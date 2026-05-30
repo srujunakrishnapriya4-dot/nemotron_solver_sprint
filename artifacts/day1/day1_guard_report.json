@@ -123,7 +123,7 @@
       "failures": []
     },
     "main_branch_awareness": {
-      "branch_hint": "sprint11-day1-1-runtime-guard",
+      "branch_hint": "codex/sprint11-day1-1-runtime-guard",
       "day1_1_fix_present": true,
       "day1_2_output_safety_present": true
     },
