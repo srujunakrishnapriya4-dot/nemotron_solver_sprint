@@ -8,6 +8,8 @@ import shutil
 import sys
 import zipfile
 
+from kaggle_path_safety import require_safe_config_output_paths, require_writable_output_path, safe_open_text_for_write, safe_write_text
+
 
 def load_simple_yaml(path: str | Path) -> dict:
     payload = {}
@@ -81,6 +83,7 @@ def main() -> None:
     parser.add_argument("--config", default="anti086_config_micro.yaml")
     args = parser.parse_args()
     config = load_simple_yaml(args.config)
+    require_safe_config_output_paths(config, stage=str(config.get("stage", "prepare")))
     from transformers import AutoTokenizer
 
     root = _resolve_input_root(config)
@@ -105,10 +108,9 @@ def main() -> None:
                 rows.append(json.loads(line))
                 if len(rows) >= int(config["max_rows"]):
                     break
-    output = Path(config["token_output"])
-    output.parent.mkdir(parents=True, exist_ok=True)
+    output = require_writable_output_path(config["token_output"], field_name="token_output")
     zero = 0
-    with output.open("w", encoding="utf-8", newline="\n") as out:
+    with safe_open_text_for_write(output, field_name="token_output", newline="\n") as out:
         token_rows = []
         for row in rows:
             row = transform_direct_answer_row(row) if bool(config.get("direct_answer_only", False)) else row
@@ -132,9 +134,8 @@ def main() -> None:
         raise SystemExit(f"zero supervised rows: {zero}")
     manifest = validate_token_mask_rows(token_rows)
     manifest.update({"max_seq_len": int(config["max_seq_len"]), "corpus_hash": stable_hash([row.get("id") or row.get("source_id") for row in rows]), "token_output": str(output)})
-    manifest_path = Path(str(config.get("token_manifest_path", output.parent / "token_manifest.json")))
-    manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    manifest_path.write_text(json.dumps(manifest, sort_keys=True, indent=2), encoding="utf-8")
+    manifest_path = require_writable_output_path(str(config.get("token_manifest_path", output.parent / "token_manifest.json")), field_name="token_manifest_path")
+    safe_write_text(manifest_path, json.dumps(manifest, sort_keys=True, indent=2), field_name="token_manifest_path")
     print(json.dumps(manifest, sort_keys=True))
 
 

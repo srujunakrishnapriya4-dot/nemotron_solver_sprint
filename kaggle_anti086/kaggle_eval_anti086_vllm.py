@@ -9,6 +9,7 @@ import re
 from decimal import Decimal, InvalidOperation
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml
+from kaggle_path_safety import require_safe_config_output_paths, require_writable_output_dir, safe_open_text_for_write, safe_write_text
 from kaggle_runtime_patches import apply_runtime_patches, require_real_optional_path
 
 MICRO_LABEL = "INFRASTRUCTURE STACK TEST ONLY - NOT A 0.95 CANDIDATE - NOT MAIN TRAINING - NOT SUBMISSION READY"
@@ -222,6 +223,7 @@ def main() -> None:
     args = parser.parse_args()
     runtime_patch = apply_runtime_patches()
     config = load_simple_yaml(args.config)
+    require_safe_config_output_paths(config, stage=str(config.get("stage", "eval")))
     if str(config.get("stage")) not in {"micro", "v1", "v1b"}:
         raise SystemExit("SPRINT-10 eval path allows micro, v1, or v1b only")
     rows = _load_eval_rows(config, args.mode)
@@ -254,13 +256,13 @@ def main() -> None:
             parent_outputs = llm.generate(prompts, params, lora_request=LoRARequest("parent", 2, parent_adapter))
             parent_records = _records_from_outputs(rows, prompts, [output.outputs[0].text for output in parent_outputs])
         backend = "vllm"
-    out_dir = Path(str(config.get("eval_output_dir", "/kaggle/working/anti086_eval")))
+    out_dir = require_writable_output_dir(str(config.get("eval_output_dir", "/kaggle/working/anti086_eval")), field_name="eval_output_dir")
     out_dir.mkdir(parents=True, exist_ok=True)
-    with (out_dir / "eval_per_puzzle.jsonl").open("w", encoding="utf-8") as handle:
+    with safe_open_text_for_write(out_dir / "eval_per_puzzle.jsonl", field_name="eval_output_dir") as handle:
         for rec in child_records:
             handle.write(json.dumps(rec, sort_keys=True) + "\n")
     if parent_records is not None:
-        with (out_dir / "parent_eval_per_puzzle.jsonl").open("w", encoding="utf-8") as handle:
+        with safe_open_text_for_write(out_dir / "parent_eval_per_puzzle.jsonl", field_name="eval_output_dir") as handle:
             for rec in parent_records:
                 handle.write(json.dumps(rec, sort_keys=True) + "\n")
     summary = compute_eval_metrics(child_records, mode=args.mode, adapter_path=child_adapter, decoding_params={"temperature": 0.0, "top_p": 1.0, "max_tokens": int(config.get("vllm_max_tokens", 32)), "backend": backend}, parent_records=parent_records)
@@ -276,7 +278,7 @@ def main() -> None:
         summary["v1_gate_status"] = "FAIL_CHILD_REGRESSED"
     else:
         summary["v1_gate_status"] = "V1_EVAL_COMPLETE_NOT_PACKAGEABLE"
-    (out_dir / "eval_summary.json").write_text(json.dumps(summary, sort_keys=True, indent=2), encoding="utf-8")
+    safe_write_text(out_dir / "eval_summary.json", json.dumps(summary, sort_keys=True, indent=2), field_name="eval_output_dir")
     print(json.dumps(summary, sort_keys=True, indent=2))
 
 

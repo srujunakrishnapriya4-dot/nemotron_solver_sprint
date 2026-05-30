@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml, stable_hash, validate_token_mask_rows
+from kaggle_path_safety import require_safe_config_output_paths, require_writable_output_dir, require_writable_output_path, safe_write_text
 from kaggle_runtime_patches import apply_runtime_patches, require_real_optional_path
 
 
@@ -43,6 +44,7 @@ def main() -> None:
     parser.add_argument("--config", default="anti086_config_micro.yaml")
     args = parser.parse_args()
     config = load_simple_yaml(args.config)
+    require_safe_config_output_paths(config, stage=str(config.get("stage", "train")))
     runtime_patch = apply_runtime_patches()
     validate_train_config(config)
     import torch
@@ -85,7 +87,7 @@ def main() -> None:
         optimizer.zero_grad(set_to_none=True)
         if step % 10 == 0:
             print(f"step={step} loss_per_supervised_token={float(loss.detach().cpu())} grad_norm={float(grad_norm)}")
-    output = Path(config["output_adapter_dir"])
+    output = require_writable_output_dir(config["output_adapter_dir"], field_name="output_adapter_dir")
     output.mkdir(parents=True, exist_ok=True)
     model.save_pretrained(output, safe_serialization=True, save_embedding_layers=False)
     size_mb = (output / "adapter_model.safetensors").stat().st_size / (1024 * 1024)
@@ -107,9 +109,8 @@ def main() -> None:
         "rank": int(config["rank"]),
         "trainable_params": trainable,
     }
-    manifest_path = Path(str(config.get("train_manifest_path", output / "train_manifest.json")))
-    manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    manifest_path.write_text(json.dumps(manifest, sort_keys=True, indent=2), encoding="utf-8")
+    manifest_path = require_writable_output_path(str(config.get("train_manifest_path", output / "train_manifest.json")), field_name="train_manifest_path")
+    safe_write_text(manifest_path, json.dumps(manifest, sort_keys=True, indent=2), field_name="train_manifest_path")
 
 
 if __name__ == "__main__":

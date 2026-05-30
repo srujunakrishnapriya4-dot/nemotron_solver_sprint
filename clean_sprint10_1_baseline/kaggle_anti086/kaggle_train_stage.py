@@ -7,6 +7,7 @@ import subprocess
 import sys
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml
+from kaggle_path_safety import require_safe_config_output_paths, require_writable_output_dir, require_writable_output_path, safe_write_text
 from kaggle_runtime_patches import require_real_optional_path
 
 MICRO_LABEL = "INFRASTRUCTURE STACK TEST ONLY - NOT A 0.95 CANDIDATE - NOT MAIN TRAINING - NOT SUBMISSION READY"
@@ -32,7 +33,7 @@ def validate_training_config(config: dict) -> None:
 
 
 def validate_adapter(config: dict) -> dict:
-    adapter_dir = Path(str(config["output_adapter_dir"]))
+    adapter_dir = require_writable_output_dir(config["output_adapter_dir"], field_name="output_adapter_dir")
     config_path = adapter_dir / "adapter_config.json"
     model_path = adapter_dir / "adapter_model.safetensors"
     if not config_path.exists() or not model_path.exists():
@@ -53,10 +54,10 @@ def validate_adapter(config: dict) -> dict:
 
 
 def write_stage_gate(stage: str, payload: dict) -> None:
-    gate_dir = Path("/kaggle/working/anti086_stage_logs")
+    gate_dir = require_writable_output_dir("/kaggle/working/anti086_stage_logs", field_name="stage_log_dir")
     gate_dir.mkdir(parents=True, exist_ok=True)
     gate = {"stage": f"train_{stage}", "decision": "PASS", "reason": "training stage completed", **payload}
-    (gate_dir / f"train_{stage}.gate.json").write_text(json.dumps(gate, sort_keys=True, indent=2), encoding="utf-8")
+    safe_write_text(gate_dir / f"train_{stage}.gate.json", json.dumps(gate, sort_keys=True, indent=2), field_name="stage_log_dir")
 
 
 def main() -> None:
@@ -64,12 +65,12 @@ def main() -> None:
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
     config = load_simple_yaml(args.config)
+    require_safe_config_output_paths(config, stage=str(config.get("stage", "train_stage")))
     validate_training_config(config)
     subprocess.check_call([sys.executable, "kaggle_train_anti086_adapter.py", "--config", args.config])
     metadata = validate_adapter(config)
-    manifest = Path(str(config.get("train_manifest_path", "/kaggle/working/anti086_train_manifest.json")))
-    manifest.parent.mkdir(parents=True, exist_ok=True)
-    manifest.write_text(json.dumps(metadata, sort_keys=True, indent=2), encoding="utf-8")
+    manifest = require_writable_output_path(str(config.get("train_manifest_path", "/kaggle/working/anti086_train_manifest.json")), field_name="train_manifest_path")
+    safe_write_text(manifest, json.dumps(metadata, sort_keys=True, indent=2), field_name="train_manifest_path")
     write_stage_gate(str(config.get("stage", "micro")), metadata)
     print(json.dumps(metadata, sort_keys=True, indent=2))
 

@@ -8,6 +8,7 @@ import subprocess
 import sys
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml
+from kaggle_path_safety import require_writable_output_path, safe_write_text
 
 
 def main() -> None:
@@ -18,15 +19,15 @@ def main() -> None:
     parent = str(config.get("parent_adapter_path", ""))
     if parent in {"", "auto_or_none", "none", "None"}:
         raise SystemExit("parent_adapter_path is required for parent baseline eval")
-    tmp_config = Path("/kaggle/working/anti086_parent_eval_config.yaml")
+    tmp_config = require_writable_output_path("/kaggle/working/anti086_parent_eval_config.yaml", field_name="parent_baseline_tmp_config")
     text = Path(args.config).read_text(encoding="utf-8")
     text = text.replace(str(config["output_adapter_dir"]), parent)
     text = text.replace(str(config["eval_output_dir"]), "/kaggle/working/anti086_parent_eval")
-    tmp_config.write_text(text, encoding="utf-8")
+    safe_write_text(tmp_config, text, field_name="parent_baseline_tmp_config")
     subprocess.check_call([sys.executable, "kaggle_eval_stage.py", "--config", str(tmp_config), "--stage", "eval_micro"])
     summary = json.loads(Path("/kaggle/working/anti086_parent_eval/eval_summary.json").read_text(encoding="utf-8"))
-    out = Path("/kaggle/working/parent_baseline_eval_report.json")
-    out.write_text(json.dumps(summary, sort_keys=True, indent=2), encoding="utf-8")
+    out = require_writable_output_path("/kaggle/working/parent_baseline_eval_report.json", field_name="parent_baseline_report")
+    safe_write_text(out, json.dumps(summary, sort_keys=True, indent=2), field_name="parent_baseline_report")
     print(json.dumps(summary, sort_keys=True, indent=2))
 
 

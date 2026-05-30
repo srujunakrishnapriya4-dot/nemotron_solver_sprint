@@ -7,6 +7,7 @@ import subprocess
 import sys
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml
+from kaggle_path_safety import require_safe_config_output_paths, require_writable_output_dir, safe_write_text
 
 
 MODE_BY_STAGE = {
@@ -53,10 +54,10 @@ def validate_eval_summary(summary_path: str | Path, *, min_outputs: int = 1) -> 
 
 
 def write_stage_gate(stage: str, payload: dict) -> None:
-    gate_dir = Path("/kaggle/working/anti086_stage_logs")
+    gate_dir = require_writable_output_dir("/kaggle/working/anti086_stage_logs", field_name="stage_log_dir")
     gate_dir.mkdir(parents=True, exist_ok=True)
     gate = {"stage": stage, "decision": "PASS", "reason": "eval stage completed", **payload}
-    (gate_dir / f"{stage}.gate.json").write_text(json.dumps(gate, sort_keys=True, indent=2), encoding="utf-8")
+    safe_write_text(gate_dir / f"{stage}.gate.json", json.dumps(gate, sort_keys=True, indent=2), field_name="stage_log_dir")
 
 
 def main() -> None:
@@ -65,6 +66,7 @@ def main() -> None:
     parser.add_argument("--stage", default="eval_micro", choices=sorted(MODE_BY_STAGE))
     args = parser.parse_args()
     config = load_simple_yaml(args.config)
+    require_safe_config_output_paths(config, stage=str(config.get("stage", "eval_stage")))
     if str(config.get("stage")) not in {"micro", "v1", "v1b"}:
         raise SystemExit("SPRINT-10 permits eval_micro/eval_v1/eval_v1b only")
     mode = str(config.get("eval_mode", MODE_BY_STAGE[args.stage]))
