@@ -38,6 +38,8 @@ def run_solver_eval(
     allow_invalid_rows: bool = False,
     min_exact_match: float = 0.0,
     min_attempt_rate: float = 0.0,
+    max_unsafe_answer_rate: float = 1.0,
+    min_correct_abstain_rate: float = 0.0,
 ) -> dict:
     rows = _read_jsonl(Path(input_path))
     out_report = require_writable_output_path(out_report, field_name="out_report")
@@ -46,6 +48,12 @@ def run_solver_eval(
     predictions: list[dict] = []
     by_family: dict[str, dict] = {}
     failure_examples: list[dict] = []
+    answerable_count = 0
+    expected_abstain_count = 0
+    correct_abstain_count = 0
+    wrong_abstain_count = 0
+    unsafe_answer_count = 0
+    wrong_answer_count = 0
 
     for idx, row in enumerate(rows):
         try:
@@ -56,20 +64,35 @@ def run_solver_eval(
             parsed = None
         family = str(row.get("family", "unknown"))
         expected = "" if row.get("answer") is None else str(row.get("answer"))
+        expected_behavior = str(row.get("metadata", {}).get("expected_solver_behavior", "answer"))
         result = ensemble.run_all(row)
         best = None if result.abstained or not result.candidates else result.candidates[0]
         answer_type = ANSWER_TYPE_BY_FAMILY.get(family)
         prediction = "" if best is None else best.answer
         normalized_expected = normalize_answer(expected, expected_type=answer_type).normalized
         normalized_prediction = normalize_answer(prediction, expected_type=answer_type).normalized if prediction else ""
-        correct = False if best is None else answers_match(prediction, expected, answer_type=answer_type)
+        answer_correct = False if best is None or expected_behavior == "abstain" else answers_match(prediction, expected, answer_type=answer_type)
+        if expected_behavior == "abstain":
+            expected_abstain_count += 1
+            if best is None:
+                correct_abstain_count += 1
+            else:
+                unsafe_answer_count += 1
+        else:
+            answerable_count += 1
+            if best is None:
+                wrong_abstain_count += 1
+            elif not answer_correct:
+                wrong_answer_count += 1
         prediction_row = {
             "id": row.get("id", f"row_{idx}"),
             "family": family,
             "subfamily": row.get("subfamily", ""),
             "expected": expected,
             "prediction": prediction,
-            "correct": bool(correct),
+            "correct": bool(answer_correct),
+            "behavior_correct": bool(best is None) if expected_behavior == "abstain" else bool(answer_correct),
+            "expected_solver_behavior": expected_behavior,
             "abstained": bool(best is None),
             "best_source": "" if best is None else best.source,
             "confidence": 0.0 if best is None else best.confidence,
@@ -90,9 +113,9 @@ def run_solver_eval(
             bucket["attempted"] += 1
             if best.verified:
                 bucket["verified"] += 1
-        if correct:
+        if answer_correct:
             bucket["correct"] += 1
-        if not correct and len(failure_examples) < 20:
+        if not prediction_row["behavior_correct"] and len(failure_examples) < 20:
             failure_examples.append(
                 {
                     "id": prediction_row["id"],
@@ -101,7 +124,7 @@ def run_solver_eval(
                     "expected": expected,
                     "prediction": prediction,
                     "prompt_excerpt": str(row.get("prompt", ""))[:300],
-                    "reason": result.reason if result.abstained else "wrong_prediction",
+                    "reason": result.reason if result.abstained else ("unsafe_answer" if expected_behavior == "abstain" else "wrong_prediction"),
                 }
             )
 
@@ -113,7 +136,19 @@ def run_solver_eval(
     correct_count = sum(1 for item in predictions if item["correct"])
     exact_match = 0.0 if row_count == 0 else correct_count / row_count
     attempt_rate = 0.0 if row_count == 0 else attempted_count / row_count
-    quality_status = _quality_status(row_count, exact_match, attempt_rate, min_exact_match, min_attempt_rate)
+    unsafe_answer_rate = 0.0 if row_count == 0 else unsafe_answer_count / row_count
+    correct_abstain_rate = 1.0 if expected_abstain_count == 0 else correct_abstain_count / expected_abstain_count
+    quality_status = _quality_status(
+        row_count,
+        exact_match,
+        attempt_rate,
+        min_exact_match,
+        min_attempt_rate,
+        unsafe_answer_rate,
+        correct_abstain_rate,
+        max_unsafe_answer_rate,
+        min_correct_abstain_rate,
+    )
     report = {
         "status": "PASS",
         "execution_status": "PASS",
@@ -124,12 +159,22 @@ def run_solver_eval(
         "verified_count": verified_count,
         "correct_count": correct_count,
         "exact_match": exact_match,
+        "answerable_count": answerable_count,
+        "expected_abstain_count": expected_abstain_count,
+        "correct_abstain_count": correct_abstain_count,
+        "wrong_abstain_count": wrong_abstain_count,
+        "wrong_answer_count": wrong_answer_count,
+        "unsafe_answer_count": unsafe_answer_count,
+        "unsafe_answer_rate": unsafe_answer_rate,
+        "correct_abstain_rate": correct_abstain_rate,
         "abstained_count": row_count - attempted_count,
         "by_family": dict(sorted(by_family.items())),
         "failure_examples": failure_examples,
         "thresholds": {
             "min_exact_match": min_exact_match,
             "min_attempt_rate": min_attempt_rate,
+            "max_unsafe_answer_rate": max_unsafe_answer_rate,
+            "min_correct_abstain_rate": min_correct_abstain_rate,
         },
     }
     _write_jsonl(Path(out_predictions), predictions)
@@ -145,6 +190,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--allow-invalid-rows", action="store_true")
     parser.add_argument("--min-exact-match", type=float, default=0.0)
     parser.add_argument("--min-attempt-rate", type=float, default=0.0)
+    parser.add_argument("--max-unsafe-answer-rate", type=float, default=1.0)
+    parser.add_argument("--min-correct-abstain-rate", type=float, default=0.0)
     parser.add_argument("--fail-on-quality-gate", action="store_true")
     args = parser.parse_args(argv)
     report = run_solver_eval(
@@ -154,6 +201,8 @@ def main(argv: list[str] | None = None) -> int:
         allow_invalid_rows=args.allow_invalid_rows,
         min_exact_match=args.min_exact_match,
         min_attempt_rate=args.min_attempt_rate,
+        max_unsafe_answer_rate=args.max_unsafe_answer_rate,
+        min_correct_abstain_rate=args.min_correct_abstain_rate,
     )
     print(
         json.dumps(
@@ -163,6 +212,8 @@ def main(argv: list[str] | None = None) -> int:
                 "row_count": report["row_count"],
                 "exact_match": report["exact_match"],
                 "attempt_rate": report["attempt_rate"],
+                "unsafe_answer_rate": report["unsafe_answer_rate"],
+                "correct_abstain_rate": report["correct_abstain_rate"],
             },
             sort_keys=True,
         )
@@ -189,10 +240,25 @@ def _write_jsonl(path: Path, rows: list[dict]) -> None:
     safe_write_text(path, payload, field_name="out_predictions")
 
 
-def _quality_status(row_count: int, exact_match: float, attempt_rate: float, min_exact_match: float, min_attempt_rate: float) -> str:
+def _quality_status(
+    row_count: int,
+    exact_match: float,
+    attempt_rate: float,
+    min_exact_match: float,
+    min_attempt_rate: float,
+    unsafe_answer_rate: float,
+    correct_abstain_rate: float,
+    max_unsafe_answer_rate: float = 1.0,
+    min_correct_abstain_rate: float = 0.0,
+) -> str:
     if row_count == 0:
         return "WARN"
-    if exact_match < min_exact_match or attempt_rate < min_attempt_rate:
+    if (
+        exact_match < min_exact_match
+        or attempt_rate < min_attempt_rate
+        or unsafe_answer_rate > max_unsafe_answer_rate
+        or correct_abstain_rate < min_correct_abstain_rate
+    ):
         return "FAIL"
     return "PASS"
 

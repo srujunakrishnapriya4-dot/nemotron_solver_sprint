@@ -4,10 +4,15 @@ from collections.abc import Iterable
 
 from kaggle_anti086.solvers.answer_normalizer import normalize_answer
 from kaggle_anti086.solvers.base import BaseSolver
+from kaggle_anti086.solvers.bit_transform_solver import BitTransformSolver
+from kaggle_anti086.solvers.char_cipher_solver import CharCipherSolver
 from kaggle_anti086.solvers.numeric_formula_solver import NumericFormulaSolver
 from kaggle_anti086.solvers.roman_solver import RomanSolver
+from kaggle_anti086.solvers.router import route_row
+from kaggle_anti086.solvers.symbol_mapping_solver import SymbolMappingSolver
 from kaggle_anti086.solvers.types import SolverCandidate, SolverResult, validate_candidate
 from kaggle_anti086.solvers.unit_conversion_solver import UnitConversionSolver
+from kaggle_anti086.solvers.verifier import verify_candidate
 from kaggle_anti086.solvers.word_cipher_solver import WordCipherSolver
 
 
@@ -29,6 +34,9 @@ ANSWER_TYPE_BY_FAMILY = {
 class SolverEnsemble:
     def __init__(self, solvers: Iterable[BaseSolver] | None = None, *, min_confidence_to_emit: float = 0.50) -> None:
         self.solvers = list(solvers) if solvers is not None else [
+            BitTransformSolver(),
+            SymbolMappingSolver(),
+            CharCipherSolver(),
             RomanSolver(),
             UnitConversionSolver(),
             NumericFormulaSolver(),
@@ -40,7 +48,9 @@ class SolverEnsemble:
         family = str(row.get("family", "unknown"))
         candidates: list[SolverCandidate] = []
         abstentions: list[dict] = []
-        for solver in self.solvers:
+        verification_failures: list[dict] = []
+        route = route_row(row)
+        for solver in self._ordered_solvers(route.candidate_solvers):
             result = solver.solve(row)
             if result.abstained or not result.candidates:
                 abstentions.append({"solver": result.solver_name, "reason": result.reason})
@@ -48,7 +58,23 @@ class SolverEnsemble:
             for candidate in result.candidates:
                 normalized = _normalize_candidate(candidate)
                 validate_candidate(normalized)
-                candidates.append(normalized)
+                verified = verify_candidate(normalized, row)
+                if verified.verified:
+                    candidates.append(
+                        SolverCandidate(
+                            answer=verified.normalized_answer,
+                            source=normalized.source,
+                            family=normalized.family,
+                            subfamily=normalized.subfamily,
+                            confidence=normalized.confidence,
+                            example_consistency=normalized.example_consistency,
+                            verified=True,
+                            risk=verified.risk,
+                            metadata=dict(normalized.metadata) | {"verification": verified.reason},
+                        )
+                    )
+                else:
+                    verification_failures.append({"solver": normalized.source, "failure_code": verified.failure_code, "reason": verified.reason})
         if not candidates:
             return SolverResult(
                 solver_name="solver_ensemble",
@@ -56,11 +82,20 @@ class SolverEnsemble:
                 candidates=[],
                 abstained=True,
                 reason="all_solvers_abstained",
-                metadata={"abstentions": abstentions},
+                metadata={"abstentions": abstentions, "verification_failures": verification_failures, "route": route.__dict__},
             )
         merged = _merge_same_answer_candidates(candidates)
         ranked = sorted(merged, key=lambda candidate: _rank_key(candidate, family))
         disagreement_warning = _verified_low_risk_disagreement(ranked)
+        if disagreement_warning["present"]:
+            return SolverResult(
+                solver_name="solver_ensemble",
+                family=family,
+                candidates=ranked,
+                abstained=True,
+                reason="verified_candidate_disagreement",
+                metadata={"abstentions": abstentions, "verification_failures": verification_failures, "route": route.__dict__, "disagreement_warning": disagreement_warning},
+            )
         if ranked[0].confidence < self.min_confidence_to_emit:
             return SolverResult(
                 solver_name="solver_ensemble",
@@ -68,7 +103,7 @@ class SolverEnsemble:
                 candidates=ranked,
                 abstained=True,
                 reason="best_candidate_below_confidence_threshold",
-                metadata={"abstentions": abstentions, "threshold": self.min_confidence_to_emit},
+                metadata={"abstentions": abstentions, "verification_failures": verification_failures, "threshold": self.min_confidence_to_emit, "route": route.__dict__},
             )
         return SolverResult(
             solver_name="solver_ensemble",
@@ -76,7 +111,7 @@ class SolverEnsemble:
             candidates=ranked,
             abstained=False,
             reason="",
-            metadata={"abstentions": abstentions, "solver_count": len(self.solvers), "disagreement_warning": disagreement_warning},
+            metadata={"abstentions": abstentions, "solver_count": len(self.solvers), "verification_failures": verification_failures, "route": route.__dict__, "disagreement_warning": disagreement_warning},
         )
 
     def best_candidate(self, row: dict) -> SolverCandidate | None:
@@ -84,6 +119,16 @@ class SolverEnsemble:
         if result.abstained or not result.candidates:
             return None
         return result.candidates[0]
+
+    def _ordered_solvers(self, preferred_names: list[str]) -> list[BaseSolver]:
+        by_name = {solver.name: solver for solver in self.solvers}
+        ordered: list[BaseSolver] = []
+        for name in preferred_names:
+            solver = by_name.get(name)
+            if solver is not None:
+                ordered.append(solver)
+        ordered.extend(solver for solver in self.solvers if solver.name not in {item.name for item in ordered})
+        return ordered
 
 
 def _normalize_candidate(candidate: SolverCandidate) -> SolverCandidate:

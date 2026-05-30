@@ -194,9 +194,15 @@
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/eval/build_day4_adversarial_solver_eval.py",
+      "sha256": "a14661c9c6636b0464ffa74b0112404a2bfd0ad3476dfb954e8defb14f79e1a4",
+      "size_bytes": 7226
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/eval/run_solver_eval.py",
-      "sha256": "5f1a71335ec352a75189e38e0c6dafbe41cea83ee57c6ca26e76ed0679b573df",
-      "size_bytes": 8443
+      "sha256": "50e3df527983da0f2e56fbc2d018dadc5114bdf19390c0963cd8a893b53e1794",
+      "size_bytes": 11158
     },
     {
       "exists": true,
@@ -218,6 +224,18 @@
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/solvers/bit_transform_solver.py",
+      "sha256": "522658c7d6fca0c926915e9dd78a0f8a9989c2af1dc697bf0fa9b405a1bb20e8",
+      "size_bytes": 10396
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/char_cipher_solver.py",
+      "sha256": "5f20c09b2ca029810486f8fb311a9fd667ef28e16cae93dc925e7bba3b34c10f",
+      "size_bytes": 8480
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/solvers/numeric_formula_solver.py",
       "sha256": "c39e22c1ad3455d161ba3d9c221b6735a12b69cc531b661e84fd0c1f715827ad",
       "size_bytes": 9880
@@ -236,9 +254,21 @@
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/solvers/router.py",
+      "sha256": "f596fa258c8a3c14cbe9d7b8a7e01f1b05b3825291e6cd3893abd6310d108409",
+      "size_bytes": 3261
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/solvers/solver_ensemble.py",
-      "sha256": "bfedf1ddba545c30e991aaae3276013c8bb615a3bac69fe5008db819acaab6ae",
-      "size_bytes": 6573
+      "sha256": "f81a697d8b8703e36abbfaa2e8810ee3a84ae973577693248a32f2bea2c7e3ab",
+      "size_bytes": 9194
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/symbol_mapping_solver.py",
+      "sha256": "65904b986920ee27c57785043856f48828813667e559b9185ca76a94b72f40f9",
+      "size_bytes": 6411
     },
     {
       "exists": true,
@@ -251,6 +281,12 @@
       "path": "kaggle_anti086/solvers/unit_conversion_solver.py",
       "sha256": "b60b6ff72752d0f57bea458792342932946b6b80b3e7574f9fbaf13cf3736266",
       "size_bytes": 8666
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/verifier.py",
+      "sha256": "be2e00c5e9fb50007d7a394df25854a2b858d4e891c953e79927c9fe839b69a6",
+      "size_bytes": 4441
     },
     {
       "exists": true,
@@ -362,6 +398,24 @@
     },
     {
       "exists": true,
+      "path": "artifacts/sprint11/day4_adversarial_solver_eval.jsonl",
+      "sha256": "8193abda1aec2a2b2062b3a5e01cfda38609b8d9a385c29812d5b563e286df5d",
+      "size_bytes": 119920
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_adversarial_solver_predictions.jsonl",
+      "sha256": "15ccd2671f7553001c9c3767585642246a43a693cbc1138636f1300e1aa64a8c",
+      "size_bytes": 109952
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_adversarial_solver_report.json",
+      "sha256": "41a1d41c1b8d4efde7b26b0e852d77a18b35ed92d7acf64b8b18d53098436315",
+      "size_bytes": 1897
+    },
+    {
+      "exists": true,
       "path": "artifacts/win_system_kaggle_cells.zip",
       "sha256": "6ff9c5db017934ce45ab546d4d5a05c9e89b5b9f5018f6766fe9e79fc65a0b0a",
       "size_bytes": 26914
@@ -375,8 +429,8 @@
     {
       "exists": true,
       "path": "factory_reset_runbook.md",
-      "sha256": "b54619b4e882a52ab5b770d7123d70c0e01d79110a8f4273998913578eb2d5c6",
-      "size_bytes": 9696
+      "sha256": "87667684b24b95472b9b5e58b995570405c226ccf1e61d11102a937188f1c9a7",
+      "size_bytes": 11450
     },
     {
       "exists": true,
@@ -399,8 +453,8 @@
     {
       "exists": true,
       "path": "clean_sprint10_1_baseline/baseline_manifest.json",
-      "sha256": "fd720a8e42ab89ad585b5cc75c97598cc4820b92852dcaed423a9917d4ad413f",
-      "size_bytes": 6466
+      "sha256": "230c9000b04b26d83109556618d90b6588c60e285ce318e36e89d8196d46cc45",
+      "size_bytes": 6467
     }
   ],
   "schema_version": 1

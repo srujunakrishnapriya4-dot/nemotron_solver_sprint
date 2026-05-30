@@ -1,0 +1,85 @@
+{
+  "abstained_count": 64,
+  "answerable_count": 192,
+  "attempt_rate": 0.75,
+  "attempted_count": 192,
+  "by_family": {
+    "bit_manipulation": {
+      "attempted": 36,
+      "correct": 36,
+      "count": 48,
+      "exact_match": 0.75,
+      "verified": 36
+    },
+    "char_cipher": {
+      "attempted": 30,
+      "correct": 30,
+      "count": 40,
+      "exact_match": 0.75,
+      "verified": 30
+    },
+    "gravity_numeric": {
+      "attempted": 12,
+      "correct": 12,
+      "count": 20,
+      "exact_match": 0.6,
+      "verified": 12
+    },
+    "numeric_formula": {
+      "attempted": 12,
+      "correct": 12,
+      "count": 12,
+      "exact_match": 1.0,
+      "verified": 12
+    },
+    "roman_numeral": {
+      "attempted": 18,
+      "correct": 18,
+      "count": 24,
+      "exact_match": 0.75,
+      "verified": 18
+    },
+    "symbol_mapping": {
+      "attempted": 36,
+      "correct": 36,
+      "count": 48,
+      "exact_match": 0.75,
+      "verified": 36
+    },
+    "unit_conversion": {
+      "attempted": 24,
+      "correct": 24,
+      "count": 32,
+      "exact_match": 0.75,
+      "verified": 24
+    },
+    "word_cipher": {
+      "attempted": 24,
+      "correct": 24,
+      "count": 32,
+      "exact_match": 0.75,
+      "verified": 24
+    }
+  },
+  "correct_abstain_count": 64,
+  "correct_abstain_rate": 1.0,
+  "correct_count": 192,
+  "exact_match": 0.75,
+  "execution_status": "PASS",
+  "expected_abstain_count": 64,
+  "failure_examples": [],
+  "quality_status": "PASS",
+  "row_count": 256,
+  "status": "PASS",
+  "thresholds": {
+    "max_unsafe_answer_rate": 0.05,
+    "min_attempt_rate": 0.5,
+    "min_correct_abstain_rate": 0.8,
+    "min_exact_match": 0.7
+  },
+  "unsafe_answer_count": 0,
+  "unsafe_answer_rate": 0.0,
+  "verified_count": 192,
+  "wrong_abstain_count": 0,
+  "wrong_answer_count": 0
+}

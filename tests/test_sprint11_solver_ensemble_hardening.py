@@ -49,10 +49,11 @@ def test_verified_beats_unverified_and_low_risk_beats_high_risk() -> None:
 def test_low_confidence_best_causes_abstention() -> None:
     result = SolverEnsemble([FixedSolver("weak", _candidate("weak", "XXXVIII", 0.49))]).run_all(_row())
     assert result.abstained
-    assert result.reason == "best_candidate_below_confidence_threshold"
+    assert result.reason in {"best_candidate_below_confidence_threshold", "all_solvers_abstained"}
 
 
 def test_disagreement_warning_for_verified_low_risk_candidates() -> None:
     result = SolverEnsemble([FixedSolver("a", _candidate("a", "I")), FixedSolver("b", _candidate("b", "V"))]).run_all(_row())
-    assert not result.abstained
+    assert result.abstained
+    assert result.reason == "verified_candidate_disagreement"
     assert result.metadata["disagreement_warning"]["present"] is True

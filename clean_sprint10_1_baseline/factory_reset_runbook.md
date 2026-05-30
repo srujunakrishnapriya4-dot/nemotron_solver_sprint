@@ -183,3 +183,25 @@ python -m pytest tests/test_sprint11_unit_conversion_precision.py tests/test_spr
 ```
 
 This still creates no 0.95 evidence. The smoke rows are generated inside the supported Day 3 solver scope and are only a regression gate.
+
+## Sprint 11C Day 4 Hard Solver Expansion
+
+Day 4 adds the second deterministic solver layer and safety foundation:
+
+- bit transform solver for fixed-width binary transformations
+- symbol mapping solver for punctuation-heavy substitution tasks
+- char cipher solver for Caesar, reversal, and safe monoalphabetic mappings
+- router that selects solver order without emitting answers
+- verifier that rejects unsafe candidate answers before ensemble ranking
+- adversarial solver eval builder with answerable and expected-abstain rows
+- solver eval metrics for unsafe answers, correct abstains, wrong abstains, and quality gates
+
+Validate Day 4:
+
+```bash
+python kaggle_anti086/eval/build_day4_adversarial_solver_eval.py --out artifacts/sprint11/day4_adversarial_solver_eval.jsonl
+python kaggle_anti086/eval/run_solver_eval.py --input artifacts/sprint11/day4_adversarial_solver_eval.jsonl --out-report artifacts/sprint11/day4_adversarial_solver_report.json --out-predictions artifacts/sprint11/day4_adversarial_solver_predictions.jsonl --min-exact-match 0.70 --min-attempt-rate 0.50 --max-unsafe-answer-rate 0.05 --min-correct-abstain-rate 0.80 --fail-on-quality-gate
+python -m pytest tests/test_sprint11_bit_transform_solver.py tests/test_sprint11_symbol_mapping_solver.py tests/test_sprint11_char_cipher_solver.py tests/test_sprint11_router.py tests/test_sprint11_verifier.py tests/test_sprint11_solver_ensemble_day4.py tests/test_sprint11_day4_adversarial_eval.py -q -p no:cacheprovider
+```
+
+Day 4 improves deterministic solver coverage and safety only. It is still not leaderboard evidence, not public/private readiness, and not 0.95 evidence. The next blocker is private-like, rule-holdout, and family-hard eval generation plus a solver-correct v2 corpus.
