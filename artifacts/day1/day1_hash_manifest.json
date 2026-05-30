@@ -188,6 +188,18 @@
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/eval/run_solver_eval.py",
+      "sha256": "05172db89a1a4ec2a08c7df5b3be17a80fc6836b1e1c14ab32affc466a62e100",
+      "size_bytes": 5416
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/__init__.py",
+      "sha256": "311313491392f37188cceb96fa728270075f23ecd215df70a2569571c54bbaf6",
+      "size_bytes": 63
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/solvers/answer_normalizer.py",
       "sha256": "134a270cda6d0ec12d76e8f2461d182cda4d206e27dee82c4f63640b4010e8a1",
       "size_bytes": 6822
@@ -200,15 +212,45 @@
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/solvers/numeric_formula_solver.py",
+      "sha256": "f3255bbdbf909d6d22b65321e843746500ed8d64b1d653cc9a1ad1261c29ae3e",
+      "size_bytes": 7848
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/roman_solver.py",
+      "sha256": "260c008ef260372c9cfbe5f7edc2f3999fd04077df3c839f787403c9add176c2",
+      "size_bytes": 4201
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/solver_ensemble.py",
+      "sha256": "6060e6ec79ffbb72b7005a2739c74647f7171861ccda31f9e51fe02c61b7bad2",
+      "size_bytes": 3707
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/solvers/types.py",
       "sha256": "aed4beed3eb089dc0a57751857ee616a70ae99b1b51878c89aed050ce71b64cf",
       "size_bytes": 1399
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/solvers/unit_conversion_solver.py",
+      "sha256": "b4a1c5540303beb6288ebbd5b88b68c5b88cb33678ce2e59062708340272743f",
+      "size_bytes": 7247
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/word_cipher_solver.py",
+      "sha256": "068e522321882174620e586a0a44a8fa072b5287c77418c1686983719c58b9a1",
+      "size_bytes": 5234
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/solvers/__init__.py",
-      "sha256": "77d7190426455871d94a31fa704cab0c1bb1a5e8a12dd740ee3b84898cec7e25",
-      "size_bytes": 75
+      "sha256": "bd3979cb71016e431db3cae36a56780b026118f1e90b9f2eb940de0ed24c70a9",
+      "size_bytes": 571
     },
     {
       "exists": true,
@@ -284,6 +326,18 @@
     },
     {
       "exists": true,
+      "path": "artifacts/sprint11/day3_solver_eval_predictions.jsonl",
+      "sha256": "607da5c619bf42aebe377c408f5647231c8fdf8738423a41ee1a81020cf0cae1",
+      "size_bytes": 972
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day3_solver_eval_report.json",
+      "sha256": "9ea3072a74eb9b6c5b8a3c6ebecb146310b57c9556b80610cb361b5aa1a15a17",
+      "size_bytes": 789
+    },
+    {
+      "exists": true,
       "path": "artifacts/win_system_kaggle_cells.zip",
       "sha256": "6ff9c5db017934ce45ab546d4d5a05c9e89b5b9f5018f6766fe9e79fc65a0b0a",
       "size_bytes": 26914
@@ -297,8 +351,8 @@
     {
       "exists": true,
       "path": "factory_reset_runbook.md",
-      "sha256": "564b812c02349805e5ac480b9d1a2449b156d5fa08ec1c61fdbdf16da40b0686",
-      "size_bytes": 6319
+      "sha256": "43c4234b2465fe1d0ed547ed13ba557b1c8a3bb15ed9d82b146959b5671b164e",
+      "size_bytes": 8041
     },
     {
       "exists": true,
@@ -321,7 +375,7 @@
     {
       "exists": true,
       "path": "clean_sprint10_1_baseline/baseline_manifest.json",
-      "sha256": "2f9272f62255763700c5e03cc3b7e6faffd5211bad547843c69af114981bd34e",
+      "sha256": "7d5b6abcbe7be397e82b9294b9b29c34b1e4f183289a281d321e2ce7afcd111c",
       "size_bytes": 6466
     }
   ],

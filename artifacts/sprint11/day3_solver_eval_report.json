@@ -1,0 +1,40 @@
+{
+  "abstained_count": 0,
+  "attempted_count": 4,
+  "by_family": {
+    "gravity_numeric": {
+      "attempted": 1,
+      "correct": 1,
+      "count": 1,
+      "exact_match": 1.0,
+      "verified": 1
+    },
+    "roman_numeral": {
+      "attempted": 1,
+      "correct": 1,
+      "count": 1,
+      "exact_match": 1.0,
+      "verified": 1
+    },
+    "unit_conversion": {
+      "attempted": 1,
+      "correct": 1,
+      "count": 1,
+      "exact_match": 1.0,
+      "verified": 1
+    },
+    "word_cipher": {
+      "attempted": 1,
+      "correct": 1,
+      "count": 1,
+      "exact_match": 1.0,
+      "verified": 1
+    }
+  },
+  "correct_count": 4,
+  "exact_match": 1.0,
+  "failure_examples": [],
+  "row_count": 4,
+  "status": "PASS",
+  "verified_count": 4
+}

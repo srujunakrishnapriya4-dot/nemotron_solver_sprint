@@ -70,8 +70,8 @@
     {
       "path": "factory_reset_runbook.md",
       "role": "runbook",
-      "sha256": "564b812c02349805e5ac480b9d1a2449b156d5fa08ec1c61fdbdf16da40b0686",
-      "size_bytes": 6319
+      "sha256": "43c4234b2465fe1d0ed547ed13ba557b1c8a3bb15ed9d82b146959b5671b164e",
+      "size_bytes": 8041
     },
     {
       "path": "kaggle_anti086/anti086_winmode_micro.yaml",

@@ -127,3 +127,37 @@ PowerShell does not reliably expand `*.py` for `py_compile`; use explicit file l
 Day 2 intentionally does not implement full deterministic solvers, synthetic generation, LoRA training, packaging, or submission. It connects to Day 3 by making rule IDs, leakage groups, verification status, and answer normalization mandatory before any solver-correct corpus can be trusted.
 
 Day 2 creates no 0.95 evidence. It only prevents fake local scores caused by bad normalization, invalid rows, train/eval leakage, and unregistered rules.
+
+## Sprint 11B Day 3 Deterministic Solver Smoke
+
+Day 3 adds the first non-model deterministic solver layer:
+
+- Roman numeral solver
+- unit conversion fitter
+- numeric/gravity formula fitter
+- word-level cipher substitution solver
+- deterministic solver ensemble
+- solver-only eval smoke runner
+
+Validate Day 3 from the repository root:
+
+```bash
+python -m py_compile kaggle_anti086/solvers/*.py kaggle_anti086/data/*.py kaggle_anti086/eval/*.py
+python -m pytest tests/test_sprint11_roman_solver.py tests/test_sprint11_unit_conversion_solver.py tests/test_sprint11_numeric_formula_solver.py tests/test_sprint11_word_cipher_solver.py tests/test_sprint11_solver_ensemble.py tests/test_sprint11_solver_eval.py -q -p no:cacheprovider
+```
+
+PowerShell wildcard fallback:
+
+```powershell
+Get-ChildItem kaggle_anti086\solvers\*.py | ForEach-Object { python -m py_compile $_.FullName }
+Get-ChildItem kaggle_anti086\data\*.py | ForEach-Object { python -m py_compile $_.FullName }
+Get-ChildItem kaggle_anti086\eval\*.py | ForEach-Object { python -m py_compile $_.FullName }
+```
+
+Run the solver eval smoke manually with:
+
+```bash
+python -m kaggle_anti086.eval.run_solver_eval --input path.jsonl --out-report artifacts/sprint11/day3_solver_eval_report.json --out-predictions artifacts/sprint11/day3_solver_eval_predictions.jsonl
+```
+
+Day 3 intentionally does not implement bit transforms, symbol mapping, char cipher, equation/operator solving, private-like split generation, synthetic corpora, LoRA training, packaging, or submission. It creates no leaderboard evidence and no 0.95 evidence. Its job is to prove that deterministic solvers can abstain safely, return schema-compatible candidates, and be scored with the Day 2 normalizer.

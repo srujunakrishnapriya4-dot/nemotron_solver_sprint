@@ -1,0 +1,4 @@
+{"abstained": false, "best_source": "roman_solver", "candidate_count": 1, "confidence": 0.98, "correct": true, "expected": "XXXVIII", "family": "roman_numeral", "id": "day3_roman", "prediction": "XXXVIII", "risk": "low", "verified": true}
+{"abstained": false, "best_source": "unit_conversion_solver", "candidate_count": 1, "confidence": 0.92, "correct": true, "expected": "45", "family": "unit_conversion", "id": "day3_unit", "prediction": "45", "risk": "low", "verified": true}
+{"abstained": false, "best_source": "numeric_formula_solver", "candidate_count": 1, "confidence": 0.97, "correct": true, "expected": "78.4", "family": "gravity_numeric", "id": "day3_gravity", "prediction": "78.4", "risk": "low", "verified": true}
+{"abstained": false, "best_source": "word_cipher_solver", "candidate_count": 1, "confidence": 0.95, "correct": true, "expected": "cat dog", "family": "word_cipher", "id": "day3_word", "prediction": "cat dog", "risk": "low", "verified": true}
