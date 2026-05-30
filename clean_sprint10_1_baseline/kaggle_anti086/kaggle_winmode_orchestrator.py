@@ -9,6 +9,7 @@ import sys
 import zipfile
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml, resolve_anti086_input_root
+from kaggle_path_safety import require_safe_config_output_paths, require_writable_output_dir, require_writable_output_path, safe_write_text
 
 
 MICRO_LABEL = "INFRASTRUCTURE STACK TEST ONLY - NOT A 0.95 CANDIDATE - NOT MAIN TRAINING - NOT SUBMISSION READY"
@@ -36,7 +37,7 @@ V1B_CONFIG = "anti086_winmode_v1b.yaml"
 
 
 def gate_dir() -> Path:
-    path = Path("/kaggle/working/anti086_stage_logs")
+    path = require_writable_output_dir("/kaggle/working/anti086_stage_logs", field_name="stage_log_dir")
     path.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -54,7 +55,7 @@ def read_gate(stage: str) -> dict | None:
 
 def write_gate(stage: str, decision: str, reason: str, **extra) -> dict:
     payload = {"stage": stage, "decision": decision, "reason": reason, "micro_stack_test_label": MICRO_LABEL, **extra}
-    gate_path(stage).write_text(json.dumps(payload, sort_keys=True, indent=2), encoding="utf-8")
+    safe_write_text(gate_path(stage), json.dumps(payload, sort_keys=True, indent=2), field_name="stage_log_dir")
     return payload
 
 
@@ -196,6 +197,7 @@ def prepare_micro() -> dict:
 
 def prepare_stage(stage: str, config_path: str) -> dict:
     config = load_simple_yaml(config_path)
+    require_safe_config_output_paths(config, stage=stage)
     validate_artifacts(stage)
     subprocess.check_call([sys.executable, "kaggle_prepare_anti086_tokens.py", "--config", config_path])
     manifest = derive_token_manifest(config)
@@ -205,9 +207,8 @@ def prepare_stage(stage: str, config_path: str) -> dict:
         raise SystemExit(f"token mask gate failed: {manifest}")
     if manifest["truncation_count"] > max(1, int(0.1 * manifest["row_count"])):
         raise SystemExit(f"truncation catastrophe: {manifest}")
-    manifest_path = Path(str(config["token_manifest_path"]))
-    manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    manifest_path.write_text(json.dumps({**manifest, "micro_stack_test_label": MICRO_LABEL}, sort_keys=True, indent=2), encoding="utf-8")
+    manifest_path = require_writable_output_path(str(config["token_manifest_path"]), field_name="token_manifest_path")
+    safe_write_text(manifest_path, json.dumps({**manifest, "micro_stack_test_label": MICRO_LABEL}, sort_keys=True, indent=2), field_name="token_manifest_path")
     return write_gate(f"prepare_{stage}", "PASS", "assistant-only token corpus prepared", token_manifest=str(manifest_path), **manifest)
 
 
@@ -218,7 +219,8 @@ def train_micro() -> dict:
 def train_stage(stage: str, config_path: str) -> dict:
     subprocess.check_call([sys.executable, "kaggle_train_stage.py", "--config", config_path])
     config = load_simple_yaml(config_path)
-    manifest_path = Path(str(config.get("train_manifest_path", "/kaggle/working/anti086_train_manifest.json")))
+    require_safe_config_output_paths(config, stage=stage)
+    manifest_path = require_writable_output_path(str(config.get("train_manifest_path", "/kaggle/working/anti086_train_manifest.json")), field_name="train_manifest_path")
     if not manifest_path.exists():
         raise SystemExit("missing train manifest after micro training")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -238,7 +240,8 @@ def eval_micro() -> dict:
 def eval_stage(stage: str, config_path: str) -> dict:
     subprocess.check_call([sys.executable, "kaggle_eval_stage.py", "--config", config_path, "--stage", f"eval_{stage}"])
     config = load_simple_yaml(config_path)
-    summary_path = Path(str(config["eval_output_dir"])) / "eval_summary.json"
+    require_safe_config_output_paths(config, stage=stage)
+    summary_path = require_writable_output_dir(str(config["eval_output_dir"]), field_name="eval_output_dir") / "eval_summary.json"
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     if stage == "v1" and summary.get("v1_gate_status") in {"INCONCLUSIVE_PARENT_MISSING", "FAIL_CHILD_REGRESSED", "INCONCLUSIVE_BOTH_ZERO"}:
         return write_gate("eval_v1", "FAIL", "v1 parent-vs-child gate did not pass", eval_summary=str(summary_path), **summary)

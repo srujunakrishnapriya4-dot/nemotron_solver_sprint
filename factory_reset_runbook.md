@@ -1,8 +1,8 @@
-# Sprint 11 Day 1 Factory Reset Runbook
+# Sprint 11 Day 1.2 Factory Reset Runbook
 
 ## Purpose
 
-Day 1 freezes the clean Sprint 10.1 baseline and removes notebook chaos before Sprint 11 work. This does not improve score directly. It prevents corrupted scripts, fake eval, broken packaging, and untraceable file mutation.
+Day 1.2 freezes the clean Sprint 10.1 baseline, hardens every configured Kaggle output path, and verifies the generated Kaggle cells before Sprint 11 work. This does not improve score directly. It prevents corrupted scripts, fake eval, broken packaging, hidden stale cells, and untraceable file mutation.
 
 ## Required Kaggle Inputs
 
@@ -19,8 +19,8 @@ Run from the repository root:
 ```bash
 python -m py_compile kaggle_anti086/kaggle_*.py
 python tools/day1_repo_guard.py --root . --out artifacts/day1/day1_guard_report.json
-python tools/hash_audit.py --write artifacts/day1/day1_hash_manifest.json <protected files>
 python tools/hash_audit.py --check artifacts/day1/day1_hash_manifest.json
+python -m pytest tests/test_day1_* -q -p no:cacheprovider
 ```
 
 The protected file list is recorded in `artifacts/day1/day1_hash_manifest.json` and the snapshot manifest is `clean_sprint10_1_baseline/baseline_manifest.json`.
@@ -41,7 +41,9 @@ Copy and run only these cells from `artifacts/win_system_kaggle_cells/`:
 8. `CELL_08_verify_files.py`
 9. `CELL_09_v1b_commands.py`
 
-Each writer cell prints the file path, size bytes, and SHA256 after writing.
+Each writer cell uses `write_file_checked(...)` and prints JSON containing file path, size bytes, and SHA256 after writing. If `artifacts/win_system_kaggle_cells/` is missing, do not use the zip blindly. Regenerate or fail.
+
+Every configured output path must be under `/kaggle/working` in Kaggle. Output paths under `/kaggle/input` are invalid even when the input dataset itself is mounted there.
 
 ## Kaggle Smoke Command
 
@@ -74,6 +76,7 @@ Do not run:
 - `submission`
 - old Sprint-8/Sprint-9 cells
 - manual notebook patch cells
+- any cell or script that writes outputs to `/kaggle/input`
 
 ## Expected Success State
 
@@ -81,6 +84,9 @@ Do not run:
 - `day1_repo_guard` reports `PASS`
 - no active Kaggle script imports `nemotron_engine`
 - no active Kaggle script writes to `/kaggle/input`
+- no active config sends outputs to `/kaggle/input`
+- `artifacts/win_system_kaggle_cells/` exists and matches `artifacts/win_system_kaggle_cells.zip` by SHA256
+- `artifacts/day1/day1_generated_cells_manifest.json` exists
 - `clean_sprint10_1_baseline/baseline_manifest.json` exists
 - `artifacts/day1/day1_parent_calibrated_eval_smoke_command.txt` exists
 
@@ -95,4 +101,4 @@ Compare file hashes before copying back. Do not restore model weights, adapters,
 
 ## Reality Check
 
-Day 1 does not improve score directly. Day 1 prevents losing the competition through corrupted scripts, fake eval, and broken packaging. 0.95 evidence is still absent.
+Day 1.2 still provides zero 0.95 evidence. It only protects the later Sprint 11 solver/eval/training plan from infrastructure corruption. 0.95 evidence is still absent.

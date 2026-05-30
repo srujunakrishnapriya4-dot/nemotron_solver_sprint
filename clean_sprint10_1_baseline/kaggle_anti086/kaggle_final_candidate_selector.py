@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from kaggle_path_safety import require_writable_output_path, safe_write_text
+
 
 MICRO_LABEL = "INFRASTRUCTURE STACK TEST ONLY - NOT A 0.95 CANDIDATE - NOT MAIN TRAINING - NOT SUBMISSION READY"
 V1_LABEL = "V1 SMALL TRAINING EXPERIMENT - NOT SUBMISSION READY - NO PACKAGE - NO KAGGLE SUBMIT"
@@ -82,9 +84,8 @@ def select_candidate() -> dict:
         "not_submission_ready": True,
         "not_095_candidate": True,
     }
-    output = Path("/kaggle/working/final_candidate_decision.json")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(payload, sort_keys=True, indent=2), encoding="utf-8")
+    output = require_writable_output_path("/kaggle/working/final_candidate_decision.json", field_name="candidate_decision_path")
+    safe_write_text(output, json.dumps(payload, sort_keys=True, indent=2), field_name="candidate_decision_path")
     return payload
 
 

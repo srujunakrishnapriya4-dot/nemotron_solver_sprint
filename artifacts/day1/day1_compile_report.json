@@ -1,0 +1,65 @@
+﻿{
+    "status":  "PASS",
+    "files":  [
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_backend_probe.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_build_anti086_corpus.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_build_parent_calibrated_eval.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_build_private_like_benchmark.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_eval_anti086_vllm.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_eval_stage.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_final_candidate_selector.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_package_anti086_adapter.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_parent_baseline_eval.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_path_safety.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_prepare_anti086_tokens.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_runtime_patches.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_train_anti086_adapter.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_train_stage.py",
+                      "status":  "PASS"
+                  },
+                  {
+                      "path":  "C:\\Users\\ADMIN\\nemotron_solver_sprint\\kaggle_anti086\\kaggle_winmode_orchestrator.py",
+                      "status":  "PASS"
+                  }
+              ]
+}

@@ -7,6 +7,8 @@ import stat
 import sys
 from typing import Iterable
 
+from kaggle_path_safety import require_not_kaggle_input_path
+
 
 CUTLASS_PATH = Path("/kaggle/usr/lib/notebooks/ryanholbrook/nvidia-utility-script/nvidia_cutlass_dsl/python_packages")
 PTXAS_BLACKWELL_PATH = Path("/kaggle/usr/lib/notebooks/ryanholbrook/nvidia-utility-script/triton/backends/nvidia/bin/ptxas-blackwell")
@@ -82,7 +84,7 @@ def discover_parent_adapter(search_roots: Iterable[str | Path] = ("/kaggle/input
 
 
 def patch_yaml_value(path: str | Path, key: str, value: str) -> None:
-    yaml_path = Path(path)
+    yaml_path = require_not_kaggle_input_path(path, field_name="config_patch_path")
     lines = yaml_path.read_text(encoding="utf-8").splitlines()
     replaced = False
     out = []

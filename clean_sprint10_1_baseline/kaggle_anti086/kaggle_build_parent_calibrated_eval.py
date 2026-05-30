@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml, resolve_anti086_input_root, transform_direct_answer_row
+from kaggle_path_safety import require_safe_config_output_paths, require_writable_output_path, safe_open_text_for_write, safe_write_text
 from kaggle_runtime_patches import apply_runtime_patches, ensure_parent_adapter_in_config
 from kaggle_eval_anti086_vllm import run_hf_fallback_eval, _prompt_from_row
 
@@ -66,8 +67,8 @@ def load_source_rows(config: dict) -> list[dict]:
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="\n") as handle:
+    path = require_writable_output_path(path, field_name="calibrated_eval_path")
+    with safe_open_text_for_write(path, field_name="calibrated_eval_path", newline="\n") as handle:
         for row in rows:
             handle.write(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n")
 
@@ -78,9 +79,10 @@ def main() -> None:
     args = parser.parse_args()
     runtime_patch = apply_runtime_patches()
     config = load_simple_yaml(args.config)
+    require_safe_config_output_paths(config, stage=str(config.get("stage", "parent_calibrated_eval")))
     parent_adapter = ensure_parent_adapter_in_config(args.config, config)
     rows = select_candidate_rows(load_source_rows(config), limit=int(config.get("max_eval_rows", 64)))
-    eval_path = Path(str(config.get("calibrated_eval_path", "/kaggle/working/anti086_eval/v1b/parent_calibrated_eval.jsonl")))
+    eval_path = require_writable_output_path(str(config.get("calibrated_eval_path", "/kaggle/working/anti086_eval/v1b/parent_calibrated_eval.jsonl")), field_name="calibrated_eval_path")
     write_jsonl(eval_path, rows)
     prompts = [_prompt_from_row(row) for row in rows]
     parent_records = run_hf_fallback_eval(config, rows, prompts, adapter_path=parent_adapter) if parent_adapter else []
@@ -89,9 +91,8 @@ def main() -> None:
     if report["synthetic_only"]:
         report["valid"] = False
         report["invalid_reason"] = "synthetic_only"
-    report_path = Path(str(config.get("parent_calibration_report_path", "/kaggle/working/anti086_eval/v1b/parent_calibration_report.json")))
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(report, sort_keys=True, indent=2), encoding="utf-8")
+    report_path = require_writable_output_path(str(config.get("parent_calibration_report_path", "/kaggle/working/anti086_eval/v1b/parent_calibration_report.json")), field_name="parent_calibration_report_path")
+    safe_write_text(report_path, json.dumps(report, sort_keys=True, indent=2), field_name="parent_calibration_report_path")
     print(json.dumps(report, sort_keys=True, indent=2))
     if not report["valid"]:
         raise SystemExit(f"invalid parent-calibrated eval: {report['invalid_reason']}")

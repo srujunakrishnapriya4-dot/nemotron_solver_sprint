@@ -1,0 +1,199 @@
+{
+  "checks": {
+    "config_output_path_validation_imported": {
+      "kaggle_anti086/kaggle_backend_probe.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_build_parent_calibrated_eval.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_eval_anti086_vllm.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_eval_stage.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_final_candidate_selector.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_package_anti086_adapter.py": {
+        "uses_path_safety": false,
+        "writes": false
+      },
+      "kaggle_anti086/kaggle_parent_baseline_eval.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_prepare_anti086_tokens.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_train_anti086_adapter.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_train_stage.py": {
+        "uses_path_safety": true,
+        "writes": true
+      },
+      "kaggle_anti086/kaggle_winmode_orchestrator.py": {
+        "uses_path_safety": true,
+        "writes": true
+      }
+    },
+    "forbidden_imports": {
+      "failures": []
+    },
+    "generated_cells_committed": {
+      "cell_dir": "artifacts/win_system_kaggle_cells",
+      "expected_cells": [
+        "CELL_01_write_configs.py",
+        "CELL_02_write_runtime_patches.py",
+        "CELL_03_write_prepare_tokens.py",
+        "CELL_04_write_train.py",
+        "CELL_05_write_eval.py",
+        "CELL_06_write_parent_calibrated_eval.py",
+        "CELL_07_write_orchestrator.py",
+        "CELL_08_verify_files.py",
+        "CELL_09_v1b_commands.py"
+      ],
+      "present_cells": [
+        "CELL_01_write_configs.py",
+        "CELL_02_write_runtime_patches.py",
+        "CELL_03_write_prepare_tokens.py",
+        "CELL_04_write_train.py",
+        "CELL_05_write_eval.py",
+        "CELL_06_write_parent_calibrated_eval.py",
+        "CELL_07_write_orchestrator.py",
+        "CELL_08_verify_files.py",
+        "CELL_09_v1b_commands.py"
+      ]
+    },
+    "generated_cells_zip_match": {
+      "directory": {
+        "CELL_01_write_configs.py": "d6d2558b743ad86aad3357ffa87fc67e25fc7212c1196724f8d66168bacb55cb",
+        "CELL_02_write_runtime_patches.py": "395285e4736f8689e773936b6435de82374d3baf8f7cbc613a1e78de2cd23024",
+        "CELL_03_write_prepare_tokens.py": "d4c523f7525c8bedc7660b86d5ec9e35d0b12199438c31c34eacb71ff75ac919",
+        "CELL_04_write_train.py": "503762b488899b26efe64e2d5b627806c4ad396bff9a882530555d3b39384bfa",
+        "CELL_05_write_eval.py": "343911837a86688093f603067e21322d2622e6be9c6bf9e7b5783e154d70613c",
+        "CELL_06_write_parent_calibrated_eval.py": "81c191a9cb063ebc94ea5b8dfd28864c0c0bf9b2674c68f2646475f92cd1cbd5",
+        "CELL_07_write_orchestrator.py": "2dcc2036751311c058599a66a75434bfd0ee07d0ad9d2b748182c1a55ce072f4",
+        "CELL_08_verify_files.py": "c5cfd497b861e8a3ef5bd3d842b1632eab37b9ed6d74628b498b5d2cedd8c903",
+        "CELL_09_v1b_commands.py": "63fea72a55f450d2511e2d3c5f45759d3bcfac1bb90957970f9938e22c43f2e8"
+      },
+      "matches": true,
+      "zip": {
+        "CELL_01_write_configs.py": "d6d2558b743ad86aad3357ffa87fc67e25fc7212c1196724f8d66168bacb55cb",
+        "CELL_02_write_runtime_patches.py": "395285e4736f8689e773936b6435de82374d3baf8f7cbc613a1e78de2cd23024",
+        "CELL_03_write_prepare_tokens.py": "d4c523f7525c8bedc7660b86d5ec9e35d0b12199438c31c34eacb71ff75ac919",
+        "CELL_04_write_train.py": "503762b488899b26efe64e2d5b627806c4ad396bff9a882530555d3b39384bfa",
+        "CELL_05_write_eval.py": "343911837a86688093f603067e21322d2622e6be9c6bf9e7b5783e154d70613c",
+        "CELL_06_write_parent_calibrated_eval.py": "81c191a9cb063ebc94ea5b8dfd28864c0c0bf9b2674c68f2646475f92cd1cbd5",
+        "CELL_07_write_orchestrator.py": "2dcc2036751311c058599a66a75434bfd0ee07d0ad9d2b748182c1a55ce072f4",
+        "CELL_08_verify_files.py": "c5cfd497b861e8a3ef5bd3d842b1632eab37b9ed6d74628b498b5d2cedd8c903",
+        "CELL_09_v1b_commands.py": "63fea72a55f450d2511e2d3c5f45759d3bcfac1bb90957970f9938e22c43f2e8"
+      },
+      "zip_exists": true,
+      "zip_path": "artifacts/win_system_kaggle_cells.zip"
+    },
+    "generated_hash_reporting": {
+      "cell_dir": "artifacts/win_system_kaggle_cells",
+      "files": {
+        "artifacts/win_system_kaggle_cells/CELL_01_write_configs.py": true,
+        "artifacts/win_system_kaggle_cells/CELL_02_write_runtime_patches.py": true,
+        "artifacts/win_system_kaggle_cells/CELL_03_write_prepare_tokens.py": true,
+        "artifacts/win_system_kaggle_cells/CELL_04_write_train.py": true,
+        "artifacts/win_system_kaggle_cells/CELL_05_write_eval.py": true,
+        "artifacts/win_system_kaggle_cells/CELL_06_write_parent_calibrated_eval.py": true,
+        "artifacts/win_system_kaggle_cells/CELL_07_write_orchestrator.py": true,
+        "artifacts/win_system_kaggle_cells/CELL_08_verify_files.py": "not_a_writer",
+        "artifacts/win_system_kaggle_cells/CELL_09_v1b_commands.py": "not_a_writer"
+      }
+    },
+    "hash_manifest": {
+      "exists": true,
+      "path": "artifacts/day1/day1_hash_manifest.json"
+    },
+    "indirect_readonly_input_write_risk": {
+      "failures": []
+    },
+    "main_branch_awareness": {
+      "branch_hint": "sprint11-day1-1-runtime-guard",
+      "day1_1_fix_present": true,
+      "day1_2_output_safety_present": true
+    },
+    "output_path_safety_static": {
+      "scanned": [
+        "kaggle_anti086/anti086_config_hard.yaml",
+        "kaggle_anti086/anti086_config_main.yaml",
+        "kaggle_anti086/anti086_config_micro.yaml",
+        "kaggle_anti086/anti086_config_v1.yaml",
+        "kaggle_anti086/anti086_config_v2.yaml",
+        "kaggle_anti086/anti086_config_v3.yaml",
+        "kaggle_anti086/anti086_winmode_final.yaml",
+        "kaggle_anti086/anti086_winmode_micro.yaml",
+        "kaggle_anti086/anti086_winmode_v1.yaml",
+        "kaggle_anti086/anti086_winmode_v1b.yaml",
+        "kaggle_anti086/anti086_winmode_v2.yaml",
+        "kaggle_anti086/anti086_winmode_v3.yaml"
+      ]
+    },
+    "packaging_run": {
+      "day1_packaging_not_allowed": true
+    },
+    "parent_adapter_path": {
+      "failures": []
+    },
+    "py_compile": {
+      "kaggle_anti086/kaggle_backend_probe.py": "PASS",
+      "kaggle_anti086/kaggle_build_anti086_corpus.py": "PASS",
+      "kaggle_anti086/kaggle_build_parent_calibrated_eval.py": "PASS",
+      "kaggle_anti086/kaggle_build_private_like_benchmark.py": "PASS",
+      "kaggle_anti086/kaggle_eval_anti086_vllm.py": "PASS",
+      "kaggle_anti086/kaggle_eval_stage.py": "PASS",
+      "kaggle_anti086/kaggle_final_candidate_selector.py": "PASS",
+      "kaggle_anti086/kaggle_package_anti086_adapter.py": "PASS",
+      "kaggle_anti086/kaggle_parent_baseline_eval.py": "PASS",
+      "kaggle_anti086/kaggle_path_safety.py": "PASS",
+      "kaggle_anti086/kaggle_prepare_anti086_tokens.py": "PASS",
+      "kaggle_anti086/kaggle_runtime_patches.py": "PASS",
+      "kaggle_anti086/kaggle_train_anti086_adapter.py": "PASS",
+      "kaggle_anti086/kaggle_train_stage.py": "PASS",
+      "kaggle_anti086/kaggle_winmode_orchestrator.py": "PASS"
+    },
+    "readonly_input_writes": {
+      "failures": []
+    },
+    "required_files": {
+      "files": {
+        "anti086_winmode_micro.yaml": "kaggle_anti086/anti086_winmode_micro.yaml",
+        "anti086_winmode_v1.yaml": "kaggle_anti086/anti086_winmode_v1.yaml",
+        "anti086_winmode_v1b.yaml": "kaggle_anti086/anti086_winmode_v1b.yaml",
+        "kaggle_backend_probe.py": "kaggle_anti086/kaggle_backend_probe.py",
+        "kaggle_build_parent_calibrated_eval.py": "kaggle_anti086/kaggle_build_parent_calibrated_eval.py",
+        "kaggle_eval_anti086_vllm.py": "kaggle_anti086/kaggle_eval_anti086_vllm.py",
+        "kaggle_eval_stage.py": "kaggle_anti086/kaggle_eval_stage.py",
+        "kaggle_final_candidate_selector.py": "kaggle_anti086/kaggle_final_candidate_selector.py",
+        "kaggle_path_safety.py": "kaggle_anti086/kaggle_path_safety.py",
+        "kaggle_prepare_anti086_tokens.py": "kaggle_anti086/kaggle_prepare_anti086_tokens.py",
+        "kaggle_runtime_patches.py": "kaggle_anti086/kaggle_runtime_patches.py",
+        "kaggle_train_anti086_adapter.py": "kaggle_anti086/kaggle_train_anti086_adapter.py",
+        "kaggle_train_stage.py": "kaggle_anti086/kaggle_train_stage.py",
+        "kaggle_winmode_orchestrator.py": "kaggle_anti086/kaggle_winmode_orchestrator.py"
+      }
+    },
+    "stale_sprint_contamination": {
+      "failures": []
+    },
+    "submission_artifacts": {
+      "submission_zip": []
+    }
+  },
+  "failures": [],
+  "status": "PASS"
+}

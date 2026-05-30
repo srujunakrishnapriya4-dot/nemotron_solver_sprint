@@ -9,6 +9,7 @@ from typing import Any
 import zipfile
 
 from kaggle_runtime_patches import apply_runtime_patches
+from kaggle_path_safety import require_writable_output_path, safe_write_text
 
 
 DEFAULT_BASE_MODEL_PATHS = (
@@ -107,9 +108,8 @@ def probe_backend(
         report["recommended_mode"] = "BACKEND_OK_FOR_MICRO" if report["vllm_import"] and report["lora_request_import"] else "BACKEND_NO_VLLM_BUT_TRAIN_POSSIBLE"
     else:
         report["recommended_mode"] = "BACKEND_NOT_SAFE"
-    out = Path(output_path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(report, sort_keys=True, indent=2), encoding="utf-8")
+    out = require_writable_output_path(output_path, field_name="backend_probe_output_path")
+    safe_write_text(out, json.dumps(report, sort_keys=True, indent=2), field_name="backend_probe_output_path")
     return report
 
 

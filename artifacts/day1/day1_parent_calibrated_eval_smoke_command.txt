@@ -1,0 +1,15 @@
+﻿PYTHONPATH="/kaggle/usr/lib/notebooks/ryanholbrook/nvidia-utility-script/nvidia_cutlass_dsl/python_packages:/kaggle/working:/kaggle/working/src:$PYTHONPATH" \
+TRITON_PTXAS_PATH="/tmp/ptxas-blackwell" \
+TRITON_PTXAS_BLACKWELL_PATH="/tmp/ptxas-blackwell" \
+python kaggle_build_parent_calibrated_eval.py --config anti086_winmode_v1b.yaml 2>&1 | tee /kaggle/working/build_parent_calibrated_eval.log
+
+Expected output artifacts:
+/kaggle/working/anti086_eval/v1b/parent_calibration_report.json
+/kaggle/working/anti086_eval/v1b/parent_calibrated_eval.jsonl
+/kaggle/working/build_parent_calibrated_eval.log
+
+Interpretation:
+This is diagnostic only.
+Parent score may be weak.
+This does not prove 0.95.
+Do not train on Day 1.

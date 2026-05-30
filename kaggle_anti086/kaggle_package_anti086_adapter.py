@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from kaggle_prepare_anti086_tokens import load_simple_yaml
+from kaggle_path_safety import require_not_kaggle_input_path
 
 
 def main() -> None:
@@ -13,6 +14,7 @@ def main() -> None:
     parser.add_argument("--eval-summary", default="/kaggle/working/anti086_eval/eval_summary.json")
     parser.add_argument("--zip-path", default="/kaggle/working/submission.zip")
     args = parser.parse_args()
+    require_not_kaggle_input_path(args.zip_path, field_name="submission_zip_path")
     config = load_simple_yaml(args.config)
     summary = json.loads(Path(args.eval_summary).read_text(encoding="utf-8"))
     decision = {

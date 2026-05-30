@@ -1,0 +1,86 @@
+{
+  "cell_dir": "artifacts/win_system_kaggle_cells",
+  "cells": [
+    {
+      "name": "CELL_01_write_configs.py",
+      "sha256": "d6d2558b743ad86aad3357ffa87fc67e25fc7212c1196724f8d66168bacb55cb",
+      "size_bytes": 4035,
+      "writes_files": [
+        "anti086_winmode_micro.yaml",
+        "anti086_winmode_v1.yaml",
+        "anti086_winmode_v1b.yaml"
+      ]
+    },
+    {
+      "name": "CELL_02_write_runtime_patches.py",
+      "sha256": "395285e4736f8689e773936b6435de82374d3baf8f7cbc613a1e78de2cd23024",
+      "size_bytes": 14271,
+      "writes_files": [
+        "kaggle_path_safety.py",
+        "kaggle_runtime_patches.py",
+        "kaggle_backend_probe.py"
+      ]
+    },
+    {
+      "name": "CELL_03_write_prepare_tokens.py",
+      "sha256": "d4c523f7525c8bedc7660b86d5ec9e35d0b12199438c31c34eacb71ff75ac919",
+      "size_bytes": 15214,
+      "writes_files": [
+        "kaggle_prepare_anti086_tokens.py"
+      ]
+    },
+    {
+      "name": "CELL_04_write_train.py",
+      "sha256": "503762b488899b26efe64e2d5b627806c4ad396bff9a882530555d3b39384bfa",
+      "size_bytes": 11405,
+      "writes_files": [
+        "kaggle_train_anti086_adapter.py",
+        "kaggle_train_stage.py"
+      ]
+    },
+    {
+      "name": "CELL_05_write_eval.py",
+      "sha256": "343911837a86688093f603067e21322d2622e6be9c6bf9e7b5783e154d70613c",
+      "size_bytes": 21537,
+      "writes_files": [
+        "kaggle_eval_anti086_vllm.py",
+        "kaggle_eval_stage.py",
+        "kaggle_parent_baseline_eval.py"
+      ]
+    },
+    {
+      "name": "CELL_06_write_parent_calibrated_eval.py",
+      "sha256": "81c191a9cb063ebc94ea5b8dfd28864c0c0bf9b2674c68f2646475f92cd1cbd5",
+      "size_bytes": 6036,
+      "writes_files": [
+        "kaggle_build_parent_calibrated_eval.py"
+      ]
+    },
+    {
+      "name": "CELL_07_write_orchestrator.py",
+      "sha256": "2dcc2036751311c058599a66a75434bfd0ee07d0ad9d2b748182c1a55ce072f4",
+      "size_bytes": 19972,
+      "writes_files": [
+        "kaggle_winmode_orchestrator.py",
+        "kaggle_final_candidate_selector.py",
+        "kaggle_package_anti086_adapter.py"
+      ]
+    },
+    {
+      "name": "CELL_08_verify_files.py",
+      "sha256": "c5cfd497b861e8a3ef5bd3d842b1632eab37b9ed6d74628b498b5d2cedd8c903",
+      "size_bytes": 2250,
+      "writes_files": []
+    },
+    {
+      "name": "CELL_09_v1b_commands.py",
+      "sha256": "63fea72a55f450d2511e2d3c5f45759d3bcfac1bb90957970f9938e22c43f2e8",
+      "size_bytes": 469,
+      "writes_files": []
+    }
+  ],
+  "generated_at": "2026-05-30T12:49:28.149615+00:00",
+  "schema_version": 1,
+  "zip_matches_directory": true,
+  "zip_path": "artifacts/win_system_kaggle_cells.zip"
+}
