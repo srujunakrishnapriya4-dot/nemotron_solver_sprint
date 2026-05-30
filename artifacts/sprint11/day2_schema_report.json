@@ -1,0 +1,36 @@
+{
+  "by_family": {
+    "bit_manipulation": 1,
+    "equation_operator": 1,
+    "roman_numeral": 1,
+    "unit_conversion": 1
+  },
+  "by_split": {
+    "private_like_eval": 1,
+    "quarantine": 1,
+    "rule_holdout_eval": 1,
+    "train": 1
+  },
+  "by_verification_status": {
+    "unsupported": 1,
+    "verified": 3
+  },
+  "failure_count": 0,
+  "failures": [],
+  "row_count": 4,
+  "rule_bank": {
+    "failures": [],
+    "families": [
+      "bit_manipulation",
+      "format_only",
+      "numeric_formula",
+      "roman_numeral",
+      "symbol_mapping",
+      "unit_conversion",
+      "word_cipher"
+    ],
+    "rule_count": 22,
+    "status": "PASS"
+  },
+  "valid_count": 4
+}

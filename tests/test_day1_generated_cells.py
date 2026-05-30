@@ -75,3 +75,7 @@ def test_generated_cells_manifest_exists_and_matches() -> None:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["zip_matches_directory"] is True
     assert [cell["name"] for cell in manifest["cells"]] == EXPECTED_CELLS
+    for cell in manifest["cells"]:
+        path = ROOT / "artifacts" / "win_system_kaggle_cells" / cell["name"]
+        assert cell["sha256"] == _sha(path)
+        assert cell["size_bytes"] == path.stat().st_size

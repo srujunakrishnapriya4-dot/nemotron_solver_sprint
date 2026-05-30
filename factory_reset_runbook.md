@@ -102,3 +102,28 @@ Compare file hashes before copying back. Do not restore model weights, adapters,
 ## Reality Check
 
 Day 1.2 still provides zero 0.95 evidence. It only protects the later Sprint 11 solver/eval/training plan from infrastructure corruption. 0.95 evidence is still absent.
+
+## Sprint 11A Day 2 Foundation
+
+Day 2 adds the non-training correctness foundation that later solver/data/eval work must obey:
+
+- answer normalization in `kaggle_anti086/solvers/answer_normalizer.py`
+- strict row schema in `kaggle_anti086/data/schema.py`
+- leakage-aware split controller in `kaggle_anti086/data/split_controller.py`
+- rule-bank registry in `kaggle_anti086/data/build_rule_bank.py`
+- solver interface contracts in `kaggle_anti086/solvers/types.py` and `kaggle_anti086/solvers/base.py`
+
+Validate Day 2 from the repository root:
+
+```bash
+python -m py_compile kaggle_anti086/solvers/*.py kaggle_anti086/data/*.py
+python -m pytest tests/test_sprint11_answer_normalizer.py tests/test_sprint11_schema.py tests/test_sprint11_split_controller.py tests/test_sprint11_rule_bank.py tests/test_sprint11_solver_contracts.py -q -p no:cacheprovider
+python tools/day1_repo_guard.py --root . --out artifacts/day1/day1_guard_report.json
+python tools/hash_audit.py --check artifacts/day1/day1_hash_manifest.json
+```
+
+PowerShell does not reliably expand `*.py` for `py_compile`; use explicit file lists or `Get-ChildItem` when needed.
+
+Day 2 intentionally does not implement full deterministic solvers, synthetic generation, LoRA training, packaging, or submission. It connects to Day 3 by making rule IDs, leakage groups, verification status, and answer normalization mandatory before any solver-correct corpus can be trusted.
+
+Day 2 creates no 0.95 evidence. It only prevents fake local scores caused by bad normalization, invalid rows, train/eval leakage, and unregistered rules.

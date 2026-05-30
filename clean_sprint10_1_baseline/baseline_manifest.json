@@ -4,74 +4,74 @@
     {
       "path": "artifacts/day1/day1_generated_cells_manifest.json",
       "role": "manifest",
-      "sha256": "97c5e2f1edeed4e91984f4e16f89075113c02c7f5f24b5e38fb1e7698fe56165",
+      "sha256": "834314f7dd371c4601d160e03237d53f74d58cb81cee58400defe5c96a55f679",
       "size_bytes": 2734
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_01_write_configs.py",
       "role": "cell",
-      "sha256": "d6d2558b743ad86aad3357ffa87fc67e25fc7212c1196724f8d66168bacb55cb",
-      "size_bytes": 4035
+      "sha256": "18a2e9c0d8b3ce329e3c0a33fa623a46affc716d0a9da47c265c23c2e7bc69e9",
+      "size_bytes": 4052
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_02_write_runtime_patches.py",
       "role": "runtime",
-      "sha256": "395285e4736f8689e773936b6435de82374d3baf8f7cbc613a1e78de2cd23024",
-      "size_bytes": 14271
+      "sha256": "aea03ae23ec9ae13a35df480ea04ad0e51c052da46ea7c0d1e0230a973ff0774",
+      "size_bytes": 14288
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_03_write_prepare_tokens.py",
       "role": "cell",
-      "sha256": "d4c523f7525c8bedc7660b86d5ec9e35d0b12199438c31c34eacb71ff75ac919",
-      "size_bytes": 15214
+      "sha256": "a4f8675153061224f32e94ddf5bda397b457b6961db22554f0d615acc1d5b010",
+      "size_bytes": 15229
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_04_write_train.py",
       "role": "cell",
-      "sha256": "503762b488899b26efe64e2d5b627806c4ad396bff9a882530555d3b39384bfa",
-      "size_bytes": 11405
+      "sha256": "73de526dceb216fe5dd9c56d62b153f65e0500fa711bdb19dab84f1f0b9da47a",
+      "size_bytes": 11421
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_05_write_eval.py",
       "role": "eval",
-      "sha256": "343911837a86688093f603067e21322d2622e6be9c6bf9e7b5783e154d70613c",
-      "size_bytes": 21537
+      "sha256": "57cf11b0c478f250d8411dd6257eeb9a7a985684acd7448c651f5e3b0fc12f16",
+      "size_bytes": 21554
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_06_write_parent_calibrated_eval.py",
       "role": "eval",
-      "sha256": "81c191a9cb063ebc94ea5b8dfd28864c0c0bf9b2674c68f2646475f92cd1cbd5",
-      "size_bytes": 6036
+      "sha256": "febc8d3db8d22689f23a778ddc84fc34f4ebea40659c79f569e84dd80f18372a",
+      "size_bytes": 6051
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_07_write_orchestrator.py",
       "role": "orchestrator",
-      "sha256": "2dcc2036751311c058599a66a75434bfd0ee07d0ad9d2b748182c1a55ce072f4",
-      "size_bytes": 19972
+      "sha256": "d991263bdf2b007d5520192a5cca16ed0617c24b364ef0cfceb9d9a3e0597b34",
+      "size_bytes": 19989
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_08_verify_files.py",
       "role": "cell",
-      "sha256": "c5cfd497b861e8a3ef5bd3d842b1632eab37b9ed6d74628b498b5d2cedd8c903",
-      "size_bytes": 2250
+      "sha256": "cc678ecf45f6344994d1aca776d6fcc3054ccfd838b6e2f0b0e8217e6a05b469",
+      "size_bytes": 2299
     },
     {
       "path": "artifacts/win_system_kaggle_cells/CELL_09_v1b_commands.py",
       "role": "cell",
-      "sha256": "63fea72a55f450d2511e2d3c5f45759d3bcfac1bb90957970f9938e22c43f2e8",
-      "size_bytes": 469
+      "sha256": "fcdbbb7b38cd7c2e06a2841231c1f0b6afaada8f88194c0e9f6c63ada075e24b",
+      "size_bytes": 475
     },
     {
       "path": "artifacts/win_system_kaggle_cells.zip",
       "role": "cell",
-      "sha256": "392be556b9cb36697a246c53aea130774f664bf1c4fb6d6e9a8b1f1ff3462f31",
-      "size_bytes": 26856
+      "sha256": "6ff9c5db017934ce45ab546d4d5a05c9e89b5b9f5018f6766fe9e79fc65a0b0a",
+      "size_bytes": 26914
     },
     {
       "path": "factory_reset_runbook.md",
       "role": "runbook",
-      "sha256": "2d81e4805c8fb4b75370b8ef5a817db446f64a5e582be8040492cfb450cb9467",
-      "size_bytes": 4638
+      "sha256": "564b812c02349805e5ac480b9d1a2449b156d5fa08ec1c61fdbdf16da40b0686",
+      "size_bytes": 6319
     },
     {
       "path": "kaggle_anti086/anti086_winmode_micro.yaml",
@@ -94,68 +94,68 @@
     {
       "path": "kaggle_anti086/kaggle_backend_probe.py",
       "role": "runtime",
-      "sha256": "ed360b1b989dcc08012df87efb4a17741dcffdf16b94e1fdee583ba69f863cee",
-      "size_bytes": 4611
+      "sha256": "4c53558d31ab44ccd141b1c00cd29bce4d93867b3a1a3a88e9c7fa83f8d1a69b",
+      "size_bytes": 4733
     },
     {
       "path": "kaggle_anti086/kaggle_build_parent_calibrated_eval.py",
       "role": "eval",
-      "sha256": "be6f0fb13f3c0d6d56f8f669a500449a88aed9189d5a38d4f8ef7efe406b1784",
-      "size_bytes": 5485
+      "sha256": "e6391c6049eabfb473e906cd247a3e69f2a3a26e846f0f014407d7d0facc338b",
+      "size_bytes": 5587
     },
     {
       "path": "kaggle_anti086/kaggle_eval_anti086_vllm.py",
       "role": "eval",
-      "sha256": "90eb5ec19b48b1a22c38bc4ed345cf53c86262230004d60b83af4b1ca18f1e4e",
-      "size_bytes": 14971
+      "sha256": "4f8721b998ff69eed2f776380ef4adb5f26faa1922a7c4fee7301df2b7865704",
+      "size_bytes": 15257
     },
     {
       "path": "kaggle_anti086/kaggle_eval_stage.py",
       "role": "eval",
-      "sha256": "e393a6d5b88838a9be2d0b2a4eae1f96052cc8c6238a46d8eff711b18cd4b28e",
-      "size_bytes": 3912
+      "sha256": "8cc81058a25e440c5f12d01898f4001ae2f32c1334ef4647bc26733798cb612c",
+      "size_bytes": 3993
     },
     {
       "path": "kaggle_anti086/kaggle_final_candidate_selector.py",
       "role": "selector",
-      "sha256": "874b09015e74dbce536b57c51c2ae44a8dd7ed2736bcd1f60d8f5d49b3f29656",
-      "size_bytes": 4008
+      "sha256": "2931a6a6f7a07f7e3729081d4cb625037cc823c0c6d276f80ea7d7c4c93bbf92",
+      "size_bytes": 4105
     },
     {
       "path": "kaggle_anti086/kaggle_path_safety.py",
       "role": "runtime",
-      "sha256": "b725398a80ed81e4993d9bd69d47ed6af415ad88ee5000f801d0c9d290e974ae",
-      "size_bytes": 4484
+      "sha256": "0128a81c14ca0264eadf6bae0ffdae24258952ca04529c61d1bae0a0165e1ab3",
+      "size_bytes": 4622
     },
     {
       "path": "kaggle_anti086/kaggle_prepare_anti086_tokens.py",
       "role": "runtime",
-      "sha256": "dc5f18c6ee3a9c8226e245738481611783c5deb2d4563df90e1851741f2e94b7",
-      "size_bytes": 14429
+      "sha256": "97fd766c540ac6ce84856273d8e2d9aebbf834aa77bdc1fde2c07b9e3367d806",
+      "size_bytes": 14766
     },
     {
       "path": "kaggle_anti086/kaggle_runtime_patches.py",
       "role": "runtime",
-      "sha256": "dcaa72f3923c1cf65894130ba2dd14b2c66ac6381d846d43645cb8ec1d09b7db",
-      "size_bytes": 4268
+      "sha256": "1d8942e11fa7eff0084c70bb1b499ec00c14c1bc0c0b3044c1ca7f61ad7e8c42",
+      "size_bytes": 4380
     },
     {
       "path": "kaggle_anti086/kaggle_train_anti086_adapter.py",
       "role": "runtime",
-      "sha256": "7a83693023bbe4aa3e262e2dc4ea931f985a10b9190d580c9fde360fb62fee2d",
-      "size_bytes": 6348
+      "sha256": "0bc196d8b573963904095a03aad11bf34c59ef3991cff84220de0ae7c8f73d34",
+      "size_bytes": 6465
     },
     {
       "path": "kaggle_anti086/kaggle_train_stage.py",
       "role": "runtime",
-      "sha256": "1a6393848b0c3a63e62fc82547677f32d557bb90530e1d1ec674fc7f3a04b13a",
-      "size_bytes": 4375
+      "sha256": "888bad9c90951827c9ab34d66b23645d673f59f6b84b4da6c873e6dbfda19098",
+      "size_bytes": 4454
     },
     {
       "path": "kaggle_anti086/kaggle_winmode_orchestrator.py",
       "role": "orchestrator",
-      "sha256": "6d1a8b183dcf1eb1a814582ea0d23798fb2190c5313312af1117fb31be59fbec",
-      "size_bytes": 13766
+      "sha256": "f647f5bcfa37914bf7da93e8422bc5122dd6f3331da48f5774274bf18e93d54c",
+      "size_bytes": 14081
     },
     {
       "path": "tools/archive_old_notebook_fragments.py",
@@ -166,8 +166,8 @@
     {
       "path": "tools/day1_repo_guard.py",
       "role": "guard",
-      "sha256": "9f47484d747c612f4ecdab17c571017e33282ac544156fe398f9e3add0bef232",
-      "size_bytes": 23666
+      "sha256": "a6c038d61b32433a9edc365abd899cc573dca7ae04949e83b4c3b9612830d01f",
+      "size_bytes": 24169
     },
     {
       "path": "tools/hash_audit.py",

@@ -1,0 +1,33 @@
+{
+  "anti_leak_eval_count": 0,
+  "family_hard_eval_count": 0,
+  "leakage_report": {
+    "abstained_train_rows": [],
+    "eval_counts": {
+      "anti_leak_eval": 0,
+      "family_hard_eval": 0,
+      "parent_calibrated_eval": 0,
+      "private_like_eval": 1,
+      "rule_holdout_eval": 1
+    },
+    "failures": [],
+    "leakage_group_overlap_count": 0,
+    "leakage_group_overlap_examples": [],
+    "quarantined_train_rows": [],
+    "row_id_overlap_count": 0,
+    "row_id_overlap_examples": [],
+    "rule_overlap_count": 0,
+    "rule_overlap_examples": [],
+    "status": "PASS",
+    "train_count": 1,
+    "unsafe_train_rows": [],
+    "unsupported_equation_train_rows": [],
+    "unsupported_train_rows": [],
+    "unverified_train_rows": []
+  },
+  "parent_calibrated_eval_count": 0,
+  "private_like_eval_count": 1,
+  "quarantine_count": 1,
+  "rule_holdout_eval_count": 1,
+  "train_count": 1
+}
