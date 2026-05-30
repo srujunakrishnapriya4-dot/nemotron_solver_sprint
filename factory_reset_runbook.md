@@ -25,6 +25,8 @@ python tools/hash_audit.py --check artifacts/day1/day1_hash_manifest.json
 
 The protected file list is recorded in `artifacts/day1/day1_hash_manifest.json` and the snapshot manifest is `clean_sprint10_1_baseline/baseline_manifest.json`.
 
+Artifact policy: `artifacts/day1/*.json` reports are committed freeze artifacts for this Day 1 baseline and can be regenerated with the commands above. If a fresh clone is missing or changes these reports, rerun the guard/hash commands before trusting the notebook cells.
+
 ## Kaggle Factory Reset Cell Order
 
 Copy and run only these cells from `artifacts/win_system_kaggle_cells/`:

@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import sys
 import zipfile
 
@@ -171,15 +172,56 @@ def _resolve_input_root(config: dict) -> Path:
     return resolve_anti086_input_root(config)
 
 
-def _write_conservative_quarantine_overlay(root: Path) -> None:
-    manifest = root / "equation_quarantine_manifest.json"
+def is_under_path(path: Path, parent: Path) -> bool:
+    try:
+        resolved_path = path.resolve(strict=False)
+        resolved_parent = parent.resolve(strict=False)
+    except OSError:
+        resolved_path = Path(str(path)).absolute()
+        resolved_parent = Path(str(parent)).absolute()
+    try:
+        resolved_path.relative_to(resolved_parent)
+        return True
+    except ValueError:
+        return False
+
+
+def is_kaggle_input_path(path: Path) -> bool:
+    return is_under_path(path, Path("/kaggle/input"))
+
+
+def writable_overlay_root(config: dict | None = None, *, working_base: Path | str = Path("/kaggle/working")) -> Path:
+    config = config or {}
+    configured = str(config.get("anti086_overlay_root", "")).strip()
+    root = Path(configured) if configured else Path(working_base) / "anti086_input_overlay"
+    if is_kaggle_input_path(root):
+        raise SystemExit(f"overlay root must not be under /kaggle/input: {root}")
+    if root.is_absolute() and not is_under_path(root, Path(working_base)) and str(root).startswith("/kaggle/"):
+        raise SystemExit(f"refusing non-working Kaggle overlay root: {root}")
+    root.mkdir(parents=True, exist_ok=True)
+    return root
+
+
+def _write_conservative_quarantine_overlay(root: Path, *, overlay_root: Path | None = None) -> Path:
+    source_root = Path(root)
+    write_root = overlay_root or (writable_overlay_root({}) if is_kaggle_input_path(source_root) else source_root)
+    if is_kaggle_input_path(write_root):
+        write_root = writable_overlay_root({})
+    if write_root.is_absolute() and str(write_root).startswith("/kaggle/") and not is_under_path(write_root, Path("/kaggle/working")):
+        raise SystemExit(f"refusing to write quarantine overlay outside /kaggle/working: {write_root}")
+    write_root.mkdir(parents=True, exist_ok=True)
+    manifest = write_root / "equation_quarantine_manifest.json"
     if manifest.exists():
-        return
+        return manifest
     manifest.write_text(
         json.dumps(
             {
                 "equation_status": "OFFLINE_SYNTHESIS_REQUIRED",
                 "overlay_created": True,
+                "source_root": str(source_root),
+                "written_root": str(write_root),
+                "read_only_source_preserved": is_kaggle_input_path(source_root),
+                "unsafe_equation_traces_excluded": True,
                 "safe_verified_trace_count": 0,
                 "unsafe_trace_excluded_count": 0,
                 "direct_answer_only_count": 0,
@@ -190,17 +232,69 @@ def _write_conservative_quarantine_overlay(root: Path) -> None:
         ),
         encoding="utf-8",
     )
+    return manifest
 
 
-def resolve_anti086_input_root(config: dict | None = None) -> Path:
+MINIMAL_INPUT_NAMES = {
+    "corpus_anti086_micro.jsonl",
+    "corpus_anti086_v1.jsonl",
+    "win_micro.jsonl",
+    "win_v1.jsonl",
+    "winmode_micro.jsonl",
+    "winmode_v1.jsonl",
+    "curriculum_manifest.json",
+    "win_corpus_manifest.json",
+    "solver_coverage_report.json",
+    "equation_quarantine_manifest.json",
+}
+COPY_SUFFIXES = {".jsonl", ".json", ".yaml", ".txt"}
+FORBIDDEN_COPY_SUFFIXES = {".safetensors", ".bin", ".pt", ".pth", ".gguf"}
+
+
+def copy_minimal_input_to_overlay(source_root: Path, overlay_root: Path) -> None:
+    if is_kaggle_input_path(overlay_root):
+        raise SystemExit(f"refusing to copy into /kaggle/input overlay: {overlay_root}")
+    overlay_root.mkdir(parents=True, exist_ok=True)
+    for src in sorted(source_root.iterdir()) if source_root.exists() else []:
+        if not src.is_file():
+            continue
+        if src.name == "submission.zip" or src.suffix.lower() in FORBIDDEN_COPY_SUFFIXES:
+            continue
+        if src.name not in MINIMAL_INPUT_NAMES and src.suffix.lower() not in COPY_SUFFIXES:
+            continue
+        dest = overlay_root / src.name
+        if src.resolve(strict=False) == dest.resolve(strict=False):
+            continue
+        shutil.copy2(src, dest)
+
+
+def _safe_local_or_working_root(root: Path, *, config: dict, working_base: Path) -> Path:
+    if is_kaggle_input_path(root):
+        overlay = writable_overlay_root(config, working_base=working_base)
+        copy_minimal_input_to_overlay(root, overlay)
+        _write_conservative_quarantine_overlay(root, overlay_root=overlay)
+        return overlay
+    if root.is_absolute() and str(root).startswith("/kaggle/") and not is_under_path(root, working_base):
+        raise SystemExit(f"refusing to write fallback artifacts outside /kaggle/working: {root}")
+    root.mkdir(parents=True, exist_ok=True) if (not root.exists() and (not root.is_absolute() or is_under_path(root, working_base))) else None
+    _write_conservative_quarantine_overlay(root)
+    return root
+
+
+def resolve_anti086_input_root(
+    config: dict | None = None,
+    *,
+    input_base: Path | str = Path("/kaggle/input"),
+    working_base: Path | str = Path("/kaggle/working"),
+) -> Path:
     config = config or {}
+    input_base = Path(input_base)
+    working_base = Path(working_base)
     configured = str(config.get("anti086_input_root", "auto"))
     if configured != "auto":
         root = Path(configured)
-        root.mkdir(parents=True, exist_ok=True) if str(root).startswith("/kaggle/working") else None
-        _write_conservative_quarantine_overlay(root)
-        return root
-    work = Path("/kaggle/working/anti086_input")
+        return _safe_local_or_working_root(root, config=config, working_base=working_base)
+    work = working_base / "anti086_input"
     marker_names = {
         "curriculum_manifest.json",
         "win_corpus_manifest.json",
@@ -209,7 +303,6 @@ def resolve_anti086_input_root(config: dict | None = None) -> Path:
         "corpus_anti086_v1.jsonl",
         "win_v1.jsonl",
     }
-    input_base = Path("/kaggle/input")
     if input_base.exists():
         for zip_path in sorted(input_base.rglob("*.zip")):
             if "anti086" in zip_path.name or "win_system" in zip_path.name:
@@ -220,19 +313,20 @@ def resolve_anti086_input_root(config: dict | None = None) -> Path:
                 return work
         for marker in marker_names:
             for path in sorted(input_base.rglob(marker)):
-                _write_conservative_quarantine_overlay(path.parent)
-                return path.parent
+                overlay = writable_overlay_root(config, working_base=working_base)
+                copy_minimal_input_to_overlay(path.parent, overlay)
+                _write_conservative_quarantine_overlay(path.parent, overlay_root=overlay)
+                return overlay
     candidates = [
         work,
-        Path("/kaggle/input/anti086"),
-        Path("/kaggle/input/win-system"),
+        input_base / "anti086",
+        input_base / "win-system",
         Path("artifacts/anti086"),
         Path("artifacts/win_system"),
     ]
     for candidate in candidates:
         if candidate.exists() and any((candidate / name).exists() for name in marker_names):
-            _write_conservative_quarantine_overlay(candidate)
-            return candidate
+            return _safe_local_or_working_root(candidate, config=config, working_base=working_base)
     work.mkdir(parents=True, exist_ok=True)
     _write_conservative_quarantine_overlay(work)
     return work
