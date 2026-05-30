@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: imo3_hybrid
+Version: 0.1.0
+Summary: IMO3 Hybrid repository runtime/package integration surface
+Requires-Python: >=3.11

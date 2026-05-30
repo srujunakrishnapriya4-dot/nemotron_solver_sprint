@@ -1,0 +1,214 @@
+ project:
+  name: imo3_hybrid
+  config_version: v2
+  system_profile: hybrid_math_reasoning
+  task_family: aimo3
+  answer_mode: nonnegative_integer
+  default_config_stack:
+    - configs/base.yaml
+
+paths:
+  repo_root: .
+  configs_root: configs
+  src_root: src
+  scripts_root: scripts
+  data_root: data
+  raw_data_root: data/raw
+  interim_data_root: data/interim
+  processed_data_root: data/processed
+  artifacts_root: artifacts
+  logs_root: artifacts/logs
+  checkpoints_root: artifacts/checkpoints
+  manifests_root: artifacts/manifests
+  router_artifacts_root: artifacts/router
+  verifier_artifacts_root: artifacts/verifier
+  operator_artifacts_root: artifacts/operator_miner
+  retrieval_artifacts_root: artifacts/retrieval
+  failure_artifacts_root: artifacts/failures
+  ablations_artifacts_root: artifacts/ablations
+  calibration_artifacts_root: artifacts/calibration
+  models_root: models
+  tests_root: tests
+  notebooks_root: notebooks
+
+datasets:
+  default_train_csv: data/raw/aimo3_train.csv
+  olympiad_corpus_dir: data/raw/olympiad_corpus
+  retrieved_traces_dir: data/raw/retrieved_traces
+  parsed_problems_path: data/interim/parsed_problems.parquet
+  trace_records_path: data/interim/trace_records.parquet
+  operator_library_path: data/interim/operator_library.parquet
+  verifier_dataset_path: data/interim/verifier_dataset.parquet
+  router_dataset_path: data/interim/router_dataset.parquet
+  train_split_path: data/processed/train_splits.parquet
+  valid_split_path: data/processed/valid_splits.parquet
+  calibration_split_path: data/processed/calibration_splits.parquet
+  retrieval_index_dir: data/interim/retrieval_index
+
+models:
+  runtime_generator_model_dir: models/gpt_oss_120b
+  offline_teacher_model_dir: models/deepseek_math_v2
+  runtime_verifier_model_dir: models/distilled_small_verifier
+  draft_model_dir: null
+
+  model_roles:
+    runtime_generator: gpt_oss_120b
+    offline_teacher: deepseek_math_v2
+    runtime_verifier: distilled_small_verifier
+    draft_model: null
+
+  defaults:
+    trust_remote_code: false
+    load_local_only: true
+    revision: null
+    runtime_generator_revision: null
+    offline_teacher_revision: null
+    runtime_verifier_revision: null
+    draft_model_revision: null
+
+prompt_selection:
+  parser:
+    default_task: primary_extract
+    fallback_task: fallback_extract
+    answer_type_task: strict_answer_type
+
+  solver:
+    default_task: primary_smdp
+    minimal_task: worker_minimal
+    tool_biased_task: worker_code_first
+    route_task_map:
+      algebra: worker_algebra
+      number_theory: worker_number_theory
+      geometry: worker_geometry
+      combinatorics: worker_combinatorics
+      mixed: primary_smdp
+
+  retrieval:
+    default_task: trace_conditioned_solve
+    compact_task: trace_conditioned_compact
+
+  verifier:
+    default_task: branch_judge
+    strict_task: strict_accept_reject
+
+  critique:
+    default_task: self_critique
+    text_task: self_critique_text
+
+  repair:
+    default_task: local_repair
+    symbolic_mismatch_task: symbolic_mismatch_repair
+
+  answering:
+    default_task: submission_projection
+    strict_task: final_answer_only
+    structured_task: final_answer_json
+
+  routing:
+    archetype_task: archetype_prediction
+    problem_type_task: problem_type_prediction
+
+reproducibility:
+  seed: 1337
+  deterministic: true
+  deterministic_algorithms: false
+  python_hash_seed: 1337
+  fail_on_unseeded_execution: false
+  stable_sorting: true
+
+environment:
+  default_device: auto
+  accelerator_backend: auto
+  allow_cpu_fallback: true
+  allow_mixed_device_execution: true
+  num_threads: 8
+  enable_async_batch_jobs: true
+  prefer_local_artifacts: true
+
+logging:
+  enabled: true
+  level: INFO
+  structured: true
+  include_timestamp: true
+  include_project_name: true
+  include_config_hash: true
+  include_seed: true
+  persist_resolved_config: true
+  log_to_stdout: true
+  log_to_file: true
+
+manifests:
+  enabled: true
+  write_run_manifest: true
+  write_artifact_manifest: true
+  include_git_commit_if_available: true
+  include_config_hash: true
+  include_timestamp: true
+  include_input_fingerprints: true
+  include_output_fingerprints: true
+  include_model_metadata: true
+  include_environment_summary: true
+  include_runtime_model_roles: true
+
+serialization:
+  default_text_encoding: utf-8
+  yaml_sort_keys: false
+  parquet_compression: zstd
+  json_indent: 2
+  write_atomic: true
+  safe_overwrite: false
+  allow_partial_debug_exports: true
+
+runtime_safety:
+  strict_config_validation: true
+  fail_on_unknown_keys: true
+  fail_on_duplicate_ids: true
+  fail_on_schema_drift: true
+  stop_on_unhandled_stage_error: false
+  continue_on_problem_failure: true
+  emit_failure_artifacts: true
+
+  answer_constraints:
+    integer_only: true
+    min_value: 0
+    max_value: 999
+    fallback_answer: 0
+
+  timeouts:
+    parse_timeout_s: 20
+    solve_timeout_s: 180
+    symbolic_timeout_s: 30
+    verifier_timeout_s: 60
+    serving_request_timeout_s: 180
+
+budgets:
+  default:
+    max_problems_per_run: null
+    max_attempts_per_problem: 3
+    max_trace_samples_per_problem: 128
+    max_repair_attempts_per_branch: 3
+    max_retrieval_hits: 5
+    max_critique_branches: 5
+
+  search:
+    self_consistency_samples_easy: 16
+    self_consistency_samples_medium: 32
+    self_consistency_samples_hard: 64
+    self_consistency_samples_very_hard: 128
+
+features:
+  parsing: true
+  routing: true
+  state_graph: true
+  operators: true
+  retrieval: true
+  branching: true
+  symbolic: true
+  verifier: true
+  aggregation: true
+  offline_pipeline: true
+  online_pipeline: true
+  serving: true
+  prompts: true
+  ablations: true
+  manifests: true

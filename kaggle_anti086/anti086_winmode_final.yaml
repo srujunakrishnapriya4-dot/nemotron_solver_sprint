@@ -1,0 +1,26 @@
+stage: final
+disabled_in_sprint8: true
+disabled_reason: SPRINT-8 micro child is not submittable; keep parent baseline unless future v1/v2 evidence exists.
+anti086_input_root: auto
+base_model_path: /kaggle/input/models/metric/nemotron-3-nano-30b-a3b-bf16/transformers/default/1
+parent_adapter_path: auto_or_none
+corpus_file: selected_by_gate
+token_output_dir: /kaggle/working/anti086_tokens/final
+output_adapter_dir: /kaggle/working/anti086_adapters/final
+eval_output_dir: /kaggle/working/anti086_eval/final
+submission_zip_path: /kaggle/working/submission.zip
+max_seq_len: 1024
+batch_size: 1
+micro_batch_size: 1
+gradient_accumulation: 8
+target_modules: q_proj,k_proj,v_proj,o_proj,up_proj,down_proj,in_proj,out_proj,lm_head
+adapter_size_limit_mb: 1500
+rank: 32
+learning_rate: 0.0000002
+full_prompt_loss: false
+answer_format: raw
+eval_mode: private_like_family_hard
+vllm_max_model_len: 8192
+vllm_max_tokens: 128
+vllm_max_num_seqs: 32
+vllm_gpu_memory_utilization: 0.85

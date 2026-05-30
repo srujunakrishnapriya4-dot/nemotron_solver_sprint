@@ -1,0 +1,222 @@
+# MI300X-specific override profile for imo3_hybrid.
+# This file is intentionally override-oriented: it should layer on top of
+# base.yaml + online.yaml + offline.yaml rather than redefine system policy.
+#
+# Hardware assumptions:
+# - Single-node MI300X-class ROCm environment unless explicitly overridden
+# - vLLM-style serving path where supported by the local stack
+# - Aggressive features remain guarded/optional unless the serving code confirms support
+
+hardware:
+  profile: mi300x
+  accelerator_vendor: amd
+  accelerator_family: instinct
+  accelerator_model: mi300x
+  device_count: 1
+  memory_per_device_gb: 192
+  rocm_required: true
+  cuda_required: false
+
+device_overrides:
+  runtime_backend: rocm
+  preferred_device: gpu
+  mixed_cpu_gpu_fallback: true
+  pin_memory: true
+  non_blocking_transfers: true
+
+  # Conservative default for stable runtime usage; can be raised if validated.
+  target_gpu_memory_utilization: 0.88
+  hard_gpu_memory_utilization_ceiling: 0.93
+  cpu_offload_gb: 0
+  allow_cpu_offload_for_emergency: true
+
+precision:
+  weights_dtype: fp8
+  activation_dtype: bf16
+  kv_cache_dtype: fp8
+  attention_compute_dtype: bf16
+
+  enable_fp8_weights: true
+  enable_fp8_kv_cache: true
+  enable_bf16_compute: true
+
+  # Guardrails so unsupported paths can be disabled without rewriting configs.
+  require_runtime_validation: true
+  fallback_weights_dtype: bf16
+  fallback_kv_cache_dtype: bf16
+  disable_fp8_if_unstable: true
+
+memory_cache:
+  enable_paged_kv_cache: true
+  enable_prefix_cache: true
+  enable_chunked_prefill: true
+  prefill_chunk_size_tokens: 2048
+
+  # Cache policy hooks for serving/runtime code.
+  kv_cache_reserve_fraction: 0.18
+  max_context_length_tokens: 8192
+  max_prefill_tokens_per_request: 4096
+  max_total_tokens_per_request: 12288
+
+  # Bounded swap/offload controls; do not assume large swap is always acceptable.
+  swap_space_gb: 8
+  allow_kv_cache_compaction: true
+  allow_kv_cache_reuse_across_requests: true
+
+batching:
+  enable_continuous_batching: true
+  enable_dynamic_batching: true
+
+  # Conservative default concurrency for large-model reasoning.
+  max_num_seqs: 32
+  max_num_batched_tokens: 8192
+  max_waiting_tokens: 2048
+
+  # Throughput-oriented limits, still bounded for memory safety.
+  online_max_concurrent_problems: 2
+  online_max_active_branches_per_problem: 8
+  offline_max_concurrent_jobs: 1
+
+serving:
+  backend: vllm
+  host: 0.0.0.0
+  port: 8000
+  trust_remote_code: false
+  eager_mode: false
+
+  # Runtime features that are plausible but should remain validated by code.
+  enable_paged_attention: true
+  enable_flash_attention_if_available: true
+  enable_graph_capture_if_supported: false
+  enable_prefix_caching: true
+  enable_logprobs: false
+
+  # Model-load/runtime controls.
+  tensor_parallel_size: 1
+  pipeline_parallel_size: 1
+  data_parallel_size: 1
+  distributed_executor_backend: local
+
+  # Stability-focused defaults.
+  request_timeout_s: 180
+  load_timeout_s: 1800
+  healthcheck_timeout_s: 30
+  crash_loop_restart_limit: 2
+
+speculative_decoding:
+  enabled: false
+  require_explicit_secondary_model: true
+
+  # Leave hooks in place, but do not assume speculative decode is always stable
+  # or beneficial for the local serving stack.
+  draft_model_name: null
+  num_speculative_tokens: 4
+  acceptance_threshold: 0.0
+  disable_on_memory_pressure: true
+  disable_for_long_contexts_over_tokens: 4096
+
+throughput:
+  benchmark_on_startup: false
+  benchmark_profile: conservative
+  warmup_requests: 2
+  benchmark_decode_tokens: 256
+  benchmark_prefill_tokens: 1024
+
+  # Believable target bands rather than inflated promises.
+  expected_decode_tokens_per_second_min: 40
+  expected_decode_tokens_per_second_target: 80
+  expected_decode_tokens_per_second_stretch: 120
+
+  warn_below_decode_toks_per_s: 25
+  warn_above_memory_utilization: 0.92
+
+online_runtime_overrides:
+  prefer_single_generator_instance: true
+  parser_on_gpu: false
+  router_on_gpu: false
+  verifier_on_gpu: true
+  symbolic_on_gpu: false
+
+  # Resource-conscious overrides for single-device runtime.
+  max_parallel_generation_workers: 1
+  max_critique_workers: 1
+  max_repair_workers: 1
+
+  # Keep inference bounded in MI300X single-device mode.
+  generation_max_new_tokens: 1024
+  critique_max_new_tokens: 384
+  verifier_max_new_tokens: 256
+
+offline_runtime_overrides:
+  # Offline jobs share the same device profile but should not overcommit memory.
+  trace_generation_device: gpu
+  router_training_device: gpu
+  verifier_distillation_device: gpu
+  operator_mining_device: cpu
+  clustering_device: cpu
+  calibration_device: gpu
+
+  max_offline_gpu_jobs: 1
+  max_offline_cpu_workers: 8
+  dataloader_num_workers: 4
+
+  # Derived from the architecture’s bounded MI300X budget expectations.
+  phase_gpu_hour_budget:
+    serving_setup_min: 6
+    serving_setup_max: 10
+    trace_generation_min: 8
+    trace_generation_max: 12
+    operator_mining_min: 4
+    operator_mining_max: 8
+    verifier_distillation_min: 4
+    verifier_distillation_max: 8
+    search_calibration_min: 4
+    search_calibration_max: 8
+    dry_runs_min: 2
+    dry_runs_max: 6
+
+resource_limits:
+  max_open_file_descriptors: 4096
+  tmpfs_preferred: false
+  local_ssd_cache_required: false
+
+  # Keep notebook/runtime behavior bounded and predictable.
+  kill_job_on_oom: false
+  fail_fast_on_repeated_oom: true
+  repeated_oom_limit: 2
+
+rocm_tuning:
+  enabled: true
+  visible_devices: "0"
+  hip_visible_devices: "0"
+
+  # Exposed as hooks; the runtime should consume only what it supports.
+  set_allocator_tuning: true
+  allocator_expandable_segments: true
+  set_matmul_precision_hint: high
+  set_deterministic_algorithms: false
+
+logging_monitoring:
+  emit_hardware_profile: true
+  emit_runtime_backend: true
+  emit_precision_summary: true
+  emit_memory_summary: true
+  emit_batching_summary: true
+  emit_cache_summary: true
+  emit_throughput_summary: true
+  emit_rocm_env_summary: true
+
+  sample_memory_stats_every_s: 30
+  sample_throughput_every_s: 30
+  persist_startup_validation_report: true
+
+validation:
+  validate_backend_on_startup: true
+  validate_precision_combo_on_startup: true
+  validate_memory_headroom_on_model_load: true
+  validate_serving_backend_matches_profile: true
+
+  # If validation fails, fall back conservatively instead of silently pretending.
+  downgrade_fp8_to_bf16_on_validation_failure: true
+  downgrade_kv_cache_fp8_to_bf16_on_validation_failure: true
+  disable_spec_decode_on_validation_failure: true

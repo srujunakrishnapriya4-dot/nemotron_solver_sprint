@@ -1,0 +1,414 @@
+# Online/runtime inference configuration for imo3_hybrid.
+# This file is intended to layer over configs/base.yaml and only override
+# runtime-path behavior for the Kaggle/online solver.
+
+runtime:
+  profile: kaggle_online
+  deterministic_seed: 1337
+  deterministic: true
+  strict_config_validation: true
+  fail_on_unknown_keys: true
+
+  # Keep online policy explicit rather than hidden in code.
+  include_submission_row: true
+  include_debug_artifacts: true
+  include_trace_hint_text: true
+  strict_stage_failures: true
+  post_branch_budget_adaptation: true
+  prompt_config_path: configs/prompts.yaml
+  minimal_prompt_profile: minimal_default
+
+  # Stable runtime mode controls.
+  mode: full
+  allow_degraded_mode: true
+  allow_panic_save_mode: true
+  force_runtime_path: null
+
+  minimal_mode:
+    attempts_per_problem: 8
+    early_stop_threshold: 4
+    request_logprobs: 5
+    max_tokens: 4096
+    max_turns_per_attempt: 8
+    max_tool_calls_per_attempt: 6
+    tool_timeout_sec: 5.0
+    max_tool_stdout_chars: 4000
+    temperature: 1.0
+    min_p: 0.02
+    allow_proxy_entropy: true
+
+  selective_gates:
+    minimal_mode_max_route_uncertainty: 0.34
+    minimal_mode_max_difficulty_score: 0.48
+    minimal_mode_max_proof_burden: 0.30
+    minimal_mode_max_retrieval_need: 0.28
+    minimal_mode_max_repair_need: 0.28
+    minimal_mode_high_entropy_threshold: 1.05
+    minimal_mode_high_proxy_uncertainty_threshold: 0.40
+    minimal_mode_fragmentation_threshold: 0.28
+    minimal_mode_allow_post_attempt_escalation: true
+    escalation_min_confidence: 0.66
+    escalation_min_answer_agreement: 0.60
+    escalation_low_margin_threshold: 0.12
+    mixed_domain_gap_threshold: 0.18
+    hard_mode_min_route_uncertainty: 0.68
+    hard_mode_min_difficulty_score: 0.80
+    hard_mode_min_proof_burden: 0.58
+    hard_mode_min_retrieval_need: 0.45
+    hard_mode_min_repair_need: 0.45
+    escalated_mode_min_retrieval_need: 0.34
+    escalated_mode_min_verifier_uncertainty: 0.28
+    escalated_mode_min_symbolic_burden: 0.26
+    escalated_mode_min_critique_uncertainty: 0.40
+    escalated_mode_min_repair_need: 0.38
+    escalated_mode_min_search_uncertainty: 0.30
+    escalated_mode_min_search_proof_burden: 0.26
+
+  # Competition-safe hard limits.
+  competition:
+    answer_min: 0
+    answer_max: 99999
+    default_fallback_answer: 0
+    total_time_budget_s: null
+    reserve_time_s: 300.0
+    stop_when_out_of_budget: true
+    continue_on_problem_failure: true
+    emit_fallback_rows_on_failure: true
+
+parser:
+  enabled: true
+  use_model_backed_parse: true
+  use_fallback_parse: true
+  strict_schema_validation: true
+  require_answer_type: true
+  require_domain_detection: true
+  require_constraint_extraction: true
+
+  timeouts:
+    parse_timeout_s: 12.0
+    fallback_timeout_s: 4.0
+
+  quality_gates:
+    min_parse_confidence: 0.35
+    degrade_route_on_low_parse_confidence: true
+    attach_parse_diagnostics: true
+
+router:
+  enabled: true
+  use_dual_router: true
+  require_problem_type_distribution: true
+  require_archetype_distribution: true
+  require_difficulty_estimate: true
+
+  uncertainty:
+    high_entropy_threshold: 0.72
+    widen_on_high_uncertainty: true
+    flatten_priors_on_high_uncertainty: true
+    mixed_domain_margin: 0.12
+    low_evidence_threshold: 1.20
+
+  outputs:
+    attach_route_rationale: true
+    attach_operator_prior: true
+    attach_budget_plan: true
+    attach_repair_neighbors: true
+
+state_init:
+  enabled: true
+  require_canonical_initial_state: true
+  attach_constraints_to_root: true
+  attach_invariants_to_root: true
+  attach_goals_to_root: true
+  fail_on_empty_state: false
+  fail_on_constraint_conflict: true
+
+retrieval:
+  enabled: true
+  retrieval_index_path: data/interim/retrieval_index
+  allow_runtime_index_open: true
+  fail_open_if_index_missing: true
+
+  query:
+    top_k_easy: 3
+    top_k_medium: 3
+    top_k_hard: 5
+    top_k_very_hard: 5
+    max_candidates_before_rerank: 24
+    min_similarity: 0.18
+    use_trace_prompting: true
+    max_trace_hints: 1
+    attach_hint_summary: true
+
+  shaping:
+    blend_into_operator_prior: true
+    prior_blend_weight: 0.30
+    route_tag_boost: 0.20
+    structural_similarity_weight: 0.55
+    textual_similarity_weight: 0.20
+    operator_overlap_weight: 0.25
+
+  policy:
+    disable_retrieval_for_easy_if_high_confidence_route: false
+    disable_retrieval_when_time_pressure_high: true
+    retrieval_depth_ceiling_easy: 2
+    retrieval_depth_ceiling_medium: 3
+    retrieval_depth_ceiling_hard: 4
+    retrieval_depth_ceiling_very_hard: 5
+
+branching:
+  enabled: true
+
+  self_consistency:
+    enabled: true
+    samples_easy: 16
+    samples_medium: 32
+    samples_hard: 64
+    samples_very_hard: 128
+    min_samples_before_entropy_exit: 8
+    diversity_temperature: 1.0
+    enforce_worker_diversity: true
+
+  frontier:
+    retain_top_k: 8
+    frontier_width_easy: 16
+    frontier_width_medium: 32
+    frontier_width_hard: 64
+    frontier_width_very_hard: 96
+    max_search_depth_easy: 4
+    max_search_depth_medium: 6
+    max_search_depth_hard: 7
+    max_search_depth_very_hard: 8
+    max_search_nodes_easy: 24
+    max_search_nodes_medium: 64
+    max_search_nodes_hard: 128
+    max_search_nodes_very_hard: 192
+
+  controller:
+    solved_cluster_stop_ratio: 0.68
+    min_branch_score_for_expansion: 0.18
+    novelty_bonus_weight: 0.18
+    exploration_bonus_weight: 0.14
+    depth_penalty_weight: 0.08
+    repair_penalty_weight: 0.05
+    disagreement_bonus_weight: 0.05
+    retrieval_blend_weight: 0.30
+    deterministic: true
+
+  search:
+    enable_limited_search_after_self_consistency: true
+    enable_priority_frontier: true
+    enable_resampling: true
+    enable_local_repair: true
+    enable_self_critique: true
+
+symbolic:
+  enabled: true
+  run_step_level_checks: true
+  run_pre_aggregation_checks: true
+  require_symbolic_for_high_confidence_selection: false
+
+  tools:
+    use_sympy: true
+    use_brute_force_for_small_spaces: true
+    use_number_theory_checks: true
+    use_geometry_checks: true
+
+  thresholds:
+    min_symbolic_pass_rate_for_trust: 0.55
+    exact_match_bonus: 0.05
+    contradiction_hard_fail: true
+
+verifier:
+  enabled: true
+  mode: default
+  use_runtime_verifier: true
+  use_teacher_verifier_fallback: false
+  score_step_level_if_available: true
+
+  thresholds:
+    pass_threshold: 0.55
+    high_confidence_threshold: 0.78
+    min_logical_consistency: 0.50
+    min_completeness: 0.45
+    min_repairability_for_repair_route: 0.35
+
+  fusion:
+    combine_with_symbolic: true
+    combine_with_answer_agreement: true
+    degrade_on_symbolic_mismatch: true
+    reject_plausible_wrong_reasoning: true
+
+aggregation:
+  enabled: true
+  canonicalize_answers: true
+  cluster_candidates: true
+  entropy_weighting: true
+  final_selector: weighted_consensus
+
+  weights:
+    verifier_probability: 0.45
+    tool_consistency: 0.25
+    answer_agreement: 0.15
+    branch_novelty: 0.10
+    exact_symbolic_check: 0.05
+
+  thresholds:
+    min_candidates_for_selection: 1
+    abstain_on_empty_candidates: true
+    entropy_high_threshold: 1.10
+    cluster_ratio_confident: 0.68
+    min_final_confidence: 0.20
+
+  outlier_control:
+    suppress_singleton_outliers: true
+    require_canonical_equivalence_merge: true
+    duplicate_penalty: 0.05
+
+adaptive_budget:
+  enabled: true
+  build_initial_budget_from_route: true
+  adapt_after_branching: true
+  use_global_tracker: true
+
+  difficulty_defaults:
+    easy:
+      branch_budget: 16
+      retrieval_depth: 2
+      max_search_depth: 4
+      max_search_nodes: 24
+      repair_budget: 1
+      self_consistency_samples: 16
+      critique_top_k: 3
+      use_retrieval: true
+      use_symbolic: true
+      use_brute_force: false
+    medium:
+      branch_budget: 32
+      retrieval_depth: 3
+      max_search_depth: 6
+      max_search_nodes: 64
+      repair_budget: 1
+      self_consistency_samples: 32
+      critique_top_k: 5
+      use_retrieval: true
+      use_symbolic: true
+      use_brute_force: false
+    hard:
+      branch_budget: 64
+      retrieval_depth: 4
+      max_search_depth: 7
+      max_search_nodes: 128
+      repair_budget: 2
+      self_consistency_samples: 64
+      critique_top_k: 5
+      use_retrieval: true
+      use_symbolic: true
+      use_brute_force: true
+    very_hard:
+      branch_budget: 128
+      retrieval_depth: 5
+      max_search_depth: 8
+      max_search_nodes: 192
+      repair_budget: 3
+      self_consistency_samples: 128
+      critique_top_k: 5
+      use_retrieval: true
+      use_symbolic: true
+      use_brute_force: true
+
+  early_exit:
+    enabled: true
+    min_branches_before_exit: 8
+    min_solved_branches: 2
+    confidence_threshold: 0.82
+    verifier_threshold: 0.75
+    symbolic_threshold: 0.65
+    entropy_threshold: 0.35
+    cluster_ratio_threshold: 0.70
+
+  widening:
+    enabled: true
+    max_widen_steps: 2
+    branch_growth_factor: 1.50
+    search_node_growth_factor: 1.50
+    retrieval_growth_step: 1
+    critique_growth_step: 1
+    repair_growth_step: 1
+    uncertainty_trigger: 0.65
+    entropy_trigger: 0.90
+    disagreement_trigger: 0.40
+
+  degradation:
+    degrade_under_time_pressure: true
+    degraded_time_pressure_ratio: 0.78
+    panic_time_pressure_ratio: 0.50
+    cut_retrieval_first: true
+    cut_critique_before_symbolic: true
+    preserve_submission_safety: true
+
+output:
+  submission:
+    enabled: true
+    format_row_during_solve: true
+    strict_problem_id: true
+    enforce_answer_range: true
+    require_unique_problem_ids: true
+    sort_rows: true
+    render_csv_header: [id, answer]
+    integer_only_answers: true
+    no_explanations_in_submission: true
+
+  debug_sidecar:
+    enabled: true
+    include_parse_metadata: true
+    include_route_rationale: true
+    include_budget_summary: true
+    include_state_summary: true
+    include_retrieval_summary: true
+    include_branch_summary: true
+    include_aggregation_summary: true
+    include_submission_summary: true
+
+logging:
+  enabled: true
+  level: INFO
+  structured: true
+  emit_stage_records: true
+  emit_failure_codes: true
+  emit_route_summary: true
+  emit_budget_summary: true
+  emit_selection_summary: true
+  persist_config_hash: true
+  persist_runtime_model_metadata: true
+
+tracing:
+  enabled: true
+  save_per_problem_trace: true
+  save_branch_search_history: true
+  save_selected_for_critique: true
+  save_failure_diagnostics: true
+  redact_submission_only_output: false
+
+failure_handling:
+  retries:
+    parse_retries: 1
+    retrieval_retries: 1
+    verifier_retries: 0
+    submission_format_retries: 0
+
+  routing:
+    degrade_on_parse_failure: true
+    fallback_to_default_medium_budget: true
+
+  repair:
+    max_repair_attempts: 3
+    max_resample_attempts: 2
+    prefer_local_repair_for_local_failures: true
+    route_missing_case_to_resample: true
+    route_symbolic_mismatch_to_repair: true
+
+  fallback:
+    allow_partial_success: true
+    allow_submission_on_partial_success: true
+    fallback_answer_on_terminal_failure: 0
+    mark_failure_in_debug_sidecar: true

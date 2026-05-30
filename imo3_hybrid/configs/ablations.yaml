@@ -1,0 +1,366 @@
+ablations:
+  version: v2
+  suite_name: imo3_hybrid_controlled_ablations
+  description: "Controlled ablation profiles for online reasoning runtime."
+  base_stack:
+    - configs/base.yaml
+    - configs/online.yaml
+    - configs/prompts.yaml
+    - configs/operators.yaml
+
+  defaults:
+    enabled: true
+    strict_validation: true
+    fail_on_unknown_override_keys: true
+    deterministic_seed: 1337
+    compare_against_profile: full_system
+    manifest_required: true
+
+    dataset:
+      split: calibration
+      max_problems: null
+      shuffle: false
+      sample_seed: 1337
+
+    execution:
+      max_parallel_runs: 1
+      stop_on_first_profile_failure: false
+      continue_on_problem_failure: true
+      reuse_cached_parses: true
+      reuse_cached_retrieval: true
+      reuse_cached_verifier_scores: false
+
+    reporting:
+      output_root: artifacts/ablations
+      write_manifest_json: true
+      write_profile_resolved_yaml: true
+      write_per_problem_metrics: true
+      write_error_summary: true
+      write_component_summary: true
+      write_runtime_summary: true
+      aggregate_by_profile: true
+
+    metrics:
+      primary:
+        - solve_rate
+        - submission_accuracy
+        - mean_final_confidence
+      secondary:
+        - verifier_accept_rate
+        - symbolic_pass_rate
+        - answer_entropy
+        - mean_runtime_seconds
+        - mean_branch_count
+        - mean_retrieval_hits_used
+        - mean_repair_attempts
+        - mean_critique_invocations
+
+  dimensions:
+    feature_toggles:
+      retrieval:
+        description: "Trace/pattern retrieval and retrieval-conditioned operator shaping."
+      branching:
+        description: "Self-consistency and limited search / expansion policy."
+      symbolic:
+        description: "Symbolic execution and deterministic checks."
+      verifier:
+        description: "Runtime verifier scoring and gating."
+      aggregation:
+        description: "Canonicalization, clustering, entropy weighting, and final selection."
+      critique:
+        description: "Top-K self-critique before final selection."
+      repair:
+        description: "Local repair, rollback, and resampling after failure."
+
+    budget_controls:
+      self_consistency_samples: [16, 32, 64, 128]
+      frontier_width: [16, 32, 64]
+      max_search_depth: [4, 6, 8]
+      retrieval_top_k: [0, 3, 5]
+      critique_top_k: [0, 3, 5]
+      repair_budget: [0, 1, 2, 3]
+
+    prompt_runtime_controls:
+      solver_prompt_family: [primary_smdp, worker_minimal]
+      parser_prompt_family: [primary_extract, fallback_extract]
+      verifier_prompt_family: [branch_judge, strict_accept_reject]
+
+    scoring_weight_controls:
+      aggregation_weight_sets:
+        - baseline
+        - verifier_heavy
+        - agreement_heavy
+        - tool_heavy
+
+  weight_sets:
+    baseline:
+      aggregation.weights:
+        verifier_probability: 0.45
+        tool_consistency: 0.25
+        answer_agreement: 0.15
+        branch_novelty: 0.10
+        exact_symbolic_check: 0.05
+
+    verifier_heavy:
+      aggregation.weights:
+        verifier_probability: 0.60
+        tool_consistency: 0.18
+        answer_agreement: 0.12
+        branch_novelty: 0.06
+        exact_symbolic_check: 0.04
+
+    agreement_heavy:
+      aggregation.weights:
+        verifier_probability: 0.34
+        tool_consistency: 0.18
+        answer_agreement: 0.30
+        branch_novelty: 0.10
+        exact_symbolic_check: 0.08
+
+    tool_heavy:
+      aggregation.weights:
+        verifier_probability: 0.35
+        tool_consistency: 0.35
+        answer_agreement: 0.15
+        branch_novelty: 0.08
+        exact_symbolic_check: 0.07
+
+  profiles:
+    full_system:
+      description: "Reference profile using the intended full online stack."
+      tags: [reference, full]
+      overrides: {}
+
+    no_retrieval:
+      description: "Disable retrieval and retrieval-conditioned prompting/shaping."
+      tags: [component, retrieval]
+      overrides:
+        retrieval.enabled: false
+        retrieval.query.top_k_easy: 0
+        retrieval.query.top_k_medium: 0
+        retrieval.query.top_k_hard: 0
+        retrieval.query.top_k_very_hard: 0
+        retrieval.query.max_trace_hints: 0
+        retrieval.shaping.blend_into_operator_prior: false
+        adaptive_budget.difficulty_defaults.easy.use_retrieval: false
+        adaptive_budget.difficulty_defaults.medium.use_retrieval: false
+        adaptive_budget.difficulty_defaults.hard.use_retrieval: false
+        adaptive_budget.difficulty_defaults.very_hard.use_retrieval: false
+
+    no_branching:
+      description: "Collapse to minimal solve path without self-consistency/search expansion."
+      tags: [component, branching]
+      overrides:
+        branching.enabled: false
+        branching.self_consistency.enabled: false
+        branching.frontier.retain_top_k: 1
+        branching.controller.min_branch_score_for_expansion: 1.0
+        adaptive_budget.early_exit.enabled: false
+        adaptive_budget.widening.enabled: false
+
+    no_symbolic:
+      description: "Disable symbolic tools and deterministic checks."
+      tags: [component, symbolic]
+      overrides:
+        symbolic.enabled: false
+        symbolic.run_step_level_checks: false
+        symbolic.run_pre_aggregation_checks: false
+        adaptive_budget.difficulty_defaults.easy.use_symbolic: false
+        adaptive_budget.difficulty_defaults.medium.use_symbolic: false
+        adaptive_budget.difficulty_defaults.hard.use_symbolic: false
+        adaptive_budget.difficulty_defaults.very_hard.use_symbolic: false
+
+    no_verifier:
+      description: "Disable runtime verifier and rely on non-verifier scoring signals."
+      tags: [component, verifier]
+      overrides:
+        verifier.enabled: false
+        aggregation.weights.verifier_probability: 0.0
+        aggregation.weights.tool_consistency: 0.40
+        aggregation.weights.answer_agreement: 0.35
+        aggregation.weights.branch_novelty: 0.15
+        aggregation.weights.exact_symbolic_check: 0.10
+        adaptive_budget.early_exit.verifier_threshold: 1.1
+
+    no_aggregation_weighting:
+      description: "Disable entropy-aware weighted selection and fall back to simpler selection."
+      tags: [component, aggregation]
+      overrides:
+        aggregation.entropy_weighting: false
+        aggregation.final_selector: simple_consensus
+        aggregation.outlier_control.suppress_singleton_outliers: false
+
+    no_critique:
+      description: "Disable top-K self-critique prior to final selection."
+      tags: [component, critique]
+      overrides:
+        branching.search.enable_self_critique: false
+        adaptive_budget.difficulty_defaults.easy.critique_top_k: 0
+        adaptive_budget.difficulty_defaults.medium.critique_top_k: 0
+        adaptive_budget.difficulty_defaults.hard.critique_top_k: 0
+        adaptive_budget.difficulty_defaults.very_hard.critique_top_k: 0
+
+    no_repair:
+      description: "Disable local repair and rollback-based correction."
+      tags: [component, repair]
+      overrides:
+        branching.search.enable_local_repair: false
+        failure_handling.repair.max_repair_attempts: 0
+        adaptive_budget.difficulty_defaults.easy.repair_budget: 0
+        adaptive_budget.difficulty_defaults.medium.repair_budget: 0
+        adaptive_budget.difficulty_defaults.hard.repair_budget: 0
+        adaptive_budget.difficulty_defaults.very_hard.repair_budget: 0
+
+    minimal_runtime:
+      description: "Fast low-budget reference for measuring marginal value of expensive components."
+      tags: [budget, runtime]
+      overrides:
+        branching.self_consistency.samples_easy: 16
+        branching.self_consistency.samples_medium: 16
+        branching.self_consistency.samples_hard: 32
+        branching.self_consistency.samples_very_hard: 32
+        branching.frontier.frontier_width_easy: 8
+        branching.frontier.frontier_width_medium: 16
+        branching.frontier.frontier_width_hard: 24
+        branching.frontier.frontier_width_very_hard: 32
+        branching.frontier.max_search_depth_easy: 3
+        branching.frontier.max_search_depth_medium: 4
+        branching.frontier.max_search_depth_hard: 5
+        branching.frontier.max_search_depth_very_hard: 6
+        retrieval.query.top_k_easy: 2
+        retrieval.query.top_k_medium: 2
+        retrieval.query.top_k_hard: 3
+        retrieval.query.top_k_very_hard: 3
+        adaptive_budget.widening.enabled: false
+
+    wide_runtime:
+      description: "High-diversity profile to test self-consistency and widening benefits."
+      tags: [budget, runtime]
+      overrides:
+        branching.self_consistency.samples_easy: 32
+        branching.self_consistency.samples_medium: 64
+        branching.self_consistency.samples_hard: 96
+        branching.self_consistency.samples_very_hard: 128
+        branching.frontier.frontier_width_easy: 24
+        branching.frontier.frontier_width_medium: 48
+        branching.frontier.frontier_width_hard: 80
+        branching.frontier.frontier_width_very_hard: 112
+        adaptive_budget.widening.enabled: true
+        adaptive_budget.widening.max_widen_steps: 3
+
+    retrieval_heavy:
+      description: "Increase retrieval depth and shaping influence."
+      tags: [retrieval, budget]
+      overrides:
+        retrieval.query.top_k_easy: 5
+        retrieval.query.top_k_medium: 5
+        retrieval.query.top_k_hard: 7
+        retrieval.query.top_k_very_hard: 7
+        retrieval.query.max_candidates_before_rerank: 40
+        retrieval.shaping.prior_blend_weight: 0.45
+        retrieval.policy.retrieval_depth_ceiling_easy: 3
+        retrieval.policy.retrieval_depth_ceiling_medium: 4
+        retrieval.policy.retrieval_depth_ceiling_hard: 5
+        retrieval.policy.retrieval_depth_ceiling_very_hard: 6
+
+    verifier_heavy:
+      description: "Increase verifier dominance in gating and final scoring."
+      tags: [verifier, scoring]
+      weight_set: verifier_heavy
+      overrides:
+        verifier.thresholds.pass_threshold: 0.60
+        verifier.thresholds.high_confidence_threshold: 0.82
+        adaptive_budget.early_exit.verifier_threshold: 0.80
+
+    agreement_heavy:
+      description: "Favor answer agreement and cluster consensus."
+      tags: [aggregation, scoring]
+      weight_set: agreement_heavy
+      overrides:
+        aggregation.cluster_candidates: true
+        aggregation.thresholds.cluster_ratio_confident: 0.62
+
+    tool_heavy:
+      description: "Favor symbolic/tool agreement more strongly."
+      tags: [aggregation, scoring]
+      weight_set: tool_heavy
+      overrides:
+        symbolic.enabled: true
+        verifier.fusion.combine_with_symbolic: true
+        aggregation.thresholds.min_final_confidence: 0.15
+
+    strict_parser_fallback:
+      description: "Use fallback-oriented parsing profile to measure parser robustness."
+      tags: [prompt, parser]
+      overrides:
+        parser.use_model_backed_parse: false
+        parser.use_fallback_parse: true
+        parser.quality_gates.min_parse_confidence: 0.0
+
+    minimal_prompting:
+      description: "Use compact prompts to test prompt-structure dependence."
+      tags: [prompt, runtime]
+      overrides:
+        prompt_selection.solver.default_task: worker_minimal
+        prompt_selection.parser.default_task: fallback_extract
+        prompt_selection.verifier.default_task: strict_accept_reject
+
+    no_early_exit:
+      description: "Disable early stopping to measure effect of full-budget exploration."
+      tags: [budget, search]
+      overrides:
+        adaptive_budget.early_exit.enabled: false
+
+  named_groups:
+    component_dropouts:
+      description: "One-at-a-time component removal around the full reference stack."
+      profiles:
+        - full_system
+        - no_retrieval
+        - no_branching
+        - no_symbolic
+        - no_verifier
+        - no_aggregation_weighting
+        - no_critique
+        - no_repair
+
+    budget_sweep:
+      description: "Compare narrow vs wide search/runtime budgets."
+      profiles:
+        - full_system
+        - minimal_runtime
+        - wide_runtime
+        - no_early_exit
+        - retrieval_heavy
+
+    scoring_sweep:
+      description: "Compare aggregation and verifier weighting regimes."
+      profiles:
+        - full_system
+        - verifier_heavy
+        - agreement_heavy
+        - tool_heavy
+
+    prompt_parser_sweep:
+      description: "Measure prompt-structure and parser-path dependence."
+      profiles:
+        - full_system
+        - strict_parser_fallback
+        - minimal_prompting
+
+  manifest:
+    experiment_name_template: "{suite_name}__{group_name}__{profile_name}__seed{seed}"
+    include_git_commit_if_available: true
+    include_config_hash: true
+    include_timestamp: true
+    include_host_metadata: true
+    include_dataset_fingerprint: true
+    required_fields:
+      - experiment_name
+      - suite_name
+      - group_name
+      - profile_name
+      - seed
+      - config_hash
+      - dataset_split
+      - started_at

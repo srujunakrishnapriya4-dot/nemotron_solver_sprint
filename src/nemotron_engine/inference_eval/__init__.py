@@ -1,0 +1,101 @@
+"""Pass 13 real completion evaluation boundary APIs."""
+
+from .completion_capture import (
+    CompletionCaptureError,
+    CompletionCaptureReport,
+    CompletionRecord,
+    capture_completions,
+    compute_completion_capture_hash,
+    validate_completion_records,
+)
+from .evaluation_manifest import (
+    InferenceEvaluationManifest,
+    InferenceEvaluationManifestError,
+    build_inference_evaluation_manifest,
+    compute_inference_evaluation_manifest_hash,
+    validate_inference_evaluation_manifest,
+)
+from .inference_contracts import (
+    InferenceBackendInvocation,
+    InferenceBackendKind,
+    InferenceBackendResult,
+    InferenceCompletion,
+    InferenceContractError,
+    InferenceMetric,
+    InferenceStatus,
+    compute_inference_result_hash,
+    validate_inference_invocation,
+    validate_inference_result,
+)
+from .inference_runner import (
+    InferenceRunReport,
+    InferenceRunnerConfig,
+    InferenceRunnerError,
+    invoke_inference_backend,
+    validate_inference_run_report,
+)
+from .private_like_bridge import (
+    CompletionPrivateLikeConfig,
+    CompletionPrivateLikeError,
+    CompletionPrivateLikeReport,
+    evaluate_private_like_from_completions,
+)
+from .prompt_batch import (
+    PromptBatch,
+    PromptBatchError,
+    PromptExample,
+    build_prompt_batch_from_transfer_examples,
+    compute_prompt_batch_hash,
+    validate_prompt_batch,
+)
+from .transfer_bridge import (
+    CompletionTransferConfig,
+    CompletionTransferError,
+    CompletionTransferReport,
+    build_transfer_examples_from_completions,
+    evaluate_completions_with_transfer_harness,
+)
+
+__all__ = [
+    "CompletionCaptureError",
+    "CompletionCaptureReport",
+    "CompletionPrivateLikeConfig",
+    "CompletionPrivateLikeError",
+    "CompletionPrivateLikeReport",
+    "CompletionRecord",
+    "CompletionTransferConfig",
+    "CompletionTransferError",
+    "CompletionTransferReport",
+    "InferenceBackendInvocation",
+    "InferenceBackendKind",
+    "InferenceBackendResult",
+    "InferenceCompletion",
+    "InferenceContractError",
+    "InferenceEvaluationManifest",
+    "InferenceEvaluationManifestError",
+    "InferenceMetric",
+    "InferenceRunReport",
+    "InferenceRunnerConfig",
+    "InferenceRunnerError",
+    "InferenceStatus",
+    "PromptBatch",
+    "PromptBatchError",
+    "PromptExample",
+    "build_inference_evaluation_manifest",
+    "build_prompt_batch_from_transfer_examples",
+    "build_transfer_examples_from_completions",
+    "capture_completions",
+    "compute_completion_capture_hash",
+    "compute_inference_evaluation_manifest_hash",
+    "compute_inference_result_hash",
+    "compute_prompt_batch_hash",
+    "evaluate_completions_with_transfer_harness",
+    "evaluate_private_like_from_completions",
+    "invoke_inference_backend",
+    "validate_completion_records",
+    "validate_inference_evaluation_manifest",
+    "validate_inference_invocation",
+    "validate_inference_result",
+    "validate_inference_run_report",
+    "validate_prompt_batch",
+]

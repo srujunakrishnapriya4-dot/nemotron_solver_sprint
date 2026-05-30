@@ -1,0 +1,412 @@
+operators:
+  version: v2
+  policy_mode: route_retrieval_repair_aware
+  strict_validation: true
+
+  # Top-level family taxonomy for policy, routing, retrieval, and mining.
+  families:
+    algebraic:
+      description: "Symbolic algebraic rewrites and expression simplifications."
+      members:
+        - substitute
+        - eliminate_variable
+        - factor
+        - expand
+        - complete_square
+        - normalize_expression
+        - inequality_rewrite
+        - solve_small_system
+
+    number_theory:
+      description: "Divisibility, congruence, valuation, residue, and finite integer reasoning."
+      members:
+        - modular_reduce
+        - congruence_split
+        - parity_check
+        - divisibility_prune
+        - valuation_check
+        - residue_case_split
+        - finite_integer_enumeration
+
+    combinatorics:
+      description: "Counting, extremal, invariant, recurrence, and constructive combinatorial moves."
+      members:
+        - count_by_cases
+        - double_count
+        - pigeonhole_apply
+        - recurrence_unroll
+        - extremal_pick
+        - invariant_extract
+        - constructive_case_split
+        - bijection_attempt
+
+    geometry:
+      description: "Geometric rewrites and transformations."
+      members:
+        - angle_chase
+        - similar_triangle_apply
+        - coordinate_transform
+        - geometric_invariant_check
+        - symmetry_reduce
+        - auxiliary_construction
+        - area_ratio_rewrite
+
+    structural:
+      description: "General proof-structure and state-organization operators."
+      members:
+        - case_split
+        - contradiction_assume
+        - wlog_reduction
+        - bound_introduce
+        - monotonicity_check
+        - subgoal_expand
+        - simplify_state
+        - merge_equivalent_state
+
+    verification:
+      description: "Tool-oriented and branch-verification actions."
+      members:
+        - symbolic_check
+        - brute_force_smallspace
+        - sanity_check
+        - plug_back_check
+        - contradiction_detect
+        - edge_case_check
+
+    repair:
+      description: "Local repair and mutation actions after branch failure."
+      members:
+        - local_patch
+        - rederive_last_step
+        - rollback_one_step
+        - rollback_to_last_verified
+        - missing_case_insertion
+        - alternate_operator_retry
+        - repair_from_neighbor
+
+  # Base priors before route/retrieval/history adjustments.
+  prior_defaults:
+    family_weights:
+      algebraic: 1.00
+      number_theory: 1.00
+      combinatorics: 1.00
+      geometry: 1.00
+      structural: 0.90
+      verification: 0.75
+      repair: 0.60
+
+    operator_bias:
+      substitute: 1.00
+      eliminate_variable: 0.95
+      factor: 0.90
+      expand: 0.60
+      modular_reduce: 0.95
+      parity_check: 0.90
+      divisibility_prune: 0.92
+      invariant_extract: 0.92
+      extremal_pick: 0.88
+      count_by_cases: 0.82
+      double_count: 0.86
+      angle_chase: 0.82
+      coordinate_transform: 0.74
+      symmetry_reduce: 0.86
+      case_split: 0.72
+      contradiction_assume: 0.76
+      bound_introduce: 0.72
+      symbolic_check: 0.84
+      brute_force_smallspace: 0.70
+      local_patch: 0.70
+      rollback_to_last_verified: 0.66
+      repair_from_neighbor: 0.72
+
+  # How route, retrieval, history, and verification signals combine.
+  scoring:
+    combine_mode: weighted_sum_then_normalize
+    weights:
+      route_problem_type: 0.28
+      route_archetype: 0.26
+      route_difficulty: 0.06
+      retrieval_support: 0.16
+      state_applicability: 0.14
+      operator_history: 0.05
+      tool_compatibility: 0.03
+      recent_success: 0.02
+
+    route_temperature:
+      high_confidence: 0.80
+      medium_confidence: 1.00
+      low_confidence: 1.20
+
+    normalization:
+      min_score_floor: 0.0001
+      sharpen_if_route_confident_above: 0.78
+      flatten_if_route_entropy_above: 0.85
+
+  applicability:
+    min_applicability_score: 0.22
+    min_precondition_confidence: 0.40
+    min_constraint_coverage: 0.30
+    min_symbol_overlap: 0.20
+    min_state_support_for_mined_operator: 0.35
+
+    hard_gates:
+      require_domain_compatibility: true
+      require_answer_type_compatibility: false
+      require_tool_compatibility_for_tool_ops: true
+      reject_if_known_invariant_conflict: true
+      reject_if_known_symbolic_contradiction: true
+
+    family_thresholds:
+      algebraic: 0.22
+      number_theory: 0.24
+      combinatorics: 0.22
+      geometry: 0.24
+      structural: 0.20
+      verification: 0.18
+      repair: 0.18
+
+  route_conditioning:
+    problem_type_compatibility:
+      algebra:
+        algebraic: 1.00
+        number_theory: 0.45
+        combinatorics: 0.35
+        geometry: 0.20
+        structural: 0.70
+        verification: 0.80
+        repair: 0.70
+      number_theory:
+        algebraic: 0.55
+        number_theory: 1.00
+        combinatorics: 0.35
+        geometry: 0.10
+        structural: 0.72
+        verification: 0.82
+        repair: 0.72
+      geometry:
+        algebraic: 0.45
+        number_theory: 0.10
+        combinatorics: 0.25
+        geometry: 1.00
+        structural: 0.68
+        verification: 0.78
+        repair: 0.70
+      combinatorics:
+        algebraic: 0.35
+        number_theory: 0.30
+        combinatorics: 1.00
+        geometry: 0.18
+        structural: 0.80
+        verification: 0.78
+        repair: 0.72
+      mixed:
+        algebraic: 0.80
+        number_theory: 0.75
+        combinatorics: 0.75
+        geometry: 0.65
+        structural: 0.85
+        verification: 0.82
+        repair: 0.76
+
+    archetype_family_boosts:
+      invariant:
+        combinatorics: 1.18
+        structural: 1.10
+        number_theory: 1.06
+      extremal:
+        combinatorics: 1.16
+        structural: 1.10
+      symmetry:
+        geometry: 1.14
+        algebraic: 1.08
+        structural: 1.08
+      pigeonhole:
+        combinatorics: 1.22
+      modular:
+        number_theory: 1.25
+        algebraic: 1.05
+      generating_function:
+        combinatorics: 1.18
+        algebraic: 1.06
+      contradiction:
+        structural: 1.18
+        number_theory: 1.05
+      construction:
+        geometry: 1.08
+        combinatorics: 1.08
+        repair: 1.04
+      induction:
+        structural: 1.14
+        combinatorics: 1.08
+      bijection:
+        combinatorics: 1.16
+      case_split:
+        structural: 1.16
+        number_theory: 1.06
+      brute_force_smallspace:
+        verification: 1.20
+        number_theory: 1.06
+
+    difficulty_modifiers:
+      easy:
+        verification: 1.08
+        repair: 0.90
+      medium:
+        verification: 1.00
+        repair: 1.00
+      hard:
+        structural: 1.06
+        repair: 1.10
+      very_hard:
+        structural: 1.10
+        repair: 1.14
+        verification: 1.06
+
+  retrieval_conditioning:
+    enabled: true
+    max_family_boost_from_retrieval: 0.22
+    max_operator_boost_from_retrieval: 0.30
+    min_similarity_for_support: 0.42
+    min_cluster_purity_for_support: 0.60
+    require_family_match_for_strong_boost: false
+
+    supports:
+      use_retrieval_for_family_reweighting: true
+      use_retrieval_for_operator_reweighting: true
+      use_retrieval_for_repair_neighboring: true
+      use_retrieval_for_prompt_hinting: true
+
+    penalties:
+      low_purity_penalty: 0.08
+      contradictory_retrieval_penalty: 0.15
+      stale_operator_template_penalty: 0.05
+
+  history_influence:
+    enabled: true
+    window_size: 5
+    discourage_immediate_repeat: true
+    immediate_repeat_penalty: 0.22
+    short_cycle_penalty: 0.12
+    family_repeat_penalty: 0.06
+    no_progress_repeat_penalty: 0.14
+    verified_success_decay_relief: 0.08
+    diversity_bonus_for_unused_families: 0.05
+
+    success_stats:
+      enabled: true
+      ema_alpha: 0.12
+      min_trials_for_full_trust: 20
+      cap_success_bonus: 0.10
+      cap_failure_penalty: 0.14
+
+  repair_policy:
+    enabled: true
+    trigger_min_failure_score: 0.45
+    prefer_local_repair_under_depth: 6
+    prefer_verified_anchor_rollback: true
+    max_neighbor_candidates: 4
+    require_same_family_neighbor_first: true
+    allow_cross_family_neighbor_if_same_archetype: true
+    penalize_full_restart_when_localizable: true
+
+    fallback_preferences:
+      substitute: [eliminate_variable, normalize_expression, symbolic_check]
+      eliminate_variable: [substitute, factor, symbolic_check]
+      factor: [expand, normalize_expression, substitute]
+      modular_reduce: [parity_check, divisibility_prune, residue_case_split]
+      parity_check: [modular_reduce, contradiction_assume, finite_integer_enumeration]
+      divisibility_prune: [valuation_check, modular_reduce, contradiction_assume]
+      invariant_extract: [extremal_pick, symmetry_reduce, contradiction_assume]
+      extremal_pick: [invariant_extract, case_split, contradiction_assume]
+      double_count: [count_by_cases, bijection_attempt, recurrence_unroll]
+      angle_chase: [similar_triangle_apply, coordinate_transform, auxiliary_construction]
+      coordinate_transform: [angle_chase, symmetry_reduce, geometric_invariant_check]
+      case_split: [missing_case_insertion, rollback_one_step, alternate_operator_retry]
+      contradiction_assume: [case_split, bound_introduce, rollback_to_last_verified]
+      symbolic_check: [rederive_last_step, rollback_to_last_verified, local_patch]
+      brute_force_smallspace: [symbolic_check, plug_back_check, sanity_check]
+      local_patch: [rederive_last_step, rollback_one_step, repair_from_neighbor]
+      rollback_one_step: [alternate_operator_retry, rederive_last_step, repair_from_neighbor]
+      repair_from_neighbor: [local_patch, rollback_to_last_verified, alternate_operator_retry]
+
+    repair_neighbor_families:
+      algebraic: [algebraic, structural, verification]
+      number_theory: [number_theory, structural, verification]
+      combinatorics: [combinatorics, structural, verification]
+      geometry: [geometry, algebraic, structural]
+      structural: [structural, verification, repair]
+      verification: [verification, repair, structural]
+      repair: [repair, structural, verification]
+
+  latching:
+    enabled: true
+    min_latch_score: 0.58
+    min_state_operator_compatibility: 0.42
+    min_invariant_compatibility: 0.35
+    require_nontrivial_progress_signal: false
+    compatibility_weights:
+      route_match: 0.26
+      state_match: 0.26
+      invariant_match: 0.18
+      retrieval_match: 0.14
+      tool_match: 0.08
+      recent_success: 0.08
+
+  mining:
+    enabled: true
+    segmentation:
+      min_step_tokens: 8
+      max_step_tokens: 160
+      require_action_verb_or_math_transform: true
+      allow_multistep_merge_for_short_spans: true
+
+    clustering:
+      method: hdbscan_or_gmm
+      min_cluster_size: 12
+      min_samples: 4
+      min_cluster_purity: 0.68
+      max_cluster_entropy: 1.10
+      deduplicate_near_duplicate_steps: true
+      require_cross_problem_support: 3
+
+    promotion:
+      min_support: 18
+      min_unique_problem_count: 5
+      min_validation_success_rate: 0.58
+      min_runtime_applicability: 0.42
+      max_failure_rate_for_promotion: 0.30
+      min_transfer_score: 0.45
+      probationary_promotions_allowed: true
+
+    compression:
+      merge_similarity_threshold: 0.86
+      merge_if_same_effect_signature: true
+      prune_low_utility_templates: true
+      prune_if_support_below: 8
+      prune_if_validation_success_below: 0.40
+
+    hard_negatives:
+      enabled: true
+      min_negative_ratio: 0.25
+      require_confusable_cluster_separation: true
+
+  promotion_registry:
+    trust_bands:
+      seed: 0.30
+      probationary: 0.45
+      active: 0.60
+      preferred: 0.75
+
+    demotion:
+      enabled: true
+      demote_if_recent_success_below: 0.28
+      demote_if_conflict_rate_above: 0.40
+      demote_if_zero_support_windows: 3
+
+  runtime_selection:
+    top_k_before_applicability_filter: 16
+    top_k_after_filter: 8
+    top_k_for_expansion: 4
+    include_verification_ops_in_top_k_even_if_low: true
+    include_repair_ops_only_after_failure: true
+    rescore_after_each_state_transition: true

@@ -1,0 +1,44 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from tools.day1_repo_guard import REQUIRED_NAMES, build_report
+
+
+def _write_clean_tree(root: Path) -> None:
+    kaggle = root / "kaggle_anti086"
+    cells = root / "artifacts" / "win_system_kaggle_cells"
+    day1 = root / "artifacts" / "day1"
+    kaggle.mkdir(parents=True)
+    cells.mkdir(parents=True)
+    day1.mkdir(parents=True)
+    for name in REQUIRED_NAMES:
+        path = kaggle / name
+        if name.endswith(".yaml"):
+            path.write_text("stage: v1b\nparent_adapter_path: none\n", encoding="utf-8")
+        else:
+            path.write_text("print('ok')\n", encoding="utf-8")
+    (cells / "CELL_01_write_configs.py").write_text("import hashlib\nprint('path size bytes sha256')\n_write('x','y')\n", encoding="utf-8")
+    (day1 / "day1_hash_manifest.json").write_text(json.dumps({"schema_version": 1, "files": []}), encoding="utf-8")
+
+
+def test_day1_repo_guard_passes_clean_toy_tree(tmp_path: Path) -> None:
+    _write_clean_tree(tmp_path)
+    report = build_report(tmp_path, strict=True)
+    assert report["status"] == "PASS", report["failures"]
+
+
+def test_day1_repo_guard_fails_for_forbidden_import(tmp_path: Path) -> None:
+    _write_clean_tree(tmp_path)
+    (tmp_path / "kaggle_anti086" / "kaggle_prepare_anti086_tokens.py").write_text("from nemotron_engine.core import x\n", encoding="utf-8")
+    report = build_report(tmp_path, strict=True)
+    assert report["status"] == "FAIL"
+    assert any(f["check"] == "forbidden_imports" for f in report["failures"])
+
+
+def test_day1_repo_guard_fails_for_missing_required_in_strict_mode(tmp_path: Path) -> None:
+    _write_clean_tree(tmp_path)
+    (tmp_path / "kaggle_anti086" / "kaggle_backend_probe.py").unlink()
+    report = build_report(tmp_path, strict=True)
+    assert any(f["check"] == "required_files" for f in report["failures"])

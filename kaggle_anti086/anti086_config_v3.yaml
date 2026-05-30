@@ -1,0 +1,12 @@
+mode: anti086_v3
+corpus_file: corpus_anti086_v3.jsonl
+token_output: /kaggle/working/anti086_tokens/train_tokens.jsonl
+base_model_path: /kaggle/input/models/metric/nemotron-3-nano-30b-a3b-bf16/transformers/default/1
+parent_adapter_path: /kaggle/input/models/huikang/nemotron-adapter/transformers/default/20
+output_adapter_dir: /kaggle/working/custom_adapter
+rank: 32
+learning_rate: 0.0000003
+max_rows: 5000
+max_seq_len: 1024
+num_steps: 650
+adapter_size_limit_mb: 1500

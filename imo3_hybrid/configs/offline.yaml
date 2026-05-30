@@ -1,0 +1,365 @@
+offline:
+  version: v2
+  profile: capability_build_loop
+  strict_validation: true
+  fail_on_unknown_keys: true
+  deterministic_seed: 1337
+
+  dataset:
+    inputs:
+      aimo_train: data/raw/aimo3_train.csv
+      olympiad_corpus_dir: data/raw/olympiad_corpus
+      retrieved_traces_dir: data/raw/retrieved_traces
+      optional_failure_logs_dir: artifacts/failures
+      optional_hard_negative_dir: data/raw/hard_negatives
+
+    outputs:
+      parsed_problems: data/interim/parsed_problems.parquet
+      trace_records: data/interim/trace_records.parquet
+      operator_library: data/interim/operator_library.parquet
+      verifier_dataset: data/interim/verifier_dataset.parquet
+      router_dataset: data/interim/router_dataset.parquet
+      archetype_dataset: data/interim/archetype_dataset.parquet
+      calibration_dataset: data/interim/calibration_dataset.parquet
+      train_splits: data/processed/train_splits.parquet
+      valid_splits: data/processed/valid_splits.parquet
+      calibration_splits: data/processed/calibration_splits.parquet
+      retrieval_index_dir: data/interim/retrieval_index
+
+    schema:
+      require_problem_id: true
+      require_problem_text: true
+      require_answer_if_available: true
+      normalize_text_before_export: true
+      drop_duplicate_problem_ids: false
+      fail_on_duplicate_problem_ids: true
+
+  splits:
+    enabled: true
+    strategy: deterministic_hash
+    seed: 1337
+    train_fraction: 0.80
+    valid_fraction: 0.10
+    calibration_fraction: 0.10
+    stratify_by:
+      - problem_type
+      - difficulty_bucket
+    keep_problem_family_together_if_available: true
+    min_examples_per_bucket: 5
+
+  trace_generation:
+    enabled: true
+    source_mode: runtime_generator_plus_teacher
+    generator_role: runtime_generator
+    teacher_role: offline_teacher
+
+    prompts:
+      parser_task: primary_extract
+      solver_task: primary_smdp
+      retrieval_solver_task: trace_conditioned_solve
+      verifier_task: branch_judge
+      critique_task: self_critique
+      repair_task: local_repair
+
+    sampling:
+      self_consistency_samples_easy: 16
+      self_consistency_samples_medium: 32
+      self_consistency_samples_hard: 64
+      self_consistency_samples_very_hard: 96
+      max_samples_per_problem: 128
+      max_attempts_per_problem: 3
+      diversity_temperature: 1.0
+      use_route_aware_workers: true
+      use_retrieval_conditioning: true
+      max_trace_conditioned_hints: 1
+
+    runtime_bounds:
+      max_new_tokens_solver: 1024
+      max_new_tokens_critique: 384
+      max_new_tokens_repair: 384
+      parse_timeout_s: 20
+      solve_timeout_s: 180
+      verifier_timeout_s: 60
+      symbolic_timeout_s: 30
+      continue_on_problem_failure: true
+
+    export:
+      write_raw_generations: true
+      write_normalized_traces: true
+      include_route_decision: true
+      include_parse_snapshot: true
+      include_retrieval_hits: true
+      include_symbolic_feedback: true
+      include_verifier_scores: true
+      include_failure_labels: true
+
+  trace_distillation:
+    enabled: true
+    min_trace_steps: 2
+    max_trace_steps: 64
+    min_reasoning_chars: 80
+    deduplicate_exact_traces: true
+    deduplicate_near_duplicate_traces: true
+    near_duplicate_similarity_threshold: 0.96
+    require_single_final_answer: true
+    require_parse_alignment: true
+    discard_empty_or_tool_free_failure_traces: false
+
+    quality_filters:
+      min_symbolic_agreement_for_positive: 0.55
+      min_verifier_score_for_positive: 0.60
+      max_allowed_contradiction_flags: 0
+      keep_plausible_negative_traces: true
+      keep_single_broken_step_traces: true
+      keep_correct_answer_wrong_reasoning_traces: true
+
+  training_data_builder:
+    enabled: true
+    build_router_rows: true
+    build_archetype_rows: true
+    build_verifier_rows: true
+    build_operator_rows: true
+    build_calibration_rows: true
+
+    labels:
+      include_problem_type: true
+      include_archetypes: true
+      include_difficulty_bucket: true
+      include_operator_sequence: true
+      include_failure_type: true
+      include_repair_action: true
+      include_symbolic_consistency: true
+      include_logical_consistency: true
+      include_completeness: true
+      include_final_answer_correctness: true
+      include_repairability: true
+
+    hard_negative_policy:
+      enabled: true
+      min_hard_negative_ratio: 0.25
+      max_hard_negative_ratio: 0.50
+      require_confusable_wrong_answers_when_available: true
+
+  verifier_data_generation:
+    enabled: true
+    target_mix:
+      correct_traces: 0.35
+      plausible_wrong_traces: 0.25
+      single_broken_step_traces: 0.20
+      correct_answer_wrong_reasoning: 0.15
+      repaired_traces: 0.05
+
+    labeling:
+      require_step_level_labels: true
+      require_branch_level_labels: true
+      require_repairability_label: true
+      require_symbolic_consistency_label: true
+      require_final_answer_correctness_label: true
+
+    balancing:
+      max_examples_per_problem: 64
+      cap_majority_class_ratio: 0.45
+      rebalance_by_problem_type: true
+      rebalance_by_difficulty: true
+
+  verifier_distillation:
+    enabled: true
+    export_dir: artifacts/verifier
+    model_size_tier: small_runtime_verifier
+    train_from_interim_dataset: true
+    max_train_examples: null
+    eval_every_n_steps: 200
+    early_stopping_patience: 4
+
+    optimization:
+      learning_rate: 2.0e-5
+      weight_decay: 0.01
+      warmup_ratio: 0.05
+      train_batch_size: 8
+      eval_batch_size: 8
+      gradient_accumulation_steps: 4
+      max_epochs: 3
+      max_grad_norm: 1.0
+
+    selection:
+      primary_metric: final_answer_correctness_f1
+      secondary_metric: symbolic_consistency_auc
+      require_calibration_export: true
+
+  router_training:
+    enabled: true
+    export_dir: artifacts/router
+    train_problem_type_head: true
+    train_archetype_head: true
+    train_difficulty_head: true
+    use_multitask_objective: true
+
+    optimization:
+      learning_rate: 3.0e-5
+      weight_decay: 0.01
+      train_batch_size: 16
+      eval_batch_size: 16
+      gradient_accumulation_steps: 2
+      max_epochs: 5
+      early_stopping_patience: 5
+
+    labels:
+      minimum_archetype_probability: 0.10
+      multi_label_archetypes: true
+      use_failure_corrected_targets_if_available: true
+
+  operator_mining:
+    enabled: true
+    export_dir: artifacts/operator_miner
+
+    segmentation:
+      min_step_tokens: 8
+      max_step_tokens: 160
+      allow_merge_short_spans: true
+      require_math_action_or_transform: true
+      normalize_prompt_artifacts_before_segmentation: true
+
+    embeddings:
+      embed_problem_text: true
+      embed_step_text: true
+      embed_state_summary: true
+      embedding_batch_size: 64
+      normalize_embeddings: true
+
+    clustering:
+      method: hdbscan_or_gmm
+      min_cluster_size: 12
+      min_samples: 4
+      min_cluster_purity: 0.68
+      max_cluster_entropy: 1.10
+      require_cross_problem_support: 3
+      deduplicate_near_duplicates: true
+
+    promotion:
+      min_support: 18
+      min_unique_problem_count: 5
+      min_validation_success_rate: 0.58
+      min_runtime_applicability: 0.42
+      max_failure_rate_for_promotion: 0.30
+      probationary_promotions_allowed: true
+
+    compression:
+      merge_similarity_threshold: 0.86
+      prune_if_support_below: 8
+      prune_if_success_below: 0.40
+
+  retrieval_index:
+    enabled: true
+    build_after_trace_export: true
+    index_type: hnsw_or_faiss
+    include_problem_embeddings: true
+    include_trace_embeddings: true
+    include_operator_signatures: true
+    include_archetype_tags: true
+    include_failure_signatures: false
+
+    build:
+      normalize_embeddings: true
+      max_items: null
+      batch_size: 256
+      write_metadata_sidecar: true
+      overwrite_existing: true
+
+    hard_negatives:
+      enabled: true
+      mine_structural_hard_negatives: true
+      max_hard_negatives_per_item: 5
+
+  archetype_training:
+    enabled: true
+    export_dir: artifacts/router/archetypes
+    train_from_router_dataset: true
+    require_multi_label_targets: true
+    minimum_positive_support_per_archetype: 20
+    drop_unstable_archetypes_below_support: 10
+
+  calibration:
+    enabled: true
+    export_dir: artifacts/calibration
+    build_calibration_dataset: true
+    run_search_calibration: true
+
+    search_grid:
+      self_consistency_samples: [16, 32, 64, 128]
+      retrieval_top_k: [0, 3, 5]
+      verifier_pass_threshold: [0.50, 0.55, 0.60]
+      min_final_confidence: [0.15, 0.20, 0.25]
+      critique_top_k: [0, 3, 5]
+      repair_budget: [0, 1, 2]
+
+    objectives:
+      primary_metric: solve_rate
+      secondary_metrics:
+        - mean_runtime_seconds
+        - symbolic_pass_rate
+        - verifier_accept_rate
+        - answer_entropy
+
+    policies:
+      preserve_deterministic_eval_order: true
+      stop_early_on_dominated_configs: true
+      max_profile_runs: 64
+
+  ablation_hooks:
+    enabled: true
+    compatible_ablation_groups:
+      - component_dropouts
+      - budget_sweep
+      - scoring_sweep
+      - prompt_parser_sweep
+    export_resolved_profiles: true
+    include_offline_artifact_fingerprint: true
+
+  manifests:
+    enabled: true
+    output_dir: artifacts/manifests/offline
+    write_run_manifest: true
+    write_artifact_manifest: true
+    include_git_commit_if_available: true
+    include_config_hash: true
+    include_timestamp: true
+    include_input_fingerprints: true
+    include_output_fingerprints: true
+    include_model_metadata: true
+    include_seed: true
+
+  logging:
+    enabled: true
+    level: INFO
+    structured: true
+    log_root: artifacts/logs/offline
+    emit_dataset_summary: true
+    emit_split_summary: true
+    emit_trace_generation_summary: true
+    emit_operator_mining_summary: true
+    emit_verifier_dataset_summary: true
+    emit_training_summary: true
+    emit_calibration_summary: true
+    persist_resolved_config: true
+
+  provenance:
+    enabled: true
+    attach_source_problem_id: true
+    attach_parent_trace_id: true
+    attach_generator_model_id: true
+    attach_teacher_model_id: true
+    attach_prompt_keys: true
+    attach_route_snapshot: true
+    attach_retrieval_snapshot: true
+    attach_symbolic_feedback: true
+    attach_verifier_snapshot: true
+    attach_failure_origin: true
+
+  failure_feedback:
+    enabled: true
+    collect_runtime_failures_if_available: true
+    collect_false_consensus_failures: true
+    collect_symbolic_mismatch_failures: true
+    collect_verifier_false_positive_failures: true
+    write_failure_bank: true
+    failure_bank_path: data/interim/failure_bank.parquet

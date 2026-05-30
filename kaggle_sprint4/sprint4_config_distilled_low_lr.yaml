@@ -1,0 +1,22 @@
+parent_adapter_path: /kaggle/input/models/huikang/nemotron-adapter/transformers/default/20
+base_model_path: /kaggle/input/models/metric/nemotron-3-nano-30b-a3b-bf16/transformers/default/1
+curated_dataset_path: /kaggle/input/datasets/surtr19/sprint4-kaggle-input
+output_adapter_dir: /kaggle/working/custom_adapter
+submission_zip_path: /kaggle/working/submission.zip
+variant_name: distilled_low_lr
+dataset_mixture:
+  train_solver_distilled.jsonl: 1.0
+max_train_rows: 1500
+lora_rank: 32
+lora_alpha: 32
+lora_dropout: 0.03
+learning_rate: 0.000001
+num_epochs: 1
+max_seq_len: 1024
+batch_size: 1
+grad_accum: 8
+seed: 42
+assistant_only_loss: true
+answer_format: raw
+min_child_exact_match_to_package: 0.0
+max_allowed_regression_vs_parent: 0.0

@@ -1,0 +1,98 @@
+"""Pass 6 SFT/DPO dataset builder APIs."""
+
+from .dpo_builder import DPOBuildError, DPOBuildReport, DPOPair, build_dpo_dataset, build_dpo_pair
+from .final_sft_refresh import FinalSFTRefreshConfig, FinalSFTRefreshError, FinalSFTRefreshReport, plan_final_sft_refresh
+from .lora_config import (
+    LoRAConfig,
+    LoRAConfigError,
+    compute_lora_config_hash,
+    load_lora_config,
+    save_lora_config,
+    validate_adapter_config_json,
+    validate_lora_config,
+)
+from .negative_generator import (
+    ALLOWED_NEGATIVE_TYPES,
+    NegativeGenerationError,
+    NegativeGenerationReport,
+    NegativeTraceCandidate,
+    generate_negative_for_trace,
+    generate_negative_traces,
+)
+from .reward_audit import RewardAuditConfig, RewardAuditError, RewardAuditReport, audit_reward_model_signals, grpo_admission_decision
+from .sft_builder import SFTBuildError, SFTBuildReport, SFTDatasetRow, build_sft_dataset, build_sft_row
+from .train_dpo import DPOTrainingConfig, DPOTrainingError, DPOTrainingReport, plan_dpo_training, run_dpo_training
+from .train_grpo import GRPOTrainingConfig, GRPOTrainingError, GRPOTrainingReport, plan_grpo_training, run_grpo_training
+from .train_sft import SFTTrainingConfig, SFTTrainingError, SFTTrainingReport, plan_sft_training, run_sft_training
+from .training_contracts import (
+    TrainingContractError,
+    TrainingDatasetContract,
+    TrainingInputManifest,
+    TrainingPlan,
+    TrainingRunReport,
+    build_training_input_manifest,
+    build_training_plan,
+    validate_dpo_pairs,
+    validate_sft_rows,
+    validate_training_plan,
+)
+
+__all__ = [
+    "ALLOWED_NEGATIVE_TYPES",
+    "DPOBuildError",
+    "DPOBuildReport",
+    "DPOPair",
+    "DPOTrainingConfig",
+    "DPOTrainingError",
+    "DPOTrainingReport",
+    "FinalSFTRefreshConfig",
+    "FinalSFTRefreshError",
+    "FinalSFTRefreshReport",
+    "GRPOTrainingConfig",
+    "GRPOTrainingError",
+    "GRPOTrainingReport",
+    "LoRAConfig",
+    "LoRAConfigError",
+    "NegativeGenerationError",
+    "NegativeGenerationReport",
+    "NegativeTraceCandidate",
+    "RewardAuditConfig",
+    "RewardAuditError",
+    "RewardAuditReport",
+    "SFTBuildError",
+    "SFTBuildReport",
+    "SFTDatasetRow",
+    "SFTTrainingConfig",
+    "SFTTrainingError",
+    "SFTTrainingReport",
+    "TrainingContractError",
+    "TrainingDatasetContract",
+    "TrainingInputManifest",
+    "TrainingPlan",
+    "TrainingRunReport",
+    "audit_reward_model_signals",
+    "build_dpo_dataset",
+    "build_dpo_pair",
+    "build_sft_dataset",
+    "build_sft_row",
+    "build_training_input_manifest",
+    "build_training_plan",
+    "compute_lora_config_hash",
+    "generate_negative_for_trace",
+    "generate_negative_traces",
+    "grpo_admission_decision",
+    "load_lora_config",
+    "plan_dpo_training",
+    "plan_final_sft_refresh",
+    "plan_grpo_training",
+    "plan_sft_training",
+    "run_dpo_training",
+    "run_grpo_training",
+    "run_sft_training",
+    "save_lora_config",
+    "validate_adapter_config_json",
+    "validate_dpo_pairs",
+    "validate_lora_config",
+    "validate_sft_rows",
+    "validate_training_plan",
+]
