@@ -37,6 +37,7 @@ STALE_PATTERNS = (
     "old fallback",
 )
 HASH_REPORT_MARKERS = ("sha256", "getsize", "stat().st_size")
+CHECKED_WRITE_HELPERS = ("write_file_checked", "_write_checked", "write_text_checked")
 WEIGHT_SUFFIXES = (".safetensors", ".bin", ".pt", ".pth", ".gguf")
 
 
@@ -106,6 +107,42 @@ def readonly_write_failures(path: Path, root: Path) -> list[dict]:
     return failures
 
 
+def indirect_readonly_input_write_risks(path: Path, root: Path) -> list[dict]:
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    failures = []
+    lines = text.splitlines()
+    input_aliases = set()
+    for idx, line in enumerate(lines, start=1):
+        compact = line.replace(" ", "")
+        if "Path(\"/kaggle/input\")" in compact or "Path('/kaggle/input')" in compact:
+            lhs = line.split("=", 1)[0].strip() if "=" in line else ""
+            if lhs and lhs.isidentifier():
+                input_aliases.add(lhs)
+        if "_write_conservative_quarantine_overlay(path.parent)" in compact:
+            window = "\n".join(lines[max(0, idx - 8) : min(len(lines), idx + 4)])
+            routed = "copy_minimal_input_to_overlay" in window and ("overlay" in compact or "_write_conservative_quarantine_overlay(overlay" in window)
+            if not routed and ("/kaggle/input" in text or any(f"{alias}.rglob" in text for alias in input_aliases)):
+                failures.append(
+                    {
+                        "check": "indirect_readonly_input_write_risk",
+                        "path": rel(path, root),
+                        "line": idx,
+                        "message": "write helper called on path.parent derived from /kaggle/input without writable overlay routing",
+                    }
+                )
+        if "_write_conservative_quarantine_overlay(" in compact and "path.parent" in compact and "copy_minimal_input_to_overlay" not in text:
+            if "/kaggle/input" in text or any(f"{alias}.rglob" in text for alias in input_aliases):
+                failures.append(
+                    {
+                        "check": "indirect_readonly_input_write_risk",
+                        "path": rel(path, root),
+                        "line": idx,
+                        "message": "quarantine overlay may write to unresolved input-derived root",
+                    }
+                )
+    return failures
+
+
 def load_simple_yaml(path: Path) -> dict:
     out = {}
     for raw in path.read_text(encoding="utf-8").splitlines():
@@ -165,10 +202,26 @@ def check_generated_hash_reporting(root: Path) -> tuple[dict, list[dict]]:
         if "_write(" not in text and "write_text(" not in text and "%%writefile" not in text:
             report["files"][rel(path, root)] = "not_a_writer"
             continue
-        ok = all(marker in text for marker in HASH_REPORT_MARKERS[:1]) and ("size" in text.lower() or "bytes" in text.lower())
+        has_helper = any(f"def {name}" in text or f"{name}(" in text for name in CHECKED_WRITE_HELPERS)
+        has_payload = "path" in text and "size_bytes" in text and "sha256" in text
+        unchecked_lines = []
+        try:
+            tree = ast.parse(text)
+            helper_ranges = []
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef) and node.name in CHECKED_WRITE_HELPERS:
+                    helper_ranges.append((node.lineno, getattr(node, "end_lineno", node.lineno)))
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr == "write_text":
+                    line = getattr(node, "lineno", 0)
+                    if not any(start <= line <= end for start, end in helper_ranges):
+                        unchecked_lines.append(line)
+        except SyntaxError:
+            unchecked_lines.append(0)
+        ok = has_helper and has_payload and not unchecked_lines
         report["files"][rel(path, root)] = ok
         if not ok:
-            failures.append({"check": "generated_hash_reporting", "path": rel(path, root), "line": 0, "message": "cell does not report file path, size bytes, and sha256"})
+            failures.append({"check": "generated_hash_reporting", "path": rel(path, root), "line": unchecked_lines[0] if unchecked_lines else 0, "message": "writer cell must use write_file_checked/_write_checked/write_text_checked and report path, size_bytes, sha256"})
     return report, failures
 
 
@@ -191,16 +244,19 @@ def build_report(root: Path, strict: bool = True, allow_submission_zip: bool = F
     import_fail = []
     stale_fail = []
     readonly_fail = []
+    indirect_fail = []
     for path in files:
         if "archive" in path.parts:
             continue
         import_fail.extend(line_failures(path, root, FORBIDDEN_IMPORT_PATTERNS, "forbidden_imports", "nemotron_engine imports forbidden in active Kaggle files"))
         stale_fail.extend(line_failures(path, root, STALE_PATTERNS, "stale_sprint_contamination", "stale Sprint-8/Sprint-9 fragment in active file"))
         readonly_fail.extend(readonly_write_failures(path, root))
+        indirect_fail.extend(indirect_readonly_input_write_risks(path, root))
     checks["forbidden_imports"] = {"failures": import_fail}
     checks["readonly_input_writes"] = {"failures": readonly_fail}
+    checks["indirect_readonly_input_write_risk"] = {"failures": indirect_fail}
     checks["stale_sprint_contamination"] = {"failures": stale_fail}
-    failures.extend(import_fail + readonly_fail + stale_fail)
+    failures.extend(import_fail + readonly_fail + indirect_fail + stale_fail)
     parent_fail = check_parent_paths(root)
     checks["parent_adapter_path"] = {"failures": parent_fail}
     failures.extend(parent_fail)
