@@ -1,40 +1,54 @@
 {
   "abstained_count": 0,
-  "attempted_count": 4,
+  "attempt_rate": 1.0,
+  "attempted_count": 60,
   "by_family": {
     "gravity_numeric": {
-      "attempted": 1,
-      "correct": 1,
-      "count": 1,
+      "attempted": 12,
+      "correct": 12,
+      "count": 12,
       "exact_match": 1.0,
-      "verified": 1
+      "verified": 12
+    },
+    "numeric_formula": {
+      "attempted": 12,
+      "correct": 12,
+      "count": 12,
+      "exact_match": 1.0,
+      "verified": 12
     },
     "roman_numeral": {
-      "attempted": 1,
-      "correct": 1,
-      "count": 1,
+      "attempted": 12,
+      "correct": 12,
+      "count": 12,
       "exact_match": 1.0,
-      "verified": 1
+      "verified": 12
     },
     "unit_conversion": {
-      "attempted": 1,
-      "correct": 1,
-      "count": 1,
+      "attempted": 12,
+      "correct": 12,
+      "count": 12,
       "exact_match": 1.0,
-      "verified": 1
+      "verified": 12
     },
     "word_cipher": {
-      "attempted": 1,
-      "correct": 1,
-      "count": 1,
+      "attempted": 12,
+      "correct": 12,
+      "count": 12,
       "exact_match": 1.0,
-      "verified": 1
+      "verified": 12
     }
   },
-  "correct_count": 4,
+  "correct_count": 60,
   "exact_match": 1.0,
+  "execution_status": "PASS",
   "failure_examples": [],
-  "row_count": 4,
+  "quality_status": "PASS",
+  "row_count": 60,
   "status": "PASS",
-  "verified_count": 4
+  "thresholds": {
+    "min_attempt_rate": 0.8,
+    "min_exact_match": 0.8
+  },
+  "verified_count": 60
 }

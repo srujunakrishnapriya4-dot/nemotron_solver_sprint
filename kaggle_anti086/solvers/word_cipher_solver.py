@@ -27,6 +27,7 @@ QUERY_PATTERNS = (
 class MappingResult:
     mapping: MappingProxyType
     conflict: bool
+    conflicts: tuple[dict, ...]
     used_pairs: int
     ignored_pairs: int
 
@@ -64,7 +65,7 @@ def extract_query_phrase(prompt: str, examples: list[tuple[list[str], list[str]]
 
 def build_word_mapping(pairs: list[tuple[list[str], list[str]]]) -> MappingResult:
     mapping: dict[str, str] = {}
-    conflict = False
+    conflicts: list[dict] = []
     used = 0
     ignored = 0
     for encrypted, plain in pairs:
@@ -75,12 +76,16 @@ def build_word_mapping(pairs: list[tuple[list[str], list[str]]]) -> MappingResul
         for key, value in zip(encrypted, plain):
             old = mapping.get(key)
             if old is not None and old != value:
-                conflict = True
+                conflicts.append({"encrypted": key, "first": old, "second": value})
             mapping[key] = value
-    return MappingResult(MappingProxyType(dict(mapping)), conflict, used, ignored)
+    return MappingResult(MappingProxyType(dict(mapping)), bool(conflicts), tuple(conflicts), used, ignored)
 
 
 class WordCipherSolver(BaseSolver):
+    def __init__(self, *, allow_partial: bool = False, min_coverage: float = 1.0) -> None:
+        self.allow_partial = allow_partial
+        self.min_coverage = min_coverage
+
     @property
     def name(self) -> str:
         return "word_cipher_solver"
@@ -97,16 +102,31 @@ class WordCipherSolver(BaseSolver):
         pairs = extract_phrase_pairs(prompt)
         query = extract_query_phrase(prompt, pairs)
         result = build_word_mapping(pairs)
+        base_metadata = {
+            "mapping_size": len(result.mapping),
+            "used_pairs": result.used_pairs,
+            "ignored_pairs": result.ignored_pairs,
+            "query_length": 0 if not query else len(query),
+            "unknown_count": 0,
+            "coverage_ratio": 0.0 if not query else 1.0,
+            "conflicts": list(result.conflicts),
+        }
         if result.used_pairs == 0:
-            return SolverResult(self.name, family, [], True, "no_aligned_examples", {"ignored_pairs": result.ignored_pairs})
+            return SolverResult(self.name, family, [], True, "no_aligned_examples", base_metadata)
         if result.conflict:
-            return SolverResult(self.name, family, [], True, "mapping_conflict", {"used_pairs": result.used_pairs})
+            return SolverResult(self.name, family, [], True, "mapping_conflict", base_metadata)
         if not query:
-            return SolverResult(self.name, family, [], True, "missing_query", {"used_pairs": result.used_pairs})
+            return SolverResult(self.name, family, [], True, "missing_query", base_metadata)
         unknown = [word for word in query if word not in result.mapping]
+        coverage = (len(query) - len(unknown)) / len(query) if query else 0.0
+        metadata = base_metadata | {"unknown_count": len(unknown), "coverage_ratio": coverage, "unknown": unknown}
         if unknown:
-            return SolverResult(self.name, family, [], True, "unknown_query_words", {"unknown": unknown})
-        answer = " ".join(result.mapping[word] for word in query)
+            if not self.allow_partial or coverage < self.min_coverage:
+                return SolverResult(self.name, family, [], True, "unknown_query_words", metadata)
+        answer_words = [result.mapping[word] for word in query if word in result.mapping]
+        if len(answer_words) != len(query):
+            return SolverResult(self.name, family, [], True, "unknown_query_words", metadata)
+        answer = " ".join(answer_words)
         candidate = SolverCandidate(
             answer=normalize_answer(answer, expected_type="text_phrase").normalized,
             source=self.name,
@@ -116,7 +136,7 @@ class WordCipherSolver(BaseSolver):
             example_consistency=1.0,
             verified=True,
             risk="low",
-            metadata={"used_pairs": result.used_pairs, "ignored_pairs": result.ignored_pairs, "query_length": len(query)},
+            metadata=metadata,
         )
         validate_candidate(candidate)
         return SolverResult(self.name, family, [candidate], False, "", {"used_pairs": result.used_pairs})

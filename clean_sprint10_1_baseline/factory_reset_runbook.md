@@ -161,3 +161,25 @@ python -m kaggle_anti086.eval.run_solver_eval --input path.jsonl --out-report ar
 ```
 
 Day 3 intentionally does not implement bit transforms, symbol mapping, char cipher, equation/operator solving, private-like split generation, synthetic corpora, LoRA training, packaging, or submission. It creates no leaderboard evidence and no 0.95 evidence. Its job is to prove that deterministic solvers can abstain safely, return schema-compatible candidates, and be scored with the Day 2 normalizer.
+
+## Sprint 11B.1 Day 3 Hardening
+
+Day 3.1 repairs the first deterministic solver layer before Day 4 expansion:
+
+- raw `Decimal` numeric parsing preserves output precision from prompt examples
+- unit and numeric formula solvers abstain on unsafe ambiguity instead of two-point overfit
+- Roman query parsing handles additional natural query forms
+- word cipher abstentions include mapping coverage and conflict diagnostics
+- solver ensemble merges same-answer candidates and refuses sub-threshold confidence
+- solver eval uses path-safe output writes and separates `execution_status` from `quality_status`
+- `kaggle_anti086/eval/build_day3_solver_smoke.py` generates a 60-row in-scope solver smoke set
+
+Validate Day 3.1:
+
+```bash
+python kaggle_anti086/eval/build_day3_solver_smoke.py --out artifacts/sprint11/day3_solver_smoke_eval.jsonl
+python kaggle_anti086/eval/run_solver_eval.py --input artifacts/sprint11/day3_solver_smoke_eval.jsonl --out-report artifacts/sprint11/day3_solver_eval_report.json --out-predictions artifacts/sprint11/day3_solver_eval_predictions.jsonl --min-exact-match 0.80 --min-attempt-rate 0.80 --fail-on-quality-gate
+python -m pytest tests/test_sprint11_unit_conversion_precision.py tests/test_sprint11_numeric_formula_precision.py tests/test_sprint11_roman_query_parsing.py tests/test_sprint11_word_cipher_diagnostics.py tests/test_sprint11_solver_ensemble_hardening.py tests/test_sprint11_solver_eval_hardening.py tests/test_sprint11_day3_solver_smoke_builder.py -q -p no:cacheprovider
+```
+
+This still creates no 0.95 evidence. The smoke rows are generated inside the supported Day 3 solver scope and are only a regression gate.

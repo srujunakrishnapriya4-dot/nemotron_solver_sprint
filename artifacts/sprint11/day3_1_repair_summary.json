@@ -1,0 +1,18 @@
+﻿{
+  "adapter_packaged": false,
+  "known_remaining_blockers": [
+    "bit_transform_solver not implemented",
+    "symbol_mapping_solver not implemented",
+    "char_cipher_solver not implemented",
+    "router not implemented",
+    "verifier hardening incomplete",
+    "private-like/rule-holdout eval generation not complete",
+    "v2 corpus not built",
+    "v2/v3 training not started"
+  ],
+  "leaderboard_evidence": false,
+  "purpose": "Harden Day 3 deterministic solver foundation",
+  "sprint": "SPRINT-11B.1",
+  "submission_created": false,
+  "training_performed": false
+}

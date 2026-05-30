@@ -188,9 +188,15 @@
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/eval/build_day3_solver_smoke.py",
+      "sha256": "d6fd73fb5b77597f94c9ca3fea72a5d868bba7b43387b0b8270d3d3d38ba184d",
+      "size_bytes": 5219
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/eval/run_solver_eval.py",
-      "sha256": "05172db89a1a4ec2a08c7df5b3be17a80fc6836b1e1c14ab32affc466a62e100",
-      "size_bytes": 5416
+      "sha256": "5f1a71335ec352a75189e38e0c6dafbe41cea83ee57c6ca26e76ed0679b573df",
+      "size_bytes": 8443
     },
     {
       "exists": true,
@@ -213,20 +219,26 @@
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/numeric_formula_solver.py",
-      "sha256": "f3255bbdbf909d6d22b65321e843746500ed8d64b1d653cc9a1ad1261c29ae3e",
-      "size_bytes": 7848
+      "sha256": "c39e22c1ad3455d161ba3d9c221b6735a12b69cc531b661e84fd0c1f715827ad",
+      "size_bytes": 9880
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/numeric_parsing.py",
+      "sha256": "b652ea70d06eff1103f886314e3695cc5d2644d0f600c4b7c09ed58a3ff765d3",
+      "size_bytes": 3270
     },
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/roman_solver.py",
-      "sha256": "260c008ef260372c9cfbe5f7edc2f3999fd04077df3c839f787403c9add176c2",
-      "size_bytes": 4201
+      "sha256": "a262220a35c336de447f99c4086f2f38e362763533db79540eb2a8fe958a15b2",
+      "size_bytes": 5281
     },
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/solver_ensemble.py",
-      "sha256": "6060e6ec79ffbb72b7005a2739c74647f7171861ccda31f9e51fe02c61b7bad2",
-      "size_bytes": 3707
+      "sha256": "bfedf1ddba545c30e991aaae3276013c8bb615a3bac69fe5008db819acaab6ae",
+      "size_bytes": 6573
     },
     {
       "exists": true,
@@ -237,14 +249,14 @@
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/unit_conversion_solver.py",
-      "sha256": "b4a1c5540303beb6288ebbd5b88b68c5b88cb33678ce2e59062708340272743f",
-      "size_bytes": 7247
+      "sha256": "b60b6ff72752d0f57bea458792342932946b6b80b3e7574f9fbaf13cf3736266",
+      "size_bytes": 8666
     },
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/word_cipher_solver.py",
-      "sha256": "068e522321882174620e586a0a44a8fa072b5287c77418c1686983719c58b9a1",
-      "size_bytes": 5234
+      "sha256": "34f653f502febd15daa7b94c6f044f5d964eb798b2bb1a67bc42b3f16e3c4a14",
+      "size_bytes": 6208
     },
     {
       "exists": true,
@@ -326,15 +338,27 @@
     },
     {
       "exists": true,
+      "path": "artifacts/sprint11/day3_1_repair_summary.json",
+      "sha256": "10b9e8a81cc5ff981c721f338cd1f8a2dc5472a3fb46ec4590b928d6977b4195",
+      "size_bytes": 577
+    },
+    {
+      "exists": true,
       "path": "artifacts/sprint11/day3_solver_eval_predictions.jsonl",
-      "sha256": "607da5c619bf42aebe377c408f5647231c8fdf8738423a41ee1a81020cf0cae1",
-      "size_bytes": 972
+      "sha256": "ea9f8fd24b1b0a98d304e2cfb2aa0058194d0bb18148ae30bad093cd9cc5f472",
+      "size_bytes": 21634
     },
     {
       "exists": true,
       "path": "artifacts/sprint11/day3_solver_eval_report.json",
-      "sha256": "9ea3072a74eb9b6c5b8a3c6ebecb146310b57c9556b80610cb361b5aa1a15a17",
-      "size_bytes": 789
+      "sha256": "58499d91fb92aa667a2b65579d078ae9c53291cff0c7f9672f83ff12c41faa2c",
+      "size_bytes": 1125
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day3_solver_smoke_eval.jsonl",
+      "sha256": "37dd89525fc7014b8728bf085e0577322fa37bde4bd63b7107357e91a85dd54c",
+      "size_bytes": 22616
     },
     {
       "exists": true,
@@ -351,8 +375,8 @@
     {
       "exists": true,
       "path": "factory_reset_runbook.md",
-      "sha256": "43c4234b2465fe1d0ed547ed13ba557b1c8a3bb15ed9d82b146959b5671b164e",
-      "size_bytes": 8041
+      "sha256": "b54619b4e882a52ab5b770d7123d70c0e01d79110a8f4273998913578eb2d5c6",
+      "size_bytes": 9696
     },
     {
       "exists": true,
@@ -375,7 +399,7 @@
     {
       "exists": true,
       "path": "clean_sprint10_1_baseline/baseline_manifest.json",
-      "sha256": "7d5b6abcbe7be397e82b9294b9b29c34b1e4f183289a281d321e2ce7afcd111c",
+      "sha256": "fd720a8e42ab89ad585b5cc75c97598cc4820b92852dcaed423a9917d4ad413f",
       "size_bytes": 6466
     }
   ],

@@ -50,7 +50,7 @@ def test_verified_candidate_beats_unverified() -> None:
     ensemble = SolverEnsemble(
         [
             FixedSolver("unverified", _candidate("unverified", "I", 1.0, verified=False)),
-            FixedSolver("verified", _candidate("verified", "V", 0.2, verified=True)),
+            FixedSolver("verified", _candidate("verified", "V", 0.6, verified=True)),
         ]
     )
     assert ensemble.best_candidate(_row()).source == "verified"

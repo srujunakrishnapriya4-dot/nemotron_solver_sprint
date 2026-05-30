@@ -3,10 +3,31 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import sys
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from kaggle_anti086.data.schema import RowValidationError, validate_row
-from kaggle_anti086.solvers.answer_normalizer import answers_match
+from kaggle_anti086.solvers.answer_normalizer import answers_match, normalize_answer
 from kaggle_anti086.solvers.solver_ensemble import ANSWER_TYPE_BY_FAMILY, SolverEnsemble
+
+try:
+    from kaggle_anti086.kaggle_path_safety import require_writable_output_path, safe_write_text
+except Exception:  # pragma: no cover - fallback for isolated local copies
+    def require_writable_output_path(path: str | Path, *, field_name: str, **_: object) -> Path:
+        candidate = Path(path)
+        normalized = str(candidate).replace("\\", "/")
+        if normalized.startswith("/kaggle/input") or normalized.startswith("/tmp/"):
+            raise SystemExit(f"{field_name} is not a safe durable eval output path: {candidate}")
+        return candidate
+
+    def safe_write_text(path: str | Path, content: str, *, field_name: str, encoding: str = "utf-8") -> Path:
+        target = require_writable_output_path(path, field_name=field_name)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding=encoding)
+        return target
 
 
 def run_solver_eval(
@@ -15,8 +36,12 @@ def run_solver_eval(
     out_predictions: str | Path,
     *,
     allow_invalid_rows: bool = False,
+    min_exact_match: float = 0.0,
+    min_attempt_rate: float = 0.0,
 ) -> dict:
     rows = _read_jsonl(Path(input_path))
+    out_report = require_writable_output_path(out_report, field_name="out_report")
+    out_predictions = require_writable_output_path(out_predictions, field_name="out_predictions")
     ensemble = SolverEnsemble()
     predictions: list[dict] = []
     by_family: dict[str, dict] = {}
@@ -35,10 +60,13 @@ def run_solver_eval(
         best = None if result.abstained or not result.candidates else result.candidates[0]
         answer_type = ANSWER_TYPE_BY_FAMILY.get(family)
         prediction = "" if best is None else best.answer
+        normalized_expected = normalize_answer(expected, expected_type=answer_type).normalized
+        normalized_prediction = normalize_answer(prediction, expected_type=answer_type).normalized if prediction else ""
         correct = False if best is None else answers_match(prediction, expected, answer_type=answer_type)
         prediction_row = {
             "id": row.get("id", f"row_{idx}"),
             "family": family,
+            "subfamily": row.get("subfamily", ""),
             "expected": expected,
             "prediction": prediction,
             "correct": bool(correct),
@@ -48,6 +76,9 @@ def run_solver_eval(
             "risk": "" if best is None else best.risk,
             "verified": False if best is None else best.verified,
             "candidate_count": 0 if result.abstained else len(result.candidates),
+            "reason": result.reason,
+            "normalized_expected": normalized_expected,
+            "normalized_prediction": normalized_prediction,
         }
         predictions.append(prediction_row)
         bucket = by_family.setdefault(
@@ -80,20 +111,29 @@ def run_solver_eval(
     attempted_count = sum(0 if item["abstained"] else 1 for item in predictions)
     verified_count = sum(1 for item in predictions if item["verified"])
     correct_count = sum(1 for item in predictions if item["correct"])
+    exact_match = 0.0 if row_count == 0 else correct_count / row_count
+    attempt_rate = 0.0 if row_count == 0 else attempted_count / row_count
+    quality_status = _quality_status(row_count, exact_match, attempt_rate, min_exact_match, min_attempt_rate)
     report = {
         "status": "PASS",
+        "execution_status": "PASS",
+        "quality_status": quality_status,
         "row_count": row_count,
         "attempted_count": attempted_count,
+        "attempt_rate": attempt_rate,
         "verified_count": verified_count,
         "correct_count": correct_count,
-        "exact_match": 0.0 if row_count == 0 else correct_count / row_count,
+        "exact_match": exact_match,
         "abstained_count": row_count - attempted_count,
         "by_family": dict(sorted(by_family.items())),
         "failure_examples": failure_examples,
+        "thresholds": {
+            "min_exact_match": min_exact_match,
+            "min_attempt_rate": min_attempt_rate,
+        },
     }
     _write_jsonl(Path(out_predictions), predictions)
-    Path(out_report).parent.mkdir(parents=True, exist_ok=True)
-    Path(out_report).write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    safe_write_text(Path(out_report), json.dumps(report, indent=2, sort_keys=True) + "\n", field_name="out_report")
     return report
 
 
@@ -103,14 +143,32 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out-report", required=True)
     parser.add_argument("--out-predictions", required=True)
     parser.add_argument("--allow-invalid-rows", action="store_true")
+    parser.add_argument("--min-exact-match", type=float, default=0.0)
+    parser.add_argument("--min-attempt-rate", type=float, default=0.0)
+    parser.add_argument("--fail-on-quality-gate", action="store_true")
     args = parser.parse_args(argv)
     report = run_solver_eval(
         args.input,
         args.out_report,
         args.out_predictions,
         allow_invalid_rows=args.allow_invalid_rows,
+        min_exact_match=args.min_exact_match,
+        min_attempt_rate=args.min_attempt_rate,
     )
-    print(json.dumps({"status": report["status"], "row_count": report["row_count"], "exact_match": report["exact_match"]}, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "execution_status": report["execution_status"],
+                "quality_status": report["quality_status"],
+                "row_count": report["row_count"],
+                "exact_match": report["exact_match"],
+                "attempt_rate": report["attempt_rate"],
+            },
+            sort_keys=True,
+        )
+    )
+    if args.fail_on_quality_gate and report["quality_status"] == "FAIL":
+        return 2
     return 0
 
 
@@ -127,9 +185,16 @@ def _read_jsonl(path: Path) -> list[dict]:
 
 
 def _write_jsonl(path: Path, rows: list[dict]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
     payload = "".join(json.dumps(row, sort_keys=True) + "\n" for row in rows)
-    path.write_text(payload, encoding="utf-8")
+    safe_write_text(path, payload, field_name="out_predictions")
+
+
+def _quality_status(row_count: int, exact_match: float, attempt_rate: float, min_exact_match: float, min_attempt_rate: float) -> str:
+    if row_count == 0:
+        return "WARN"
+    if exact_match < min_exact_match or attempt_rate < min_attempt_rate:
+        return "FAIL"
+    return "PASS"
 
 
 if __name__ == "__main__":

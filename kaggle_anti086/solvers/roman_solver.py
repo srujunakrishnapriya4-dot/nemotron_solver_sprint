@@ -27,9 +27,12 @@ EXAMPLE_RE = re.compile(r"\b(\d{1,4})\s*(?:->|=|:)\s*([IVXLCDM]+)\b", re.IGNOREC
 QUERY_PATTERNS = (
     re.compile(r"\b(?:convert|input|query)\s*[:#]?\s*(\d{1,5})\b", re.IGNORECASE),
     re.compile(r"\bwhat\s+is\s+(\d{1,5})\s+(?:in|as)\b", re.IGNORECASE),
+    re.compile(r"\b(?:write|solve\s+for|output\s+for|target\s+number)\s*[:#]?\s*(\d{1,5})\b", re.IGNORECASE),
+    re.compile(r"\bgiven\s+the\s+examples\s+above,?\s*(\d{1,5})\b", re.IGNORECASE),
     re.compile(r"\b(\d{1,5})\s*(?:->|=)\s*\?", re.IGNORECASE),
     re.compile(r"\bnumber\s*[:#]?\s*(\d{1,5})\b", re.IGNORECASE),
 )
+STANDALONE_NUMBER_RE = re.compile(r"\b(\d{1,5})\b")
 
 
 def int_to_roman(n: int) -> str:
@@ -56,13 +59,23 @@ def extract_roman_examples(prompt: str) -> list[tuple[int, str]]:
 def extract_roman_query(prompt: str) -> int | None:
     text = prompt or ""
     example_spans = [match.span() for match in EXAMPLE_RE.finditer(text)]
+    candidates: list[tuple[int, int]] = []
     for pattern in QUERY_PATTERNS:
         matches = list(pattern.finditer(text))
-        for match in reversed(matches):
+        for match in matches:
             if _inside_any(match.span(1), example_spans):
                 continue
-            return int(match.group(1))
-    return None
+            candidates.append((match.start(1), int(match.group(1))))
+    if not candidates and example_spans and _prompt_asks_for_answer(text):
+        last_example_end = max(end for _, end in example_spans)
+        tail = text[last_example_end:]
+        standalone = [match for match in STANDALONE_NUMBER_RE.finditer(tail) if not _inside_any((last_example_end + match.start(1), last_example_end + match.end(1)), example_spans)]
+        if standalone:
+            match = standalone[-1]
+            candidates.append((last_example_end + match.start(1), int(match.group(1))))
+    if not candidates:
+        return None
+    return sorted(candidates, key=lambda item: item[0])[-1][1]
 
 
 class RomanSolver(BaseSolver):
@@ -114,3 +127,7 @@ class RomanSolver(BaseSolver):
 def _inside_any(span: tuple[int, int], spans: list[tuple[int, int]]) -> bool:
     start, end = span
     return any(parent_start <= start and end <= parent_end for parent_start, parent_end in spans)
+
+
+def _prompt_asks_for_answer(text: str) -> bool:
+    return bool(re.search(r"\b(?:answer|convert|write|solve|output|same\s+system|examples\s+above)\b", text, re.IGNORECASE))

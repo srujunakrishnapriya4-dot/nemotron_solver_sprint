@@ -49,8 +49,9 @@ def test_numeric_formula_inconsistent_examples_abstain() -> None:
 
 
 def test_numeric_formula_ambiguous_not_low_risk_verified() -> None:
-    result = NumericFormulaSolver().solve(_row("1 -> 2; 2 -> 4. Query 3?"))
-    assert result.abstained or result.candidates[0].risk != "low"
+    result = NumericFormulaSolver().solve(_row("1 -> 1; 2 -> 4. Query 3?"))
+    assert result.abstained
+    assert result.reason == "ambiguous_formula_disagreement"
 
 
 def test_numeric_formula_missing_query_abstains() -> None:
