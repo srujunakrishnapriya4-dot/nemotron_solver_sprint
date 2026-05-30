@@ -1,0 +1,40 @@
+{
+  "adapter_packaged": false,
+  "answerable_count": 218,
+  "answerable_exact_match": 0.7706422018348624,
+  "behavior_accuracy": 0.8287671232876712,
+  "correct_abstain_rate": 1.0,
+  "expected_abstain_count": 74,
+  "family_distribution": {
+    "bit_manipulation": 56,
+    "char_cipher": 44,
+    "custom_numeral": 2,
+    "gravity_numeric": 23,
+    "numeric_formula": 13,
+    "roman_numeral": 26,
+    "symbol_mapping": 56,
+    "unit_conversion": 36,
+    "word_cipher": 36
+  },
+  "known_limitations": [
+    "private_like_eval_512 not built yet",
+    "rule_holdout_eval_512 not built yet",
+    "family_hard_eval_512 not built yet",
+    "v2 solver-correct corpus not built",
+    "v2/v3 training not started",
+    "equation/operator solver still unsupported",
+    "no leaderboard evidence",
+    "no 0.95 evidence"
+  ],
+  "leaderboard_evidence": false,
+  "purpose": "Bulletproof Day 4 solver/eval hardening",
+  "row_count": 292,
+  "sprint": "SPRINT-11C.1",
+  "statement": "No training was performed. No adapter was packaged. No submission artifact was created. This is not leaderboard evidence.",
+  "submission_created": false,
+  "training_performed": false,
+  "unique_leakage_group_count": 292,
+  "unique_rule_id_count": 292,
+  "unsafe_answer_rate": 0.0,
+  "unsafe_answer_rate_on_abstain_rows": 0.0
+}

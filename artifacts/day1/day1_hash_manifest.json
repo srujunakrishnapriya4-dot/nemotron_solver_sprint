@@ -195,14 +195,14 @@
     {
       "exists": true,
       "path": "kaggle_anti086/eval/build_day4_adversarial_solver_eval.py",
-      "sha256": "a14661c9c6636b0464ffa74b0112404a2bfd0ad3476dfb954e8defb14f79e1a4",
-      "size_bytes": 7226
+      "sha256": "dc05ac12e60b4cde1f9a03d956055e6c3c0f0a7a2af964ac8f6b4dc7fc168600",
+      "size_bytes": 20837
     },
     {
       "exists": true,
       "path": "kaggle_anti086/eval/run_solver_eval.py",
-      "sha256": "50e3df527983da0f2e56fbc2d018dadc5114bdf19390c0963cd8a893b53e1794",
-      "size_bytes": 11158
+      "sha256": "2fbb5ce35826fe5dac78dcfba337009690943ef877bed12c87e4e5b84294c26c",
+      "size_bytes": 13895
     },
     {
       "exists": true,
@@ -225,8 +225,8 @@
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/bit_transform_solver.py",
-      "sha256": "522658c7d6fca0c926915e9dd78a0f8a9989c2af1dc697bf0fa9b405a1bb20e8",
-      "size_bytes": 10396
+      "sha256": "06cfeb7db333c0c0ce1b64d1f330121420b204b03a635ba28e17f8462e66b0f1",
+      "size_bytes": 14023
     },
     {
       "exists": true,
@@ -255,20 +255,20 @@
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/router.py",
-      "sha256": "f596fa258c8a3c14cbe9d7b8a7e01f1b05b3825291e6cd3893abd6310d108409",
-      "size_bytes": 3261
+      "sha256": "cb3c5926d63bb97ca5bb727780718e76aaed325d6cadcc040447721b3fb9c65f",
+      "size_bytes": 3451
     },
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/solver_ensemble.py",
-      "sha256": "f81a697d8b8703e36abbfaa2e8810ee3a84ae973577693248a32f2bea2c7e3ab",
-      "size_bytes": 9194
+      "sha256": "906c64509ea581ff3255e8e32689c53ef5718d4483947afb601278d776190fd9",
+      "size_bytes": 10895
     },
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/symbol_mapping_solver.py",
-      "sha256": "65904b986920ee27c57785043856f48828813667e559b9185ca76a94b72f40f9",
-      "size_bytes": 6411
+      "sha256": "801ef5d8517994c4f5a94226960f4cc0ec1feae2064e0a782cf2b6e51c806cfd",
+      "size_bytes": 8162
     },
     {
       "exists": true,
@@ -285,14 +285,14 @@
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/verifier.py",
-      "sha256": "be2e00c5e9fb50007d7a394df25854a2b858d4e891c953e79927c9fe839b69a6",
-      "size_bytes": 4441
+      "sha256": "d13660c373bc56ffb0d6c1f41643bd76d8dbe489ce2d93cb537dd3a52c5702b9",
+      "size_bytes": 5606
     },
     {
       "exists": true,
       "path": "kaggle_anti086/solvers/word_cipher_solver.py",
-      "sha256": "34f653f502febd15daa7b94c6f044f5d964eb798b2bb1a67bc42b3f16e3c4a14",
-      "size_bytes": 6208
+      "sha256": "2f26f46802ec70a672a66befc1e7bc5e5c870e1110f2285d38d3143a0a95dd87",
+      "size_bytes": 6910
     },
     {
       "exists": true,
@@ -395,6 +395,30 @@
       "path": "artifacts/sprint11/day3_solver_smoke_eval.jsonl",
       "sha256": "37dd89525fc7014b8728bf085e0577322fa37bde4bd63b7107357e91a85dd54c",
       "size_bytes": 22616
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_adversarial_solver_eval.jsonl",
+      "sha256": "54b6a939e132706e89ac8b5cc1dbab3419c45bd17eaa05e1fcda4642caba1661",
+      "size_bytes": 216346
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_adversarial_solver_predictions.jsonl",
+      "sha256": "9425af2c29b92e8f0fe92c1ab7cbee7c1fd75dd86a1a62b2caa6394fcfa1bd2d",
+      "size_bytes": 126968
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_adversarial_solver_report.json",
+      "sha256": "ac308e597bc0b7da9d4990c2f42894a4b630bde30333ef8c6d2f81a6d5cfcb73",
+      "size_bytes": 8676
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_hardening_summary.json",
+      "sha256": "9d4775b873e7fde550d47ae1ce5097075e32985a0efd85bd72fff60c37426a5a",
+      "size_bytes": 1334
     },
     {
       "exists": true,

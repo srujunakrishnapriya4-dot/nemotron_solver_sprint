@@ -19,7 +19,7 @@ from kaggle_anti086.solvers.word_cipher_solver import WordCipherSolver
 RISK_ORDER = {"low": 0, "medium": 1, "high": 2}
 ANSWER_TYPE_BY_FAMILY = {
     "roman_numeral": "roman",
-    "custom_numeral": "roman",
+    "custom_numeral": "generic",
     "unit_conversion": "numeric",
     "numeric_formula": "numeric",
     "gravity_numeric": "numeric",
@@ -50,8 +50,25 @@ class SolverEnsemble:
         abstentions: list[dict] = []
         verification_failures: list[dict] = []
         route = route_row(row)
-        for solver in self._ordered_solvers(route.candidate_solvers):
-            result = solver.solve(row)
+        if not route.supported_by_solver and route.confidence >= 0.75:
+            return SolverResult(
+                solver_name="solver_ensemble",
+                family=family,
+                candidates=[],
+                abstained=True,
+                reason=route.unsupported_reason or "unsupported_route",
+                metadata={"route": route.__dict__},
+            )
+        ordered_solvers = self._ordered_solvers(route.candidate_solvers)
+        preferred = set(route.candidate_solvers)
+        preferred_candidate_found = False
+        for solver in ordered_solvers:
+            if preferred_candidate_found and route.confidence >= 0.85 and solver.name not in preferred:
+                break
+            solver_row = row
+            if solver.name in preferred and family in {"unknown", ""} and route.family != family:
+                solver_row = dict(row) | {"family": route.family}
+            result = solver.solve(solver_row)
             if result.abstained or not result.candidates:
                 abstentions.append({"solver": result.solver_name, "reason": result.reason})
                 continue
@@ -60,6 +77,8 @@ class SolverEnsemble:
                 validate_candidate(normalized)
                 verified = verify_candidate(normalized, row)
                 if verified.verified:
+                    if normalized.source in preferred:
+                        preferred_candidate_found = True
                     candidates.append(
                         SolverCandidate(
                             answer=verified.normalized_answer,
@@ -88,14 +107,20 @@ class SolverEnsemble:
         ranked = sorted(merged, key=lambda candidate: _rank_key(candidate, family))
         disagreement_warning = _verified_low_risk_disagreement(ranked)
         if disagreement_warning["present"]:
-            return SolverResult(
-                solver_name="solver_ensemble",
-                family=family,
-                candidates=ranked,
-                abstained=True,
-                reason="verified_candidate_disagreement",
-                metadata={"abstentions": abstentions, "verification_failures": verification_failures, "route": route.__dict__, "disagreement_warning": disagreement_warning},
-            )
+            routed_sources = set(route.candidate_solvers)
+            routed_low = [candidate for candidate in ranked if candidate.source in routed_sources and candidate.verified and candidate.risk == "low"]
+            fallback_low = [candidate for candidate in ranked if candidate.source not in routed_sources and candidate.verified and candidate.risk == "low"]
+            if route.confidence >= 0.85 and len(routed_low) == 1 and fallback_low and all(candidate.example_consistency < routed_low[0].example_consistency or candidate.confidence < routed_low[0].confidence for candidate in fallback_low):
+                disagreement_warning = disagreement_warning | {"overridden_by_route": True}
+            else:
+                return SolverResult(
+                    solver_name="solver_ensemble",
+                    family=family,
+                    candidates=ranked,
+                    abstained=True,
+                    reason="verified_candidate_disagreement",
+                    metadata={"abstentions": abstentions, "verification_failures": verification_failures, "route": route.__dict__, "disagreement_warning": disagreement_warning},
+                )
         if ranked[0].confidence < self.min_confidence_to_emit:
             return SolverResult(
                 solver_name="solver_ensemble",

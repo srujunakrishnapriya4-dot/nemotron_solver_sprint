@@ -70,6 +70,19 @@ class BitRule:
             if bits.count("1") % 2:
                 return bits[:-1] + ("0" if bits[-1] == "1" else "1")
             return bits
+        if self.operation == "swap_positions":
+            chars = list(bits)
+            i, j = self.params["positions"]
+            chars[i], chars[j] = chars[j], chars[i]
+            return "".join(chars)
+        if self.operation == "permutation":
+            return _apply_permutation(bits, self.params["permutation"])
+        if self.operation == "permutation_then_xor":
+            permuted = int(_apply_permutation(bits, self.params["permutation"]), 2)
+            return _format_bits(permuted ^ self.params["mask_int"], width)
+        if self.operation == "xor_then_permutation":
+            xored = _format_bits(value ^ self.params["mask_int"], width)
+            return _apply_permutation(xored, self.params["permutation"])
         raise ValueError(f"unknown bit operation: {self.operation}")
 
 
@@ -190,6 +203,75 @@ def _candidate_rules(examples: list[tuple[str, str]], width: int) -> list[BitRul
             rules.append(BitRule(op_name, op_name, 2, 0.9, "medium", {"mask": _format_bits(mask, width), "mask_int": mask}))
     for k in range(1, width):
         rules.append(BitRule("not_then_rotate", f"not_then_rotate_left_{k}", 3, 0.89, "low", {"k": k}))
+    for i in range(width):
+        for j in range(i + 1, width):
+            rules.append(BitRule("swap_positions", f"swap_positions_{i}_{j}", 2, 0.9, "medium", {"positions": (i, j)}))
+    rules.extend(_infer_permutation_rules(examples, width))
+    return rules
+
+
+def _infer_permutation_rules(examples: list[tuple[str, str]], width: int) -> list[BitRule]:
+    if len(examples) < 3 or width not in {4, 8}:
+        return []
+    choices: list[list[tuple[int, int]]] = []
+    for out_pos in range(width):
+        position_choices: list[tuple[int, int]] = []
+        for in_pos in range(width):
+            for xor_bit in (0, 1):
+                if all(((int(inp[in_pos]) ^ xor_bit) == int(out[out_pos])) for inp, out in examples):
+                    position_choices.append((in_pos, xor_bit))
+        if not position_choices:
+            return []
+        choices.append(position_choices)
+    candidates: list[tuple[tuple[int, ...], tuple[int, ...]]] = []
+
+    def backtrack(out_pos: int, used: set[int], perm: list[int], xor_bits: list[int]) -> None:
+        if len(candidates) >= 32:
+            return
+        if out_pos == width:
+            candidates.append((tuple(perm), tuple(xor_bits)))
+            return
+        for in_pos, xor_bit in choices[out_pos]:
+            if in_pos in used:
+                continue
+            used.add(in_pos)
+            perm.append(in_pos)
+            xor_bits.append(xor_bit)
+            backtrack(out_pos + 1, used, perm, xor_bits)
+            xor_bits.pop()
+            perm.pop()
+            used.remove(in_pos)
+
+    backtrack(0, set(), [], [])
+    rules: list[BitRule] = []
+    identity = tuple(range(width))
+    for perm, xor_bits in candidates:
+        mask_int = int("".join(str(bit) for bit in xor_bits), 2)
+        if perm == identity and mask_int == 0:
+            continue
+        if mask_int == 0:
+            rules.append(BitRule("permutation", "bit_position_permutation", 5, 0.82, "medium", {"permutation": perm}))
+        else:
+            rules.append(
+                BitRule(
+                    "permutation_then_xor",
+                    "bit_position_permutation_then_xor",
+                    6,
+                    0.8,
+                    "medium",
+                    {"permutation": perm, "mask": _format_bits(mask_int, width), "mask_int": mask_int},
+                )
+            )
+            rules.append(
+                BitRule(
+                    "xor_then_permutation",
+                    "xor_then_bit_position_permutation",
+                    6,
+                    0.8,
+                    "medium",
+                    {"permutation": perm, "mask": _format_bits(mask_int, width), "mask_int": mask_int},
+                )
+            )
     return rules
 
 
@@ -228,9 +310,14 @@ def _rule_metadata(rule: BitRule, problem: BitProblem) -> dict:
             "matched_examples": len(problem.examples),
             "example_count": len(problem.examples),
             "complexity": rule.complexity,
+            "ambiguity_count": 0,
         }
     )
     return metadata
+
+
+def _apply_permutation(bits: str, permutation: tuple[int, ...] | list[int]) -> str:
+    return "".join(bits[index] for index in permutation)
 
 
 def _dedupe_rules(rules: list[BitRule]) -> list[BitRule]:

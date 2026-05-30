@@ -107,22 +107,35 @@ class WordCipherSolver(BaseSolver):
             "used_pairs": result.used_pairs,
             "ignored_pairs": result.ignored_pairs,
             "query_length": 0 if not query else len(query),
+            "query_word_count": 0 if not query else len(query),
             "unknown_count": 0,
+            "unknown_words": [],
+            "known_word_count": 0 if not query else len(query),
             "coverage_ratio": 0.0 if not query else 1.0,
+            "coverage": 0.0 if not query else 1.0,
             "conflicts": list(result.conflicts),
+            "conflicting_words": [item["encrypted"] for item in result.conflicts],
+            "reason_for_abstain": "",
         }
         if result.used_pairs == 0:
-            return SolverResult(self.name, family, [], True, "no_aligned_examples", base_metadata)
+            return SolverResult(self.name, family, [], True, "no_aligned_examples", base_metadata | {"reason_for_abstain": "no_aligned_examples"})
         if result.conflict:
-            return SolverResult(self.name, family, [], True, "mapping_conflict", base_metadata)
+            return SolverResult(self.name, family, [], True, "mapping_conflict", base_metadata | {"reason_for_abstain": "conflicting_word_mapping"})
         if not query:
-            return SolverResult(self.name, family, [], True, "missing_query", base_metadata)
+            return SolverResult(self.name, family, [], True, "missing_query", base_metadata | {"reason_for_abstain": "missing_query"})
         unknown = [word for word in query if word not in result.mapping]
         coverage = (len(query) - len(unknown)) / len(query) if query else 0.0
-        metadata = base_metadata | {"unknown_count": len(unknown), "coverage_ratio": coverage, "unknown": unknown}
+        metadata = base_metadata | {
+            "unknown_count": len(unknown),
+            "unknown_words": unknown,
+            "known_word_count": len(query) - len(unknown),
+            "coverage_ratio": coverage,
+            "coverage": coverage,
+            "unknown": unknown,
+        }
         if unknown:
             if not self.allow_partial or coverage < self.min_coverage:
-                return SolverResult(self.name, family, [], True, "unknown_query_words", metadata)
+                return SolverResult(self.name, family, [], True, "unknown_query_words", metadata | {"reason_for_abstain": "unknown_query_words"})
         answer_words = [result.mapping[word] for word in query if word in result.mapping]
         if len(answer_words) != len(query):
             return SolverResult(self.name, family, [], True, "unknown_query_words", metadata)

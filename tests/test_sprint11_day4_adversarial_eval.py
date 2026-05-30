@@ -31,8 +31,8 @@ def test_day4_solver_eval_reports_unsafe_answer_metrics(tmp_path) -> None:
         input_path,
         tmp_path / "report.json",
         tmp_path / "predictions.jsonl",
-        min_exact_match=0.70,
-        min_attempt_rate=0.50,
+        min_behavior_accuracy=0.80,
+        min_answerable_exact_match=0.70,
         max_unsafe_answer_rate=0.05,
         min_correct_abstain_rate=0.80,
     )

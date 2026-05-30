@@ -40,6 +40,8 @@ def run_solver_eval(
     min_attempt_rate: float = 0.0,
     max_unsafe_answer_rate: float = 1.0,
     min_correct_abstain_rate: float = 0.0,
+    min_behavior_accuracy: float | None = None,
+    min_answerable_exact_match: float | None = None,
 ) -> dict:
     rows = _read_jsonl(Path(input_path))
     out_report = require_writable_output_path(out_report, field_name="out_report")
@@ -54,6 +56,9 @@ def run_solver_eval(
     wrong_abstain_count = 0
     unsafe_answer_count = 0
     wrong_answer_count = 0
+    answerable_attempted_count = 0
+    answerable_correct_count = 0
+    behavior_correct_count = 0
 
     for idx, row in enumerate(rows):
         try:
@@ -76,14 +81,20 @@ def run_solver_eval(
             expected_abstain_count += 1
             if best is None:
                 correct_abstain_count += 1
+                behavior_correct_count += 1
             else:
                 unsafe_answer_count += 1
         else:
             answerable_count += 1
             if best is None:
                 wrong_abstain_count += 1
-            elif not answer_correct:
-                wrong_answer_count += 1
+            else:
+                answerable_attempted_count += 1
+                if answer_correct:
+                    answerable_correct_count += 1
+                    behavior_correct_count += 1
+                else:
+                    wrong_answer_count += 1
         prediction_row = {
             "id": row.get("id", f"row_{idx}"),
             "family": family,
@@ -137,7 +148,14 @@ def run_solver_eval(
     exact_match = 0.0 if row_count == 0 else correct_count / row_count
     attempt_rate = 0.0 if row_count == 0 else attempted_count / row_count
     unsafe_answer_rate = 0.0 if row_count == 0 else unsafe_answer_count / row_count
+    unsafe_answer_rate_on_abstain_rows = 0.0 if expected_abstain_count == 0 else unsafe_answer_count / expected_abstain_count
     correct_abstain_rate = 1.0 if expected_abstain_count == 0 else correct_abstain_count / expected_abstain_count
+    answerable_exact_match = 0.0 if answerable_count == 0 else answerable_correct_count / answerable_count
+    answerable_attempt_rate = 0.0 if answerable_count == 0 else answerable_attempted_count / answerable_count
+    answerable_wrong_answer_rate = 0.0 if answerable_count == 0 else wrong_answer_count / answerable_count
+    abstain_precision = 1.0 if (correct_abstain_count + wrong_abstain_count) == 0 else correct_abstain_count / (correct_abstain_count + wrong_abstain_count)
+    abstain_recall = correct_abstain_rate
+    behavior_accuracy = 0.0 if row_count == 0 else behavior_correct_count / row_count
     quality_status = _quality_status(
         row_count,
         exact_match,
@@ -148,6 +166,10 @@ def run_solver_eval(
         correct_abstain_rate,
         max_unsafe_answer_rate,
         min_correct_abstain_rate,
+        behavior_accuracy,
+        min_behavior_accuracy,
+        answerable_exact_match,
+        min_answerable_exact_match,
     )
     report = {
         "status": "PASS",
@@ -159,6 +181,12 @@ def run_solver_eval(
         "verified_count": verified_count,
         "correct_count": correct_count,
         "exact_match": exact_match,
+        "answerable_exact_match": answerable_exact_match,
+        "answerable_attempt_rate": answerable_attempt_rate,
+        "answerable_wrong_answer_rate": answerable_wrong_answer_rate,
+        "abstain_precision": abstain_precision,
+        "abstain_recall": abstain_recall,
+        "behavior_accuracy": behavior_accuracy,
         "answerable_count": answerable_count,
         "expected_abstain_count": expected_abstain_count,
         "correct_abstain_count": correct_abstain_count,
@@ -166,6 +194,7 @@ def run_solver_eval(
         "wrong_answer_count": wrong_answer_count,
         "unsafe_answer_count": unsafe_answer_count,
         "unsafe_answer_rate": unsafe_answer_rate,
+        "unsafe_answer_rate_on_abstain_rows": unsafe_answer_rate_on_abstain_rows,
         "correct_abstain_rate": correct_abstain_rate,
         "abstained_count": row_count - attempted_count,
         "by_family": dict(sorted(by_family.items())),
@@ -175,6 +204,8 @@ def run_solver_eval(
             "min_attempt_rate": min_attempt_rate,
             "max_unsafe_answer_rate": max_unsafe_answer_rate,
             "min_correct_abstain_rate": min_correct_abstain_rate,
+            "min_behavior_accuracy": min_behavior_accuracy,
+            "min_answerable_exact_match": min_answerable_exact_match,
         },
     }
     _write_jsonl(Path(out_predictions), predictions)
@@ -192,6 +223,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-attempt-rate", type=float, default=0.0)
     parser.add_argument("--max-unsafe-answer-rate", type=float, default=1.0)
     parser.add_argument("--min-correct-abstain-rate", type=float, default=0.0)
+    parser.add_argument("--min-behavior-accuracy", type=float, default=None)
+    parser.add_argument("--min-answerable-exact-match", type=float, default=None)
     parser.add_argument("--fail-on-quality-gate", action="store_true")
     args = parser.parse_args(argv)
     report = run_solver_eval(
@@ -203,6 +236,8 @@ def main(argv: list[str] | None = None) -> int:
         min_attempt_rate=args.min_attempt_rate,
         max_unsafe_answer_rate=args.max_unsafe_answer_rate,
         min_correct_abstain_rate=args.min_correct_abstain_rate,
+        min_behavior_accuracy=args.min_behavior_accuracy,
+        min_answerable_exact_match=args.min_answerable_exact_match,
     )
     print(
         json.dumps(
@@ -211,8 +246,11 @@ def main(argv: list[str] | None = None) -> int:
                 "quality_status": report["quality_status"],
                 "row_count": report["row_count"],
                 "exact_match": report["exact_match"],
+                "answerable_exact_match": report["answerable_exact_match"],
+                "behavior_accuracy": report["behavior_accuracy"],
                 "attempt_rate": report["attempt_rate"],
                 "unsafe_answer_rate": report["unsafe_answer_rate"],
+                "unsafe_answer_rate_on_abstain_rows": report["unsafe_answer_rate_on_abstain_rows"],
                 "correct_abstain_rate": report["correct_abstain_rate"],
             },
             sort_keys=True,
@@ -250,6 +288,10 @@ def _quality_status(
     correct_abstain_rate: float,
     max_unsafe_answer_rate: float = 1.0,
     min_correct_abstain_rate: float = 0.0,
+    behavior_accuracy: float = 0.0,
+    min_behavior_accuracy: float | None = None,
+    answerable_exact_match: float = 0.0,
+    min_answerable_exact_match: float | None = None,
 ) -> str:
     if row_count == 0:
         return "WARN"
@@ -258,6 +300,8 @@ def _quality_status(
         or attempt_rate < min_attempt_rate
         or unsafe_answer_rate > max_unsafe_answer_rate
         or correct_abstain_rate < min_correct_abstain_rate
+        or (min_behavior_accuracy is not None and behavior_accuracy < min_behavior_accuracy)
+        or (min_answerable_exact_match is not None and answerable_exact_match < min_answerable_exact_match)
     ):
         return "FAIL"
     return "PASS"

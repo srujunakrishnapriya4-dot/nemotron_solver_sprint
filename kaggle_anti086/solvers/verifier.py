@@ -10,7 +10,7 @@ from kaggle_anti086.solvers.types import SolverCandidate
 ROMAN_VALID_RE = re.compile(r"^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")
 ANSWER_TYPE_BY_FAMILY = {
     "roman_numeral": "roman",
-    "custom_numeral": "roman",
+    "custom_numeral": "generic",
     "unit_conversion": "numeric",
     "numeric_formula": "numeric",
     "gravity_numeric": "numeric",
@@ -60,9 +60,27 @@ def _family_check(family: str, normalized: str, candidate: SolverCandidate, row:
         expected_width = candidate.metadata.get("width") or _infer_output_width(str(row.get("prompt", "")))
         if expected_width and len(normalized) != int(expected_width):
             return _fail("bit_answer_wrong_width", candidate.risk, normalized)
-    elif family in {"roman_numeral", "custom_numeral"}:
+    elif family == "roman_numeral":
         if not normalized or not ROMAN_VALID_RE.fullmatch(normalized):
             return _fail("roman_answer_invalid", candidate.risk, normalized)
+    elif family == "custom_numeral":
+        custom = str(candidate.answer).strip().strip("`\"'")
+        metadata = row.get("metadata", {}) if isinstance(row.get("metadata", {}), dict) else {}
+        allowed = metadata.get("allowed_symbols") or metadata.get("custom_numeral_allowed_symbols")
+        if not custom:
+            return _fail("custom_numeral_empty", candidate.risk, normalized)
+        if len(custom) > 64:
+            return _fail("custom_numeral_too_long", candidate.risk, normalized)
+        if any(ord(char) < 32 or ord(char) == 127 for char in custom):
+            return _fail("custom_numeral_control_char", candidate.risk, normalized)
+        if re.search(r"\s", custom):
+            return _fail("custom_numeral_whitespace", candidate.risk, normalized)
+        if re.search(r"\b(?:answer|because|explanation|therefore)\b", custom, re.IGNORECASE):
+            return _fail("custom_numeral_verbose", candidate.risk, normalized)
+        if allowed is not None:
+            allowed_set = set(str(allowed))
+            if any(char not in allowed_set for char in custom):
+                return _fail("custom_numeral_disallowed_symbol", candidate.risk, normalized)
     elif family in {"numeric_formula", "unit_conversion", "gravity_numeric"}:
         if not re.fullmatch(r"[-+]?\d+(?:\.\d+)?", normalized):
             return _fail("numeric_answer_invalid", candidate.risk, normalized)

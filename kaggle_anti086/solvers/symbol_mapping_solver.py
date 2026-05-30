@@ -42,10 +42,35 @@ class SymbolMappingSolver(BaseSolver):
             return SolverResult(self.name, family, [], True, "insufficient_examples", {"example_count": len(pairs)})
         if query is None:
             return SolverResult(self.name, family, [], True, "missing_query", {"example_count": len(pairs)})
+        if any(len(left) != len(right) for left, right in pairs):
+            return SolverResult(
+                self.name,
+                family,
+                [],
+                True,
+                "unsupported_alignment_compression",
+                {
+                    "example_count": len(pairs),
+                    "alignment_mode": "unsupported_variable_length",
+                    "reason_for_abstain": "length_mismatch_examples",
+                },
+            )
         mappings = [mapping for mapping in (_build_mapping(pairs, False), _build_mapping(pairs, True)) if mapping is not None and not mapping.conflicts]
         if not mappings:
             conflict = _build_mapping(pairs, False)
-            return SolverResult(self.name, family, [], True, "mapping_conflict", {"conflicts": [] if conflict is None else list(conflict.conflicts)})
+            conflicts = [] if conflict is None else list(conflict.conflicts)
+            return SolverResult(
+                self.name,
+                family,
+                [],
+                True,
+                "mapping_conflict",
+                {
+                    "conflicts": conflicts,
+                    "conflict_source": None if not conflicts else conflicts[0].get("source"),
+                    "reason_for_abstain": "conflicting_symbol_mapping",
+                },
+            )
         predictions = []
         candidates = []
         for mapping in mappings:
@@ -53,7 +78,23 @@ class SymbolMappingSolver(BaseSolver):
             if prediction == "":
                 continue
             if coverage < self.min_coverage:
-                return SolverResult(self.name, family, [], True, "unknown_symbol_coverage_too_low", {"coverage_ratio": coverage, "query_length": len(query), "mapping_size": len(mapping.mapping)})
+                unknown_count = sum(1 for char in query if char not in mapping.mapping)
+                return SolverResult(
+                    self.name,
+                    family,
+                    [],
+                    True,
+                    "unknown_symbol_coverage_too_low",
+                    {
+                        "coverage_ratio": coverage,
+                        "coverage": coverage,
+                        "unknown_symbol_count": unknown_count,
+                        "query_length": len(query),
+                        "mapping_size": len(mapping.mapping),
+                        "alignment_mode": "reverse_substitution" if mapping.reverse_input else "same_length_substitution",
+                        "reason_for_abstain": "unknown_query_symbols",
+                    },
+                )
             predictions.append(prediction)
             candidates.append((mapping, prediction, coverage))
         if not candidates:
@@ -75,8 +116,12 @@ class SymbolMappingSolver(BaseSolver):
                 "mapping_size": len(mapping.mapping),
                 "ignored_pairs": mapping.ignored_pairs,
                 "coverage_ratio": coverage,
+                "coverage": coverage,
+                "unknown_symbol_count": sum(1 for char in query if char not in mapping.mapping),
                 "query_length": len(query),
                 "reverse_input": mapping.reverse_input,
+                "alignment_mode": "reverse_substitution" if mapping.reverse_input else "same_length_substitution",
+                "reason_for_abstain": "",
             },
         )
         validate_candidate(candidate)

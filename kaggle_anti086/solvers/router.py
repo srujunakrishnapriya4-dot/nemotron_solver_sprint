@@ -16,17 +16,20 @@ class RouterResult:
     candidate_solvers: list[str]
     risk: str
     signals: list[str] = field(default_factory=list)
+    unsupported_reason: str = ""
 
 
 def route_row(row: dict) -> RouterResult:
     family = str(row.get("family", "unknown"))
     prompt = str(row.get("prompt", ""))
     if family == "equation_operator" or re.search(r"\b(?:equation|operator|modulo|exact division)\b", prompt, re.IGNORECASE):
-        return RouterResult("equation_operator", "unsupported", 0.8, False, [], "high", ["equation_operator_unsupported"])
+        return RouterResult("equation_operator", "unsupported", 0.92, False, [], "high", ["equation_operator_unsupported"], "equation_operator_solver_not_implemented")
     if BIT_PAIR_RE.search(prompt) or family == "bit_manipulation":
         return RouterResult("bit_manipulation", "binary_transform", 0.94, True, ["bit_transform_solver"], "low", ["binary_pairs"])
-    if ROMAN_EXAMPLE_RE.search(prompt) or family in {"roman_numeral", "custom_numeral"}:
-        return RouterResult(family if family in {"roman_numeral", "custom_numeral"} else "roman_numeral", "standard_roman", 0.93, True, ["roman_solver"], "low", ["roman_examples"])
+    if family == "custom_numeral":
+        return RouterResult("custom_numeral", "unsupported", 0.9, False, [], "high", ["custom_numeral_unsupported"], "custom_numeral_solver_not_implemented")
+    if ROMAN_EXAMPLE_RE.search(prompt) or family == "roman_numeral":
+        return RouterResult("roman_numeral", "standard_roman", 0.93, True, ["roman_solver"], "low", ["roman_examples"])
     if family == "gravity_numeric" or re.search(r"\b(?:gravity|falling|distance|time|0\.5\s*\*\s*g)\b", prompt, re.IGNORECASE):
         return RouterResult("gravity_numeric", "gravity_distance", 0.9, True, ["numeric_formula_solver"], "low", ["gravity_wording"])
     if family == "unit_conversion" or re.search(r"\b(?:convert|unit|target unit|maps? to|converts? to)\b", prompt, re.IGNORECASE):

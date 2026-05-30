@@ -1,0 +1,282 @@
+{
+  "abstain_precision": 0.5967741935483871,
+  "abstain_recall": 1.0,
+  "abstained_count": 124,
+  "answerable_attempt_rate": 0.7706422018348624,
+  "answerable_count": 218,
+  "answerable_exact_match": 0.7706422018348624,
+  "answerable_wrong_answer_rate": 0.0,
+  "attempt_rate": 0.5753424657534246,
+  "attempted_count": 168,
+  "behavior_accuracy": 0.8287671232876712,
+  "by_family": {
+    "bit_manipulation": {
+      "attempted": 42,
+      "correct": 42,
+      "count": 56,
+      "exact_match": 0.75,
+      "verified": 42
+    },
+    "char_cipher": {
+      "attempted": 22,
+      "correct": 22,
+      "count": 44,
+      "exact_match": 0.5,
+      "verified": 22
+    },
+    "custom_numeral": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 2,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "gravity_numeric": {
+      "attempted": 14,
+      "correct": 14,
+      "count": 23,
+      "exact_match": 0.6086956521739131,
+      "verified": 14
+    },
+    "numeric_formula": {
+      "attempted": 10,
+      "correct": 10,
+      "count": 13,
+      "exact_match": 0.7692307692307693,
+      "verified": 10
+    },
+    "roman_numeral": {
+      "attempted": 20,
+      "correct": 20,
+      "count": 26,
+      "exact_match": 0.7692307692307693,
+      "verified": 20
+    },
+    "symbol_mapping": {
+      "attempted": 6,
+      "correct": 6,
+      "count": 56,
+      "exact_match": 0.10714285714285714,
+      "verified": 6
+    },
+    "unit_conversion": {
+      "attempted": 27,
+      "correct": 27,
+      "count": 36,
+      "exact_match": 0.75,
+      "verified": 27
+    },
+    "word_cipher": {
+      "attempted": 27,
+      "correct": 27,
+      "count": 36,
+      "exact_match": 0.75,
+      "verified": 27
+    }
+  },
+  "correct_abstain_count": 74,
+  "correct_abstain_rate": 1.0,
+  "correct_count": 168,
+  "exact_match": 0.5753424657534246,
+  "execution_status": "PASS",
+  "expected_abstain_count": 74,
+  "failure_examples": [
+    {
+      "abstained": true,
+      "expected": "rtv",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_001",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 1. []{ -> qrs; }<> -> tuv; ]{} -> rst; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "135",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_002",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 2. +-= -> 012; ~|: -> 345; -=~ -> 123; -~: -> ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_003",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 3. `'\" -> @&!; ,._ -> []{; '\", -> &![; query: ',_ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_004",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 4. !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "vtr",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_005",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 5. []{ -> srq; }<> -> vut; ]{} -> tsr; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "135",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_006",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 6. +-= -> 012; ~|: -> 345; -=~ -> 123; query: -~: output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_007",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 7. ``'\"` -> `@&!`; `,._` -> `[]{`; `'\",` -> `&![`; query: ',_ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "rtv",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_009",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 9. []{ -> qrs; }<> -> tuv; ]{} -> rst; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "531",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_010",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 10. +-= -> 210; ~|: -> 543; -=~ -> 321; -~: -> ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_011",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 11. `'\" -> @&!; ,._ -> []{; '\", -> &![; query: ',_ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_012",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 12. !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "rtv",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_013",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 13. []{ -> qrs; }<> -> tuv; ]{} -> rst; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "135",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_014",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 14. +-= -> 012; ~|: -> 345; -=~ -> 123; query: -~: output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "{[&",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_015",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 15. ``'\"` -> `!&@`; `,._` -> `{][`; `'\",` -> `[!&`; query: ',_ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "rtv",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_017",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 17. []{ -> qrs; }<> -> tuv; ]{} -> rst; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "135",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_018",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 18. +-= -> 012; ~|: -> 345; -=~ -> 123; -~: -> ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_019",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 19. `'\" -> @&!; ,._ -> []{; '\", -> &![; query: ',_ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "FDB",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_020",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 20. !@# -> CBA; $%^ -> FED; @#$ -> DCB; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "rtv",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_021",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 21. []{ -> qrs; }<> -> tuv; ]{} -> rst; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "135",
+      "family": "symbol_mapping",
+      "id": "day4_1_symbol_answer_022",
+      "prediction": "",
+      "prompt_excerpt": "Symbol seed 22. +-= -> 012; ~|: -> 345; -=~ -> 123; query: -~: output ?",
+      "reason": "all_solvers_abstained"
+    }
+  ],
+  "quality_status": "PASS",
+  "row_count": 292,
+  "status": "PASS",
+  "thresholds": {
+    "max_unsafe_answer_rate": 0.05,
+    "min_answerable_exact_match": 0.7,
+    "min_attempt_rate": 0.0,
+    "min_behavior_accuracy": 0.8,
+    "min_correct_abstain_rate": 0.8,
+    "min_exact_match": 0.0
+  },
+  "unsafe_answer_count": 0,
+  "unsafe_answer_rate": 0.0,
+  "unsafe_answer_rate_on_abstain_rows": 0.0,
+  "verified_count": 168,
+  "wrong_abstain_count": 50,
+  "wrong_answer_count": 0
+}
