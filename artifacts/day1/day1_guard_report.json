@@ -76,27 +76,27 @@
     },
     "generated_cells_zip_match": {
       "directory": {
-        "CELL_01_write_configs.py": "d6d2558b743ad86aad3357ffa87fc67e25fc7212c1196724f8d66168bacb55cb",
-        "CELL_02_write_runtime_patches.py": "395285e4736f8689e773936b6435de82374d3baf8f7cbc613a1e78de2cd23024",
-        "CELL_03_write_prepare_tokens.py": "d4c523f7525c8bedc7660b86d5ec9e35d0b12199438c31c34eacb71ff75ac919",
-        "CELL_04_write_train.py": "503762b488899b26efe64e2d5b627806c4ad396bff9a882530555d3b39384bfa",
-        "CELL_05_write_eval.py": "343911837a86688093f603067e21322d2622e6be9c6bf9e7b5783e154d70613c",
-        "CELL_06_write_parent_calibrated_eval.py": "81c191a9cb063ebc94ea5b8dfd28864c0c0bf9b2674c68f2646475f92cd1cbd5",
-        "CELL_07_write_orchestrator.py": "2dcc2036751311c058599a66a75434bfd0ee07d0ad9d2b748182c1a55ce072f4",
-        "CELL_08_verify_files.py": "c5cfd497b861e8a3ef5bd3d842b1632eab37b9ed6d74628b498b5d2cedd8c903",
-        "CELL_09_v1b_commands.py": "63fea72a55f450d2511e2d3c5f45759d3bcfac1bb90957970f9938e22c43f2e8"
+        "CELL_01_write_configs.py": "18a2e9c0d8b3ce329e3c0a33fa623a46affc716d0a9da47c265c23c2e7bc69e9",
+        "CELL_02_write_runtime_patches.py": "aea03ae23ec9ae13a35df480ea04ad0e51c052da46ea7c0d1e0230a973ff0774",
+        "CELL_03_write_prepare_tokens.py": "a4f8675153061224f32e94ddf5bda397b457b6961db22554f0d615acc1d5b010",
+        "CELL_04_write_train.py": "73de526dceb216fe5dd9c56d62b153f65e0500fa711bdb19dab84f1f0b9da47a",
+        "CELL_05_write_eval.py": "57cf11b0c478f250d8411dd6257eeb9a7a985684acd7448c651f5e3b0fc12f16",
+        "CELL_06_write_parent_calibrated_eval.py": "febc8d3db8d22689f23a778ddc84fc34f4ebea40659c79f569e84dd80f18372a",
+        "CELL_07_write_orchestrator.py": "d991263bdf2b007d5520192a5cca16ed0617c24b364ef0cfceb9d9a3e0597b34",
+        "CELL_08_verify_files.py": "cc678ecf45f6344994d1aca776d6fcc3054ccfd838b6e2f0b0e8217e6a05b469",
+        "CELL_09_v1b_commands.py": "fcdbbb7b38cd7c2e06a2841231c1f0b6afaada8f88194c0e9f6c63ada075e24b"
       },
       "matches": true,
       "zip": {
-        "CELL_01_write_configs.py": "d6d2558b743ad86aad3357ffa87fc67e25fc7212c1196724f8d66168bacb55cb",
-        "CELL_02_write_runtime_patches.py": "395285e4736f8689e773936b6435de82374d3baf8f7cbc613a1e78de2cd23024",
-        "CELL_03_write_prepare_tokens.py": "d4c523f7525c8bedc7660b86d5ec9e35d0b12199438c31c34eacb71ff75ac919",
-        "CELL_04_write_train.py": "503762b488899b26efe64e2d5b627806c4ad396bff9a882530555d3b39384bfa",
-        "CELL_05_write_eval.py": "343911837a86688093f603067e21322d2622e6be9c6bf9e7b5783e154d70613c",
-        "CELL_06_write_parent_calibrated_eval.py": "81c191a9cb063ebc94ea5b8dfd28864c0c0bf9b2674c68f2646475f92cd1cbd5",
-        "CELL_07_write_orchestrator.py": "2dcc2036751311c058599a66a75434bfd0ee07d0ad9d2b748182c1a55ce072f4",
-        "CELL_08_verify_files.py": "c5cfd497b861e8a3ef5bd3d842b1632eab37b9ed6d74628b498b5d2cedd8c903",
-        "CELL_09_v1b_commands.py": "63fea72a55f450d2511e2d3c5f45759d3bcfac1bb90957970f9938e22c43f2e8"
+        "CELL_01_write_configs.py": "18a2e9c0d8b3ce329e3c0a33fa623a46affc716d0a9da47c265c23c2e7bc69e9",
+        "CELL_02_write_runtime_patches.py": "aea03ae23ec9ae13a35df480ea04ad0e51c052da46ea7c0d1e0230a973ff0774",
+        "CELL_03_write_prepare_tokens.py": "a4f8675153061224f32e94ddf5bda397b457b6961db22554f0d615acc1d5b010",
+        "CELL_04_write_train.py": "73de526dceb216fe5dd9c56d62b153f65e0500fa711bdb19dab84f1f0b9da47a",
+        "CELL_05_write_eval.py": "57cf11b0c478f250d8411dd6257eeb9a7a985684acd7448c651f5e3b0fc12f16",
+        "CELL_06_write_parent_calibrated_eval.py": "febc8d3db8d22689f23a778ddc84fc34f4ebea40659c79f569e84dd80f18372a",
+        "CELL_07_write_orchestrator.py": "d991263bdf2b007d5520192a5cca16ed0617c24b364ef0cfceb9d9a3e0597b34",
+        "CELL_08_verify_files.py": "cc678ecf45f6344994d1aca776d6fcc3054ccfd838b6e2f0b0e8217e6a05b469",
+        "CELL_09_v1b_commands.py": "fcdbbb7b38cd7c2e06a2841231c1f0b6afaada8f88194c0e9f6c63ada075e24b"
       },
       "zip_exists": true,
       "zip_path": "artifacts/win_system_kaggle_cells.zip"
@@ -123,7 +123,7 @@
       "failures": []
     },
     "main_branch_awareness": {
-      "branch_hint": "codex/sprint11-day1-1-runtime-guard",
+      "branch_hint": "main",
       "day1_1_fix_present": true,
       "day1_2_output_safety_present": true
     },
