@@ -1,0 +1,17 @@
+{
+  "adapter_dir": "\\kaggle\\working\\anti086_adapters\\v2a_20260531T170102Z_82337a4a",
+  "anti_leak_delta": null,
+  "candidate": "v2a_base_lora",
+  "candidate_quality": "REJECT",
+  "eval_completed": false,
+  "family_hard_delta": null,
+  "family_regressions": [],
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "packaging_allowed": false,
+  "private_like_delta": null,
+  "rule_holdout_delta": null,
+  "status": "FAIL",
+  "submission_allowed": false,
+  "trained": false
+}

@@ -37,6 +37,6 @@ def test_dry_run_summary_does_not_pretend_trained(tmp_path):
     config = load_training_config("kaggle_anti086/training/configs/v2a_base_lora.yaml")
     manifest = build_run_manifest(config, config_path="kaggle_anti086/training/configs/v2a_base_lora.yaml", collator_audit_path=audit, output_root=tmp_path)
     summary = build_training_summary(config, manifest, dry_run=True, failures=[], warnings=[])
-    assert summary["status"] == "PASS"
+    assert summary["status"] == "DRY_RUN_PASS"
     assert summary["trained"] is False
     assert summary["steps_completed"] == 0

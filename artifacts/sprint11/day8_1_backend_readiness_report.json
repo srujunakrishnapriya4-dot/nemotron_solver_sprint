@@ -1,0 +1,66 @@
+{
+  "collator_audit_pass": false,
+  "config_ready": true,
+  "dataset_ready": true,
+  "dataset_report": {
+    "direct_rows": 1350,
+    "effective_sft_rows": 2025.0,
+    "failures": [],
+    "family_counts": {
+      "bit_manipulation": 428,
+      "char_cipher": 384,
+      "format_only": 116,
+      "gravity_numeric": 232,
+      "numeric_formula": 254,
+      "roman_numeral": 192,
+      "symbol_mapping": 448,
+      "unit_conversion": 330,
+      "word_cipher": 316
+    },
+    "max_seq_len": 1024,
+    "missing_required_metadata": 0,
+    "sft_row_count": 2700,
+    "solver_corrected_rows": 1350,
+    "source_counts": {
+      "direct_answer": 1350,
+      "solver_corrected": 1350
+    },
+    "status": "PASS",
+    "unsupported_rows": 0,
+    "unverified_rows": 0,
+    "zero_answer_rows": 0
+  },
+  "dependency_report": {
+    "base_model_path_exists": false,
+    "bf16_supported": false,
+    "bitsandbytes_available": false,
+    "cuda_available": false,
+    "device_name": null,
+    "failures": [
+      "torch_unavailable:ModuleNotFoundError",
+      "transformers_unavailable:ModuleNotFoundError",
+      "peft_unavailable:ModuleNotFoundError"
+    ],
+    "model_loadable": false,
+    "peft_available": false,
+    "tokenizer_loadable": false,
+    "torch_available": false,
+    "transformers_available": false
+  },
+  "failures": [
+    "collator_audit_not_pass",
+    "cuda_missing",
+    "peft_missing",
+    "tokenizer_not_loadable",
+    "torch_missing",
+    "transformers_missing"
+  ],
+  "gpu_ready": false,
+  "model_ready": false,
+  "status": "FAIL",
+  "tokenizer_ready": false,
+  "training_backend_ready": false,
+  "warnings": [
+    "bitsandbytes_unavailable_qlora_disabled"
+  ]
+}

@@ -13,6 +13,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from kaggle_anti086.data.v2_corpus_io import read_jsonl, write_json_checked
 from kaggle_anti086.training.prepare_tokenization_dry_run import UNSUPPORTED_SFT, fallback_tokenize
+from kaggle_anti086.training.sft_dataset import build_assistant_only_features
 from kaggle_anti086.training.training_config_schema import load_training_config
 
 
@@ -25,6 +26,8 @@ class TokenizerLike(Protocol):
 
 
 class FallbackAuditTokenizer:
+    pad_token_id = 0
+
     def encode(self, text: str, add_special_tokens: bool = False) -> list[int]:
         del add_special_tokens
         return [abs(hash(token)) % 50000 for token in fallback_tokenize(text)]
@@ -43,29 +46,12 @@ def load_real_tokenizer(base_model_path: str) -> tuple[Any | None, list[str]]:
 
 
 def build_labels_for_row(row: dict[str, Any], tokenizer: TokenizerLike, *, supervise: bool, max_seq_len: int) -> dict[str, Any]:
-    messages = row.get("messages", [])
-    user = str(messages[0].get("content", "")) if messages else str(row.get("prompt", ""))
-    assistant = str(messages[1].get("content", "")) if len(messages) > 1 else str(row.get("answer", ""))
-    system_ids = tokenizer.encode(SYSTEM_PROMPT + "\n", add_special_tokens=False)
-    user_ids = tokenizer.encode("USER:\n" + user + "\n", add_special_tokens=False)
-    assistant_prefix_ids = tokenizer.encode("ASSISTANT:\n", add_special_tokens=False)
-    answer_ids = tokenizer.encode(assistant, add_special_tokens=False)
-    input_ids = system_ids + user_ids + assistant_prefix_ids + answer_ids
-    labels = [-100] * (len(system_ids) + len(user_ids) + len(assistant_prefix_ids))
-    labels += answer_ids[:] if supervise else [-100] * len(answer_ids)
-    if len(input_ids) > max_seq_len:
-        input_ids = input_ids[:max_seq_len]
-        labels = labels[:max_seq_len]
-    return {
-        "input_ids": input_ids,
-        "labels": labels,
-        "system_span": [0, len(system_ids)],
-        "user_span": [len(system_ids), len(system_ids) + len(user_ids)],
-        "assistant_prefix_span": [len(system_ids) + len(user_ids), len(system_ids) + len(user_ids) + len(assistant_prefix_ids)],
-        "answer_span": [len(system_ids) + len(user_ids) + len(assistant_prefix_ids), len(system_ids) + len(user_ids) + len(assistant_prefix_ids) + len(answer_ids)],
-        "answer_token_count": len(answer_ids),
-        "truncated": len(system_ids) + len(user_ids) + len(assistant_prefix_ids) + len(answer_ids) > max_seq_len,
-    }
+    features = build_assistant_only_features(row, tokenizer, max_seq_len)
+    if not supervise:
+        features = dict(features)
+        features["labels"] = [-100] * len(features["labels"])
+        features["supervised_token_count"] = 0
+    return features
 
 
 def select_audit_sample(config: dict[str, Any], *, sample_size: int) -> list[tuple[str, dict[str, Any]]]:
@@ -163,6 +149,7 @@ def build_real_collator_audit(config: dict[str, Any], *, sample_size: int = 128,
         "mode": "real_tokenizer" if tokenizer_loaded else mode,
         "sample_size": len(sample),
         "tokenizer_loaded": tokenizer_loaded,
+        "shared_label_builder": True,
         "collator_contract": COLLATOR_CONTRACT,
         "prompt_tokens_supervised": counts["prompt_tokens_supervised"],
         "system_tokens_supervised": counts["system_tokens_supervised"],

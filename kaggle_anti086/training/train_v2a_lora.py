@@ -12,6 +12,10 @@ if str(REPO_ROOT) not in sys.path:
 
 from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked
 from kaggle_anti086.kaggle_path_safety import require_writable_output_dir
+from kaggle_anti086.training.day8_1_backend_readiness import build_backend_readiness
+from kaggle_anti086.training.lora_backend import prepare_model_for_v2a_training, run_lora_training
+from kaggle_anti086.training.model_loader import load_base_model, load_tokenizer
+from kaggle_anti086.training.sft_dataset import Sprint11SFTDataset, build_sft_dataset_report, load_weighted_sft_rows
 from kaggle_anti086.training.training_config_schema import STATUS_PASS_RUNNABLE, _target_modules, load_training_config, validate_training_config
 from kaggle_anti086.training.training_run_manifest import build_run_manifest
 
@@ -56,27 +60,32 @@ def preflight_v2a_training(config: dict[str, Any], *, config_path: str | Path, c
     return warnings, failures
 
 
-def build_training_summary(config: dict[str, Any], manifest: dict[str, Any], *, dry_run: bool, failures: list[str], warnings: list[str]) -> dict[str, Any]:
+def build_training_summary(config: dict[str, Any], manifest: dict[str, Any], *, dry_run: bool, failures: list[str], warnings: list[str], backend_summary: dict[str, Any] | None = None) -> dict[str, Any]:
+    backend_summary = backend_summary or {}
+    trained = bool(backend_summary.get("status") == "PASS") and not dry_run and not failures
     return {
-        "status": "PASS" if dry_run and not failures else ("FAIL" if failures or dry_run else "PASS"),
+        "status": "DRY_RUN_PASS" if dry_run and not failures else ("PASS" if trained else "FAIL"),
         "stage": "v2a_base_lora",
         "run_id": manifest.get("run_id"),
-        "trained": False if dry_run or failures else True,
+        "trained": trained,
         "dry_run": dry_run,
-        "steps_completed": 0 if dry_run or failures else int(config.get("num_steps", 0)),
-        "loss_start": None,
-        "loss_end": None,
-        "loss_nan_detected": False,
-        "grad_nan_detected": False,
+        "steps_completed": int(backend_summary.get("steps_completed", 0) or 0),
+        "loss_start": backend_summary.get("loss_start"),
+        "loss_end": backend_summary.get("loss_end"),
+        "loss_min": backend_summary.get("loss_min"),
+        "loss_max": backend_summary.get("loss_max"),
+        "loss_nan_detected": bool(backend_summary.get("loss_nan_detected", False)),
+        "grad_nan_detected": bool(backend_summary.get("grad_nan_detected", False)),
         "adapter_dir": manifest.get("output_adapter_dir"),
-        "adapter_config_exists": False,
-        "adapter_model_exists": False,
+        "adapter_config_exists": bool(backend_summary.get("adapter_config_exists", False)),
+        "adapter_model_exists": bool(backend_summary.get("adapter_model_exists", False)),
         "rank": int(config.get("rank", 0)),
         "target_modules": _target_modules(config),
+        "dataset_report": backend_summary.get("dataset_report"),
         "packaging_allowed": False,
         "submission_allowed": False,
         "warnings": warnings + (["dry_run_no_training_performed"] if dry_run else []),
-        "failures": failures,
+        "failures": failures + list(backend_summary.get("failures", [])),
     }
 
 
@@ -87,6 +96,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out-manifest", required=True)
     parser.add_argument("--out-summary", required=True)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--kaggle-mode", action="store_true")
     args = parser.parse_args(argv)
     config = load_training_config(args.config)
     warnings, failures = preflight_v2a_training(config, config_path=args.config, collator_audit_path=args.collator_audit)
@@ -95,13 +105,31 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as exc:
         manifest = {"run_id": None, "stage": config.get("stage"), "output_adapter_dir": None, "packaging_allowed": False, "submission_allowed": False, "failures": [str(exc)]}
         failures.append(f"manifest_failed:{type(exc).__name__}")
-    if not args.dry_run and not failures:
-        failures.append("actual_training_backend_not_available_in_this_entrypoint")
+    backend_summary: dict[str, Any] | None = None
+    if args.kaggle_mode and not args.dry_run and not failures:
+        readiness = build_backend_readiness(args.config, args.collator_audit)
+        if readiness["status"] != "PASS":
+            failures.append("backend_readiness_not_pass")
+            failures.extend(readiness.get("failures", []))
+        else:
+            tokenizer = load_tokenizer(str(config["base_model_path"]))
+            rows = load_weighted_sft_rows(config)
+            dataset_report = build_sft_dataset_report(config, rows)
+            if dataset_report["status"] != "PASS":
+                failures.append("sft_dataset_not_pass")
+            else:
+                dataset = Sprint11SFTDataset(rows, tokenizer, int(config.get("max_seq_len", 1024)))
+                model = load_base_model(str(config["base_model_path"]), load_in_4bit=bool(config.get("load_in_4bit", False)), bf16=True)
+                model = prepare_model_for_v2a_training(model, config)
+                backend_summary = run_lora_training(model, tokenizer, dataset, config, manifest["output_adapter_dir"])
+                backend_summary["dataset_report"] = dataset_report
+    elif not args.dry_run and not failures:
+        failures.append("real_training_requires_kaggle_mode")
     write_json_checked(args.out_manifest, manifest, field_name="day8_v2a_train_manifest")
-    summary = build_training_summary(config, manifest, dry_run=args.dry_run, failures=failures, warnings=warnings)
+    summary = build_training_summary(config, manifest, dry_run=args.dry_run, failures=failures, warnings=warnings, backend_summary=backend_summary)
     write_json_checked(args.out_summary, summary, field_name="day8_v2a_train_summary")
     print(json.dumps({"status": summary["status"], "trained": summary["trained"], "dry_run": summary["dry_run"], "out": args.out_summary}, sort_keys=True))
-    return 0 if summary["status"] == "PASS" else 2
+    return 0 if summary["status"] in {"PASS", "DRY_RUN_PASS"} else 2
 
 
 if __name__ == "__main__":

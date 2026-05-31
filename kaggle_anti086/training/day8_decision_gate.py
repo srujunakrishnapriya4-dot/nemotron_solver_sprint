@@ -53,8 +53,12 @@ def build_day8_decision(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", required=True)
+    parser.add_argument("--collator-audit", default="artifacts/sprint11/day8_real_collator_audit_report.json")
+    parser.add_argument("--train-summary", default="artifacts/sprint11/day8_v2a_train_summary.json")
+    parser.add_argument("--eval-report", default="artifacts/sprint11/day8_v2a_eval_report.json")
+    parser.add_argument("--candidate-report", default="artifacts/sprint11/day8_candidate_report.json")
     args = parser.parse_args(argv)
-    report = build_day8_decision()
+    report = build_day8_decision(args.collator_audit, args.train_summary, args.eval_report, args.candidate_report)
     write_json_checked(args.out, report, field_name="day8_decision_report")
     print(json.dumps({"status": report["status"], "decision": report["decision"], "out": args.out}, sort_keys=True))
     return 0 if report["status"] == "PASS" else 2

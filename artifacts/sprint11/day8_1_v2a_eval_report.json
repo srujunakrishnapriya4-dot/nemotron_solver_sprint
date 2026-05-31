@@ -1,0 +1,14 @@
+{
+  "adapter_dir": "\\kaggle\\working\\anti086_adapters\\v2a_20260531T170102Z_82337a4a",
+  "by_family": {},
+  "catastrophic_families": [],
+  "evals": {},
+  "failures": [],
+  "model_eval_completed": false,
+  "regressions": [],
+  "required_kaggle_command": "python kaggle_anti086/training/post_train_eval.py --adapter-dir /kaggle/working/anti086_adapters/<v2a_run> --out-report artifacts/sprint11/day8_v2a_eval_report.json --out-predictions artifacts/sprint11/day8_v2a_eval_predictions.jsonl",
+  "status": "NEEDS_KAGGLE_MODEL_EVAL",
+  "warnings": [
+    "local_model_inference_unavailable"
+  ]
+}

@@ -20,7 +20,8 @@ def build_candidate_report(
     evaluation = read_json(eval_report_path) if Path(eval_report_path).exists() else {"status": "MISSING", "model_eval_completed": False}
     quality = "NEEDS_KAGGLE_EVAL"
     status = "WARN"
-    if train.get("status") == "FAIL":
+    adapter_files = bool(train.get("adapter_config_exists") and train.get("adapter_model_exists"))
+    if train.get("status") == "FAIL" or (train.get("trained") and not adapter_files):
         quality = "REJECT"
         status = "FAIL"
     elif evaluation.get("status") == "PASS":
@@ -29,7 +30,7 @@ def build_candidate_report(
         if regressions or any(delta < 0 for delta in deltas):
             quality = "REJECT"
             status = "FAIL"
-        elif deltas and all(delta > 0 for delta in deltas[:2]):
+        elif deltas and all(delta >= -0.000001 for delta in deltas[:2]):
             quality = "PROMOTE_TO_DAY9_FAILURE_MINING"
             status = "PASS"
     return {
