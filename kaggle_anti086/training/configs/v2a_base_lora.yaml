@@ -23,3 +23,12 @@ abstain_safety_weight: 0.0
 hard_negative_weight: 0.0
 adapter_size_limit_mb: 1500
 not_submission_ready: true
+load_in_4bit: true
+bnb_4bit_compute_dtype: bf16
+bnb_4bit_quant_type: nf4
+bnb_4bit_use_double_quant: true
+device_map: auto
+low_cpu_mem_usage: true
+gradient_checkpointing: true
+bf16: auto
+seed: 42

@@ -1,0 +1,25 @@
+{
+  "decision": "NEEDS_KAGGLE_SMOKE_TRAIN",
+  "failures": [],
+  "full_training_allowed": false,
+  "gates": {
+    "adapter_artifact": "FAIL",
+    "day7_readiness": "PASS",
+    "day8_1_backend": "FAIL",
+    "final_sft_leakage": "PASS",
+    "lora_target": "FAIL",
+    "output_drift": "FAIL",
+    "smoke_train": "NEEDS_KAGGLE_SMOKE_TRAIN",
+    "supervised_label_decode": "PASS",
+    "trainable_params": "FAIL",
+    "truncation": "PASS",
+    "weighted_sampling": "PASS"
+  },
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "packaging_allowed": false,
+  "smoke_training_required": true,
+  "status": "WARN",
+  "submission_allowed": false,
+  "warnings": []
+}

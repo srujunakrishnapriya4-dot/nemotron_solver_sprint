@@ -1,0 +1,41 @@
+{
+  "abstain_safety_selected": 0,
+  "direct_rows_available": 1350,
+  "direct_rows_selected": 1350,
+  "duplicate_prompt_hash_count": 0,
+  "effective_solver_corrected_weight": 0.5,
+  "failures": [],
+  "family_counts": {
+    "bit_manipulation": 320,
+    "char_cipher": 277,
+    "format_only": 86,
+    "gravity_numeric": 168,
+    "numeric_formula": 196,
+    "roman_numeral": 147,
+    "symbol_mapping": 345,
+    "unit_conversion": 252,
+    "word_cipher": 234
+  },
+  "first_200_family_distribution": {
+    "bit_manipulation": 23,
+    "char_cipher": 23,
+    "format_only": 22,
+    "gravity_numeric": 22,
+    "numeric_formula": 22,
+    "roman_numeral": 22,
+    "symbol_mapping": 22,
+    "unit_conversion": 22,
+    "word_cipher": 22
+  },
+  "hard_negative_selected": 0,
+  "max_consecutive_same_family": 26,
+  "max_consecutive_same_rule_id": 1,
+  "seed": 42,
+  "solver_corrected_mirror_prompt_count": 675,
+  "solver_corrected_rows_available": 1350,
+  "solver_corrected_rows_selected": 675,
+  "status": "PASS",
+  "total_selected": 2025,
+  "unsupported_selected": 0,
+  "warnings": []
+}

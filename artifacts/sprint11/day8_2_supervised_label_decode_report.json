@@ -1,0 +1,12 @@
+{
+  "contains_assistant_prefix_count": 0,
+  "contains_explanation_count": 0,
+  "contains_prompt_count": 0,
+  "decoded_match_count": 128,
+  "decoded_mismatch_count": 0,
+  "empty_supervised_count": 0,
+  "examples": [],
+  "failures": [],
+  "rows_checked": 128,
+  "status": "PASS"
+}

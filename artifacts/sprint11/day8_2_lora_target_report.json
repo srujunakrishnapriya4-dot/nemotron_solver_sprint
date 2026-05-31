@@ -1,0 +1,18 @@
+{
+  "candidate_linear_module_names_sample": [],
+  "failures": [
+    "model_unavailable_local"
+  ],
+  "matched_target_counts": {
+    "o_proj": 0,
+    "q_proj": 0,
+    "v_proj": 0
+  },
+  "status": "FAIL",
+  "target_modules": [
+    "q_proj",
+    "v_proj",
+    "o_proj"
+  ],
+  "total_matched_modules": 0
+}

@@ -1107,8 +1107,8 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/configs/v2a_base_lora.yaml",
-      "sha256": "ebaebba680a17529b693fd8550bafadf9320a5d23c3a1876764fe9c81fa82941",
-      "size_bytes": 849
+      "sha256": "876fcf0e5d0d62d634235711e04374004ea294cb160b4974063f85788cbb29c7",
+      "size_bytes": 1044
     },
     {
       "exists": true,
@@ -1167,8 +1167,8 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/lora_backend.py",
-      "sha256": "e778797d2d4b0f1db752ce45a9fbd97636b5d970f512f76ef9b8711df58f2ab9",
-      "size_bytes": 5337
+      "sha256": "aab654bee9f7110c647142762fab420dc5af4e6799b07967ce2a69ca59762b00",
+      "size_bytes": 5910
     },
     {
       "exists": true,
@@ -1179,8 +1179,8 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/model_loader.py",
-      "sha256": "79a1701e3dfcfe98080bf18e9b8316536c902ecadf1d70a2276ec171d4331cca",
-      "size_bytes": 3391
+      "sha256": "24db9fcd6a86b76d825f2f9b0d2d6f2d34fe5615791544a82dcfd6b1d19634ca",
+      "size_bytes": 4977
     },
     {
       "exists": true,
@@ -1197,8 +1197,8 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/real_tokenizer_collator_audit.py",
-      "sha256": "2e79c3720c2796efa25a4c2b1fcb85961730c5357612f9897f02d07e6697ddaf",
-      "size_bytes": 8804
+      "sha256": "7b78e73a8b08372af11d71feeedf58e59bd74977f36b125b509561774fa679ab",
+      "size_bytes": 9482
     },
     {
       "exists": true,
@@ -1209,14 +1209,14 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/sft_dataset.py",
-      "sha256": "3a03332ce8948c7e28b109fe392d56f8510e0482768bcf6028c219ab2803a1c1",
-      "size_bytes": 6371
+      "sha256": "17e7572f425a241982b9e89192533acef7fd6024abca827051182a08a8b8091b",
+      "size_bytes": 6941
     },
     {
       "exists": true,
       "path": "kaggle_anti086/training/train_v2a_lora.py",
-      "sha256": "2e098b70f9c7ca462ad2962b1563686e4a08bbd72e4f5776276daad1059d2a33",
-      "size_bytes": 7779
+      "sha256": "925bd4a31d52d62d454ff98846d8cace7b78527ab5837bc64c7bec5be4d9e049",
+      "size_bytes": 9434
     },
     {
       "exists": true,
@@ -1311,8 +1311,8 @@
     {
       "exists": true,
       "path": "tests/test_sprint11_lora_backend_guards.py",
-      "sha256": "844a6290ae38c54df3f581ee9dc083693c9e414146dea3cb1bf0cd65db2a9d73",
-      "size_bytes": 1093
+      "sha256": "eb276597d44c03914f9dc0619d57726d6b4cb3713057db3c59623d233ad9ff7e",
+      "size_bytes": 2258
     },
     {
       "exists": true,
@@ -1323,8 +1323,8 @@
     {
       "exists": true,
       "path": "tests/test_sprint11_model_loader.py",
-      "sha256": "a1dc42c4e7a6cfc86ce14a25102db0adbd91ecd16a3ea209bcc99243a8102182",
-      "size_bytes": 747
+      "sha256": "180dcc9f1c0f0f09e9d101ac3ca7324258a12dd8a6f8e286d17ee68aab366c71",
+      "size_bytes": 1342
     },
     {
       "exists": true,
@@ -1493,6 +1493,246 @@
       "path": "tools/hash_audit.py",
       "sha256": "3c17511079ebf0b038767f3a24440491041109a2ae70ab199f9f3dc352e4c030",
       "size_bytes": 2775
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/runtime/prompt_format.py",
+      "sha256": "ec559702ccc53af36af25ef0082f0d750587df739ff01c228c74bb11ab8b0389",
+      "size_bytes": 746
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/weighted_sft_sampler.py",
+      "sha256": "0c736e1ab16853031ba6f47526afa06e22a4d3bbd788402d201eedab73df6da7",
+      "size_bytes": 5687
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/truncation_audit.py",
+      "sha256": "bbb97f688ea1ac4e74baa410aa12fb10c53da0c31c3d43c0b0287c7cd6db9dcb",
+      "size_bytes": 2857
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/lora_target_inspector.py",
+      "sha256": "6c320044a9632b16cbf24673388046092b4aa7e378912d3b907be1b86e7d0516",
+      "size_bytes": 3489
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/trainable_parameter_audit.py",
+      "sha256": "9996ef2e3ec338c58257042d7fd2b741dfe12d1f96a724176151b48d1723e2ca",
+      "size_bytes": 3879
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/final_sft_leakage_audit.py",
+      "sha256": "3ddf3dcd4d0652c0b021cc8f38e235191a44107d2d3ce708885c6e623fc782ab",
+      "size_bytes": 4139
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/supervised_label_decode_audit.py",
+      "sha256": "5fa36ace846c6ad8a42b60678d57f36cda99d9f11f902bdcbaec87e4658e76de",
+      "size_bytes": 3669
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/adapter_artifact_audit.py",
+      "sha256": "abc127e573a0623ccc8d705e6b790b47ebe810b093fef3baa062efa8930fe4ac",
+      "size_bytes": 2678
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/training_safety_callbacks.py",
+      "sha256": "f7c4e56d0f47b30578de72122c31ec0dddb7d0a1407eb42ce9fa57a7d73851a7",
+      "size_bytes": 1494
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/eval_ladder.py",
+      "sha256": "67b7176b6dfa7b736cff415162ed42a4784bc8b5d4bab9586d829bde734678ab",
+      "size_bytes": 1383
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/output_drift_audit.py",
+      "sha256": "0331668dd1aaf2f1066e31b2732c650aa8453007fdc70b251d8c0d3ac1b1bcea",
+      "size_bytes": 2914
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/day8_2_smoke_train.py",
+      "sha256": "17554833042deb4a731c19c4883424b586f61c99d8a8e7de279264b03acc3f1d",
+      "size_bytes": 3304
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/day8_2_readiness.py",
+      "sha256": "cd0091a0f727c3ca730cacd338a5c87baf2afafe2b15cfc3e58cdcf4f31c0307",
+      "size_bytes": 4371
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/day8_2_kaggle_commands.py",
+      "sha256": "999d10006eeac45cce150c2b4e22ed9223b4d40d0c054b62636cc3f4e13e5290",
+      "size_bytes": 3057
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_weighted_sampling_report.json",
+      "sha256": "5249dd39252e5a19918874a5f043f1145c5f50d287b7d935cf6652fb48c5abff",
+      "size_bytes": 1114
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_truncation_audit_report.json",
+      "sha256": "dad570a3b17ab116042c71c79904f81ceadd4775a852bd58388fd1d8a74a3aaf",
+      "size_bytes": 295
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_lora_target_report.json",
+      "sha256": "f802f997bfb85dc2f90746389cffbd27344c1a34311a62b8149800dba802d845",
+      "size_bytes": 320
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_trainable_parameter_report.json",
+      "sha256": "5d409bcbc97755cf09b34d2df8daff1e3ecf6cdc9d669a7456b0f09bab43d2ef",
+      "size_bytes": 292
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_final_sft_leakage_report.json",
+      "sha256": "53c8d5b259fe48247cc69e2f6b76056d52103cd904e2a09bb501589ce654d2c6",
+      "size_bytes": 375
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_supervised_label_decode_report.json",
+      "sha256": "37a7bfada757f07999e598e56a71dc869c613fde5fe085dd64db0cacc6a0a4ba",
+      "size_bytes": 291
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_adapter_artifact_report.json",
+      "sha256": "204e29b057713e39ff54d8f7861fcd339f1ea489f1491d1fa43dd72c6baf0b23",
+      "size_bytes": 369
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_smoke_train_summary.json",
+      "sha256": "1849356701566bed6d591bf387dd28c9577e3678cd092ea8da82a344593ff411",
+      "size_bytes": 374
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_smoke_eval_report.json",
+      "sha256": "5cf5e247c35b40d92fe3b76a909c301b12cb1c2d8174e4ab69a26b850a824932",
+      "size_bytes": 590
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_output_drift_report.json",
+      "sha256": "d1ab549b7ce8b7b6d3484fe58f0ebe87f2307a0c1236cfae77a29394b9b391cf",
+      "size_bytes": 102
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_readiness_report.json",
+      "sha256": "7b8e6ea58906d70bd1d87872acdf498e3d6d03b941ab2a078084e31477cbb23c",
+      "size_bytes": 693
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_kaggle_command_plan.txt",
+      "sha256": "6a6a022b2e7e4cff8735f4899b8df29654967ddc7470cc8d2164ed05d037c875",
+      "size_bytes": 2342
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2_v2a_smoke_eval_predictions.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_prompt_format.py",
+      "sha256": "390b3cf8646bfd22e049bf4a3bac87bdeaf365b6b29a7b469754071f019f8e11",
+      "size_bytes": 877
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_weighted_sft_sampler.py",
+      "sha256": "ec46dce19452fd8bb17ad4804872b6a8eb679da11dca2c3b590d0ae2ae93bb28",
+      "size_bytes": 1485
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_truncation_audit.py",
+      "sha256": "ec7676438504b8844c8944a42857060db58b5bd42eb2f7963394a476c49aa9b1",
+      "size_bytes": 924
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_lora_target_inspector.py",
+      "sha256": "88b0786cf4d519049141a5427fada3cfa8a2b80f49a7036582d8277729c835d7",
+      "size_bytes": 782
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_trainable_parameter_audit.py",
+      "sha256": "2e2a280c7f99d2f50075bf65a38c419064d30229cb93656956b591946fb69f0e",
+      "size_bytes": 995
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_final_sft_leakage_audit.py",
+      "sha256": "142367286d6adf88dac11e2563e90282045baf21c6e57fe3de58508fda998015",
+      "size_bytes": 1206
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_supervised_label_decode_audit.py",
+      "sha256": "8385a18b238aea1e1822301b33c206a77d3e4cf90bccf231caed9eadc4e8e6bd",
+      "size_bytes": 1461
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_adapter_artifact_audit.py",
+      "sha256": "52396529f1355f705b5a2b874a6db74cd5f5929d4d491e108a278e0353a922dc",
+      "size_bytes": 885
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_training_safety_callbacks.py",
+      "sha256": "f1cfddf2a53554cc007e61d5f922a585577c8fd0de8184cf9a04b99707d35788",
+      "size_bytes": 708
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_eval_ladder.py",
+      "sha256": "457ad70959f7280ff080a38aa537dfa2fb9bde5823d91b95bd7b1914c77af1b4",
+      "size_bytes": 1131
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_output_drift_audit.py",
+      "sha256": "e1104f98c670940e9f490a0ce41c49deec2b3db14b8ce67899c2dcd67fe262bf",
+      "size_bytes": 788
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_day8_2_smoke_train.py",
+      "sha256": "5bddd097d0ce582d82085a1e43d18291c02e669b603d08f618331d2de8856095",
+      "size_bytes": 465
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_day8_2_readiness.py",
+      "sha256": "4c17470e69016f243622935fa1c32a8ef4aaa4d70d7c84e8c7c7258f74f4459f",
+      "size_bytes": 1191
     }
   ],
   "schema_version": 1

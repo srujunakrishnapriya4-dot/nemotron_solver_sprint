@@ -1,0 +1,12 @@
+{
+  "anti_leak_group_overlap_count": 0,
+  "duplicate_prompt_hash_count": 0,
+  "failures": [],
+  "near_duplicate_template_warnings": [],
+  "rule_holdout_rule_overlap_count": 0,
+  "sft_rows_checked": 2025,
+  "solver_corrected_mirror_prompt_count": 675,
+  "status": "PASS",
+  "train_eval_normalized_prompt_overlap_count": 0,
+  "train_eval_prompt_overlap_count": 0
+}

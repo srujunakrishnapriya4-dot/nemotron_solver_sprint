@@ -31,3 +31,43 @@ def test_adapter_validation_requires_files(tmp_path):
 def test_custom_collator_preserves_labels():
     batch = collate_sft_batch([{"input_ids": [1], "attention_mask": [1], "labels": [-100]}])
     assert "labels" in batch
+
+
+def _tolist(value):
+    return value.tolist() if hasattr(value, "tolist") else value
+
+
+def test_custom_collator_uses_tokenizer_pad_id():
+    class Tok:
+        pad_token_id = 123
+        eos_token_id = 456
+
+    batch = collate_sft_batch(
+        [
+            {"input_ids": [1], "attention_mask": [1], "labels": [1]},
+            {"input_ids": [2, 3], "attention_mask": [1, 1], "labels": [2, 3]},
+        ],
+        Tok(),
+    )
+    assert _tolist(batch["input_ids"])[0][-1] == 123
+    assert _tolist(batch["labels"])[0][-1] == -100
+
+
+def test_custom_collator_uses_eos_fallback_and_rejects_missing_ids():
+    class EosTok:
+        pad_token_id = None
+        eos_token_id = 456
+
+    batch = collate_sft_batch(
+        [
+            {"input_ids": [1], "attention_mask": [1], "labels": [1]},
+            {"input_ids": [2, 3], "attention_mask": [1, 1], "labels": [2, 3]},
+        ],
+        EosTok(),
+    )
+    assert _tolist(batch["input_ids"])[0][-1] == 456
+    class BadTok:
+        pad_token_id = None
+        eos_token_id = None
+    with pytest.raises(ValueError):
+        collate_sft_batch([{"input_ids": [1], "attention_mask": [1], "labels": [1]}], BadTok())

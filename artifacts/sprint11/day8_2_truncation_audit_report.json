@@ -1,0 +1,13 @@
+{
+  "answer_truncated_count": 0,
+  "failures": [],
+  "max_seq_len": 1024,
+  "missing_answer_span_count": 0,
+  "rejected_rows": [],
+  "rows_checked": 2700,
+  "status": "PASS",
+  "token_length_max": 112,
+  "token_length_p95": 110,
+  "truncated_rows": 0,
+  "zero_supervised_rows": 0
+}

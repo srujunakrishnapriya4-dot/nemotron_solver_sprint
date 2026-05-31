@@ -4,6 +4,7 @@ import argparse
 from collections import Counter
 import json
 from pathlib import Path
+import re
 import sys
 from typing import Any, Protocol
 
@@ -27,10 +28,29 @@ class TokenizerLike(Protocol):
 
 class FallbackAuditTokenizer:
     pad_token_id = 0
+    eos_token_id = 0
+
+    def __init__(self):
+        self._vocab: dict[str, int] = {}
+        self._inverse: dict[int, str] = {}
 
     def encode(self, text: str, add_special_tokens: bool = False) -> list[int]:
         del add_special_tokens
-        return [abs(hash(token)) % 50000 for token in fallback_tokenize(text)]
+        ids = []
+        for token in fallback_tokenize(text):
+            if token not in self._vocab:
+                idx = len(self._vocab) + 1
+                self._vocab[token] = idx
+                self._inverse[idx] = token
+            ids.append(self._vocab[token])
+        return ids
+
+    def decode(self, ids: list[int], skip_special_tokens: bool = True) -> str:
+        del skip_special_tokens
+        text = " ".join(self._inverse.get(int(idx), "") for idx in ids).strip()
+        text = re.sub(r"\s+([^\w\s])", r"\1", text)
+        text = re.sub(r"([^\w\s])\s+", r"\1", text)
+        return text.strip()
 
 
 def load_real_tokenizer(base_model_path: str) -> tuple[Any | None, list[str]]:

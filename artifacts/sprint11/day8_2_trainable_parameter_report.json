@@ -1,0 +1,13 @@
+{
+  "base_params_frozen": false,
+  "failures": [
+    "model_unavailable_local"
+  ],
+  "lm_head_trainable": false,
+  "lora_params_trainable": false,
+  "status": "FAIL",
+  "total_params": 0,
+  "trainable_param_names_sample": [],
+  "trainable_params": 0,
+  "trainable_ratio": 0.0
+}

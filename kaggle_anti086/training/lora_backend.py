@@ -6,6 +6,7 @@ from typing import Any
 
 from kaggle_anti086.kaggle_path_safety import safe_mkdir_for_output
 from kaggle_anti086.training.sft_dataset import Sprint11SFTDataset
+from kaggle_anti086.training.training_safety_callbacks import Sprint11TrainingSafetyCallback
 from kaggle_anti086.training.training_config_schema import _target_modules
 
 
@@ -60,7 +61,7 @@ def run_lora_training(model, tokenizer, dataset: Sprint11SFTDataset, config: dic
         gradient_checkpointing=True,
         max_grad_norm=1.0,
     )
-    trainer = Trainer(model=model, args=args, train_dataset=dataset, data_collator=collate_sft_batch, tokenizer=tokenizer)
+    trainer = Trainer(model=model, args=args, train_dataset=dataset, data_collator=lambda features: collate_sft_batch(features, tokenizer), tokenizer=tokenizer, callbacks=[Sprint11TrainingSafetyCallback()])
     result = trainer.train()
     losses = [float(row["loss"]) for row in trainer.state.log_history if "loss" in row]
     save_lora_adapter(model, output_dir)
@@ -81,11 +82,11 @@ def run_lora_training(model, tokenizer, dataset: Sprint11SFTDataset, config: dic
     }
 
 
-def collate_sft_batch(features: list[dict[str, Any]]) -> dict[str, Any]:
+def collate_sft_batch(features: list[dict[str, Any]], tokenizer: Any | None = None) -> dict[str, Any]:
     if not features:
         return {"input_ids": [], "attention_mask": [], "labels": []}
     max_len = max(len(item["input_ids"]) for item in features)
-    pad_id = 0
+    pad_id = _pad_id(tokenizer)
     batch = {"input_ids": [], "attention_mask": [], "labels": []}
     for item in features:
         pad = max_len - len(item["input_ids"])
@@ -98,6 +99,18 @@ def collate_sft_batch(features: list[dict[str, Any]]) -> dict[str, Any]:
         return {key: torch.tensor(value, dtype=torch.long) for key, value in batch.items()}
     except Exception:
         return batch
+
+
+def _pad_id(tokenizer: Any | None) -> int:
+    if tokenizer is None:
+        return 0
+    pad = getattr(tokenizer, "pad_token_id", None)
+    if pad is not None:
+        return int(pad)
+    eos = getattr(tokenizer, "eos_token_id", None)
+    if eos is not None:
+        return int(eos)
+    raise ValueError("tokenizer_missing_pad_and_eos_token_id")
 
 
 def save_lora_adapter(model, output_dir: str | Path) -> None:

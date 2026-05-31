@@ -18,9 +18,17 @@ from kaggle_anti086.training.model_loader import load_base_model, load_tokenizer
 from kaggle_anti086.training.sft_dataset import Sprint11SFTDataset, build_sft_dataset_report, load_weighted_sft_rows
 from kaggle_anti086.training.training_config_schema import STATUS_PASS_RUNNABLE, _target_modules, load_training_config, validate_training_config
 from kaggle_anti086.training.training_run_manifest import build_run_manifest
+from kaggle_anti086.training.weighted_sft_sampler import build_weighted_sample, build_weighted_sampling_report
 
 
-def preflight_v2a_training(config: dict[str, Any], *, config_path: str | Path, collator_audit_path: str | Path) -> tuple[list[str], list[str]]:
+def preflight_v2a_training(
+    config: dict[str, Any],
+    *,
+    config_path: str | Path,
+    collator_audit_path: str | Path,
+    smoke_steps: int | None = None,
+    require_day8_2_readiness: bool = False,
+) -> tuple[list[str], list[str]]:
     warnings: list[str] = []
     failures: list[str] = []
     day7 = Path("artifacts/sprint11/day7_training_readiness_report.json")
@@ -30,6 +38,14 @@ def preflight_v2a_training(config: dict[str, Any], *, config_path: str | Path, c
         report = read_json(day7)
         if report.get("decision") != "ALLOW_DAY8_V2_TRAINING" or report.get("training_allowed_next_stage") is not True:
             failures.append("day7_not_allowing_day8")
+    if require_day8_2_readiness and not smoke_steps:
+        day8_2 = Path("artifacts/sprint11/day8_2_readiness_report.json")
+        if not day8_2.exists():
+            failures.append("day8_2_readiness_missing")
+        else:
+            readiness = read_json(day8_2)
+            if readiness.get("decision") != "ALLOW_DAY8_3_FULL_V2A_TRAINING" or readiness.get("full_training_allowed") is not True:
+                failures.append("day8_2_not_allowing_full_training")
     validation = validate_training_config(config, path=config_path)
     if validation.status != STATUS_PASS_RUNNABLE or config.get("stage") != "v2a_base_lora":
         failures.append("config_not_runnable_v2a")
@@ -97,9 +113,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out-summary", required=True)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--kaggle-mode", action="store_true")
+    parser.add_argument("--smoke-steps", type=int, default=None)
+    parser.add_argument("--require-day8-2-readiness", action="store_true")
     args = parser.parse_args(argv)
     config = load_training_config(args.config)
-    warnings, failures = preflight_v2a_training(config, config_path=args.config, collator_audit_path=args.collator_audit)
+    if args.smoke_steps is not None:
+        if args.smoke_steps < 1 or args.smoke_steps > 5:
+            raise SystemExit("--smoke-steps must be between 1 and 5")
+        config = dict(config)
+        config["num_steps"] = args.smoke_steps
+    warnings, failures = preflight_v2a_training(
+        config,
+        config_path=args.config,
+        collator_audit_path=args.collator_audit,
+        smoke_steps=args.smoke_steps,
+        require_day8_2_readiness=args.require_day8_2_readiness,
+    )
     try:
         manifest = build_run_manifest(config, config_path=args.config, collator_audit_path=args.collator_audit)
     except Exception as exc:
@@ -113,11 +142,16 @@ def main(argv: list[str] | None = None) -> int:
             failures.extend(readiness.get("failures", []))
         else:
             tokenizer = load_tokenizer(str(config["base_model_path"]))
-            rows = load_weighted_sft_rows(config)
+            all_rows = load_weighted_sft_rows(config)
+            rows = build_weighted_sample(all_rows, seed=int(config.get("seed", 42)))
+            sampling_report = build_weighted_sampling_report(all_rows, rows, seed=int(config.get("seed", 42)))
             dataset_report = build_sft_dataset_report(config, rows)
+            dataset_report["weighted_sampling_report"] = sampling_report
             if dataset_report["status"] != "PASS":
                 failures.append("sft_dataset_not_pass")
-            else:
+            if sampling_report["status"] != "PASS":
+                failures.append("weighted_sampling_not_pass")
+            if dataset_report["status"] == "PASS" and sampling_report["status"] == "PASS":
                 dataset = Sprint11SFTDataset(rows, tokenizer, int(config.get("max_seq_len", 1024)))
                 model = load_base_model(str(config["base_model_path"]), load_in_4bit=bool(config.get("load_in_4bit", False)), bf16=True)
                 model = prepare_model_for_v2a_training(model, config)

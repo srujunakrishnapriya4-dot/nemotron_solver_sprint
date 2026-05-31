@@ -5,10 +5,11 @@ from dataclasses import dataclass
 from typing import Any, Protocol
 
 from kaggle_anti086.data.v2_corpus_io import read_jsonl
+from kaggle_anti086.runtime.prompt_format import render_chat_like_text, render_system_prompt, render_training_example
 from kaggle_anti086.training.prepare_tokenization_dry_run import UNSUPPORTED_SFT
 
 
-SYSTEM_PROMPT = "You are a reasoning model. Respond with only the final answer."
+SYSTEM_PROMPT = render_system_prompt()
 ALLOWED_SFT_SOURCES = {"direct_answer", "solver_corrected"}
 
 
@@ -29,12 +30,7 @@ def render_sft_example(row: dict[str, Any]) -> dict[str, str]:
     messages = row.get("messages", [])
     user = str(messages[0].get("content", "")) if messages else str(row.get("prompt", ""))
     assistant = str(messages[1].get("content", "")) if len(messages) > 1 else str(row.get("answer", ""))
-    return {
-        "system": SYSTEM_PROMPT,
-        "user": user,
-        "assistant": assistant,
-        "text": f"SYSTEM:\n{SYSTEM_PROMPT}\n\nUSER:\n{user}\n\nASSISTANT:\n{assistant}",
-    }
+    return render_training_example(user, assistant)
 
 
 def build_assistant_only_features(row: dict[str, Any], tokenizer: TokenizerLike, max_seq_len: int) -> dict[str, Any]:
@@ -47,12 +43,24 @@ def build_assistant_only_features(row: dict[str, Any], tokenizer: TokenizerLike,
     labels = [-100] * (len(system_ids) + len(user_ids) + len(assistant_prefix_ids)) + answer_ids[:]
     attention_mask = [1] * len(input_ids)
     original_len = len(input_ids)
+    prompt_len = len(system_ids) + len(user_ids) + len(assistant_prefix_ids)
+    answer_truncated = False
+    prompt_truncated = False
     if original_len > max_seq_len:
+        answer_truncated = max_seq_len < prompt_len + len(answer_ids)
+        prompt_truncated = max_seq_len < prompt_len
         input_ids = input_ids[:max_seq_len]
         labels = labels[:max_seq_len]
         attention_mask = attention_mask[:max_seq_len]
-    answer_start = len(system_ids) + len(user_ids) + len(assistant_prefix_ids)
+    answer_start = prompt_len
     supervised = sum(1 for label in labels if label != -100)
+    rejected_reason = None
+    if not answer_ids:
+        rejected_reason = "missing_answer_span"
+    elif answer_truncated:
+        rejected_reason = "answer_truncated"
+    elif supervised == 0:
+        rejected_reason = "zero_supervised"
     return {
         "input_ids": input_ids,
         "attention_mask": attention_mask,
@@ -64,6 +72,10 @@ def build_assistant_only_features(row: dict[str, Any], tokenizer: TokenizerLike,
         "answer_token_count": len(answer_ids),
         "supervised_token_count": supervised,
         "truncated": original_len > max_seq_len,
+        "answer_truncated": answer_truncated,
+        "prompt_truncated": prompt_truncated,
+        "missing_answer_span": not bool(answer_ids),
+        "rejected_reason": rejected_reason,
         "metadata": {
             "id": row.get("id"),
             "family": row.get("family"),

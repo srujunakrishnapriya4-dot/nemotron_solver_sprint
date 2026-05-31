@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 
-def check_training_dependencies(base_model_path: str | None = None) -> dict[str, Any]:
+def check_training_dependencies(base_model_path: str | None = None, *, kaggle_mode: bool = False, config: dict[str, Any] | None = None) -> dict[str, Any]:
     report = {
         "torch_available": False,
         "transformers_available": False,
@@ -17,6 +17,10 @@ def check_training_dependencies(base_model_path: str | None = None) -> dict[str,
         "tokenizer_loadable": False,
         "model_loadable": False,
         "failures": [],
+        "quantization_mode": "4bit" if (config or {}).get("load_in_4bit") else "none",
+        "device_map": (config or {}).get("device_map", "auto"),
+        "bf16_enabled": False,
+        "gradient_checkpointing_enabled": bool((config or {}).get("gradient_checkpointing", False)),
     }
     try:
         import torch  # type: ignore
@@ -52,6 +56,20 @@ def check_training_dependencies(base_model_path: str | None = None) -> dict[str,
             report["tokenizer_loadable"] = tokenizer is not None
         except Exception as exc:
             report["failures"].append(f"tokenizer_unloadable:{type(exc).__name__}")
+    if kaggle_mode:
+        if not report["torch_available"]:
+            report["failures"].append("torch_required_in_kaggle_mode")
+        if not report["transformers_available"]:
+            report["failures"].append("transformers_required_in_kaggle_mode")
+        if not report["peft_available"]:
+            report["failures"].append("peft_required_in_kaggle_mode")
+        if not report["cuda_available"]:
+            report["failures"].append("cuda_required_in_kaggle_mode")
+        if (config or {}).get("load_in_4bit") and not report["bitsandbytes_available"]:
+            report["failures"].append("bitsandbytes_required_for_4bit")
+        if not report["tokenizer_loadable"]:
+            report["failures"].append("tokenizer_required_in_kaggle_mode")
+    report["bf16_enabled"] = bool(report.get("bf16_supported")) if (config or {}).get("bf16", "auto") == "auto" else bool((config or {}).get("bf16"))
     return report
 
 
@@ -68,11 +86,16 @@ def load_base_model(base_model_path: str, *, load_in_4bit: bool = False, bf16: b
     import torch  # type: ignore
     from transformers import AutoModelForCausalLM  # type: ignore
 
-    kwargs: dict[str, Any] = {"local_files_only": Path(base_model_path).exists(), "trust_remote_code": True}
+    kwargs: dict[str, Any] = {"local_files_only": Path(base_model_path).exists(), "trust_remote_code": True, "low_cpu_mem_usage": True}
     if bf16 and torch.cuda.is_available() and getattr(torch.cuda, "is_bf16_supported", lambda: False)():
         kwargs["torch_dtype"] = torch.bfloat16
     if load_in_4bit:
-        kwargs["load_in_4bit"] = True
+        try:
+            from transformers import BitsAndBytesConfig  # type: ignore
+
+            kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True)
+        except Exception:
+            kwargs["load_in_4bit"] = True
         kwargs["device_map"] = "auto"
     return AutoModelForCausalLM.from_pretrained(base_model_path, **kwargs)
 

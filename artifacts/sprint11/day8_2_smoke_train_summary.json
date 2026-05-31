@@ -1,0 +1,16 @@
+{
+  "adapter_dir": null,
+  "adapter_valid": false,
+  "artifact_audit_status": "MISSING",
+  "failures": [],
+  "loss_end": null,
+  "loss_nan_detected": false,
+  "loss_start": null,
+  "requested_steps": 5,
+  "smoke_eval_status": "SKIPPED",
+  "status": "NEEDS_KAGGLE_SMOKE_TRAIN",
+  "steps_completed": 0,
+  "warnings": [
+    "local_smoke_training_not_run"
+  ]
+}
