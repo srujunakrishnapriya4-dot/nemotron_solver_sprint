@@ -1,0 +1,346 @@
+{
+  "abstain_precision": 0.0,
+  "abstain_recall": 1.0,
+  "abstained_count": 12,
+  "abstention_examples": [
+    {
+      "abstained": true,
+      "expected": "17",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0013_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #13] [rule_holdout #625] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 5",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "21",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0049_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #49] [rule_holdout #629] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 9",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "48",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0103_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #103] [rule_holdout #635] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 15",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "39",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0139_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #139] [rule_holdout #639] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 19",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "76",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0193_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #193] [rule_holdout #645] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 25",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "60",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0229_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #229] [rule_holdout #649] 1 -> 4; 2 -> 6; 3 -> 8. Now solve: 29",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "107",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0283_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #283] [rule_holdout #655] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 35",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "81",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0315_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #315] [rule_holdout #659] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 39",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "138",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0363_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #363] [rule_holdout #665] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 45",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "99",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0395_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #395] [rule_holdout #669] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 49",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "166",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0443_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #443] [rule_holdout #675] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 55",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "120",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0475_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #475] [rule_holdout #679] 1 -> 4; 2 -> 6; 3 -> 8. Now solve: 59",
+      "reason": "all_solvers_abstained"
+    }
+  ],
+  "answerable_attempt_rate": 0.9765625,
+  "answerable_count": 512,
+  "answerable_exact_match": 0.9765625,
+  "answerable_wrong_answer_rate": 0.0,
+  "attempt_rate": 0.9765625,
+  "attempted_count": 500,
+  "behavior_accuracy": 0.9765625,
+  "benchmark_mode": "solver",
+  "by_family": {
+    "bit_manipulation": {
+      "attempted": 60,
+      "correct": 60,
+      "count": 60,
+      "exact_match": 1.0,
+      "verified": 60
+    },
+    "char_cipher": {
+      "attempted": 60,
+      "correct": 60,
+      "count": 60,
+      "exact_match": 1.0,
+      "verified": 60
+    },
+    "format_only": {
+      "attempted": 32,
+      "correct": 32,
+      "count": 32,
+      "exact_match": 1.0,
+      "verified": 32
+    },
+    "gravity_numeric": {
+      "attempted": 60,
+      "correct": 60,
+      "count": 60,
+      "exact_match": 1.0,
+      "verified": 60
+    },
+    "numeric_formula": {
+      "attempted": 48,
+      "correct": 48,
+      "count": 60,
+      "exact_match": 0.8,
+      "verified": 48
+    },
+    "roman_numeral": {
+      "attempted": 60,
+      "correct": 60,
+      "count": 60,
+      "exact_match": 1.0,
+      "verified": 60
+    },
+    "symbol_mapping": {
+      "attempted": 60,
+      "correct": 60,
+      "count": 60,
+      "exact_match": 1.0,
+      "verified": 60
+    },
+    "unit_conversion": {
+      "attempted": 60,
+      "correct": 60,
+      "count": 60,
+      "exact_match": 1.0,
+      "verified": 60
+    },
+    "word_cipher": {
+      "attempted": 60,
+      "correct": 60,
+      "count": 60,
+      "exact_match": 1.0,
+      "verified": 60
+    }
+  },
+  "by_subfamily": {
+    "bit_manipulation::reverse_bits": 15,
+    "bit_manipulation::rotate_left": 15,
+    "bit_manipulation::rotate_then_xor": 15,
+    "bit_manipulation::xor_mask": 15,
+    "char_cipher::caesar_shift": 20,
+    "char_cipher::monoalphabetic_substitution": 20,
+    "char_cipher::reverse_string": 20,
+    "format_only::answer_prefix_symbol": 5,
+    "format_only::arrow_output": 5,
+    "format_only::binary_first_line": 5,
+    "format_only::boxed_answer": 6,
+    "format_only::text_answer_prefix": 5,
+    "format_only::think_tag_suffix": 6,
+    "gravity_numeric::gravity_distance": 60,
+    "numeric_formula::linear_offset": 30,
+    "numeric_formula::quadratic_scale": 30,
+    "roman_numeral::standard_roman": 60,
+    "symbol_mapping::char_substitution": 60,
+    "unit_conversion::linear_offset_round_0": 40,
+    "unit_conversion::multiplicative_scale_round_2": 20,
+    "word_cipher::word_substitution": 60
+  },
+  "correct_abstain_count": 0,
+  "correct_abstain_rate": 1.0,
+  "correct_count": 500,
+  "eval_type": "rule_holdout",
+  "exact_match": 0.9765625,
+  "execution_status": "PASS",
+  "expected_abstain_count": 0,
+  "failure_examples": [
+    {
+      "abstained": true,
+      "expected": "17",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0013_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #13] [rule_holdout #625] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 5",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "21",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0049_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #49] [rule_holdout #629] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 9",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "48",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0103_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #103] [rule_holdout #635] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 15",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "39",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0139_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #139] [rule_holdout #639] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 19",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "76",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0193_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #193] [rule_holdout #645] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 25",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "60",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0229_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #229] [rule_holdout #649] 1 -> 4; 2 -> 6; 3 -> 8. Now solve: 29",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "107",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0283_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #283] [rule_holdout #655] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 35",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "81",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0315_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #315] [rule_holdout #659] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 39",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "138",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0363_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #363] [rule_holdout #665] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 45",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "99",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0395_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #395] [rule_holdout #669] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 49",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "166",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0443_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #443] [rule_holdout #675] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 55",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "120",
+      "family": "numeric_formula",
+      "id": "day5_rule_holdout_answerable_0475_00",
+      "prediction": "",
+      "prompt_excerpt": "[answerable rule_holdout #475] [rule_holdout #679] 1 -> 4; 2 -> 6; 3 -> 8. Now solve: 59",
+      "reason": "all_solvers_abstained"
+    }
+  ],
+  "quality_status": "PASS",
+  "row_count": 512,
+  "status": "PASS",
+  "thresholds": {
+    "max_unsafe_answer_rate": 0.05,
+    "min_answerable_exact_match": null,
+    "min_attempt_rate": 0.0,
+    "min_behavior_accuracy": 0.55,
+    "min_correct_abstain_rate": 0.8,
+    "min_exact_match": 0.0
+  },
+  "unsafe_answer_count": 0,
+  "unsafe_answer_rate": 0.0,
+  "unsafe_answer_rate_on_abstain_rows": 0.0,
+  "verified_count": 500,
+  "weak_family_warnings": [],
+  "wrong_abstain_count": 12,
+  "wrong_answer_count": 0
+}

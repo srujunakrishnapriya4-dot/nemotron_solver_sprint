@@ -28,6 +28,8 @@ def route_row(row: dict) -> RouterResult:
         return RouterResult("bit_manipulation", "binary_transform", 0.94, True, ["bit_transform_solver"], "low", ["binary_pairs"])
     if family == "custom_numeral":
         return RouterResult("custom_numeral", "unsupported", 0.9, False, [], "high", ["custom_numeral_unsupported"], "custom_numeral_solver_not_implemented")
+    if family == "format_only" or re.search(r"\b(?:raw\s+(?:model\s+)?output|format\s+only|extract\s+final)\b", prompt, re.IGNORECASE):
+        return RouterResult("format_only", "normalization", 0.9, True, ["format_only_solver"], "low", ["format_only"])
     if ROMAN_EXAMPLE_RE.search(prompt) or family == "roman_numeral":
         return RouterResult("roman_numeral", "standard_roman", 0.93, True, ["roman_solver"], "low", ["roman_examples"])
     if family == "gravity_numeric" or re.search(r"\b(?:gravity|falling|distance|time|0\.5\s*\*\s*g)\b", prompt, re.IGNORECASE):

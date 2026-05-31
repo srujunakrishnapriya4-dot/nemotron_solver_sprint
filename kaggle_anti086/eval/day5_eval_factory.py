@@ -67,10 +67,12 @@ FAMILY_HARD_COUNTS = {
     "bit_manipulation": 80,
     "custom_numeral": 48,
     "equation_operator": 48,
-    "numeric_formula": 48,
-    "unit_conversion": 40,
-    "word_cipher": 40,
-    "gravity_numeric": 32,
+    "numeric_formula": 40,
+    "unit_conversion": 32,
+    "word_cipher": 32,
+    "gravity_numeric": 24,
+    "roman_numeral": 16,
+    "format_only": 16,
 }
 
 ANTI_LEAK_COUNTS = {
@@ -98,7 +100,6 @@ SPLIT_BY_EVAL = {
 UNSUPPORTED_DIRECT_ANSWER_FAMILIES = {
     "custom_numeral",
     "equation_operator",
-    "format_only",
     "permutation_sorting",
     "sequence_pattern",
 }
@@ -271,7 +272,7 @@ def _row_for_family(eval_name: str, family: str, local_idx: int, global_idx: int
         "custom_numeral": _unsupported_case,
         "sequence_pattern": _unsupported_case,
         "permutation_sorting": _unsupported_case,
-        "format_only": _unsupported_case,
+        "format_only": _format_only_case,
         "equation_operator": _unsupported_case,
     }
     case = family_builders[family](eval_name, family, local_idx, rng, hard_bias)
@@ -445,12 +446,25 @@ def _roman_case(eval_name: str, family: str, i: int, rng: random.Random, hard_bi
     return _case("standard_roman", prompt, int_to_roman(n), "answer", f"roman_{n}_{i}", 2, _noise(i))
 
 
+def _format_only_case(eval_name: str, family: str, i: int, rng: random.Random, hard_bias: bool) -> dict:
+    cases = [
+        ("boxed_answer", r"\boxed{154.620}", "154.62", "numeric"),
+        ("think_tag_suffix", "</think>\nXXXVIII", "XXXVIII", "roman"),
+        ("arrow_output", "38 -> XXXVIII", "XXXVIII", "roman"),
+        ("answer_prefix_symbol", "Answer: @&.", "@&", "symbol"),
+        ("text_answer_prefix", "The answer is: cat book.", "cat book", "text_phrase"),
+        ("binary_first_line", "00101010\nExplanation: copied from scratch work.", "00101010", "binary"),
+    ]
+    sub, raw, answer, answer_type = cases[i % len(cases)]
+    prompt = f"Format-only cleanup task. Raw output: {raw}\nExtract final answer only."
+    return _case(sub, prompt, answer, "answer", f"format_only_{sub}_{i}", 1, "format_trap", {"answer_type": answer_type})
+
+
 def _unsupported_case(eval_name: str, family: str, i: int, rng: random.Random, hard_bias: bool) -> dict:
     prompts = {
         "custom_numeral": f"custom glyphs {i}: 1 -> @; 2 -> &&. target number: 3",
         "sequence_pattern": f"sequence {i}: 2, 4, 8, 16, ?",
         "permutation_sorting": f"sort by hidden rule {i}: cab -> abc; bca -> abc; query: dac",
-        "format_only": f"format trap {i}: answer should be boxed, but no solver should emit it.",
         "equation_operator": f"operator equation {i}: A @ B -> C. infer target A # B?",
     }
     return _case("expected_abstain", prompts.get(family, f"unsupported {family} {i}"), "ABSTAIN", "abstain", f"{family}_unsupported_{i}", 4 if hard_bias else 3, "format_trap" if family == "format_only" else "ambiguous_rule")

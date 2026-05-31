@@ -31,5 +31,5 @@ def test_weak_subfamily_report_uses_predictions_not_static_names(tmp_path) -> No
     roman = [row for row in report["subfamilies"] if row["family"] == "roman_numeral"][0]
     assert roman["day6_action"] == "eligible_for_v2_direct_answer"
     format_rows = [row for row in report["subfamilies"] if row["family"] == "format_only"]
-    assert not format_rows or format_rows[0]["day6_action"] in {"eligible_for_abstain_safety", "blocked_unsupported_family"}
+    assert not format_rows or format_rows[0]["day6_action"] in {"eligible_for_v2_direct_answer", "eligible_for_abstain_safety"}
     assert report["status"] == "PASS"

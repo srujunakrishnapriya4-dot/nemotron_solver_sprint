@@ -1,7 +1,7 @@
 {
-  "abstain_precision": 0.9242424242424242,
+  "abstain_precision": 0.9137931034482759,
   "abstain_recall": 1.0,
-  "abstained_count": 132,
+  "abstained_count": 116,
   "abstention_examples": [
     {
       "abstained": true,
@@ -94,12 +94,12 @@
       "reason": "all_solvers_abstained"
     }
   ],
-  "answerable_attempt_rate": 0.9743589743589743,
-  "answerable_count": 390,
-  "answerable_exact_match": 0.9743589743589743,
+  "answerable_attempt_rate": 0.9753694581280788,
+  "answerable_count": 406,
+  "answerable_exact_match": 0.9753694581280788,
   "answerable_wrong_answer_rate": 0.0,
-  "attempt_rate": 0.7421875,
-  "attempted_count": 380,
+  "attempt_rate": 0.7734375,
+  "attempted_count": 396,
   "behavior_accuracy": 0.98046875,
   "benchmark_mode": "solver",
   "by_family": {
@@ -132,11 +132,11 @@
       "verified": 0
     },
     "format_only": {
-      "attempted": 0,
-      "correct": 0,
+      "attempted": 16,
+      "correct": 16,
       "count": 16,
-      "exact_match": 0.0,
-      "verified": 0
+      "exact_match": 1.0,
+      "verified": 16
     },
     "gravity_numeric": {
       "attempted": 38,
@@ -207,7 +207,12 @@
     "char_cipher::reverse_string": 17,
     "custom_numeral::expected_abstain": 24,
     "equation_operator::expected_abstain": 16,
-    "format_only::expected_abstain": 16,
+    "format_only::answer_prefix_symbol": 3,
+    "format_only::arrow_output": 3,
+    "format_only::binary_first_line": 2,
+    "format_only::boxed_answer": 3,
+    "format_only::text_answer_prefix": 2,
+    "format_only::think_tag_suffix": 3,
     "gravity_numeric::expected_abstain": 2,
     "gravity_numeric::gravity_distance": 38,
     "numeric_formula::linear_offset": 24,
@@ -223,13 +228,13 @@
     "word_cipher::expected_abstain": 4,
     "word_cipher::word_substitution": 52
   },
-  "correct_abstain_count": 122,
+  "correct_abstain_count": 106,
   "correct_abstain_rate": 1.0,
-  "correct_count": 380,
+  "correct_count": 396,
   "eval_type": "private_like",
-  "exact_match": 0.7421875,
+  "exact_match": 0.7734375,
   "execution_status": "PASS",
-  "expected_abstain_count": 122,
+  "expected_abstain_count": 106,
   "failure_examples": [
     {
       "abstained": true,
@@ -336,11 +341,10 @@
   "unsafe_answer_count": 0,
   "unsafe_answer_rate": 0.0,
   "unsafe_answer_rate_on_abstain_rows": 0.0,
-  "verified_count": 380,
+  "verified_count": 396,
   "weak_family_warnings": [
     "weak_solver_family_custom_numeral",
     "weak_solver_family_equation_operator",
-    "weak_solver_family_format_only",
     "weak_solver_family_permutation_sorting",
     "weak_solver_family_sequence_pattern"
   ],

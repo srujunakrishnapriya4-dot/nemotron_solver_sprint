@@ -2,8 +2,8 @@
   "action_counts": {
     "blocked_solver_failure": 1,
     "blocked_unsupported_family": 4,
-    "eligible_for_abstain_safety": 7,
-    "eligible_for_v2_direct_answer": 15
+    "eligible_for_abstain_safety": 6,
+    "eligible_for_v2_direct_answer": 21
   },
   "created_by": "SPRINT-11D.1",
   "schema_version": 1,
@@ -263,34 +263,150 @@
       "wrong_answer_rate": 0.0
     },
     {
-      "abstained_count": 42,
-      "answerable_count": 0,
-      "attempt_rate": 0.0,
-      "attempted": 0,
-      "correct": 0,
-      "count": 42,
-      "day6_action": "eligible_for_abstain_safety",
+      "abstained_count": 0,
+      "answerable_count": 11,
+      "attempt_rate": 1.0,
+      "attempted": 11,
+      "correct": 11,
+      "count": 11,
+      "day6_action": "eligible_for_v2_direct_answer",
       "dominant_failure": "none",
       "evals": [
         "anti_leak",
+        "family_hard",
         "private_like",
         "rule_holdout"
       ],
-      "exact_match": 0.0,
+      "exact_match": 1.0,
       "failure_reason_counts": {},
       "family": "format_only",
-      "subfamily": "expected_abstain",
+      "subfamily": "answer_prefix_symbol",
       "unsafe_answer_rate": 0.0,
       "wrong_answer_count": 0,
       "wrong_answer_rate": 0.0
     },
     {
-      "abstained_count": 9,
+      "abstained_count": 0,
+      "answerable_count": 11,
+      "attempt_rate": 1.0,
+      "attempted": 11,
+      "correct": 11,
+      "count": 11,
+      "day6_action": "eligible_for_v2_direct_answer",
+      "dominant_failure": "none",
+      "evals": [
+        "anti_leak",
+        "family_hard",
+        "private_like",
+        "rule_holdout"
+      ],
+      "exact_match": 1.0,
+      "failure_reason_counts": {},
+      "family": "format_only",
+      "subfamily": "arrow_output",
+      "unsafe_answer_rate": 0.0,
+      "wrong_answer_count": 0,
+      "wrong_answer_rate": 0.0
+    },
+    {
+      "abstained_count": 0,
+      "answerable_count": 7,
+      "attempt_rate": 1.0,
+      "attempted": 7,
+      "correct": 7,
+      "count": 7,
+      "day6_action": "eligible_for_v2_direct_answer",
+      "dominant_failure": "none",
+      "evals": [
+        "anti_leak",
+        "family_hard",
+        "private_like",
+        "rule_holdout"
+      ],
+      "exact_match": 1.0,
+      "failure_reason_counts": {},
+      "family": "format_only",
+      "subfamily": "binary_first_line",
+      "unsafe_answer_rate": 0.0,
+      "wrong_answer_count": 0,
+      "wrong_answer_rate": 0.0
+    },
+    {
+      "abstained_count": 0,
+      "answerable_count": 11,
+      "attempt_rate": 1.0,
+      "attempted": 11,
+      "correct": 11,
+      "count": 11,
+      "day6_action": "eligible_for_v2_direct_answer",
+      "dominant_failure": "none",
+      "evals": [
+        "anti_leak",
+        "family_hard",
+        "private_like",
+        "rule_holdout"
+      ],
+      "exact_match": 1.0,
+      "failure_reason_counts": {},
+      "family": "format_only",
+      "subfamily": "boxed_answer",
+      "unsafe_answer_rate": 0.0,
+      "wrong_answer_count": 0,
+      "wrong_answer_rate": 0.0
+    },
+    {
+      "abstained_count": 0,
+      "answerable_count": 7,
+      "attempt_rate": 1.0,
+      "attempted": 7,
+      "correct": 7,
+      "count": 7,
+      "day6_action": "eligible_for_v2_direct_answer",
+      "dominant_failure": "none",
+      "evals": [
+        "anti_leak",
+        "family_hard",
+        "private_like",
+        "rule_holdout"
+      ],
+      "exact_match": 1.0,
+      "failure_reason_counts": {},
+      "family": "format_only",
+      "subfamily": "text_answer_prefix",
+      "unsafe_answer_rate": 0.0,
+      "wrong_answer_count": 0,
+      "wrong_answer_rate": 0.0
+    },
+    {
+      "abstained_count": 0,
+      "answerable_count": 11,
+      "attempt_rate": 1.0,
+      "attempted": 11,
+      "correct": 11,
+      "count": 11,
+      "day6_action": "eligible_for_v2_direct_answer",
+      "dominant_failure": "none",
+      "evals": [
+        "anti_leak",
+        "family_hard",
+        "private_like",
+        "rule_holdout"
+      ],
+      "exact_match": 1.0,
+      "failure_reason_counts": {},
+      "family": "format_only",
+      "subfamily": "think_tag_suffix",
+      "unsafe_answer_rate": 0.0,
+      "wrong_answer_count": 0,
+      "wrong_answer_rate": 0.0
+    },
+    {
+      "abstained_count": 8,
       "answerable_count": 0,
       "attempt_rate": 0.0,
       "attempted": 0,
       "correct": 0,
-      "count": 9,
+      "count": 8,
       "day6_action": "eligible_for_abstain_safety",
       "dominant_failure": "none",
       "evals": [
@@ -309,11 +425,11 @@
     },
     {
       "abstained_count": 0,
-      "answerable_count": 123,
+      "answerable_count": 116,
       "attempt_rate": 1.0,
-      "attempted": 123,
-      "correct": 123,
-      "count": 123,
+      "attempted": 116,
+      "correct": 116,
+      "count": 116,
       "day6_action": "eligible_for_v2_direct_answer",
       "dominant_failure": "none",
       "evals": [
@@ -331,12 +447,12 @@
       "wrong_answer_rate": 0.0
     },
     {
-      "abstained_count": 35,
-      "answerable_count": 84,
-      "attempt_rate": 0.5833333333333334,
-      "attempted": 49,
-      "correct": 49,
-      "count": 84,
+      "abstained_count": 33,
+      "answerable_count": 80,
+      "attempt_rate": 0.5875,
+      "attempted": 47,
+      "correct": 47,
+      "count": 80,
       "day6_action": "blocked_solver_failure",
       "dominant_failure": "none",
       "evals": [
@@ -345,9 +461,9 @@
         "private_like",
         "rule_holdout"
       ],
-      "exact_match": 0.5833333333333334,
+      "exact_match": 0.5875,
       "failure_reason_counts": {
-        "all_solvers_abstained": 35
+        "all_solvers_abstained": 33
       },
       "family": "numeric_formula",
       "subfamily": "linear_offset",
@@ -357,11 +473,11 @@
     },
     {
       "abstained_count": 0,
-      "answerable_count": 84,
+      "answerable_count": 80,
       "attempt_rate": 1.0,
-      "attempted": 84,
-      "correct": 84,
-      "count": 84,
+      "attempted": 80,
+      "correct": 80,
+      "count": 80,
       "day6_action": "eligible_for_v2_direct_answer",
       "dominant_failure": "none",
       "evals": [
@@ -400,15 +516,16 @@
     },
     {
       "abstained_count": 0,
-      "answerable_count": 80,
+      "answerable_count": 96,
       "attempt_rate": 1.0,
-      "attempted": 80,
-      "correct": 80,
-      "count": 80,
+      "attempted": 96,
+      "correct": 96,
+      "count": 96,
       "day6_action": "eligible_for_v2_direct_answer",
       "dominant_failure": "none",
       "evals": [
         "anti_leak",
+        "family_hard",
         "private_like",
         "rule_holdout"
       ],
@@ -509,12 +626,12 @@
       "wrong_answer_rate": 0.0
     },
     {
-      "abstained_count": 8,
+      "abstained_count": 7,
       "answerable_count": 0,
       "attempt_rate": 0.0,
       "attempted": 0,
       "correct": 0,
-      "count": 8,
+      "count": 7,
       "day6_action": "eligible_for_abstain_safety",
       "dominant_failure": "none",
       "evals": [
@@ -533,11 +650,11 @@
     },
     {
       "abstained_count": 0,
-      "answerable_count": 113,
+      "answerable_count": 109,
       "attempt_rate": 1.0,
-      "attempted": 113,
-      "correct": 113,
-      "count": 113,
+      "attempted": 109,
+      "correct": 109,
+      "count": 109,
       "day6_action": "eligible_for_v2_direct_answer",
       "dominant_failure": "none",
       "evals": [
@@ -556,11 +673,11 @@
     },
     {
       "abstained_count": 0,
-      "answerable_count": 59,
+      "answerable_count": 56,
       "attempt_rate": 1.0,
-      "attempted": 59,
-      "correct": 59,
-      "count": 59,
+      "attempted": 56,
+      "correct": 56,
+      "count": 56,
       "day6_action": "eligible_for_v2_direct_answer",
       "dominant_failure": "none",
       "evals": [
@@ -578,12 +695,12 @@
       "wrong_answer_rate": 0.0
     },
     {
-      "abstained_count": 15,
+      "abstained_count": 14,
       "answerable_count": 0,
       "attempt_rate": 0.0,
       "attempted": 0,
       "correct": 0,
-      "count": 15,
+      "count": 14,
       "day6_action": "eligible_for_abstain_safety",
       "dominant_failure": "none",
       "evals": [
@@ -602,11 +719,11 @@
     },
     {
       "abstained_count": 0,
-      "answerable_count": 165,
+      "answerable_count": 158,
       "attempt_rate": 1.0,
-      "attempted": 165,
-      "correct": 165,
-      "count": 165,
+      "attempted": 158,
+      "correct": 158,
+      "count": 158,
       "day6_action": "eligible_for_v2_direct_answer",
       "dominant_failure": "none",
       "evals": [

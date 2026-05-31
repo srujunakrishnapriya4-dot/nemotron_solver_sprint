@@ -1,7 +1,7 @@
 {
-  "abstain_precision": 0.9230769230769231,
+  "abstain_precision": 0.9090909090909091,
   "abstain_recall": 1.0,
-  "abstained_count": 65,
+  "abstained_count": 55,
   "abstention_examples": [
     {
       "abstained": true,
@@ -49,12 +49,12 @@
       "reason": "all_solvers_abstained"
     }
   ],
-  "answerable_attempt_rate": 0.9744897959183674,
-  "answerable_count": 196,
-  "answerable_exact_match": 0.9744897959183674,
+  "answerable_attempt_rate": 0.9757281553398058,
+  "answerable_count": 206,
+  "answerable_exact_match": 0.9757281553398058,
   "answerable_wrong_answer_rate": 0.0,
-  "attempt_rate": 0.74609375,
-  "attempted_count": 191,
+  "attempt_rate": 0.78515625,
+  "attempted_count": 201,
   "behavior_accuracy": 0.98046875,
   "benchmark_mode": "solver",
   "by_family": {
@@ -87,11 +87,11 @@
       "verified": 0
     },
     "format_only": {
-      "attempted": 0,
-      "correct": 0,
+      "attempted": 10,
+      "correct": 10,
       "count": 10,
-      "exact_match": 0.0,
-      "verified": 0
+      "exact_match": 1.0,
+      "verified": 10
     },
     "gravity_numeric": {
       "attempted": 19,
@@ -155,7 +155,12 @@
     "char_cipher::reverse_string": 8,
     "custom_numeral::expected_abstain": 16,
     "equation_operator::expected_abstain": 10,
-    "format_only::expected_abstain": 10,
+    "format_only::answer_prefix_symbol": 2,
+    "format_only::arrow_output": 2,
+    "format_only::binary_first_line": 1,
+    "format_only::boxed_answer": 2,
+    "format_only::text_answer_prefix": 1,
+    "format_only::think_tag_suffix": 2,
     "gravity_numeric::expected_abstain": 1,
     "gravity_numeric::gravity_distance": 19,
     "numeric_formula::linear_offset": 12,
@@ -170,13 +175,13 @@
     "word_cipher::expected_abstain": 2,
     "word_cipher::word_substitution": 26
   },
-  "correct_abstain_count": 60,
+  "correct_abstain_count": 50,
   "correct_abstain_rate": 1.0,
-  "correct_count": 191,
+  "correct_count": 201,
   "eval_type": "anti_leak",
-  "exact_match": 0.74609375,
+  "exact_match": 0.78515625,
   "execution_status": "PASS",
-  "expected_abstain_count": 60,
+  "expected_abstain_count": 50,
   "failure_examples": [
     {
       "abstained": true,
@@ -238,7 +243,7 @@
   "unsafe_answer_count": 0,
   "unsafe_answer_rate": 0.0,
   "unsafe_answer_rate_on_abstain_rows": 0.0,
-  "verified_count": 191,
+  "verified_count": 201,
   "weak_family_warnings": [
     "weak_solver_family_custom_numeral"
   ],

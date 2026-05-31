@@ -1,0 +1,13 @@
+{
+  "comparison_file_count": 3,
+  "created_by": "SPRINT-11D.2",
+  "failures": [],
+  "leakage_group_overlap_count": 0,
+  "overlap_examples": [],
+  "rule_holdout_row_count": 512,
+  "rule_id_overlap_count": 0,
+  "rule_signature_overlap_count": 0,
+  "schema_version": 1,
+  "semantic_holdout_pass": true,
+  "status": "PASS"
+}

@@ -86,12 +86,16 @@ def _model_plan(eval_path: str | Path, out_report: Path) -> dict:
 
 
 def _kaggle_eval_command(eval_path: str | Path, stage: str) -> str:
+    mode = "private_like_rule_holdout" if "rule_holdout" in str(eval_path) else "private_like_family_hard"
+    label = "base" if stage == "base_eval" else "parent"
     return (
+        f"# {label} Kaggle GPU eval command plan; model results are not faked by Day 5.\n"
+        f"# Mount or copy {eval_path} to the configured anti086 input root before running.\n"
         'PYTHONPATH="/kaggle/working:/kaggle/working/src:$PYTHONPATH" '
         'TRITON_PTXAS_PATH="/tmp/ptxas-blackwell" '
         'TRITON_PTXAS_BLACKWELL_PATH="/tmp/ptxas-blackwell" '
-        f"python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml "
-        f"--stage {stage} --eval-file {eval_path}"
+        f"python kaggle_anti086/kaggle_eval_anti086_vllm.py --config anti086_winmode_v1b.yaml --mode {mode}\n"
+        f"# Expected report: /kaggle/working/anti086_eval/eval_summary.json"
     )
 
 

@@ -19,6 +19,7 @@ ANSWER_TYPE_BY_FAMILY = {
     "char_cipher": "text_phrase",
     "symbol_mapping": "symbol",
     "digit_symbol_mapping": "symbol",
+    "format_only": "generic",
 }
 
 
@@ -92,6 +93,11 @@ def _family_check(family: str, normalized: str, candidate: SolverCandidate, row:
     elif family in {"symbol_mapping", "digit_symbol_mapping"}:
         if re.search(r"\b(?:answer|because|explanation)\b", candidate.answer, re.IGNORECASE):
             return _fail("symbol_answer_verbose", candidate.risk, normalized)
+    elif family == "format_only":
+        if not normalized:
+            return _fail("format_only_empty", candidate.risk, normalized)
+        if re.search(r"\b(?:because|explanation|therefore|reasoning)\b", candidate.answer, re.IGNORECASE):
+            return _fail("format_only_verbose", candidate.risk, normalized)
     return VerificationResult(True, "accepted", candidate.risk, normalized, "")
 
 

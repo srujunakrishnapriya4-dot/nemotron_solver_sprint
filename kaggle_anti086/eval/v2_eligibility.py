@@ -27,7 +27,22 @@ CLASSES = (
     "blocked_missing_metadata",
 )
 
-UNSUPPORTED_DIRECT_FAMILIES = {"custom_numeral", "equation_operator", "format_only", "permutation_sorting", "sequence_pattern"}
+UNSUPPORTED_DIRECT_FAMILIES = {"custom_numeral", "equation_operator", "permutation_sorting", "sequence_pattern"}
+THRESHOLDS = {
+    "eligible_verified_answer_count": 1000,
+    "eligible_abstain_safety_count": 200,
+    "unsafe_answer_rate": 0.0,
+}
+PER_FAMILY_THRESHOLDS = {
+    "bit_manipulation": 100,
+    "symbol_mapping": 100,
+    "char_cipher": 100,
+    "unit_conversion": 100,
+    "numeric_formula": 80,
+    "gravity_numeric": 80,
+    "word_cipher": 100,
+    "roman_numeral": 50,
+}
 
 
 def build_v2_eligibility_report(pairs: dict[str, tuple[Path, Path]]) -> dict:
@@ -52,6 +67,7 @@ def build_v2_eligibility_report(pairs: dict[str, tuple[Path, Path]]) -> dict:
     hard_negative_dist: Counter[str] = Counter()
     blocked_dist: Counter[str] = Counter()
     leakage_risk_count = 0
+    unsafe_answer_count = 0
 
     for eval_name, row, pred in items:
         family = str(row.get("family", "unknown"))
@@ -65,6 +81,8 @@ def build_v2_eligibility_report(pairs: dict[str, tuple[Path, Path]]) -> dict:
         )
         if leakage_risk:
             leakage_risk_count += 1
+        if row.get("metadata", {}).get("expected_solver_behavior") == "abstain" and not bool(pred.get("abstained", True)):
+            unsafe_answer_count += 1
         klass = _classify(row, pred, missing=missing, leakage_risk=leakage_risk)
         class_counts[klass] += 1
         by_family[family][klass] += 1
@@ -90,17 +108,25 @@ def build_v2_eligibility_report(pairs: dict[str, tuple[Path, Path]]) -> dict:
             }
         )
 
-    blocked_counts = {name: class_counts[name] for name in CLASSES if name.startswith("blocked_") and class_counts[name]}
-    status = "FAIL" if leakage_risk_count else "PASS"
-    day6_decision = (
-        "ALLOW_CORPUS_BUILD"
-        if status == "PASS" and class_counts["eligible_verified_answer"] >= 64 and not blocked_counts.get("blocked_leakage_risk")
-        else "BLOCK_CORPUS_BUILD"
-    )
+    blocked_counts = {name: class_counts[name] for name in CLASSES if name.startswith("blocked_")}
+    unsafe_answer_rate = 0.0 if not items else unsafe_answer_count / len(items)
+    per_family_gate_status = {
+        family: {
+            "value": direct_dist.get(family, 0),
+            "threshold": threshold,
+            "status": "PASS" if direct_dist.get(family, 0) >= threshold else "FAIL",
+        }
+        for family, threshold in PER_FAMILY_THRESHOLDS.items()
+    }
+    remaining_blockers = _remaining_blockers(class_counts, blocked_counts, direct_dist, unsafe_answer_rate)
+    status = "PASS" if not remaining_blockers else "FAIL"
+    day6_decision = "ALLOW_CORPUS_BUILD" if status == "PASS" else "BLOCK_CORPUS_BUILD"
     return {
-        "schema_version": 1,
-        "created_by": "SPRINT-11D.1",
+        "schema_version": 2,
+        "created_by": "SPRINT-11D.2",
         "status": status,
+        "training_allowed": False,
+        "thresholds": THRESHOLDS,
         "total_rows_seen": len(items),
         "eligible_verified_answer_count": class_counts["eligible_verified_answer"],
         "eligible_hard_negative_count": class_counts["eligible_hard_negative"],
@@ -110,12 +136,35 @@ def build_v2_eligibility_report(pairs: dict[str, tuple[Path, Path]]) -> dict:
         "by_family": {family: dict(counter) for family, counter in sorted(by_family.items())},
         "by_subfamily": {subfamily: dict(counter) for subfamily, counter in sorted(by_subfamily.items())},
         "direct_answer_family_distribution": dict(sorted(direct_dist.items())),
+        "eligible_by_family": dict(sorted(direct_dist.items())),
         "hard_negative_family_distribution": dict(sorted(hard_negative_dist.items())),
         "blocked_family_distribution": dict(sorted(blocked_dist.items())),
         "leakage_risk_count": leakage_risk_count,
+        "unsafe_answer_count": unsafe_answer_count,
+        "unsafe_answer_rate": unsafe_answer_rate,
+        "per_family_thresholds": PER_FAMILY_THRESHOLDS,
+        "per_family_gate_status": per_family_gate_status,
+        "remaining_blockers": remaining_blockers,
         "day6_decision": day6_decision,
         "row_classifications": classifications[:2000],
     }
+
+
+def _remaining_blockers(class_counts: Counter[str], blocked_counts: dict[str, int], direct_dist: Counter[str], unsafe_answer_rate: float) -> list[str]:
+    blockers = []
+    if class_counts["eligible_verified_answer"] < THRESHOLDS["eligible_verified_answer_count"]:
+        blockers.append("eligible_verified_answer_count_below_threshold")
+    if class_counts["eligible_abstain_safety"] < THRESHOLDS["eligible_abstain_safety_count"]:
+        blockers.append("eligible_abstain_safety_count_below_threshold")
+    for key in ("blocked_leakage_risk", "blocked_missing_metadata", "blocked_eval_generator_bug"):
+        if blocked_counts.get(key, 0) > 0:
+            blockers.append(f"{key}_present")
+    if unsafe_answer_rate > THRESHOLDS["unsafe_answer_rate"]:
+        blockers.append("unsafe_answer_rate_above_zero")
+    for family, threshold in PER_FAMILY_THRESHOLDS.items():
+        if direct_dist.get(family, 0) < threshold:
+            blockers.append(f"{family}_eligible_verified_answer_below_{threshold}")
+    return blockers
 
 
 def _classify(row: dict, pred: dict, *, missing: list[str], leakage_risk: bool) -> str:

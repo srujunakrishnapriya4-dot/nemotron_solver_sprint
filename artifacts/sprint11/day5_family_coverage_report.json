@@ -3,7 +3,7 @@
   "duplicate_prompt_count": 0,
   "evals": {
     "anti_leak": {
-      "answerable_count": 196,
+      "answerable_count": 206,
       "by_family": {
         "bit_manipulation": 32,
         "char_cipher": 28,
@@ -30,7 +30,12 @@
         "char_cipher::reverse_string": 8,
         "custom_numeral::expected_abstain": 16,
         "equation_operator::expected_abstain": 10,
-        "format_only::expected_abstain": 10,
+        "format_only::answer_prefix_symbol": 2,
+        "format_only::arrow_output": 2,
+        "format_only::binary_first_line": 1,
+        "format_only::boxed_answer": 2,
+        "format_only::text_answer_prefix": 1,
+        "format_only::think_tag_suffix": 2,
         "gravity_numeric::expected_abstain": 1,
         "gravity_numeric::gravity_distance": 19,
         "numeric_formula::linear_offset": 12,
@@ -46,11 +51,12 @@
         "word_cipher::word_substitution": 26
       },
       "difficulty_distribution": {
+        "1": 10,
         "2": 108,
-        "3": 136,
+        "3": 126,
         "4": 12
       },
-      "expected_abstain_count": 60,
+      "expected_abstain_count": 50,
       "noise_profile_distribution": {
         "ambiguous_rule": 55,
         "answer_only_style": 14,
@@ -70,17 +76,19 @@
       "unsupported_family_count": 48
     },
     "family_hard": {
-      "answerable_count": 348,
+      "answerable_count": 351,
       "by_family": {
         "bit_manipulation": 80,
         "char_cipher": 80,
         "custom_numeral": 48,
         "equation_operator": 48,
-        "gravity_numeric": 32,
-        "numeric_formula": 48,
+        "format_only": 16,
+        "gravity_numeric": 24,
+        "numeric_formula": 40,
+        "roman_numeral": 16,
         "symbol_mapping": 96,
-        "unit_conversion": 40,
-        "word_cipher": 40
+        "unit_conversion": 32,
+        "word_cipher": 32
       },
       "by_subfamily": {
         "bit_manipulation::expected_abstain": 16,
@@ -94,45 +102,53 @@
         "char_cipher::reverse_string": 21,
         "custom_numeral::expected_abstain": 48,
         "equation_operator::expected_abstain": 48,
-        "gravity_numeric::expected_abstain": 4,
-        "gravity_numeric::gravity_distance": 28,
-        "numeric_formula::linear_offset": 24,
-        "numeric_formula::quadratic_scale": 24,
+        "format_only::answer_prefix_symbol": 3,
+        "format_only::arrow_output": 3,
+        "format_only::binary_first_line": 2,
+        "format_only::boxed_answer": 3,
+        "format_only::text_answer_prefix": 2,
+        "format_only::think_tag_suffix": 3,
+        "gravity_numeric::expected_abstain": 3,
+        "gravity_numeric::gravity_distance": 21,
+        "numeric_formula::linear_offset": 20,
+        "numeric_formula::quadratic_scale": 20,
+        "roman_numeral::standard_roman": 16,
         "symbol_mapping::char_substitution": 57,
         "symbol_mapping::expected_abstain": 24,
         "symbol_mapping::reversal_substitution": 15,
-        "unit_conversion::expected_abstain": 3,
-        "unit_conversion::linear_offset_round_0": 24,
-        "unit_conversion::multiplicative_scale_round_2": 13,
-        "word_cipher::expected_abstain": 5,
-        "word_cipher::word_substitution": 35
+        "unit_conversion::expected_abstain": 2,
+        "unit_conversion::linear_offset_round_0": 20,
+        "unit_conversion::multiplicative_scale_round_2": 10,
+        "word_cipher::expected_abstain": 4,
+        "word_cipher::word_substitution": 28
       },
       "difficulty_distribution": {
-        "2": 56,
-        "3": 220,
-        "4": 236
+        "1": 16,
+        "2": 65,
+        "3": 198,
+        "4": 233
       },
-      "expected_abstain_count": 164,
+      "expected_abstain_count": 161,
       "noise_profile_distribution": {
-        "ambiguous_rule": 140,
-        "answer_only_style": 25,
-        "clean": 32,
-        "conflicting_examples": 47,
-        "distractor_pair": 29,
+        "ambiguous_rule": 138,
+        "answer_only_style": 23,
+        "clean": 31,
+        "conflicting_examples": 45,
+        "distractor_pair": 28,
         "extra_explanation_text": 28,
-        "format_trap": 24,
-        "long_prompt": 26,
-        "query_with_arrow": 27,
+        "format_trap": 39,
+        "long_prompt": 24,
+        "query_with_arrow": 26,
         "query_with_colon": 27,
         "quoted_examples": 28,
-        "unknown_symbols_or_words": 53,
-        "whitespace_noise": 26
+        "unknown_symbols_or_words": 51,
+        "whitespace_noise": 24
       },
       "row_count": 512,
-      "unsupported_family_count": 96
+      "unsupported_family_count": 112
     },
     "private_like": {
-      "answerable_count": 390,
+      "answerable_count": 406,
       "by_family": {
         "bit_manipulation": 64,
         "char_cipher": 56,
@@ -160,7 +176,12 @@
         "char_cipher::reverse_string": 17,
         "custom_numeral::expected_abstain": 24,
         "equation_operator::expected_abstain": 16,
-        "format_only::expected_abstain": 16,
+        "format_only::answer_prefix_symbol": 3,
+        "format_only::arrow_output": 3,
+        "format_only::binary_first_line": 2,
+        "format_only::boxed_answer": 3,
+        "format_only::text_answer_prefix": 2,
+        "format_only::think_tag_suffix": 3,
         "gravity_numeric::expected_abstain": 2,
         "gravity_numeric::gravity_distance": 38,
         "numeric_formula::linear_offset": 24,
@@ -177,11 +198,12 @@
         "word_cipher::word_substitution": 52
       },
       "difficulty_distribution": {
+        "1": 16,
         "2": 216,
-        "3": 270,
+        "3": 254,
         "4": 26
       },
-      "expected_abstain_count": 122,
+      "expected_abstain_count": 106,
       "noise_profile_distribution": {
         "ambiguous_rule": 116,
         "answer_only_style": 30,
@@ -201,7 +223,7 @@
       "unsupported_family_count": 96
     },
     "rule_holdout": {
-      "answerable_count": 404,
+      "answerable_count": 420,
       "by_family": {
         "bit_manipulation": 72,
         "char_cipher": 56,
@@ -228,7 +250,12 @@
         "char_cipher::reverse_string": 17,
         "custom_numeral::expected_abstain": 24,
         "equation_operator::expected_abstain": 16,
-        "format_only::expected_abstain": 16,
+        "format_only::answer_prefix_symbol": 3,
+        "format_only::arrow_output": 3,
+        "format_only::binary_first_line": 2,
+        "format_only::boxed_answer": 3,
+        "format_only::text_answer_prefix": 2,
+        "format_only::think_tag_suffix": 3,
         "gravity_numeric::expected_abstain": 2,
         "gravity_numeric::gravity_distance": 38,
         "numeric_formula::linear_offset": 24,
@@ -244,11 +271,12 @@
         "word_cipher::word_substitution": 52
       },
       "difficulty_distribution": {
+        "1": 16,
         "2": 230,
-        "3": 254,
+        "3": 238,
         "4": 28
       },
-      "expected_abstain_count": 108,
+      "expected_abstain_count": 92,
       "noise_profile_distribution": {
         "ambiguous_rule": 101,
         "answer_only_style": 30,

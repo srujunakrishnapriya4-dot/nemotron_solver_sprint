@@ -17,7 +17,9 @@ def test_model_plan_writes_exact_base_parent_command_files(tmp_path) -> None:
     parent_path = tmp_path / "day5_kaggle_parent_eval_commands.txt"
     assert base_path.exists()
     assert parent_path.exists()
-    assert "--stage base_eval" in base_path.read_text(encoding="utf-8")
-    assert "--stage parent_eval" in parent_path.read_text(encoding="utf-8")
+    assert "kaggle_eval_anti086_vllm.py" in base_path.read_text(encoding="utf-8")
+    assert "kaggle_eval_anti086_vllm.py" in parent_path.read_text(encoding="utf-8")
+    assert "--eval-file" not in base_path.read_text(encoding="utf-8")
+    assert "--eval-file" not in parent_path.read_text(encoding="utf-8")
     assert plan["model_results_faked"] is False
     assert plan["command_files"]["base"].endswith("day5_kaggle_base_eval_commands.txt")

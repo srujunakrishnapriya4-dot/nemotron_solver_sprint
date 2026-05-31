@@ -1,1 +1,4 @@
-PYTHONPATH="/kaggle/working:/kaggle/working/src:$PYTHONPATH" TRITON_PTXAS_PATH="/tmp/ptxas-blackwell" TRITON_PTXAS_BLACKWELL_PATH="/tmp/ptxas-blackwell" python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml --stage base_eval --eval-file artifacts/sprint11/day5_private_like_eval_512.jsonl
+# base Kaggle GPU eval command plan; model results are not faked by Day 5.
+# Mount or copy artifacts/sprint11/day5_private_like_eval_512.jsonl to the configured anti086 input root before running.
+PYTHONPATH="/kaggle/working:/kaggle/working/src:$PYTHONPATH" TRITON_PTXAS_PATH="/tmp/ptxas-blackwell" TRITON_PTXAS_BLACKWELL_PATH="/tmp/ptxas-blackwell" python kaggle_anti086/kaggle_eval_anti086_vllm.py --config anti086_winmode_v1b.yaml --mode private_like_family_hard
+# Expected report: /kaggle/working/anti086_eval/eval_summary.json

@@ -6,6 +6,7 @@ from kaggle_anti086.solvers.answer_normalizer import normalize_answer
 from kaggle_anti086.solvers.base import BaseSolver
 from kaggle_anti086.solvers.bit_transform_solver import BitTransformSolver
 from kaggle_anti086.solvers.char_cipher_solver import CharCipherSolver
+from kaggle_anti086.solvers.format_only_solver import FormatOnlySolver
 from kaggle_anti086.solvers.numeric_formula_solver import NumericFormulaSolver
 from kaggle_anti086.solvers.roman_solver import RomanSolver
 from kaggle_anti086.solvers.router import route_row
@@ -28,6 +29,7 @@ ANSWER_TYPE_BY_FAMILY = {
     "char_cipher": "text_phrase",
     "symbol_mapping": "symbol",
     "digit_symbol_mapping": "symbol",
+    "format_only": "generic",
 }
 
 
@@ -41,6 +43,7 @@ class SolverEnsemble:
             UnitConversionSolver(),
             NumericFormulaSolver(),
             WordCipherSolver(),
+            FormatOnlySolver(),
         ]
         self.min_confidence_to_emit = min_confidence_to_emit
 

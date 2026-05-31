@@ -15,7 +15,8 @@ def test_answerable_rows_are_verified_answer_only() -> None:
     assert all(row["metadata"]["eval_purpose"] == "answer_accuracy_eval" for row in rows)
     assert all(row["verification_status"] == "verified" for row in rows)
     assert all(row["answer"] and row["answer"] != "ABSTAIN" for row in rows)
-    assert not {"equation_operator", "sequence_pattern", "permutation_sorting", "format_only"} & {row["family"] for row in rows}
+    assert "format_only" in {row["family"] for row in rows}
+    assert not {"equation_operator", "sequence_pattern", "permutation_sorting"} & {row["family"] for row in rows}
 
 
 def test_answerable_builder_does_not_mutate_mixed_eval() -> None:

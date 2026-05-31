@@ -1,0 +1,112 @@
+{
+  "decision": "ALLOW_DAY6_CORPUS_BUILD",
+  "gates": {
+    "eligible_abstain_safety_count": {
+      "status": "PASS",
+      "threshold": 200,
+      "value": 409
+    },
+    "eligible_verified_answer_count": {
+      "status": "PASS",
+      "threshold": 1000,
+      "value": 1350
+    },
+    "family_hard_answerable_exact_match": {
+      "status": "PASS",
+      "threshold": 0.9,
+      "value": 0.970703125
+    },
+    "format_only_ready": {
+      "status": "PASS",
+      "threshold": true,
+      "value": true
+    },
+    "private_like_answerable_exact_match": {
+      "status": "PASS",
+      "threshold": 0.9,
+      "value": 0.9765625
+    },
+    "rule_holdout_answerable_exact_match": {
+      "status": "PASS",
+      "threshold": 0.9,
+      "value": 0.9765625
+    },
+    "semantic_holdout_pass": {
+      "status": "PASS",
+      "threshold": true,
+      "value": true
+    },
+    "unsafe_answer_rate_max": {
+      "status": "PASS",
+      "threshold": 0.0,
+      "value": 0.0
+    }
+  },
+  "no_0_95_evidence_exists": true,
+  "no_leaderboard_evidence_exists": true,
+  "no_training_evidence_exists": true,
+  "packaging_allowed": false,
+  "reason": "all Day 5.2 readiness gates passed",
+  "remaining_blockers": [],
+  "schema_version": 1,
+  "source_reports": {
+    "anti_leak": {
+      "path": "artifacts\\sprint11\\day5_anti_leak_solver_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "family_hard": {
+      "path": "artifacts\\sprint11\\day5_family_hard_solver_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "family_hard_answerable": {
+      "path": "artifacts\\sprint11\\day5_family_hard_answerable_solver_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "manifest": {
+      "path": "artifacts\\sprint11\\day5_eval_manifest.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "private_like": {
+      "path": "artifacts\\sprint11\\day5_private_like_solver_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "private_like_answerable": {
+      "path": "artifacts\\sprint11\\day5_private_like_answerable_solver_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "rule_holdout": {
+      "path": "artifacts\\sprint11\\day5_rule_holdout_solver_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "rule_holdout_answerable": {
+      "path": "artifacts\\sprint11\\day5_rule_holdout_answerable_solver_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "semantic_holdout": {
+      "path": "artifacts\\sprint11\\day5_2_semantic_holdout_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "v2_eligibility": {
+      "path": "artifacts\\sprint11\\day5_v2_eligibility_report.json",
+      "present": true,
+      "status": "PASS"
+    },
+    "weak_subfamily": {
+      "path": "artifacts\\sprint11\\day5_weak_subfamily_report.json",
+      "present": true,
+      "status": "PASS"
+    }
+  },
+  "status": "PASS",
+  "submission_allowed": false,
+  "training_allowed": false
+}

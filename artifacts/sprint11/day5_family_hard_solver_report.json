@@ -1,7 +1,7 @@
 {
-  "abstain_precision": 0.9425287356321839,
+  "abstain_precision": 0.9526627218934911,
   "abstain_recall": 1.0,
-  "abstained_count": 174,
+  "abstained_count": 169,
   "abstention_examples": [
     {
       "abstained": true,
@@ -74,33 +74,15 @@
       "prediction": "",
       "prompt_excerpt": "[family_hard #387] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 39",
       "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "138",
-      "family": "numeric_formula",
-      "id": "day5_family_hard_numeric_formula_0041",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #393] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 45",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "99",
-      "family": "numeric_formula",
-      "id": "day5_family_hard_numeric_formula_0045",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #397] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 49",
-      "reason": "all_solvers_abstained"
     }
   ],
-  "answerable_attempt_rate": 0.9712643678160919,
-  "answerable_count": 348,
-  "answerable_exact_match": 0.9712643678160919,
+  "answerable_attempt_rate": 0.9772079772079773,
+  "answerable_count": 351,
+  "answerable_exact_match": 0.9772079772079773,
   "answerable_wrong_answer_rate": 0.0,
-  "attempt_rate": 0.66015625,
-  "attempted_count": 338,
-  "behavior_accuracy": 0.98046875,
+  "attempt_rate": 0.669921875,
+  "attempted_count": 343,
+  "behavior_accuracy": 0.984375,
   "benchmark_mode": "solver",
   "by_family": {
     "bit_manipulation": {
@@ -131,19 +113,33 @@
       "exact_match": 0.0,
       "verified": 0
     },
+    "format_only": {
+      "attempted": 16,
+      "correct": 16,
+      "count": 16,
+      "exact_match": 1.0,
+      "verified": 16
+    },
     "gravity_numeric": {
-      "attempted": 28,
-      "correct": 28,
-      "count": 32,
+      "attempted": 21,
+      "correct": 21,
+      "count": 24,
       "exact_match": 0.875,
-      "verified": 28
+      "verified": 21
     },
     "numeric_formula": {
-      "attempted": 38,
-      "correct": 38,
-      "count": 48,
-      "exact_match": 0.7916666666666666,
-      "verified": 38
+      "attempted": 32,
+      "correct": 32,
+      "count": 40,
+      "exact_match": 0.8,
+      "verified": 32
+    },
+    "roman_numeral": {
+      "attempted": 16,
+      "correct": 16,
+      "count": 16,
+      "exact_match": 1.0,
+      "verified": 16
     },
     "symbol_mapping": {
       "attempted": 72,
@@ -153,18 +149,18 @@
       "verified": 72
     },
     "unit_conversion": {
-      "attempted": 37,
-      "correct": 37,
-      "count": 40,
-      "exact_match": 0.925,
-      "verified": 37
+      "attempted": 30,
+      "correct": 30,
+      "count": 32,
+      "exact_match": 0.9375,
+      "verified": 30
     },
     "word_cipher": {
-      "attempted": 35,
-      "correct": 35,
-      "count": 40,
+      "attempted": 28,
+      "correct": 28,
+      "count": 32,
       "exact_match": 0.875,
-      "verified": 35
+      "verified": 28
     }
   },
   "by_subfamily": {
@@ -179,26 +175,33 @@
     "char_cipher::reverse_string": 21,
     "custom_numeral::expected_abstain": 48,
     "equation_operator::expected_abstain": 48,
-    "gravity_numeric::expected_abstain": 4,
-    "gravity_numeric::gravity_distance": 28,
-    "numeric_formula::linear_offset": 24,
-    "numeric_formula::quadratic_scale": 24,
+    "format_only::answer_prefix_symbol": 3,
+    "format_only::arrow_output": 3,
+    "format_only::binary_first_line": 2,
+    "format_only::boxed_answer": 3,
+    "format_only::text_answer_prefix": 2,
+    "format_only::think_tag_suffix": 3,
+    "gravity_numeric::expected_abstain": 3,
+    "gravity_numeric::gravity_distance": 21,
+    "numeric_formula::linear_offset": 20,
+    "numeric_formula::quadratic_scale": 20,
+    "roman_numeral::standard_roman": 16,
     "symbol_mapping::char_substitution": 57,
     "symbol_mapping::expected_abstain": 24,
     "symbol_mapping::reversal_substitution": 15,
-    "unit_conversion::expected_abstain": 3,
-    "unit_conversion::linear_offset_round_0": 24,
-    "unit_conversion::multiplicative_scale_round_2": 13,
-    "word_cipher::expected_abstain": 5,
-    "word_cipher::word_substitution": 35
+    "unit_conversion::expected_abstain": 2,
+    "unit_conversion::linear_offset_round_0": 20,
+    "unit_conversion::multiplicative_scale_round_2": 10,
+    "word_cipher::expected_abstain": 4,
+    "word_cipher::word_substitution": 28
   },
-  "correct_abstain_count": 164,
+  "correct_abstain_count": 161,
   "correct_abstain_rate": 1.0,
-  "correct_count": 338,
+  "correct_count": 343,
   "eval_type": "family_hard",
-  "exact_match": 0.66015625,
+  "exact_match": 0.669921875,
   "execution_status": "PASS",
-  "expected_abstain_count": 164,
+  "expected_abstain_count": 161,
   "failure_examples": [
     {
       "abstained": true,
@@ -271,24 +274,6 @@
       "prediction": "",
       "prompt_excerpt": "[family_hard #387] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 39",
       "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "138",
-      "family": "numeric_formula",
-      "id": "day5_family_hard_numeric_formula_0041",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #393] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 45",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "99",
-      "family": "numeric_formula",
-      "id": "day5_family_hard_numeric_formula_0045",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #397] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 49",
-      "reason": "all_solvers_abstained"
     }
   ],
   "quality_status": "PASS",
@@ -305,11 +290,11 @@
   "unsafe_answer_count": 0,
   "unsafe_answer_rate": 0.0,
   "unsafe_answer_rate_on_abstain_rows": 0.0,
-  "verified_count": 338,
+  "verified_count": 343,
   "weak_family_warnings": [
     "weak_solver_family_custom_numeral",
     "weak_solver_family_equation_operator"
   ],
-  "wrong_abstain_count": 10,
+  "wrong_abstain_count": 8,
   "wrong_answer_count": 0
 }

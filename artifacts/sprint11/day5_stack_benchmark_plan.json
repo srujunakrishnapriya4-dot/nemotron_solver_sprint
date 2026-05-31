@@ -9,8 +9,8 @@
   "model_results_faked": false,
   "note": "Day 5 does not run base/parent/child model inference locally.",
   "required_next_commands": [
-    "PYTHONPATH=\"/kaggle/working:/kaggle/working/src:$PYTHONPATH\" TRITON_PTXAS_PATH=\"/tmp/ptxas-blackwell\" TRITON_PTXAS_BLACKWELL_PATH=\"/tmp/ptxas-blackwell\" python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml --stage base_eval --eval-file artifacts/sprint11/day5_private_like_eval_512.jsonl",
-    "PYTHONPATH=\"/kaggle/working:/kaggle/working/src:$PYTHONPATH\" TRITON_PTXAS_PATH=\"/tmp/ptxas-blackwell\" TRITON_PTXAS_BLACKWELL_PATH=\"/tmp/ptxas-blackwell\" python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml --stage parent_eval --eval-file artifacts/sprint11/day5_private_like_eval_512.jsonl",
+    "# base Kaggle GPU eval command plan; model results are not faked by Day 5.\n# Mount or copy artifacts/sprint11/day5_private_like_eval_512.jsonl to the configured anti086 input root before running.\nPYTHONPATH=\"/kaggle/working:/kaggle/working/src:$PYTHONPATH\" TRITON_PTXAS_PATH=\"/tmp/ptxas-blackwell\" TRITON_PTXAS_BLACKWELL_PATH=\"/tmp/ptxas-blackwell\" python kaggle_anti086/kaggle_eval_anti086_vllm.py --config anti086_winmode_v1b.yaml --mode private_like_family_hard\n# Expected report: /kaggle/working/anti086_eval/eval_summary.json",
+    "# parent Kaggle GPU eval command plan; model results are not faked by Day 5.\n# Mount or copy artifacts/sprint11/day5_private_like_eval_512.jsonl to the configured anti086 input root before running.\nPYTHONPATH=\"/kaggle/working:/kaggle/working/src:$PYTHONPATH\" TRITON_PTXAS_PATH=\"/tmp/ptxas-blackwell\" TRITON_PTXAS_BLACKWELL_PATH=\"/tmp/ptxas-blackwell\" python kaggle_anti086/kaggle_eval_anti086_vllm.py --config anti086_winmode_v1b.yaml --mode private_like_family_hard\n# Expected report: /kaggle/working/anti086_eval/eval_summary.json",
     "python kaggle_anti086/eval/compare_solver_base_parent.py --solver-report artifacts/sprint11/day5_private_like_solver_report.json --parent-report <parent_report.json> --out artifacts/sprint11/day5_solver_base_parent_comparison.json"
   ]
 }
