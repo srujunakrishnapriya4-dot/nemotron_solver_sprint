@@ -1,0 +1,54 @@
+{
+  "abstain_safety_supervised_rows": 0,
+  "assistant_answer_tokens_supervised": 208,
+  "collator_contract": "assistant_only_answer_loss",
+  "examples": [
+    {
+      "family": "bit_manipulation",
+      "id": "train_v2_direct_000001",
+      "source": "direct_answer",
+      "supervised_tokens": 1
+    },
+    {
+      "family": "char_cipher",
+      "id": "train_v2_direct_000116",
+      "source": "direct_answer",
+      "supervised_tokens": 1
+    },
+    {
+      "family": "format_only",
+      "id": "train_v2_direct_000381",
+      "source": "direct_answer",
+      "supervised_tokens": 3
+    },
+    {
+      "family": "gravity_numeric",
+      "id": "train_v2_direct_000311",
+      "source": "direct_answer",
+      "supervised_tokens": 3
+    },
+    {
+      "family": "numeric_formula",
+      "id": "train_v2_direct_000273",
+      "source": "direct_answer",
+      "supervised_tokens": 1
+    }
+  ],
+  "failures": [],
+  "hard_negative_supervised_rows": 0,
+  "max_seq_len": 1024,
+  "mode": "local_dev_warning",
+  "prompt_tokens_supervised": 0,
+  "sample_size": 128,
+  "status": "WARN_LOCAL_TOKENIZER_UNAVAILABLE",
+  "system_tokens_supervised": 0,
+  "tokenizer_loaded": false,
+  "truncation_count": 0,
+  "truncation_rate": 0.0,
+  "unsupported_supervised_rows": 0,
+  "user_tokens_supervised": 0,
+  "warnings": [
+    "transformers_unavailable:ModuleNotFoundError"
+  ],
+  "zero_supervised_sft_rows": 0
+}

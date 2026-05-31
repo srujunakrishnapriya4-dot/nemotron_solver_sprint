@@ -1,0 +1,14 @@
+{
+  "candidate_quality": "REJECT",
+  "collator_status": "WARN_LOCAL_TOKENIZER_UNAVAILABLE",
+  "decision": "BLOCK_TRAINING_BAD_LABEL_MASK",
+  "eval_status": "NEEDS_KAGGLE_MODEL_EVAL",
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "no_training_beyond_v2a": true,
+  "packaging_allowed": false,
+  "status": "FAIL",
+  "submission_allowed": false,
+  "trained": false,
+  "training_status": "FAIL"
+}

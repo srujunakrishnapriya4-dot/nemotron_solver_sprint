@@ -1,0 +1,32 @@
+{
+  "assistant_only_loss": true,
+  "base_model_path": "/kaggle/input/nemotron-model",
+  "collator_audit_status": "WARN_LOCAL_TOKENIZER_UNAVAILABLE",
+  "config_path": "kaggle_anti086\\training\\configs\\v2a_base_lora.yaml",
+  "config_sha256": "ebaebba680a17529b693fd8550bafadf9320a5d23c3a1876764fe9c81fa82941",
+  "full_prompt_loss": false,
+  "git_commit": "61030534edf8826dda0a8fe9b0c746e4c717f842",
+  "gpu_visible": false,
+  "learning_rate": 1e-07,
+  "num_steps": 500,
+  "output_adapter_dir": "\\kaggle\\working\\anti086_adapters\\v2a_20260531T153226Z_31949e0a",
+  "packaging_allowed": false,
+  "parent_adapter_path": "none",
+  "rank": 32,
+  "real_collator_audit_sha256": "adc57bb81197936fa31dd86fc0680f59a7d8a4d995cd95d0d0e7fec78ca30a3f",
+  "run_id": "20260531T153226Z_31949e0a",
+  "sampling_policy_report_sha256": "66468f7ce67ee2dcf2d9b227409ad5516e70f025ac285b6654623cb2e5e780a8",
+  "stage": "v2a_base_lora",
+  "submission_allowed": false,
+  "target_modules": [
+    "q_proj",
+    "v_proj",
+    "o_proj"
+  ],
+  "train_direct_path": "artifacts/sprint11/train_v2_verified_direct_answer.jsonl",
+  "train_direct_sha256": "f0b56e909d5629b9067ae1f8729c065f08ad3ac31c2694e85d11bed339dcb388",
+  "train_on_user": false,
+  "train_solver_corrected_path": "artifacts/sprint11/train_v2_solver_corrected.jsonl",
+  "train_solver_corrected_sha256": "b38fb7fa38b41d4eb93b2a5aff183509ece2e67860a679efd3273e0eafb5eb1b",
+  "training_allowed_today": true
+}
