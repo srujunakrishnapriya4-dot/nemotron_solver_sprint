@@ -1,0 +1,22 @@
+{
+  "base": null,
+  "base_status": "NOT_RUN",
+  "created_by": "SPRINT-11D",
+  "model_results_faked": false,
+  "parent": null,
+  "parent_status": "NOT_RUN",
+  "required_next_commands": [
+    "Run Kaggle GPU parent/base eval before claiming model evidence.",
+    "Do not package or submit from solver-only reports."
+  ],
+  "schema_version": 1,
+  "solver": {
+    "answerable_exact_match": 0.8256410256410256,
+    "behavior_accuracy": 0.8671875,
+    "correct_abstain_rate": 1.0,
+    "execution_status": "PASS",
+    "quality_status": "PASS",
+    "row_count": 512,
+    "unsafe_answer_rate": 0.0
+  }
+}

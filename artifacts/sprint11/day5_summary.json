@@ -1,0 +1,157 @@
+{
+  "adapter_packaged": false,
+  "decision": "ALLOW_V2_CORPUS_BUILD_ONLY",
+  "eval_files": {
+    "anti_leak": {
+      "answerable_count": 196,
+      "expected_abstain_count": 60,
+      "family_distribution": {
+        "bit_manipulation": 32,
+        "char_cipher": 28,
+        "custom_numeral": 16,
+        "equation_operator": 10,
+        "format_only": 10,
+        "gravity_numeric": 20,
+        "numeric_formula": 24,
+        "roman_numeral": 16,
+        "sequence_pattern": 12,
+        "symbol_mapping": 32,
+        "unit_conversion": 28,
+        "word_cipher": 28
+      },
+      "path": "artifacts\\sprint11\\day5_anti_leak_eval_256.jsonl",
+      "row_count": 256,
+      "sha256": "ccbbbd66f45b40a834f596f9873d1c5e984f865b2102fe8e1a68f253e0ca507e",
+      "size_bytes": 223915,
+      "unique_leakage_group_count": 256,
+      "unique_rule_id_count": 256
+    },
+    "family_hard": {
+      "answerable_count": 348,
+      "expected_abstain_count": 164,
+      "family_distribution": {
+        "bit_manipulation": 80,
+        "char_cipher": 80,
+        "custom_numeral": 48,
+        "equation_operator": 48,
+        "gravity_numeric": 32,
+        "numeric_formula": 48,
+        "symbol_mapping": 96,
+        "unit_conversion": 40,
+        "word_cipher": 40
+      },
+      "path": "artifacts\\sprint11\\day5_family_hard_eval_512.jsonl",
+      "row_count": 512,
+      "sha256": "9796f07a050d3408c4a838820898d5b1ede521e4bcb20d9aa683ebf0478dbc03",
+      "size_bytes": 424297,
+      "unique_leakage_group_count": 512,
+      "unique_rule_id_count": 512
+    },
+    "private_like": {
+      "answerable_count": 390,
+      "expected_abstain_count": 122,
+      "family_distribution": {
+        "bit_manipulation": 64,
+        "char_cipher": 56,
+        "custom_numeral": 24,
+        "equation_operator": 16,
+        "format_only": 16,
+        "gravity_numeric": 40,
+        "numeric_formula": 48,
+        "permutation_sorting": 16,
+        "roman_numeral": 32,
+        "sequence_pattern": 24,
+        "symbol_mapping": 64,
+        "unit_conversion": 56,
+        "word_cipher": 56
+      },
+      "path": "artifacts\\sprint11\\day5_private_like_eval_512.jsonl",
+      "row_count": 512,
+      "sha256": "7685390dc0d30116938c1ca90b96519b6acc88a44905fbd2910e62fbd7fcc5bd",
+      "size_bytes": 425045,
+      "unique_leakage_group_count": 512,
+      "unique_rule_id_count": 512
+    },
+    "rule_holdout": {
+      "answerable_count": 404,
+      "expected_abstain_count": 108,
+      "family_distribution": {
+        "bit_manipulation": 72,
+        "char_cipher": 56,
+        "custom_numeral": 24,
+        "equation_operator": 16,
+        "format_only": 16,
+        "gravity_numeric": 40,
+        "numeric_formula": 48,
+        "roman_numeral": 32,
+        "sequence_pattern": 24,
+        "symbol_mapping": 72,
+        "unit_conversion": 56,
+        "word_cipher": 56
+      },
+      "path": "artifacts\\sprint11\\day5_rule_holdout_eval_512.jsonl",
+      "row_count": 512,
+      "sha256": "f61c55edf0250ceec0cb498fa2ca376a202d1088c54f2f0e543647581e9f8f43",
+      "size_bytes": 443257,
+      "unique_leakage_group_count": 512,
+      "unique_rule_id_count": 512
+    }
+  },
+  "known_weak_families": [
+    "weak_solver_family_custom_numeral",
+    "weak_solver_family_equation_operator",
+    "weak_solver_family_format_only",
+    "weak_solver_family_permutation_sorting",
+    "weak_solver_family_sequence_pattern",
+    "weak_solver_family_symbol_mapping"
+  ],
+  "leaderboard_evidence": false,
+  "next_required_sprint": "SPRINT-11E ? v2 solver-correct corpus builder, only if Day 5 eval quality is acceptable",
+  "purpose": "Private-like / rule-holdout / family-hard eval builder and solver benchmark",
+  "solver_reports": {
+    "anti_leak": {
+      "answerable_exact_match": 0.826530612244898,
+      "answerable_wrong_answer_rate": 0.0,
+      "behavior_accuracy": 0.8671875,
+      "correct_abstain_rate": 1.0,
+      "execution_status": "PASS",
+      "quality_status": "PASS",
+      "row_count": 256,
+      "unsafe_answer_rate": 0.0
+    },
+    "family_hard": {
+      "answerable_exact_match": 0.764367816091954,
+      "answerable_wrong_answer_rate": 0.0,
+      "behavior_accuracy": 0.83984375,
+      "correct_abstain_rate": 1.0,
+      "execution_status": "PASS",
+      "quality_status": "PASS",
+      "row_count": 512,
+      "unsafe_answer_rate": 0.0
+    },
+    "private_like": {
+      "answerable_exact_match": 0.8256410256410256,
+      "answerable_wrong_answer_rate": 0.0,
+      "behavior_accuracy": 0.8671875,
+      "correct_abstain_rate": 1.0,
+      "execution_status": "PASS",
+      "quality_status": "PASS",
+      "row_count": 512,
+      "unsafe_answer_rate": 0.0
+    },
+    "rule_holdout": {
+      "answerable_exact_match": 0.8143564356435643,
+      "answerable_wrong_answer_rate": 0.0,
+      "behavior_accuracy": 0.853515625,
+      "correct_abstain_rate": 1.0,
+      "execution_status": "PASS",
+      "quality_status": "PASS",
+      "row_count": 512,
+      "unsafe_answer_rate": 0.0
+    }
+  },
+  "sprint": "SPRINT-11D",
+  "submission_created": false,
+  "training_performed": false,
+  "zero_point_95_evidence": false
+}

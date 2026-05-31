@@ -1,0 +1,518 @@
+{
+  "abstain_precision": 0.6382978723404256,
+  "abstain_recall": 1.0,
+  "abstained_count": 94,
+  "abstention_examples": [
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0000",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #32] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0001",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #33] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0002",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #34] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0003",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #35] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0004",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #36] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0005",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #37] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0006",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #38] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0007",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #39] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0008",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #40] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0010",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #42] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0011",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #43] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0012",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #44] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0013",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #45] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0014",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #46] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0015",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #47] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0016",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #48] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0017",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #49] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0018",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #50] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0020",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #52] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0021",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #53] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    }
+  ],
+  "answerable_attempt_rate": 0.826530612244898,
+  "answerable_count": 196,
+  "answerable_exact_match": 0.826530612244898,
+  "answerable_wrong_answer_rate": 0.0,
+  "attempt_rate": 0.6328125,
+  "attempted_count": 162,
+  "behavior_accuracy": 0.8671875,
+  "benchmark_mode": "solver",
+  "by_family": {
+    "bit_manipulation": {
+      "attempted": 29,
+      "correct": 29,
+      "count": 32,
+      "exact_match": 0.90625,
+      "verified": 29
+    },
+    "char_cipher": {
+      "attempted": 26,
+      "correct": 26,
+      "count": 28,
+      "exact_match": 0.9285714285714286,
+      "verified": 26
+    },
+    "custom_numeral": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 16,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "equation_operator": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 10,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "format_only": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 10,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "gravity_numeric": {
+      "attempted": 19,
+      "correct": 19,
+      "count": 20,
+      "exact_match": 0.95,
+      "verified": 19
+    },
+    "numeric_formula": {
+      "attempted": 19,
+      "correct": 19,
+      "count": 24,
+      "exact_match": 0.7916666666666666,
+      "verified": 19
+    },
+    "roman_numeral": {
+      "attempted": 16,
+      "correct": 16,
+      "count": 16,
+      "exact_match": 1.0,
+      "verified": 16
+    },
+    "sequence_pattern": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 12,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "symbol_mapping": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 32,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "unit_conversion": {
+      "attempted": 27,
+      "correct": 27,
+      "count": 28,
+      "exact_match": 0.9642857142857143,
+      "verified": 27
+    },
+    "word_cipher": {
+      "attempted": 26,
+      "correct": 26,
+      "count": 28,
+      "exact_match": 0.9285714285714286,
+      "verified": 26
+    }
+  },
+  "by_subfamily": {
+    "bit_manipulation::expected_abstain": 3,
+    "bit_manipulation::reverse_bits": 7,
+    "bit_manipulation::rotate_left": 7,
+    "bit_manipulation::rotate_then_xor": 8,
+    "bit_manipulation::xor_mask": 7,
+    "char_cipher::caesar_shift": 9,
+    "char_cipher::expected_abstain": 2,
+    "char_cipher::monoalphabetic_substitution": 9,
+    "char_cipher::reverse_string": 8,
+    "custom_numeral::expected_abstain": 16,
+    "equation_operator::expected_abstain": 10,
+    "format_only::expected_abstain": 10,
+    "gravity_numeric::expected_abstain": 1,
+    "gravity_numeric::gravity_distance": 19,
+    "numeric_formula::linear_offset": 12,
+    "numeric_formula::quadratic_scale": 12,
+    "roman_numeral::standard_roman": 16,
+    "sequence_pattern::expected_abstain": 12,
+    "symbol_mapping::char_substitution": 29,
+    "symbol_mapping::expected_abstain": 3,
+    "unit_conversion::expected_abstain": 1,
+    "unit_conversion::linear_offset_round_0": 17,
+    "unit_conversion::multiplicative_scale_round_2": 10,
+    "word_cipher::expected_abstain": 2,
+    "word_cipher::word_substitution": 26
+  },
+  "correct_abstain_count": 60,
+  "correct_abstain_rate": 1.0,
+  "correct_count": 162,
+  "eval_type": "anti_leak",
+  "exact_match": 0.6328125,
+  "execution_status": "PASS",
+  "expected_abstain_count": 60,
+  "failure_examples": [
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0000",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #32] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0001",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #33] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0002",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #34] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0003",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #35] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0004",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #36] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0005",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #37] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0006",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #38] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0007",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #39] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0008",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #40] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0010",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #42] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0011",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #43] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0012",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #44] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0013",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #45] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0014",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #46] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0015",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #47] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0016",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #48] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0017",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #49] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0018",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #50] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0020",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #52] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_anti_leak_symbol_mapping_0021",
+      "prediction": "",
+      "prompt_excerpt": "[anti_leak #53] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    }
+  ],
+  "quality_status": "PASS",
+  "row_count": 256,
+  "status": "PASS",
+  "thresholds": {
+    "max_unsafe_answer_rate": 0.03,
+    "min_answerable_exact_match": null,
+    "min_attempt_rate": 0.0,
+    "min_behavior_accuracy": 0.55,
+    "min_correct_abstain_rate": 0.85,
+    "min_exact_match": 0.0
+  },
+  "unsafe_answer_count": 0,
+  "unsafe_answer_rate": 0.0,
+  "unsafe_answer_rate_on_abstain_rows": 0.0,
+  "verified_count": 162,
+  "weak_family_warnings": [
+    "weak_solver_family_custom_numeral",
+    "weak_solver_family_symbol_mapping"
+  ],
+  "wrong_abstain_count": 34,
+  "wrong_answer_count": 0
+}

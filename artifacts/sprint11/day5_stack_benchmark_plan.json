@@ -1,0 +1,11 @@
+{
+  "eval_path": "artifacts\\sprint11\\day5_private_like_eval_512.jsonl",
+  "execution_status": "PASS",
+  "mode": "model_plan",
+  "model_results_faked": false,
+  "note": "Day 5 does not run base/parent/child model inference locally.",
+  "required_next_commands": [
+    "python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml --stage parent_eval",
+    "python kaggle_anti086/eval/compare_solver_base_parent.py --solver-report artifacts/sprint11/day5_private_like_solver_report.json --parent-report <parent_report.json> --out artifacts/sprint11/day5_solver_base_parent_comparison.json"
+  ]
+}

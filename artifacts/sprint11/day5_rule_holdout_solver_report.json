@@ -1,0 +1,521 @@
+{
+  "abstain_precision": 0.5901639344262295,
+  "abstain_recall": 1.0,
+  "abstained_count": 183,
+  "abstention_examples": [
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0000",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #72] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0001",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #73] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0002",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #74] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0003",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #75] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0004",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #76] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0005",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #77] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0006",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #78] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0007",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #79] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0008",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #80] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0010",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #82] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0011",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #83] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0012",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #84] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0013",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #85] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0014",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #86] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0015",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #87] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0016",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #88] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0017",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #89] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0018",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #90] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0020",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #92] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0021",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #93] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    }
+  ],
+  "answerable_attempt_rate": 0.8143564356435643,
+  "answerable_count": 404,
+  "answerable_exact_match": 0.8143564356435643,
+  "answerable_wrong_answer_rate": 0.0,
+  "attempt_rate": 0.642578125,
+  "attempted_count": 329,
+  "behavior_accuracy": 0.853515625,
+  "benchmark_mode": "solver",
+  "by_family": {
+    "bit_manipulation": {
+      "attempted": 64,
+      "correct": 64,
+      "count": 72,
+      "exact_match": 0.8888888888888888,
+      "verified": 64
+    },
+    "char_cipher": {
+      "attempted": 51,
+      "correct": 51,
+      "count": 56,
+      "exact_match": 0.9107142857142857,
+      "verified": 51
+    },
+    "custom_numeral": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 24,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "equation_operator": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 16,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "format_only": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 16,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "gravity_numeric": {
+      "attempted": 38,
+      "correct": 38,
+      "count": 40,
+      "exact_match": 0.95,
+      "verified": 38
+    },
+    "numeric_formula": {
+      "attempted": 38,
+      "correct": 38,
+      "count": 48,
+      "exact_match": 0.7916666666666666,
+      "verified": 38
+    },
+    "roman_numeral": {
+      "attempted": 32,
+      "correct": 32,
+      "count": 32,
+      "exact_match": 1.0,
+      "verified": 32
+    },
+    "sequence_pattern": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 24,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "symbol_mapping": {
+      "attempted": 0,
+      "correct": 0,
+      "count": 72,
+      "exact_match": 0.0,
+      "verified": 0
+    },
+    "unit_conversion": {
+      "attempted": 54,
+      "correct": 54,
+      "count": 56,
+      "exact_match": 0.9642857142857143,
+      "verified": 54
+    },
+    "word_cipher": {
+      "attempted": 52,
+      "correct": 52,
+      "count": 56,
+      "exact_match": 0.9285714285714286,
+      "verified": 52
+    }
+  },
+  "by_subfamily": {
+    "bit_manipulation::expected_abstain": 8,
+    "bit_manipulation::reverse_bits": 16,
+    "bit_manipulation::rotate_left": 16,
+    "bit_manipulation::rotate_then_xor": 16,
+    "bit_manipulation::xor_mask": 16,
+    "char_cipher::caesar_shift": 17,
+    "char_cipher::expected_abstain": 5,
+    "char_cipher::monoalphabetic_substitution": 17,
+    "char_cipher::reverse_string": 17,
+    "custom_numeral::expected_abstain": 24,
+    "equation_operator::expected_abstain": 16,
+    "format_only::expected_abstain": 16,
+    "gravity_numeric::expected_abstain": 2,
+    "gravity_numeric::gravity_distance": 38,
+    "numeric_formula::linear_offset": 24,
+    "numeric_formula::quadratic_scale": 24,
+    "roman_numeral::standard_roman": 32,
+    "sequence_pattern::expected_abstain": 24,
+    "symbol_mapping::char_substitution": 65,
+    "symbol_mapping::expected_abstain": 7,
+    "unit_conversion::expected_abstain": 2,
+    "unit_conversion::linear_offset_round_0": 36,
+    "unit_conversion::multiplicative_scale_round_2": 18,
+    "word_cipher::expected_abstain": 4,
+    "word_cipher::word_substitution": 52
+  },
+  "correct_abstain_count": 108,
+  "correct_abstain_rate": 1.0,
+  "correct_count": 329,
+  "eval_type": "rule_holdout",
+  "exact_match": 0.642578125,
+  "execution_status": "PASS",
+  "expected_abstain_count": 108,
+  "failure_examples": [
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0000",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #72] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0001",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #73] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0002",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #74] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0003",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #75] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0004",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #76] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0005",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #77] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0006",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #78] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0007",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #79] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0008",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #80] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0010",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #82] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0011",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #83] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0012",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #84] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0013",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #85] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0014",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #86] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0015",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #87] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0016",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #88] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0017",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #89] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0018",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #90] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "BDF",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0020",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #92] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "reason": "all_solvers_abstained"
+    },
+    {
+      "abstained": true,
+      "expected": "&[{",
+      "family": "symbol_mapping",
+      "id": "day5_rule_holdout_symbol_mapping_0021",
+      "prediction": "",
+      "prompt_excerpt": "[rule_holdout #93] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "reason": "all_solvers_abstained"
+    }
+  ],
+  "quality_status": "PASS",
+  "row_count": 512,
+  "status": "PASS",
+  "thresholds": {
+    "max_unsafe_answer_rate": 0.05,
+    "min_answerable_exact_match": null,
+    "min_attempt_rate": 0.0,
+    "min_behavior_accuracy": 0.55,
+    "min_correct_abstain_rate": 0.8,
+    "min_exact_match": 0.0
+  },
+  "unsafe_answer_count": 0,
+  "unsafe_answer_rate": 0.0,
+  "unsafe_answer_rate_on_abstain_rows": 0.0,
+  "verified_count": 329,
+  "weak_family_warnings": [
+    "weak_solver_family_custom_numeral",
+    "weak_solver_family_equation_operator",
+    "weak_solver_family_format_only",
+    "weak_solver_family_sequence_pattern",
+    "weak_solver_family_symbol_mapping"
+  ],
+  "wrong_abstain_count": 75,
+  "wrong_answer_count": 0
+}
