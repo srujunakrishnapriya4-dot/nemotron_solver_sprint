@@ -1,0 +1,134 @@
+{
+  "decision": "ALLOW_DAY7_TRAINING_CONFIG_PREP",
+  "family_counts": {
+    "bit_manipulation": 214,
+    "char_cipher": 192,
+    "format_only": 58,
+    "gravity_numeric": 116,
+    "numeric_formula": 127,
+    "roman_numeral": 96,
+    "symbol_mapping": 224,
+    "unit_conversion": 165,
+    "word_cipher": 158
+  },
+  "quality_gates": {
+    "assistant_only_loss_rows": {
+      "status": "PASS",
+      "threshold": 1350,
+      "value": 1350
+    },
+    "bit_manipulation_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 214
+    },
+    "char_cipher_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 192
+    },
+    "duplicate_source_row_ids": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "eligible_abstain_safety_rows": {
+      "status": "PASS",
+      "threshold": 200,
+      "value": 409
+    },
+    "empty_assistant_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "format_only_rows": {
+      "status": "PASS",
+      "threshold": 20,
+      "value": 58
+    },
+    "full_prompt_loss_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "gravity_numeric_rows": {
+      "status": "PASS",
+      "threshold": 80,
+      "value": 116
+    },
+    "hard_negative_rows": {
+      "status": "PASS",
+      "threshold": 20,
+      "value": 33
+    },
+    "leakage_group_overlap_count": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "leakage_report_status": {
+      "status": "PASS",
+      "threshold": "PASS",
+      "value": "PASS"
+    },
+    "mixture_report_status": {
+      "status": "PASS",
+      "threshold": "PASS",
+      "value": "PASS"
+    },
+    "numeric_formula_rows": {
+      "status": "PASS",
+      "threshold": 80,
+      "value": 127
+    },
+    "prompt_hash_overlap_count": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "roman_numeral_rows": {
+      "status": "PASS",
+      "threshold": 50,
+      "value": 96
+    },
+    "rule_id_overlap_count": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "symbol_mapping_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 224
+    },
+    "unit_conversion_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 165
+    },
+    "unsupported_family_direct_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "verbose_assistant_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "verified_direct_answer_rows": {
+      "status": "PASS",
+      "threshold": 1000,
+      "value": 1350
+    },
+    "word_cipher_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 158
+    }
+  },
+  "remaining_blockers": [],
+  "status": "PASS",
+  "training_allowed": false
+}

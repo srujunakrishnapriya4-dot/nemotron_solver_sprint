@@ -1,0 +1,21 @@
+{
+  "abstain_safety_rows": 409,
+  "decision": "ALLOW_DAY7_TRAINING_CONFIG_PREP",
+  "hard_negative_rows": 33,
+  "leakage_report_status": "PASS",
+  "manifest_status": "PASS",
+  "mixture_report_status": "PASS",
+  "no_0_95_evidence": true,
+  "no_adapter_packaged": true,
+  "no_leaderboard_evidence": true,
+  "no_submission_created": true,
+  "no_training_performed": true,
+  "packaging_allowed": false,
+  "quality_gate_status": "PASS",
+  "remaining_blockers": [],
+  "solver_corrected_rows": 1350,
+  "status": "PASS",
+  "submission_allowed": false,
+  "training_allowed": false,
+  "verified_direct_answer_rows": 1350
+}

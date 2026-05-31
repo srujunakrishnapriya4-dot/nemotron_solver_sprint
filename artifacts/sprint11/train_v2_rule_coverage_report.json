@@ -1,0 +1,59 @@
+{
+  "family_distribution": {
+    "bit_manipulation": 214,
+    "char_cipher": 192,
+    "format_only": 58,
+    "gravity_numeric": 116,
+    "numeric_formula": 127,
+    "roman_numeral": 96,
+    "symbol_mapping": 224,
+    "unit_conversion": 165,
+    "word_cipher": 158
+  },
+  "row_count": 1350,
+  "status": "PASS",
+  "subfamily_distribution": {
+    "bit_manipulation": {
+      "reverse_bits": 53,
+      "rotate_left": 53,
+      "rotate_then_xor": 55,
+      "xor_mask": 53
+    },
+    "char_cipher": {
+      "caesar_shift": 65,
+      "monoalphabetic_substitution": 64,
+      "reverse_string": 63
+    },
+    "format_only": {
+      "answer_prefix_symbol": 11,
+      "arrow_output": 11,
+      "binary_first_line": 7,
+      "boxed_answer": 11,
+      "text_answer_prefix": 7,
+      "think_tag_suffix": 11
+    },
+    "gravity_numeric": {
+      "gravity_distance": 116
+    },
+    "numeric_formula": {
+      "linear_offset": 47,
+      "quadratic_scale": 80
+    },
+    "roman_numeral": {
+      "standard_roman": 96
+    },
+    "symbol_mapping": {
+      "char_substitution": 209,
+      "reversal_substitution": 15
+    },
+    "unit_conversion": {
+      "linear_offset_round_0": 109,
+      "multiplicative_scale_round_2": 56
+    },
+    "word_cipher": {
+      "word_substitution": 158
+    }
+  },
+  "unique_leakage_group_count": 1350,
+  "unique_rule_id_count": 1350
+}

@@ -2,6 +2,438 @@
   "files": [
     {
       "exists": true,
+      "path": "artifacts/day1/day1_generated_cells_manifest.json",
+      "sha256": "834314f7dd371c4601d160e03237d53f74d58cb81cee58400defe5c96a55f679",
+      "size_bytes": 2734
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day2_rule_bank.json",
+      "sha256": "81fe94b027b83f935b49e5a6eae950fd2d1671179bf200f8751fcffac33c3642",
+      "size_bytes": 7861
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day2_schema_report.json",
+      "sha256": "0d91204da44f849243438db9f4085453b80263ffa9395bed14acdad3c03ca6e1",
+      "size_bytes": 703
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day2_split_smoke_report.json",
+      "sha256": "381fa937ecd9898329367d1493664e532ad729401e3f4f6cdec754061df17a3d",
+      "size_bytes": 921
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day3_1_repair_summary.json",
+      "sha256": "10b9e8a81cc5ff981c721f338cd1f8a2dc5472a3fb46ec4590b928d6977b4195",
+      "size_bytes": 577
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day3_solver_eval_predictions.jsonl",
+      "sha256": "ea9f8fd24b1b0a98d304e2cfb2aa0058194d0bb18148ae30bad093cd9cc5f472",
+      "size_bytes": 21634
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day3_solver_eval_report.json",
+      "sha256": "58499d91fb92aa667a2b65579d078ae9c53291cff0c7f9672f83ff12c41faa2c",
+      "size_bytes": 1125
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day3_solver_smoke_eval.jsonl",
+      "sha256": "37dd89525fc7014b8728bf085e0577322fa37bde4bd63b7107357e91a85dd54c",
+      "size_bytes": 22616
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_adversarial_solver_eval.jsonl",
+      "sha256": "54b6a939e132706e89ac8b5cc1dbab3419c45bd17eaa05e1fcda4642caba1661",
+      "size_bytes": 216346
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_adversarial_solver_predictions.jsonl",
+      "sha256": "9425af2c29b92e8f0fe92c1ab7cbee7c1fd75dd86a1a62b2caa6394fcfa1bd2d",
+      "size_bytes": 126968
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_adversarial_solver_report.json",
+      "sha256": "ac308e597bc0b7da9d4990c2f42894a4b630bde30333ef8c6d2f81a6d5cfcb73",
+      "size_bytes": 8676
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_1_hardening_summary.json",
+      "sha256": "9d4775b873e7fde550d47ae1ce5097075e32985a0efd85bd72fff60c37426a5a",
+      "size_bytes": 1334
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_adversarial_solver_eval.jsonl",
+      "sha256": "8193abda1aec2a2b2062b3a5e01cfda38609b8d9a385c29812d5b563e286df5d",
+      "size_bytes": 119920
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_adversarial_solver_predictions.jsonl",
+      "sha256": "15ccd2671f7553001c9c3767585642246a43a693cbc1138636f1300e1aa64a8c",
+      "size_bytes": 109952
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day4_adversarial_solver_report.json",
+      "sha256": "41a1d41c1b8d4efde7b26b0e852d77a18b35ed92d7acf64b8b18d53098436315",
+      "size_bytes": 1897
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_2_readiness_summary.json",
+      "sha256": "0576a7874ef00ff0cba610e3bcfbcc04fe4498f386e01f7dbd38f51d723ee652",
+      "size_bytes": 3133
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_2_semantic_holdout_report.json",
+      "sha256": "5e96f4cdb5bec497bf9fa7c5f0ac7c073888073f17f4c0e5b2f4edf9331c459d",
+      "size_bytes": 334
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_anti_leak_eval_256.jsonl",
+      "sha256": "403a813042695e08a886ce0a8132561f00a9e76f629cb7f6ac6883a074019507",
+      "size_bytes": 232119
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_anti_leak_solver_predictions.jsonl",
+      "sha256": "32ee8d2a9a8aa12960a1dfc5581876241ad58fbcf41789678c30902ba8c29438",
+      "size_bytes": 114900
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_anti_leak_solver_report.json",
+      "sha256": "141b156461cfc667f7f7e47c5422ef589d31f4a904ecf76299f0ef30d930d50b",
+      "size_bytes": 7471
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_eval_manifest.json",
+      "sha256": "304e496d69d25269bad6785ee534f328e32d0f44858c1ee42c122708926b8def",
+      "size_bytes": 18717
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_family_coverage_report.json",
+      "sha256": "76d95e945b23dff92a3807d33f06194f434877587414ec98a8c2b44b66ac2b7a",
+      "size_bytes": 10737
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_family_hard_answerable_512.jsonl",
+      "sha256": "0a4f779323f5211577a8511183f5996da8b67bb6f75e9a71faebf7601309df45",
+      "size_bytes": 634630
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_family_hard_answerable_solver_predictions.jsonl",
+      "sha256": "69ddf038d714418eae308c6d471300f877afe24eb376a7388a51d080ad28665f",
+      "size_bytes": 230307
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_family_hard_answerable_solver_report.json",
+      "sha256": "040ba142f199c21f77c29cb8c14d4a112ddb1dd7dec677428034d0b740377a12",
+      "size_bytes": 13600
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_family_hard_eval_512.jsonl",
+      "sha256": "5ca75dccc77614b2225f198c4eae8fefd1cc14038703ae47536e025a856b4cdf",
+      "size_bytes": 442896
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_family_hard_solver_predictions.jsonl",
+      "sha256": "fb854555798456ef4a5535df5f089d665bf7fd93769bc4be70890d573b2c055f",
+      "size_bytes": 230701
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_family_hard_solver_report.json",
+      "sha256": "e987dda3d0af22aa68952edbd2e079ab57e593d378e0f139d0b70a8718d7902c",
+      "size_bytes": 9210
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_kaggle_base_eval_commands.txt",
+      "sha256": "aef96bd38e6321c69339386418947ccdb04917b6cafbc34cff3e2d72c476ec47",
+      "size_bytes": 535
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_kaggle_parent_eval_commands.txt",
+      "sha256": "15fd07a2dfbe1bfb22e03fff61ae850c3bd471dd9638549f4b312cc4dd9bb5a3",
+      "size_bytes": 537
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_model_plan_predictions_placeholder.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_private_like_answerable_512.jsonl",
+      "sha256": "0dfd307fa369d1366339b546bd2f26fee96b7be1cc66a963076c6142be2c99e8",
+      "size_bytes": 641309
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_private_like_answerable_solver_predictions.jsonl",
+      "sha256": "843dff71b2186a5f6d20a7213eefdfdbde173d2fc5d30222cb97c1eaefa83ad4",
+      "size_bytes": 230868
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_private_like_answerable_solver_report.json",
+      "sha256": "9955f2ed9119eba014dfe4636c4fb952a62ff927e2e42ee49b356810ab57d814",
+      "size_bytes": 11579
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_private_like_eval_512.jsonl",
+      "sha256": "edd380717cce947654dc7126e5e2a934eb0d7795d23c20a2f1167090fe240d92",
+      "size_bytes": 445877
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_private_like_solver_predictions.jsonl",
+      "sha256": "552b6a7dfae6289368bd3f99d417bcdb0b961d4508f0ce46ace689b9a94a3822",
+      "size_bytes": 231313
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_private_like_solver_report.json",
+      "sha256": "d892c2133ad6a5831c178a5dfc445b24a9459ab57bb56f75a3727f758232e7a3",
+      "size_bytes": 10977
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_rule_holdout_answerable_512.jsonl",
+      "sha256": "d5991cc465172b00bb94f2f3a06b1943ccb526d4d5324bb9a8d42ccd12363c6a",
+      "size_bytes": 670493
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_rule_holdout_answerable_solver_predictions.jsonl",
+      "sha256": "b67e27eefbe773413e7265ca2aa47a536998646c30923521d035aac7a530088a",
+      "size_bytes": 230868
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_rule_holdout_answerable_solver_report.json",
+      "sha256": "a1b2474480d29a988da91af130d734480c1b7275ff251f38be548cffbab2f779",
+      "size_bytes": 11579
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_rule_holdout_eval_512.jsonl",
+      "sha256": "39ea00666897138d0a4d454415f9afbc4bf434d7b3d1e718af7c3fc15db6b55c",
+      "size_bytes": 470233
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_rule_holdout_solver_predictions.jsonl",
+      "sha256": "d74debece93b93699979ec4c89e60f54ba6ff53aaa03ea0b4c05ef2c958a916d",
+      "size_bytes": 231281
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_rule_holdout_solver_report.json",
+      "sha256": "0b66a6ae0aab89e89a3a51bc301d6c9c3d69c725af9d8ea61b0543249c8e736d",
+      "size_bytes": 10751
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_solver_base_parent_comparison.json",
+      "sha256": "2d6ee8b96f13ea6ec6d59b381bd94e77a9e938eb7a48f1a3befa99adf27a0a0d",
+      "size_bytes": 617
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_stack_benchmark_plan.json",
+      "sha256": "adf45bfb608e555de105aac7ef2cdc85d45d96f0b26032cd016550c48f89ee51",
+      "size_bytes": 1789
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_summary.json",
+      "sha256": "b9fb59876f89449477665c3e7167dc00791bcfb0bfc92e4dc704192cb9514d33",
+      "size_bytes": 10003
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_v2_eligibility_report.json",
+      "sha256": "2d47b14226915dd789a53d1fa6b248da3262c86cdea178fbe15d32618d2bd362",
+      "size_bytes": 664671
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day5_weak_subfamily_report.json",
+      "sha256": "f887352ee6547bf7898f96d10f9a5bf7ff855eab78f2d079579c21099b0eb563",
+      "size_bytes": 19954
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day6_corpus_build_summary.json",
+      "sha256": "23c129dea7ee02d783b5621d6e9560be8cab8743d034ad685a1f373471f6f209",
+      "size_bytes": 633
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_abstain_safety.jsonl",
+      "sha256": "7f981fc45720f6d5ac03e27b85ef8921650b45d40cfaebe5bc5822550eca926d",
+      "size_bytes": 490675
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_blocked_reason_report.json",
+      "sha256": "ab88f08438fee580f6462f62035752416044cb37182e280ce80ec30edf7051c7",
+      "size_bytes": 58
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_hard_negative.jsonl",
+      "sha256": "aa4d9e6f14e8cdaf10d0c02cca77e03e4d7680c3495b7e1234f88ce3a83abdf3",
+      "size_bytes": 39424
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_leakage_report.json",
+      "sha256": "02c69a4209daf783239d31a719eb92174fa1f4edf1066c02e14a65034c53d939",
+      "size_bytes": 292
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_manifest.json",
+      "sha256": "25277a62262d162afe74e3888c0e3d0b5397fc576b3caf9d3343d4e69d85e47a",
+      "size_bytes": 7128
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_mixture_report.json",
+      "sha256": "78a65d0108a858bf9f352085577cfe805998c49773f03fd53ba1089faf14ebe5",
+      "size_bytes": 1137
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_quality_gate.json",
+      "sha256": "0210d5764082a86838a1acd5be50f10adcfcdd47569a0e8fcb0242e5d310e9f8",
+      "size_bytes": 2952
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_rejected_rows.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_rule_coverage_report.json",
+      "sha256": "021eff3f9ba1a29f1556882c78ee8990e0ff529fbc6c14ceda5c43017bcef204",
+      "size_bytes": 1405
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_solver_corrected.jsonl",
+      "sha256": "98cbf8910bfb15b2d616f220092f223dd5682872bf290ef0500ab02b5b919850",
+      "size_bytes": 2559658
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_verified_direct_answer.jsonl",
+      "sha256": "24ecc77ba2f013f8119f540779487ad969ba5db1c30450fb648a9e970e0984b6",
+      "size_bytes": 2554258
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells.zip",
+      "sha256": "6ff9c5db017934ce45ab546d4d5a05c9e89b5b9f5018f6766fe9e79fc65a0b0a",
+      "size_bytes": 26914
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_01_write_configs.py",
+      "sha256": "18a2e9c0d8b3ce329e3c0a33fa623a46affc716d0a9da47c265c23c2e7bc69e9",
+      "size_bytes": 4052
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_02_write_runtime_patches.py",
+      "sha256": "aea03ae23ec9ae13a35df480ea04ad0e51c052da46ea7c0d1e0230a973ff0774",
+      "size_bytes": 14288
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_03_write_prepare_tokens.py",
+      "sha256": "a4f8675153061224f32e94ddf5bda397b457b6961db22554f0d615acc1d5b010",
+      "size_bytes": 15229
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_04_write_train.py",
+      "sha256": "73de526dceb216fe5dd9c56d62b153f65e0500fa711bdb19dab84f1f0b9da47a",
+      "size_bytes": 11421
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_05_write_eval.py",
+      "sha256": "57cf11b0c478f250d8411dd6257eeb9a7a985684acd7448c651f5e3b0fc12f16",
+      "size_bytes": 21554
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_06_write_parent_calibrated_eval.py",
+      "sha256": "febc8d3db8d22689f23a778ddc84fc34f4ebea40659c79f569e84dd80f18372a",
+      "size_bytes": 6051
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_07_write_orchestrator.py",
+      "sha256": "d991263bdf2b007d5520192a5cca16ed0617c24b364ef0cfceb9d9a3e0597b34",
+      "size_bytes": 19989
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_08_verify_files.py",
+      "sha256": "cc678ecf45f6344994d1aca776d6fcc3054ccfd838b6e2f0b0e8217e6a05b469",
+      "size_bytes": 2299
+    },
+    {
+      "exists": true,
+      "path": "artifacts/win_system_kaggle_cells/CELL_09_v1b_commands.py",
+      "sha256": "fcdbbb7b38cd7c2e06a2841231c1f0b6afaada8f88194c0e9f6c63ada075e24b",
+      "size_bytes": 475
+    },
+    {
+      "exists": true,
+      "path": "clean_sprint10_1_baseline/baseline_manifest.json",
+      "sha256": "230c9000b04b26d83109556618d90b6588c60e285ce318e36e89d8196d46cc45",
+      "size_bytes": 6467
+    },
+    {
+      "exists": true,
+      "path": "factory_reset_runbook.md",
+      "sha256": "87667684b24b95472b9b5e58b995570405c226ccf1e61d11102a937188f1c9a7",
+      "size_bytes": 11450
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/anti086_config_hard.yaml",
       "sha256": "5086ae2f0e29918b541429e991d32c17573f48cd72b8de2cf8dc8b12028472e2",
       "size_bytes": 467
@@ -71,6 +503,180 @@
       "path": "kaggle_anti086/anti086_winmode_v3.yaml",
       "sha256": "51fccdc4ea0a1dc1039726611cb900e52578e9e7d060c0ffb3cd5add4b15dda0",
       "size_bytes": 1173
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/__init__.py",
+      "sha256": "3905b59be375a0e3af19599f84a0f00c28b0b4735e87a6747328f48d5aeea98c",
+      "size_bytes": 67
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/build_rule_bank.py",
+      "sha256": "33d1bb8de580f0af559b7ca534b09244aa74f6ae62b8ff46494a5df265b06108",
+      "size_bytes": 4510
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/build_train_v2_corpus.py",
+      "sha256": "ff77082df612712cafb64aa0b1280eb8ec7f03dbf56c15d8643c397d093d992d",
+      "size_bytes": 18589
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/schema.py",
+      "sha256": "5f13b7e46de54858aaecd25afe34547be24b257ba617c3acc2d499d83d06aab5",
+      "size_bytes": 4999
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/split_controller.py",
+      "sha256": "8f761fec059093d50f52e079cb4dad5545d6983cd9c07ca5e2eb5a200e5b8238",
+      "size_bytes": 6213
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_corpus_io.py",
+      "sha256": "28c1af724560392fbecdbf839aedb90304df420fda3bc39ccd3f873b3b254cbb",
+      "size_bytes": 3804
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_corpus_leakage.py",
+      "sha256": "5c5df78e697dcc9563e8ae71f42912af48403c19d5f2062482151cd50ffc281d",
+      "size_bytes": 3595
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_corpus_manifest.py",
+      "sha256": "ed3941c4dd9dfb25ed53b203e06d018c121afeb498740c9b39fb8e42ead197f4",
+      "size_bytes": 3618
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_corpus_mixture.py",
+      "sha256": "2eae8a18be7bf9384196a614c684c9476483cf2afb58b2b7366ea204fc5813b8",
+      "size_bytes": 1437
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_corpus_quality_gate.py",
+      "sha256": "d56870808743e6ed45c59d262aabc591e305e1ead2c55ec3245fcf8eae83785d",
+      "size_bytes": 3930
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_prompt_templates.py",
+      "sha256": "3bc67ef4d3db7a07c0f5f77c00516cd2975251f89298e312717dcf334e87f5ae",
+      "size_bytes": 2904
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/__init__.py",
+      "sha256": "311313491392f37188cceb96fa728270075f23ecd215df70a2569571c54bbaf6",
+      "size_bytes": 63
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/build_answerable_eval.py",
+      "sha256": "60ab9f009bd7387ffbd2b527b394c15e7455fea6b0b79f70ea52481ff73b1d46",
+      "size_bytes": 1110
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/build_anti_leak_eval.py",
+      "sha256": "a0d8d22dadf83ed6f77d6543175a7954b97734f316c60691bb934d403071c06d",
+      "size_bytes": 816
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/build_day3_solver_smoke.py",
+      "sha256": "d6fd73fb5b77597f94c9ca3fea72a5d868bba7b43387b0b8270d3d3d38ba184d",
+      "size_bytes": 5219
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/build_day4_adversarial_solver_eval.py",
+      "sha256": "dc05ac12e60b4cde1f9a03d956055e6c3c0f0a7a2af964ac8f6b4dc7fc168600",
+      "size_bytes": 20837
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/build_family_hard_eval.py",
+      "sha256": "b561c6fc723f2d601ac297de524eee2596306d566d3c2ffcc66e087e377dceec",
+      "size_bytes": 822
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/build_private_like_eval.py",
+      "sha256": "b16f9ea337847a2131799210ab23fc11afd339df7904d73d14010dfbc22ec716",
+      "size_bytes": 825
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/build_rule_holdout_eval.py",
+      "sha256": "c75fe375d63f9507e436182bcce6a85bb6174d193b93ccfb263af2902f75e05c",
+      "size_bytes": 825
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/compare_solver_base_parent.py",
+      "sha256": "c392db53c51dcb969f6f6dfb886139c8e62c82dc2c1c6a896bfbe414af3aaf11",
+      "size_bytes": 2697
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/day5_eval_factory.py",
+      "sha256": "c0012624195af6b97ce777c875804ab516e0f22222f7b65397e50b9cff1f9b05",
+      "size_bytes": 21998
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/day5_readiness_summary.py",
+      "sha256": "3f70a8c78e65b5e93e101c2abbed2ebbbbaf92a0aa4e5aa3042a6c441927aa1f",
+      "size_bytes": 6683
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/eval_manifest.py",
+      "sha256": "f9abea763408a502c9a770dc249d7471e146477d219d21eb25398b372b835f2b",
+      "size_bytes": 8922
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/family_coverage_report.py",
+      "sha256": "b827037a46436ade308fe3cc28cc01e3edccade7dbb1129d874d02b5e58f01b9",
+      "size_bytes": 4714
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/run_solver_eval.py",
+      "sha256": "2fbb5ce35826fe5dac78dcfba337009690943ef877bed12c87e4e5b84294c26c",
+      "size_bytes": 13895
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/run_stack_benchmark.py",
+      "sha256": "e7dc972e404a4f995a94555cc469b4a6978a64d01f56e70ac8d8d1cc07307e05",
+      "size_bytes": 6794
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/semantic_holdout.py",
+      "sha256": "8f914ee977eb1db451004038435c8974a855b2e57fe51828338b56cf7b9b504f",
+      "size_bytes": 3986
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/v2_eligibility.py",
+      "sha256": "a9858dc804c607d5ec241ba73eeb38b4ed75d9f4291071aae72789b4b8596fbe",
+      "size_bytes": 10764
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/eval/weak_subfamily_report.py",
+      "sha256": "d982149b9d55aab73da1b8d31c8c47f5574fa88e7d9532c8dd5ae851843880ee",
+      "size_bytes": 7355
     },
     {
       "exists": true,
@@ -164,105 +770,9 @@
     },
     {
       "exists": true,
-      "path": "kaggle_anti086/data/build_rule_bank.py",
-      "sha256": "33d1bb8de580f0af559b7ca534b09244aa74f6ae62b8ff46494a5df265b06108",
-      "size_bytes": 4510
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/data/schema.py",
-      "sha256": "5f13b7e46de54858aaecd25afe34547be24b257ba617c3acc2d499d83d06aab5",
-      "size_bytes": 4999
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/data/split_controller.py",
-      "sha256": "8f761fec059093d50f52e079cb4dad5545d6983cd9c07ca5e2eb5a200e5b8238",
-      "size_bytes": 6213
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/data/__init__.py",
-      "sha256": "3905b59be375a0e3af19599f84a0f00c28b0b4735e87a6747328f48d5aeea98c",
-      "size_bytes": 67
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/build_anti_leak_eval.py",
-      "sha256": "a0d8d22dadf83ed6f77d6543175a7954b97734f316c60691bb934d403071c06d",
-      "size_bytes": 816
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/build_day3_solver_smoke.py",
-      "sha256": "d6fd73fb5b77597f94c9ca3fea72a5d868bba7b43387b0b8270d3d3d38ba184d",
-      "size_bytes": 5219
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/build_day4_adversarial_solver_eval.py",
-      "sha256": "dc05ac12e60b4cde1f9a03d956055e6c3c0f0a7a2af964ac8f6b4dc7fc168600",
-      "size_bytes": 20837
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/build_family_hard_eval.py",
-      "sha256": "b561c6fc723f2d601ac297de524eee2596306d566d3c2ffcc66e087e377dceec",
-      "size_bytes": 822
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/build_private_like_eval.py",
-      "sha256": "b16f9ea337847a2131799210ab23fc11afd339df7904d73d14010dfbc22ec716",
-      "size_bytes": 825
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/build_rule_holdout_eval.py",
-      "sha256": "c75fe375d63f9507e436182bcce6a85bb6174d193b93ccfb263af2902f75e05c",
-      "size_bytes": 825
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/compare_solver_base_parent.py",
-      "sha256": "c392db53c51dcb969f6f6dfb886139c8e62c82dc2c1c6a896bfbe414af3aaf11",
-      "size_bytes": 2697
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/day5_eval_factory.py",
-      "sha256": "c0012624195af6b97ce777c875804ab516e0f22222f7b65397e50b9cff1f9b05",
-      "size_bytes": 21998
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/eval_manifest.py",
-      "sha256": "f9abea763408a502c9a770dc249d7471e146477d219d21eb25398b372b835f2b",
-      "size_bytes": 8922
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/family_coverage_report.py",
-      "sha256": "b827037a46436ade308fe3cc28cc01e3edccade7dbb1129d874d02b5e58f01b9",
-      "size_bytes": 4714
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/run_solver_eval.py",
-      "sha256": "2fbb5ce35826fe5dac78dcfba337009690943ef877bed12c87e4e5b84294c26c",
-      "size_bytes": 13895
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/run_stack_benchmark.py",
-      "sha256": "e7dc972e404a4f995a94555cc469b4a6978a64d01f56e70ac8d8d1cc07307e05",
-      "size_bytes": 6794
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/__init__.py",
-      "sha256": "311313491392f37188cceb96fa728270075f23ecd215df70a2569571c54bbaf6",
-      "size_bytes": 63
+      "path": "kaggle_anti086/solvers/__init__.py",
+      "sha256": "52029616b639e68a7d8278a87d4a664c1784e6750ab38d17915b69aa711ea793",
+      "size_bytes": 666
     },
     {
       "exists": true,
@@ -287,6 +797,12 @@
       "path": "kaggle_anti086/solvers/char_cipher_solver.py",
       "sha256": "5f20c09b2ca029810486f8fb311a9fd667ef28e16cae93dc925e7bba3b34c10f",
       "size_bytes": 8480
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/solvers/format_only_solver.py",
+      "sha256": "07266157b37d966f550baa8987f07d799b1ee78c8db9339a308979f15b112e4b",
+      "size_bytes": 3560
     },
     {
       "exists": true,
@@ -350,339 +866,9 @@
     },
     {
       "exists": true,
-      "path": "kaggle_anti086/solvers/__init__.py",
-      "sha256": "52029616b639e68a7d8278a87d4a664c1784e6750ab38d17915b69aa711ea793",
-      "size_bytes": 666
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_01_write_configs.py",
-      "sha256": "18a2e9c0d8b3ce329e3c0a33fa623a46affc716d0a9da47c265c23c2e7bc69e9",
-      "size_bytes": 4052
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_02_write_runtime_patches.py",
-      "sha256": "aea03ae23ec9ae13a35df480ea04ad0e51c052da46ea7c0d1e0230a973ff0774",
-      "size_bytes": 14288
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_03_write_prepare_tokens.py",
-      "sha256": "a4f8675153061224f32e94ddf5bda397b457b6961db22554f0d615acc1d5b010",
-      "size_bytes": 15229
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_04_write_train.py",
-      "sha256": "73de526dceb216fe5dd9c56d62b153f65e0500fa711bdb19dab84f1f0b9da47a",
-      "size_bytes": 11421
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_05_write_eval.py",
-      "sha256": "57cf11b0c478f250d8411dd6257eeb9a7a985684acd7448c651f5e3b0fc12f16",
-      "size_bytes": 21554
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_06_write_parent_calibrated_eval.py",
-      "sha256": "febc8d3db8d22689f23a778ddc84fc34f4ebea40659c79f569e84dd80f18372a",
-      "size_bytes": 6051
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_07_write_orchestrator.py",
-      "sha256": "d991263bdf2b007d5520192a5cca16ed0617c24b364ef0cfceb9d9a3e0597b34",
-      "size_bytes": 19989
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_08_verify_files.py",
-      "sha256": "cc678ecf45f6344994d1aca776d6fcc3054ccfd838b6e2f0b0e8217e6a05b469",
-      "size_bytes": 2299
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells/CELL_09_v1b_commands.py",
-      "sha256": "fcdbbb7b38cd7c2e06a2841231c1f0b6afaada8f88194c0e9f6c63ada075e24b",
-      "size_bytes": 475
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day2_rule_bank.json",
-      "sha256": "81fe94b027b83f935b49e5a6eae950fd2d1671179bf200f8751fcffac33c3642",
-      "size_bytes": 7861
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day2_schema_report.json",
-      "sha256": "0d91204da44f849243438db9f4085453b80263ffa9395bed14acdad3c03ca6e1",
-      "size_bytes": 703
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day2_split_smoke_report.json",
-      "sha256": "381fa937ecd9898329367d1493664e532ad729401e3f4f6cdec754061df17a3d",
-      "size_bytes": 921
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day3_1_repair_summary.json",
-      "sha256": "10b9e8a81cc5ff981c721f338cd1f8a2dc5472a3fb46ec4590b928d6977b4195",
-      "size_bytes": 577
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day3_solver_eval_predictions.jsonl",
-      "sha256": "ea9f8fd24b1b0a98d304e2cfb2aa0058194d0bb18148ae30bad093cd9cc5f472",
-      "size_bytes": 21634
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day3_solver_eval_report.json",
-      "sha256": "58499d91fb92aa667a2b65579d078ae9c53291cff0c7f9672f83ff12c41faa2c",
-      "size_bytes": 1125
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day3_solver_smoke_eval.jsonl",
-      "sha256": "37dd89525fc7014b8728bf085e0577322fa37bde4bd63b7107357e91a85dd54c",
-      "size_bytes": 22616
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day4_1_adversarial_solver_eval.jsonl",
-      "sha256": "54b6a939e132706e89ac8b5cc1dbab3419c45bd17eaa05e1fcda4642caba1661",
-      "size_bytes": 216346
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day4_1_adversarial_solver_predictions.jsonl",
-      "sha256": "9425af2c29b92e8f0fe92c1ab7cbee7c1fd75dd86a1a62b2caa6394fcfa1bd2d",
-      "size_bytes": 126968
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day4_1_adversarial_solver_report.json",
-      "sha256": "ac308e597bc0b7da9d4990c2f42894a4b630bde30333ef8c6d2f81a6d5cfcb73",
-      "size_bytes": 8676
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day4_1_hardening_summary.json",
-      "sha256": "9d4775b873e7fde550d47ae1ce5097075e32985a0efd85bd72fff60c37426a5a",
-      "size_bytes": 1334
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day4_adversarial_solver_eval.jsonl",
-      "sha256": "8193abda1aec2a2b2062b3a5e01cfda38609b8d9a385c29812d5b563e286df5d",
-      "size_bytes": 119920
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day4_adversarial_solver_predictions.jsonl",
-      "sha256": "15ccd2671f7553001c9c3767585642246a43a693cbc1138636f1300e1aa64a8c",
-      "size_bytes": 109952
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day4_adversarial_solver_report.json",
-      "sha256": "41a1d41c1b8d4efde7b26b0e852d77a18b35ed92d7acf64b8b18d53098436315",
-      "size_bytes": 1897
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_anti_leak_eval_256.jsonl",
-      "sha256": "403a813042695e08a886ce0a8132561f00a9e76f629cb7f6ac6883a074019507",
-      "size_bytes": 232119
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_anti_leak_solver_predictions.jsonl",
-      "sha256": "32ee8d2a9a8aa12960a1dfc5581876241ad58fbcf41789678c30902ba8c29438",
-      "size_bytes": 114900
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_anti_leak_solver_report.json",
-      "sha256": "141b156461cfc667f7f7e47c5422ef589d31f4a904ecf76299f0ef30d930d50b",
-      "size_bytes": 7471
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_eval_manifest.json",
-      "sha256": "304e496d69d25269bad6785ee534f328e32d0f44858c1ee42c122708926b8def",
-      "size_bytes": 18717
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_family_coverage_report.json",
-      "sha256": "76d95e945b23dff92a3807d33f06194f434877587414ec98a8c2b44b66ac2b7a",
-      "size_bytes": 10737
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_family_hard_eval_512.jsonl",
-      "sha256": "5ca75dccc77614b2225f198c4eae8fefd1cc14038703ae47536e025a856b4cdf",
-      "size_bytes": 442896
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_family_hard_solver_predictions.jsonl",
-      "sha256": "fb854555798456ef4a5535df5f089d665bf7fd93769bc4be70890d573b2c055f",
-      "size_bytes": 230701
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_family_hard_solver_report.json",
-      "sha256": "e987dda3d0af22aa68952edbd2e079ab57e593d378e0f139d0b70a8718d7902c",
-      "size_bytes": 9210
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_model_plan_predictions_placeholder.jsonl",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size_bytes": 0
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_private_like_eval_512.jsonl",
-      "sha256": "edd380717cce947654dc7126e5e2a934eb0d7795d23c20a2f1167090fe240d92",
-      "size_bytes": 445877
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_private_like_solver_predictions.jsonl",
-      "sha256": "552b6a7dfae6289368bd3f99d417bcdb0b961d4508f0ce46ace689b9a94a3822",
-      "size_bytes": 231313
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_private_like_solver_report.json",
-      "sha256": "d892c2133ad6a5831c178a5dfc445b24a9459ab57bb56f75a3727f758232e7a3",
-      "size_bytes": 10977
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_rule_holdout_eval_512.jsonl",
-      "sha256": "39ea00666897138d0a4d454415f9afbc4bf434d7b3d1e718af7c3fc15db6b55c",
-      "size_bytes": 470233
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_rule_holdout_solver_predictions.jsonl",
-      "sha256": "d74debece93b93699979ec4c89e60f54ba6ff53aaa03ea0b4c05ef2c958a916d",
-      "size_bytes": 231281
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_rule_holdout_solver_report.json",
-      "sha256": "0b66a6ae0aab89e89a3a51bc301d6c9c3d69c725af9d8ea61b0543249c8e736d",
-      "size_bytes": 10751
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_solver_base_parent_comparison.json",
-      "sha256": "2d6ee8b96f13ea6ec6d59b381bd94e77a9e938eb7a48f1a3befa99adf27a0a0d",
-      "size_bytes": 617
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_stack_benchmark_plan.json",
-      "sha256": "adf45bfb608e555de105aac7ef2cdc85d45d96f0b26032cd016550c48f89ee51",
-      "size_bytes": 1789
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_summary.json",
-      "sha256": "b9fb59876f89449477665c3e7167dc00791bcfb0bfc92e4dc704192cb9514d33",
-      "size_bytes": 10003
-    },
-    {
-      "exists": true,
-      "path": "artifacts/win_system_kaggle_cells.zip",
-      "sha256": "6ff9c5db017934ce45ab546d4d5a05c9e89b5b9f5018f6766fe9e79fc65a0b0a",
-      "size_bytes": 26914
-    },
-    {
-      "exists": true,
-      "path": "artifacts/day1/day1_generated_cells_manifest.json",
-      "sha256": "834314f7dd371c4601d160e03237d53f74d58cb81cee58400defe5c96a55f679",
-      "size_bytes": 2734
-    },
-    {
-      "exists": true,
-      "path": "factory_reset_runbook.md",
-      "sha256": "87667684b24b95472b9b5e58b995570405c226ccf1e61d11102a937188f1c9a7",
-      "size_bytes": 11450
-    },
-    {
-      "exists": true,
-      "path": "tools/day1_repo_guard.py",
-      "sha256": "a6c038d61b32433a9edc365abd899cc573dca7ae04949e83b4c3b9612830d01f",
-      "size_bytes": 24169
-    },
-    {
-      "exists": true,
-      "path": "tools/hash_audit.py",
-      "sha256": "3c17511079ebf0b038767f3a24440491041109a2ae70ab199f9f3dc352e4c030",
-      "size_bytes": 2775
-    },
-    {
-      "exists": true,
-      "path": "tools/archive_old_notebook_fragments.py",
-      "sha256": "ae4e2333511b47a42cc49d3a667456d4b1afc398aeeb8bf7b4a87066c8bc44c8",
-      "size_bytes": 3211
-    },
-    {
-      "exists": true,
-      "path": "clean_sprint10_1_baseline/baseline_manifest.json",
-      "sha256": "230c9000b04b26d83109556618d90b6588c60e285ce318e36e89d8196d46cc45",
-      "size_bytes": 6467
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/build_answerable_eval.py",
-      "sha256": "60ab9f009bd7387ffbd2b527b394c15e7455fea6b0b79f70ea52481ff73b1d46",
-      "size_bytes": 1110
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/weak_subfamily_report.py",
-      "sha256": "d982149b9d55aab73da1b8d31c8c47f5574fa88e7d9532c8dd5ae851843880ee",
-      "size_bytes": 7355
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/v2_eligibility.py",
-      "sha256": "a9858dc804c607d5ec241ba73eeb38b4ed75d9f4291071aae72789b4b8596fbe",
-      "size_bytes": 10764
-    },
-    {
-      "exists": true,
       "path": "tests/test_sprint11_day5_answerable_eval.py",
       "sha256": "606cd56f3e636701cf34a528003e497f93dc8d622277cbd8f1a53220d187d67d",
       "size_bytes": 1350
-    },
-    {
-      "exists": true,
-      "path": "tests/test_sprint11_day5_manifest_purpose.py",
-      "sha256": "55d7ebfc56660bd0c40654256e80b57ca0548c9069b831fad24b6c6097713df5",
-      "size_bytes": 1696
-    },
-    {
-      "exists": true,
-      "path": "tests/test_sprint11_weak_subfamily_report.py",
-      "sha256": "1ebeb8b771c1a0949e62b4d4a18011e6fa06fa10a119842f20b18e3608dac42a",
-      "size_bytes": 1756
-    },
-    {
-      "exists": true,
-      "path": "tests/test_sprint11_v2_eligibility.py",
-      "sha256": "c432225389ab09d471f05024b5fb420b4cefa26eec7ccb28604557df2c4e0411",
-      "size_bytes": 5730
     },
     {
       "exists": true,
@@ -692,63 +878,15 @@
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_private_like_answerable_512.jsonl",
-      "sha256": "0dfd307fa369d1366339b546bd2f26fee96b7be1cc66a963076c6142be2c99e8",
-      "size_bytes": 641309
+      "path": "tests/test_sprint11_day5_manifest_purpose.py",
+      "sha256": "55d7ebfc56660bd0c40654256e80b57ca0548c9069b831fad24b6c6097713df5",
+      "size_bytes": 1696
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_rule_holdout_answerable_512.jsonl",
-      "sha256": "d5991cc465172b00bb94f2f3a06b1943ccb526d4d5324bb9a8d42ccd12363c6a",
-      "size_bytes": 670493
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_family_hard_answerable_512.jsonl",
-      "sha256": "0a4f779323f5211577a8511183f5996da8b67bb6f75e9a71faebf7601309df45",
-      "size_bytes": 634630
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_weak_subfamily_report.json",
-      "sha256": "f887352ee6547bf7898f96d10f9a5bf7ff855eab78f2d079579c21099b0eb563",
-      "size_bytes": 19954
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_v2_eligibility_report.json",
-      "sha256": "2d47b14226915dd789a53d1fa6b248da3262c86cdea178fbe15d32618d2bd362",
-      "size_bytes": 664671
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_kaggle_base_eval_commands.txt",
-      "sha256": "aef96bd38e6321c69339386418947ccdb04917b6cafbc34cff3e2d72c476ec47",
-      "size_bytes": 535
-    },
-    {
-      "exists": true,
-      "path": "artifacts/sprint11/day5_kaggle_parent_eval_commands.txt",
-      "sha256": "15fd07a2dfbe1bfb22e03fff61ae850c3bd471dd9638549f4b312cc4dd9bb5a3",
-      "size_bytes": 537
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/solvers/format_only_solver.py",
-      "sha256": "07266157b37d966f550baa8987f07d799b1ee78c8db9339a308979f15b112e4b",
-      "size_bytes": 3560
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/semantic_holdout.py",
-      "sha256": "8f914ee977eb1db451004038435c8974a855b2e57fe51828338b56cf7b9b504f",
-      "size_bytes": 3986
-    },
-    {
-      "exists": true,
-      "path": "kaggle_anti086/eval/day5_readiness_summary.py",
-      "sha256": "3f70a8c78e65b5e93e101c2abbed2ebbbbaf92a0aa4e5aa3042a6c441927aa1f",
-      "size_bytes": 6683
+      "path": "tests/test_sprint11_day5_readiness_summary.py",
+      "sha256": "11cc1cd5828670b09f34dd93134c7b5f9f8424a855fea8145945f7d6f1ab95a2",
+      "size_bytes": 3042
     },
     {
       "exists": true,
@@ -764,57 +902,75 @@
     },
     {
       "exists": true,
-      "path": "tests/test_sprint11_day5_readiness_summary.py",
-      "sha256": "11cc1cd5828670b09f34dd93134c7b5f9f8424a855fea8145945f7d6f1ab95a2",
-      "size_bytes": 3042
+      "path": "tests/test_sprint11_v2_corpus_builder.py",
+      "sha256": "c2f95d862aabd459d3c776a0034baee6727db7e53d31a11e77b5d6c1cc55d1f2",
+      "size_bytes": 3282
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_private_like_answerable_solver_report.json",
-      "sha256": "9955f2ed9119eba014dfe4636c4fb952a62ff927e2e42ee49b356810ab57d814",
-      "size_bytes": 11579
+      "path": "tests/test_sprint11_v2_corpus_io.py",
+      "sha256": "9b6747b420d98fb54d1b9885145a599fd49436bd7bc609109d8b28c32e6ecbb2",
+      "size_bytes": 1132
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_private_like_answerable_solver_predictions.jsonl",
-      "sha256": "843dff71b2186a5f6d20a7213eefdfdbde173d2fc5d30222cb97c1eaefa83ad4",
-      "size_bytes": 230868
+      "path": "tests/test_sprint11_v2_corpus_leakage.py",
+      "sha256": "95d65ac6195d5c0d2730177d3b9ba53490f4e97d836a05188229170a4d61ff2b",
+      "size_bytes": 1829
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_rule_holdout_answerable_solver_report.json",
-      "sha256": "a1b2474480d29a988da91af130d734480c1b7275ff251f38be548cffbab2f779",
-      "size_bytes": 11579
+      "path": "tests/test_sprint11_v2_corpus_manifest.py",
+      "sha256": "3b427f5d98496076eac69122ba7e712ee7ad7893df226c66094a125bd9869ed0",
+      "size_bytes": 1871
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_rule_holdout_answerable_solver_predictions.jsonl",
-      "sha256": "b67e27eefbe773413e7265ca2aa47a536998646c30923521d035aac7a530088a",
-      "size_bytes": 230868
+      "path": "tests/test_sprint11_v2_corpus_mixture.py",
+      "sha256": "1581655d0f5c3218987d3722d32d738f1202884d5e8cebaf4e53ad9a0f68b99e",
+      "size_bytes": 881
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_family_hard_answerable_solver_report.json",
-      "sha256": "040ba142f199c21f77c29cb8c14d4a112ddb1dd7dec677428034d0b740377a12",
-      "size_bytes": 13600
+      "path": "tests/test_sprint11_v2_corpus_quality_gate.py",
+      "sha256": "a0f7102ae91b9fe4cea6cb28479ff97bf746489b013d1cbab8ef14b680761bd7",
+      "size_bytes": 3822
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_family_hard_answerable_solver_predictions.jsonl",
-      "sha256": "69ddf038d714418eae308c6d471300f877afe24eb376a7388a51d080ad28665f",
-      "size_bytes": 230307
+      "path": "tests/test_sprint11_v2_eligibility.py",
+      "sha256": "c432225389ab09d471f05024b5fb420b4cefa26eec7ccb28604557df2c4e0411",
+      "size_bytes": 5730
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_2_semantic_holdout_report.json",
-      "sha256": "5e96f4cdb5bec497bf9fa7c5f0ac7c073888073f17f4c0e5b2f4edf9331c459d",
-      "size_bytes": 334
+      "path": "tests/test_sprint11_v2_prompt_templates.py",
+      "sha256": "1709a8e3137a877fa6c4fd9c136cd1a0664ad369f191c389be02709a9f1b7b93",
+      "size_bytes": 1776
     },
     {
       "exists": true,
-      "path": "artifacts/sprint11/day5_2_readiness_summary.json",
-      "sha256": "0576a7874ef00ff0cba610e3bcfbcc04fe4498f386e01f7dbd38f51d723ee652",
-      "size_bytes": 3133
+      "path": "tests/test_sprint11_weak_subfamily_report.py",
+      "sha256": "1ebeb8b771c1a0949e62b4d4a18011e6fa06fa10a119842f20b18e3608dac42a",
+      "size_bytes": 1756
+    },
+    {
+      "exists": true,
+      "path": "tools/archive_old_notebook_fragments.py",
+      "sha256": "ae4e2333511b47a42cc49d3a667456d4b1afc398aeeb8bf7b4a87066c8bc44c8",
+      "size_bytes": 3211
+    },
+    {
+      "exists": true,
+      "path": "tools/day1_repo_guard.py",
+      "sha256": "a6c038d61b32433a9edc365abd899cc573dca7ae04949e83b4c3b9612830d01f",
+      "size_bytes": 24169
+    },
+    {
+      "exists": true,
+      "path": "tools/hash_audit.py",
+      "sha256": "3c17511079ebf0b038767f3a24440491041109a2ae70ab199f9f3dc352e4c030",
+      "size_bytes": 2775
     }
   ],
   "schema_version": 1

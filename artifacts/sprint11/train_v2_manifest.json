@@ -1,0 +1,247 @@
+{
+  "blocked_rows": {},
+  "created_by": "SPRINT-11E",
+  "decision": "ALLOW_DAY7_TRAINING_CONFIG_PREP",
+  "family_distribution": {
+    "bit_manipulation": 214,
+    "char_cipher": 192,
+    "format_only": 58,
+    "gravity_numeric": 116,
+    "numeric_formula": 127,
+    "roman_numeral": 96,
+    "symbol_mapping": 224,
+    "unit_conversion": 165,
+    "word_cipher": 158
+  },
+  "files": {
+    "abstain_safety": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_abstain_safety.jsonl",
+      "row_count": 409,
+      "sha256": "7f981fc45720f6d5ac03e27b85ef8921650b45d40cfaebe5bc5822550eca926d",
+      "size_bytes": 490675
+    },
+    "blocked_reason_report": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_blocked_reason_report.json",
+      "sha256": "ab88f08438fee580f6462f62035752416044cb37182e280ce80ec30edf7051c7",
+      "size_bytes": 58
+    },
+    "hard_negative": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_hard_negative.jsonl",
+      "row_count": 33,
+      "sha256": "aa4d9e6f14e8cdaf10d0c02cca77e03e4d7680c3495b7e1234f88ce3a83abdf3",
+      "size_bytes": 39424
+    },
+    "leakage_report": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_leakage_report.json",
+      "sha256": "02c69a4209daf783239d31a719eb92174fa1f4edf1066c02e14a65034c53d939",
+      "size_bytes": 292
+    },
+    "mixture_report": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_mixture_report.json",
+      "sha256": "78a65d0108a858bf9f352085577cfe805998c49773f03fd53ba1089faf14ebe5",
+      "size_bytes": 1137
+    },
+    "quality_gate": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_quality_gate.json",
+      "sha256": "0210d5764082a86838a1acd5be50f10adcfcdd47569a0e8fcb0242e5d310e9f8",
+      "size_bytes": 2952
+    },
+    "rejected_rows": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_rejected_rows.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rule_coverage_report": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_rule_coverage_report.json",
+      "sha256": "021eff3f9ba1a29f1556882c78ee8990e0ff529fbc6c14ceda5c43017bcef204",
+      "size_bytes": 1405
+    },
+    "solver_corrected": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_solver_corrected.jsonl",
+      "row_count": 1350,
+      "sha256": "98cbf8910bfb15b2d616f220092f223dd5682872bf290ef0500ab02b5b919850",
+      "size_bytes": 2559658
+    },
+    "verified_direct_answer": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\train_v2_verified_direct_answer.jsonl",
+      "row_count": 1350,
+      "sha256": "24ecc77ba2f013f8119f540779487ad969ba5db1c30450fb648a9e970e0984b6",
+      "size_bytes": 2554258
+    }
+  },
+  "leakage_group_count": 1350,
+  "leakage_report_status": "PASS",
+  "loss_scope_distribution": {
+    "assistant_only": 1350
+  },
+  "mixture_report_status": "PASS",
+  "no_0_95_evidence": true,
+  "no_adapter_packaged": true,
+  "no_leaderboard_evidence": true,
+  "no_submission_created": true,
+  "no_training_performed": true,
+  "packaging_allowed": false,
+  "quality_gates": {
+    "assistant_only_loss_rows": {
+      "status": "PASS",
+      "threshold": 1350,
+      "value": 1350
+    },
+    "bit_manipulation_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 214
+    },
+    "char_cipher_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 192
+    },
+    "duplicate_source_row_ids": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "eligible_abstain_safety_rows": {
+      "status": "PASS",
+      "threshold": 200,
+      "value": 409
+    },
+    "empty_assistant_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "format_only_rows": {
+      "status": "PASS",
+      "threshold": 20,
+      "value": 58
+    },
+    "full_prompt_loss_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "gravity_numeric_rows": {
+      "status": "PASS",
+      "threshold": 80,
+      "value": 116
+    },
+    "hard_negative_rows": {
+      "status": "PASS",
+      "threshold": 20,
+      "value": 33
+    },
+    "leakage_group_overlap_count": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "leakage_report_status": {
+      "status": "PASS",
+      "threshold": "PASS",
+      "value": "PASS"
+    },
+    "mixture_report_status": {
+      "status": "PASS",
+      "threshold": "PASS",
+      "value": "PASS"
+    },
+    "numeric_formula_rows": {
+      "status": "PASS",
+      "threshold": 80,
+      "value": 127
+    },
+    "prompt_hash_overlap_count": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "roman_numeral_rows": {
+      "status": "PASS",
+      "threshold": 50,
+      "value": 96
+    },
+    "rule_id_overlap_count": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "symbol_mapping_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 224
+    },
+    "unit_conversion_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 165
+    },
+    "unsupported_family_direct_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "verbose_assistant_rows": {
+      "status": "PASS",
+      "threshold": 0,
+      "value": 0
+    },
+    "verified_direct_answer_rows": {
+      "status": "PASS",
+      "threshold": 1000,
+      "value": 1350
+    },
+    "word_cipher_rows": {
+      "status": "PASS",
+      "threshold": 100,
+      "value": 158
+    }
+  },
+  "remaining_blockers": [],
+  "rule_id_count": 1350,
+  "schema_version": 1,
+  "source_eval_distribution": {
+    "anti_leak": 201,
+    "family_hard": 343,
+    "private_like": 396,
+    "rule_holdout": 410
+  },
+  "status": "PASS",
+  "subfamily_distribution": {
+    "bit_manipulation::reverse_bits": 53,
+    "bit_manipulation::rotate_left": 53,
+    "bit_manipulation::rotate_then_xor": 55,
+    "bit_manipulation::xor_mask": 53,
+    "char_cipher::caesar_shift": 65,
+    "char_cipher::monoalphabetic_substitution": 64,
+    "char_cipher::reverse_string": 63,
+    "format_only::answer_prefix_symbol": 11,
+    "format_only::arrow_output": 11,
+    "format_only::binary_first_line": 7,
+    "format_only::boxed_answer": 11,
+    "format_only::text_answer_prefix": 7,
+    "format_only::think_tag_suffix": 11,
+    "gravity_numeric::gravity_distance": 116,
+    "numeric_formula::linear_offset": 47,
+    "numeric_formula::quadratic_scale": 80,
+    "roman_numeral::standard_roman": 96,
+    "symbol_mapping::char_substitution": 209,
+    "symbol_mapping::reversal_substitution": 15,
+    "unit_conversion::linear_offset_round_0": 109,
+    "unit_conversion::multiplicative_scale_round_2": 56,
+    "word_cipher::word_substitution": 158
+  },
+  "submission_allowed": false,
+  "training_allowed": false
+}

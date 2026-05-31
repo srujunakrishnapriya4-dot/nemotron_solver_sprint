@@ -1,0 +1,11 @@
+{
+  "duplicate_prompt_answer_count": 0,
+  "duplicate_source_row_id_count": 0,
+  "failures": [],
+  "id_overlap_count": 0,
+  "leakage_group_overlap_count": 0,
+  "prompt_hash_overlap_count": 0,
+  "rule_id_overlap_count": 0,
+  "status": "PASS",
+  "unsupported_family_direct_rows": 0
+}

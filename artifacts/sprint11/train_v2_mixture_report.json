@@ -1,0 +1,40 @@
+{
+  "actual_mixture": {
+    "bit_manipulation": 0.15851851851851853,
+    "char_cipher": 0.14222222222222222,
+    "format_only": 0.04296296296296296,
+    "gravity_numeric": 0.08592592592592592,
+    "numeric_formula": 0.09407407407407407,
+    "roman_numeral": 0.07111111111111111,
+    "symbol_mapping": 0.16592592592592592,
+    "unit_conversion": 0.12222222222222222,
+    "word_cipher": 0.11703703703703704
+  },
+  "family_counts": {
+    "bit_manipulation": 214,
+    "char_cipher": 192,
+    "format_only": 58,
+    "gravity_numeric": 116,
+    "numeric_formula": 127,
+    "roman_numeral": 96,
+    "symbol_mapping": 224,
+    "unit_conversion": 165,
+    "word_cipher": 158
+  },
+  "max_duplicate_source_row_count": 1,
+  "oversampling_used": false,
+  "status": "PASS",
+  "target_mixture": {
+    "bit_manipulation": 0.15,
+    "char_cipher": 0.1,
+    "format_only": 0.05,
+    "gravity_numeric": 0.08,
+    "numeric_formula": 0.12,
+    "other_supported": 0.05,
+    "roman_numeral": 0.06,
+    "symbol_mapping": 0.12,
+    "unit_conversion": 0.12,
+    "word_cipher": 0.15
+  },
+  "underrepresented_families": []
+}
