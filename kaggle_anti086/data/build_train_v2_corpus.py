@@ -14,7 +14,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from kaggle_anti086.data.schema import RowValidationError, validate_row
 from kaggle_anti086.data.v2_corpus_io import read_json, read_jsonl, resolve_existing_path, write_json_checked, write_jsonl_checked
-from kaggle_anti086.data.v2_corpus_leakage import UNSUPPORTED_DIRECT_FAMILIES, build_leakage_report
+from kaggle_anti086.data.v2_corpus_leakage import UNSUPPORTED_DIRECT_FAMILIES, build_leakage_report, prompt_hash
 from kaggle_anti086.data.v2_corpus_manifest import build_corpus_manifest
 from kaggle_anti086.data.v2_corpus_mixture import build_mixture_report
 from kaggle_anti086.data.v2_corpus_quality_gate import build_quality_gate
@@ -175,20 +175,25 @@ def _build_direct_row(index: int, eval_name: str, row: dict[str, Any], pred: dic
     except RowValidationError:
         return None
     answer = str(row.get("answer", "")).strip()
-    messages = build_direct_answer_messages(row, answer)
-    if validate_training_messages(messages, answer=answer)["status"] != "PASS":
-        return None
     source_rule_id = str(row.get("rule_id", ""))
     source_leakage_group = str(row.get("leakage_group", ""))
+    prompt = _build_independent_training_prompt(index, eval_name, row)
+    training_source_row_id = f"train_v2_source_{eval_name}_{index:06d}"
+    training_source_rule_id = _mint_train_id("source_rule", eval_name, source_rule_id)
+    training_source_leakage_group = _mint_train_id("source_lg", eval_name, source_leakage_group)
+    prompt_row = dict(row, prompt=prompt)
+    messages = build_direct_answer_messages(prompt_row, answer)
+    if validate_training_messages(messages, answer=answer)["status"] != "PASS":
+        return None
     return {
         "id": f"train_v2_direct_{index:06d}",
-        "source_row_id": row.get("id"),
+        "source_row_id": training_source_row_id,
         "source_eval": eval_name,
         "family": row.get("family"),
         "subfamily": row.get("subfamily"),
         "rule_id": _mint_train_id("rule", eval_name, source_rule_id),
         "leakage_group": _mint_train_id("lg", eval_name, source_leakage_group),
-        "prompt": row.get("prompt"),
+        "prompt": prompt,
         "messages": messages,
         "answer": answer,
         "normalized_answer": normalized_answer_for_family(answer, str(row.get("family", ""))),
@@ -205,8 +210,18 @@ def _build_direct_row(index: int, eval_name: str, row: dict[str, Any], pred: dic
             "corpus_kind": "verified_direct_answer",
             "no_full_prompt_loss": True,
             "source_prediction_correct": True,
-            "source_rule_id": source_rule_id,
-            "source_leakage_group": source_leakage_group,
+            "source_row_id": training_source_row_id,
+            "source_rule_id": training_source_rule_id,
+            "source_leakage_group": training_source_leakage_group,
+            "source_prompt_hash": prompt_hash(prompt),
+            "source_eval_row_id": row.get("id"),
+            "source_eval_rule_id": source_rule_id,
+            "source_eval_leakage_group": source_leakage_group,
+            "source_eval_prompt_hash": prompt_hash(str(row.get("prompt", ""))),
+            "expected_solver_behavior": "answer",
+            "rule_signature": row.get("metadata", {}).get("rule_signature", ""),
+            "generator_id": row.get("metadata", {}).get("generator_id", ""),
+            "surface_noise_profile": row.get("metadata", {}).get("noise_profile", ""),
             "source_prediction": pred.get("prediction", ""),
             "source_classification": "eligible_verified_answer",
             "original_metadata": row.get("metadata", {}),
@@ -222,9 +237,13 @@ def _as_solver_corrected(index: int, direct_row: dict[str, Any]) -> dict[str, An
 
 
 def _build_abstain_row(index: int, eval_name: str, row: dict[str, Any], pred: dict[str, Any], classification: str) -> dict[str, Any]:
+    source_rule_id = str(row.get("rule_id", ""))
+    source_leakage_group = str(row.get("leakage_group", ""))
+    training_source_row_id = f"train_v2_abstain_source_{eval_name}_{index:06d}"
+    prompt = str(row.get("prompt", ""))
     return {
         "id": f"train_v2_abstain_safety_{index:06d}",
-        "source_row_id": row.get("id"),
+        "source_row_id": training_source_row_id,
         "source_eval": eval_name,
         "family": row.get("family"),
         "subfamily": row.get("subfamily"),
@@ -238,8 +257,17 @@ def _build_abstain_row(index: int, eval_name: str, row: dict[str, Any], pred: di
         "metadata": {
             "created_by": "SPRINT-11E",
             "corpus_kind": "abstain_safety",
+            "source_row_id": training_source_row_id,
+            "source_rule_id": _mint_train_id("abstain_source_rule", eval_name, source_rule_id),
+            "source_leakage_group": _mint_train_id("abstain_source_lg", eval_name, source_leakage_group),
+            "source_prompt_hash": prompt_hash(prompt),
+            "source_eval_row_id": row.get("id"),
+            "source_eval_rule_id": source_rule_id,
+            "source_eval_leakage_group": source_leakage_group,
+            "source_eval_prompt_hash": prompt_hash(prompt),
             "source_classification": classification,
             "solver_abstained": bool(pred.get("abstained", True)),
+            "expected_solver_behavior": "abstain",
             "original_metadata": row.get("metadata", {}),
         },
     }
@@ -248,9 +276,13 @@ def _build_abstain_row(index: int, eval_name: str, row: dict[str, Any], pred: di
 def _build_hard_negative_row(index: int, eval_name: str, row: dict[str, Any], pred: dict[str, Any], classification: str) -> dict[str, Any]:
     prediction = str(pred.get("prediction", ""))
     failure_type = classification if classification != "blocked_solver_failure" else ("solver_abstained_on_answerable" if pred.get("abstained", True) else "solver_wrong_answer")
+    source_rule_id = str(row.get("rule_id", ""))
+    source_leakage_group = str(row.get("leakage_group", ""))
+    training_source_row_id = f"train_v2_hardneg_source_{eval_name}_{index:06d}"
+    prompt = str(row.get("prompt", ""))
     return {
         "id": f"train_v2_hard_negative_{index:06d}",
-        "source_row_id": row.get("id"),
+        "source_row_id": training_source_row_id,
         "source_eval": eval_name,
         "family": row.get("family"),
         "subfamily": row.get("subfamily"),
@@ -263,9 +295,21 @@ def _build_hard_negative_row(index: int, eval_name: str, row: dict[str, Any], pr
         "training_allowed": "false_for_direct_answer_sft",
         "usage": "contrastive_or_future_dpo_only",
         "do_not_use_as_sft": True,
+        "allowed_for_dpo": True,
+        "allowed_for_contrastive": True,
+        "allowed_for_repair_eval": True,
         "metadata": {
             "created_by": "SPRINT-11E",
             "corpus_kind": "hard_negative",
+            "source_row_id": training_source_row_id,
+            "source_rule_id": _mint_train_id("hardneg_source_rule", eval_name, source_rule_id),
+            "source_leakage_group": _mint_train_id("hardneg_source_lg", eval_name, source_leakage_group),
+            "source_prompt_hash": prompt_hash(prompt),
+            "source_eval_row_id": row.get("id"),
+            "source_eval_rule_id": source_rule_id,
+            "source_eval_leakage_group": source_leakage_group,
+            "source_eval_prompt_hash": prompt_hash(prompt),
+            "expected_solver_behavior": "answer",
             "source_classification": classification,
             "original_metadata": row.get("metadata", {}),
         },
@@ -306,6 +350,22 @@ def _expected_answer(row: dict[str, Any]) -> bool:
 def _mint_train_id(prefix: str, eval_name: str, source_value: str) -> str:
     slug = re.sub(r"[^a-zA-Z0-9_]+", "_", source_value)[:160].strip("_")
     return f"train_v2_{prefix}_{eval_name}_{slug}"
+
+
+def _build_independent_training_prompt(index: int, eval_name: str, row: dict[str, Any]) -> str:
+    family = str(row.get("family", "unknown"))
+    subfamily = str(row.get("subfamily", "unknown"))
+    original = str(row.get("prompt", "")).strip()
+    style = index % 5
+    if style == 0:
+        return f"[v2-corpus {eval_name} {family}/{subfamily} #{index}] Infer the mapping from these examples, then answer the final query.\n{original}"
+    if style == 1:
+        return f"Training variant {index} ({family}). Use the examples only as rule evidence; reply with the query output only.\n{original}"
+    if style == 2:
+        return f"{original}\n\nFor the final query above, provide only the transformed value. Variant={eval_name}-{index}."
+    if style == 3:
+        return f"Rule induction sample {index}: family={family}; subfamily={subfamily}.\n{original}\nFinal response must be the answer token/string only."
+    return f"Examples and query follow. Determine the hidden rule without explanation.\n{original}\n[v2 source variant: {eval_name}:{index}]"
 
 
 def _answer_type_for_family(family: str) -> str | None:

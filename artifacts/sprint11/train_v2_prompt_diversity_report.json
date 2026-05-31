@@ -1,0 +1,43 @@
+{
+  "direct_rows": 1350,
+  "max_generator_share": 0.05333333333333334,
+  "max_prompt_template_share": 0.00962962962962963,
+  "max_rule_signature_share_by_family": {
+    "bit_manipulation": 0.004672897196261682,
+    "char_cipher": 0.005208333333333333,
+    "format_only": 0.017241379310344827,
+    "gravity_numeric": 0.008620689655172414,
+    "numeric_formula": 0.007874015748031496,
+    "roman_numeral": 0.010416666666666666,
+    "symbol_mapping": 0.004464285714285714,
+    "unit_conversion": 0.006060606060606061,
+    "word_cipher": 0.006329113924050633
+  },
+  "status": "WARN",
+  "surface_noise_profiles_per_family": {
+    "bit_manipulation": 13,
+    "char_cipher": 13,
+    "format_only": 1,
+    "gravity_numeric": 13,
+    "numeric_formula": 13,
+    "roman_numeral": 13,
+    "symbol_mapping": 13,
+    "unit_conversion": 13,
+    "word_cipher": 13
+  },
+  "templates_per_family": {
+    "bit_manipulation": 46,
+    "char_cipher": 95,
+    "format_only": 58,
+    "gravity_numeric": 22,
+    "numeric_formula": 40,
+    "roman_numeral": 20,
+    "symbol_mapping": 110,
+    "unit_conversion": 40,
+    "word_cipher": 39
+  },
+  "violations": [],
+  "warnings": [
+    "format_only_has_fewer_than_2_surface_noise_profiles"
+  ]
+}

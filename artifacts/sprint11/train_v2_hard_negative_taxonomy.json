@@ -1,0 +1,17 @@
+{
+  "contrastive_or_repair_policy_missing_count": 0,
+  "do_not_use_as_sft_missing_count": 0,
+  "failure_class_counts": {
+    "solver_abstained_on_answerable": 33
+  },
+  "failures": [],
+  "hard_negative_rows": 33,
+  "insufficient_failure_diversity": true,
+  "needs_day9_expansion": true,
+  "sft_violation_count": 0,
+  "status": "WARN",
+  "warnings": [
+    "hard_negative_rows_below_100_needs_day9_expansion",
+    "insufficient_failure_diversity"
+  ]
+}

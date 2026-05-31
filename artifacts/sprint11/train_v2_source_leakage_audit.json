@@ -1,0 +1,33 @@
+{
+  "checked_files": [
+    "artifacts/sprint11/train_v2_verified_direct_answer.jsonl",
+    "artifacts/sprint11/train_v2_solver_corrected.jsonl",
+    "artifacts/sprint11/train_v2_abstain_safety.jsonl",
+    "artifacts/sprint11/train_v2_hard_negative.jsonl",
+    "artifacts/sprint11/day5_rule_holdout_eval_512.jsonl",
+    "artifacts/sprint11/day5_anti_leak_eval_256.jsonl",
+    "artifacts/sprint11/day5_private_like_eval_512.jsonl",
+    "artifacts/sprint11/day5_family_hard_eval_512.jsonl"
+  ],
+  "corpus_row_count": 3142,
+  "direct_rows_from_expected_abstain": 0,
+  "direct_source_row_id_duplicates": 0,
+  "direct_source_row_id_in_eval_ids": 0,
+  "eval_row_count": 1792,
+  "failures": [],
+  "missing_source_metadata_by_file": {
+    "abstain_safety": 0,
+    "direct": 0,
+    "hard_negative": 0,
+    "solver_corrected": 0
+  },
+  "missing_source_metadata_count": 0,
+  "missing_source_metadata_examples": [],
+  "source_leakage_group_overlap_with_anti_leak": 0,
+  "source_prompt_hash_overlap_with_eval": 0,
+  "source_rule_id_overlap_with_rule_holdout": 0,
+  "status": "PASS",
+  "unsupported_direct_family_rows": 0,
+  "unverified_direct_sft_rows": 0,
+  "warnings": []
+}

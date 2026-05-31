@@ -1,0 +1,28 @@
+{
+  "blocking_failures": [],
+  "decision": "ALLOW_DAY7_TRAINING_CONFIG_PREP",
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "packaging_allowed": false,
+  "remaining_blockers_before_training": [
+    "Day 7 training configs not validated yet.",
+    "Base/parent/child training configs not prepared yet.",
+    "No v2 adapter trained.",
+    "No post-training eval.",
+    "No public leaderboard calibration."
+  ],
+  "reports": {
+    "hard_negative_taxonomy": "WARN",
+    "independence_report": "PASS",
+    "prompt_diversity_report": "WARN",
+    "sampling_policy": "PASS",
+    "source_leakage_audit": "PASS"
+  },
+  "status": "WARN",
+  "submission_allowed": false,
+  "training_allowed": false,
+  "warnings": [
+    "prompt_diversity_report_warn",
+    "hard_negative_taxonomy_warn"
+  ]
+}

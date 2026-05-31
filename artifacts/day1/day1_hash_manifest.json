@@ -290,6 +290,12 @@
     },
     {
       "exists": true,
+      "path": "artifacts/sprint11/day6_1_corpus_audit_summary.json",
+      "sha256": "d2b4a1e5dd5d3b74dd85de742cdcf8d9575d9bc351298c839335cf714402329b",
+      "size_bytes": 826
+    },
+    {
+      "exists": true,
       "path": "artifacts/sprint11/day6_corpus_build_summary.json",
       "sha256": "23c129dea7ee02d783b5621d6e9560be8cab8743d034ad685a1f373471f6f209",
       "size_bytes": 633
@@ -297,8 +303,8 @@
     {
       "exists": true,
       "path": "artifacts/sprint11/train_v2_abstain_safety.jsonl",
-      "sha256": "7f981fc45720f6d5ac03e27b85ef8921650b45d40cfaebe5bc5822550eca926d",
-      "size_bytes": 490675
+      "sha256": "d3be51a5c01a25101d9cbd6bdfda0a311f4f25ab306dcc7baced10eadaf522df",
+      "size_bytes": 856348
     },
     {
       "exists": true,
@@ -309,8 +315,20 @@
     {
       "exists": true,
       "path": "artifacts/sprint11/train_v2_hard_negative.jsonl",
-      "sha256": "aa4d9e6f14e8cdaf10d0c02cca77e03e4d7680c3495b7e1234f88ce3a83abdf3",
-      "size_bytes": 39424
+      "sha256": "ec717e9f400489a686caaf951f8147100b8788a9b3c4a429d239db52bf97a725",
+      "size_bytes": 70921
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_hard_negative_taxonomy.json",
+      "sha256": "65f2d0e7640deb28b9b5817d6c45dcea44102bb2cc18e2ed3bec462ec90afde4",
+      "size_bytes": 468
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_independence_report.json",
+      "sha256": "c0181d7d8a29a6b4f544b15d371f38c967caa97f058d326df95441d6c06f2281",
+      "size_bytes": 212391
     },
     {
       "exists": true,
@@ -321,7 +339,7 @@
     {
       "exists": true,
       "path": "artifacts/sprint11/train_v2_manifest.json",
-      "sha256": "25277a62262d162afe74e3888c0e3d0b5397fc576b3caf9d3343d4e69d85e47a",
+      "sha256": "a8047f7bb74cbfa03137e8e454eedafc8955daa8037362d9e9fac2ea46d6f48d",
       "size_bytes": 7128
     },
     {
@@ -329,6 +347,12 @@
       "path": "artifacts/sprint11/train_v2_mixture_report.json",
       "sha256": "78a65d0108a858bf9f352085577cfe805998c49773f03fd53ba1089faf14ebe5",
       "size_bytes": 1137
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_prompt_diversity_report.json",
+      "sha256": "c0b80284f219490476e03e418eb4c4d7c3c1e9011f52e8b7546c69481356173d",
+      "size_bytes": 1258
     },
     {
       "exists": true,
@@ -350,15 +374,27 @@
     },
     {
       "exists": true,
+      "path": "artifacts/sprint11/train_v2_sampling_policy.json",
+      "sha256": "66468f7ce67ee2dcf2d9b227409ad5516e70f025ac285b6654623cb2e5e780a8",
+      "size_bytes": 1113420
+    },
+    {
+      "exists": true,
       "path": "artifacts/sprint11/train_v2_solver_corrected.jsonl",
-      "sha256": "98cbf8910bfb15b2d616f220092f223dd5682872bf290ef0500ab02b5b919850",
-      "size_bytes": 2559658
+      "sha256": "b38fb7fa38b41d4eb93b2a5aff183509ece2e67860a679efd3273e0eafb5eb1b",
+      "size_bytes": 3910156
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/train_v2_source_leakage_audit.json",
+      "sha256": "79ce74761dfc141ee121759aa81167aa681fc9e729a557db20970b6e22a912e6",
+      "size_bytes": 1195
     },
     {
       "exists": true,
       "path": "artifacts/sprint11/train_v2_verified_direct_answer.jsonl",
-      "sha256": "24ecc77ba2f013f8119f540779487ad969ba5db1c30450fb648a9e970e0984b6",
-      "size_bytes": 2554258
+      "sha256": "f0b56e909d5629b9067ae1f8729c065f08ad3ac31c2694e85d11bed339dcb388",
+      "size_bytes": 3904756
     },
     {
       "exists": true,
@@ -519,8 +555,14 @@
     {
       "exists": true,
       "path": "kaggle_anti086/data/build_train_v2_corpus.py",
-      "sha256": "ff77082df612712cafb64aa0b1280eb8ec7f03dbf56c15d8643c397d093d992d",
-      "size_bytes": 18589
+      "sha256": "160cb39c9ca1f9fe651ffca21d77dd8f99852dae0ca11b21ae434fcae0d57b6f",
+      "size_bytes": 22460
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/day6_1_corpus_audit_summary.py",
+      "sha256": "9082003aca9395fec5739cbb2b3367b175b252732530a0c1ad8d9d152c0fea11",
+      "size_bytes": 3013
     },
     {
       "exists": true,
@@ -533,6 +575,12 @@
       "path": "kaggle_anti086/data/split_controller.py",
       "sha256": "8f761fec059093d50f52e079cb4dad5545d6983cd9c07ca5e2eb5a200e5b8238",
       "size_bytes": 6213
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_corpus_independence.py",
+      "sha256": "704446e628040c707523885ea4ffb54b75d82f01b2ee9976f0dfac52537cf330",
+      "size_bytes": 4746
     },
     {
       "exists": true,
@@ -566,9 +614,33 @@
     },
     {
       "exists": true,
+      "path": "kaggle_anti086/data/v2_hard_negative_taxonomy.py",
+      "sha256": "ec62f34ec145bfbcae80e81e5275d8aa759054100a5280ddd023eb92f274a0fb",
+      "size_bytes": 4749
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_prompt_diversity.py",
+      "sha256": "dec56a290be15bffa9f248760d108e1475fefde6b8baf444c10bd418c3abecbb",
+      "size_bytes": 5747
+    },
+    {
+      "exists": true,
       "path": "kaggle_anti086/data/v2_prompt_templates.py",
       "sha256": "3bc67ef4d3db7a07c0f5f77c00516cd2975251f89298e312717dcf334e87f5ae",
       "size_bytes": 2904
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_sampling_policy.py",
+      "sha256": "8c4ee3988e6d888f585c270d6ee5aecd40f5d194c63854ab332b02e6d96f1c82",
+      "size_bytes": 8010
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/data/v2_source_leakage_audit.py",
+      "sha256": "67e7e3bb4b44a4eecdbc515e04220985de128e8d123a104d3f5736ab222302f1",
+      "size_bytes": 6985
     },
     {
       "exists": true,
@@ -890,6 +962,12 @@
     },
     {
       "exists": true,
+      "path": "tests/test_sprint11_day6_1_audit_summary.py",
+      "sha256": "4cf3da9015fabe7cf95a0b41cdc8d7df8afc19edc38d6ed82a1600df8aa96913",
+      "size_bytes": 1975
+    },
+    {
+      "exists": true,
       "path": "tests/test_sprint11_format_only_solver.py",
       "sha256": "5a0b798b65790df1903ab0d09c83100d2c2ddf8273bd37b592b27ccd570abb29",
       "size_bytes": 1812
@@ -905,6 +983,12 @@
       "path": "tests/test_sprint11_v2_corpus_builder.py",
       "sha256": "c2f95d862aabd459d3c776a0034baee6727db7e53d31a11e77b5d6c1cc55d1f2",
       "size_bytes": 3282
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_v2_corpus_independence.py",
+      "sha256": "2d69b0e6dc78580d23b9e10c11ab69db23cf76e856bd7c806a82b73ba87b2c91",
+      "size_bytes": 1545
     },
     {
       "exists": true,
@@ -944,9 +1028,33 @@
     },
     {
       "exists": true,
+      "path": "tests/test_sprint11_v2_hard_negative_taxonomy.py",
+      "sha256": "9a93bef400eb4c6367f6702a494f2bbfc1bef89e7a9fae5a50b77f507700ad48",
+      "size_bytes": 1531
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_v2_prompt_diversity.py",
+      "sha256": "f7ca2c822bc99364a17f6759ee0b9148509546a8ad7df70b7f1d80fef108b241",
+      "size_bytes": 2008
+    },
+    {
+      "exists": true,
       "path": "tests/test_sprint11_v2_prompt_templates.py",
       "sha256": "1709a8e3137a877fa6c4fd9c136cd1a0664ad369f191c389be02709a9f1b7b93",
       "size_bytes": 1776
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_v2_sampling_policy.py",
+      "sha256": "d391f2e69b52e24c9b82505e3bf053a9a98877a3cff0843727a58ad3af619156",
+      "size_bytes": 1321
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_v2_source_leakage_audit.py",
+      "sha256": "62646b0dd71ead4779e3da94ea58cf623b342c2beff8398a10ccf1419263fcf9",
+      "size_bytes": 3606
     },
     {
       "exists": true,
