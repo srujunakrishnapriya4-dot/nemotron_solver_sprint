@@ -1,0 +1,20 @@
+{
+  "decision": "NEEDS_KAGGLE_SMOKE_TRAIN",
+  "failures": [],
+  "full_training_allowed": false,
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "packaging_allowed": false,
+  "reports": {
+    "adapter_artifact": "FAIL",
+    "memory": "WARN",
+    "orchestrator": "WARN",
+    "output_drift": "FAIL",
+    "preflight": "WARN",
+    "smoke_eval": "NEEDS_KAGGLE_MODEL_EVAL",
+    "smoke_train": "NEEDS_KAGGLE_SMOKE_TRAIN"
+  },
+  "status": "WARN",
+  "submission_allowed": false,
+  "warnings": []
+}

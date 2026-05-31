@@ -18,7 +18,17 @@ def test_run_manifest_unique_and_records_hashes(tmp_path):
     assert manifest["packaging_allowed"] is False
 
 
-def test_run_manifest_refuses_overwrite(tmp_path):
+def test_run_manifest_refuses_overwrite(monkeypatch, tmp_path):
+    import kaggle_anti086.training.training_run_manifest as trm
+
+    class FixedDateTime:
+        @staticmethod
+        def now(tz=None):
+            from datetime import datetime, timezone
+
+            return datetime(2026, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+
+    monkeypatch.setattr(trm, "datetime", FixedDateTime)
     audit = tmp_path / "audit.json"
     write_json_checked(audit, {"status": "PASS"}, field_name="audit")
     config = load_training_config("kaggle_anti086/training/configs/v2a_base_lora.yaml")

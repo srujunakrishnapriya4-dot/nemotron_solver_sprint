@@ -1,0 +1,23 @@
+{
+  "failures": [],
+  "snapshot_count": 1,
+  "snapshots": [
+    {
+      "cuda_available": false,
+      "device_count": 0,
+      "devices": [],
+      "failures": [],
+      "stage": "local_no_kaggle_model_stack",
+      "status": "WARN",
+      "timestamp_utc": "2026-05-31T21:12:51.910706+00:00",
+      "torch_available": false,
+      "warnings": [
+        "gpu_memory_snapshot_failed:ModuleNotFoundError"
+      ]
+    }
+  ],
+  "status": "WARN",
+  "warnings": [
+    "local_no_kaggle_model_stack"
+  ]
+}

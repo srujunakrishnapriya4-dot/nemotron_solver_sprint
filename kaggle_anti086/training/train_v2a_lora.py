@@ -13,10 +13,14 @@ if str(REPO_ROOT) not in sys.path:
 from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked
 from kaggle_anti086.kaggle_path_safety import require_writable_output_dir
 from kaggle_anti086.training.day8_1_backend_readiness import build_backend_readiness
+from kaggle_anti086.training.gpu_memory_audit import capture_gpu_memory_snapshot
 from kaggle_anti086.training.lora_backend import prepare_model_for_v2a_training, run_lora_training
+from kaggle_anti086.training.model_lifecycle import free_objects
 from kaggle_anti086.training.model_loader import load_base_model, load_tokenizer
+from kaggle_anti086.training.run_provenance import build_run_provenance
 from kaggle_anti086.training.sft_dataset import Sprint11SFTDataset, build_sft_dataset_report, load_weighted_sft_rows
 from kaggle_anti086.training.training_config_schema import STATUS_PASS_RUNNABLE, _target_modules, load_training_config, validate_training_config
+from kaggle_anti086.training.training_log_history import build_training_log_history
 from kaggle_anti086.training.training_run_manifest import build_run_manifest
 from kaggle_anti086.training.weighted_sft_sampler import build_weighted_sample, build_weighted_sampling_report
 
@@ -98,6 +102,10 @@ def build_training_summary(config: dict[str, Any], manifest: dict[str, Any], *, 
         "rank": int(config.get("rank", 0)),
         "target_modules": _target_modules(config),
         "dataset_report": backend_summary.get("dataset_report"),
+        "smoke_steps": int(config.get("num_steps", 0)) if int(config.get("num_steps", 0) or 0) <= 5 else None,
+        "memory_snapshots": backend_summary.get("memory_snapshots", []),
+        "training_log_history_path": backend_summary.get("training_log_history_path"),
+        "run_provenance_path": backend_summary.get("run_provenance_path"),
         "packaging_allowed": False,
         "submission_allowed": False,
         "warnings": warnings + (["dry_run_no_training_performed"] if dry_run else []),
@@ -152,6 +160,7 @@ def main(argv: list[str] | None = None) -> int:
         manifest = {"run_id": None, "stage": config.get("stage"), "output_adapter_dir": None, "packaging_allowed": False, "submission_allowed": False, "failures": [str(exc)]}
         failures.append(f"manifest_failed:{type(exc).__name__}")
     backend_summary: dict[str, Any] | None = None
+    memory_snapshots: list[dict[str, Any]] = []
     if args.kaggle_mode and not args.dry_run and not failures:
         readiness = build_backend_readiness(args.config, args.collator_audit)
         if readiness["status"] != "PASS":
@@ -170,10 +179,26 @@ def main(argv: list[str] | None = None) -> int:
                 failures.append("weighted_sampling_not_pass")
             if dataset_report["status"] == "PASS" and sampling_report["status"] == "PASS":
                 dataset = Sprint11SFTDataset(rows, tokenizer, int(config.get("max_seq_len", 1024)))
+                memory_snapshots.append(capture_gpu_memory_snapshot("train_before_model_load", kaggle_mode=True))
                 model = load_base_model(str(config["base_model_path"]), load_in_4bit=bool(config.get("load_in_4bit", False)), bf16=True)
+                memory_snapshots.append(capture_gpu_memory_snapshot("train_after_model_load", kaggle_mode=True))
                 model = prepare_model_for_v2a_training(model, config)
+                memory_snapshots.append(capture_gpu_memory_snapshot("train_after_lora_prepare", kaggle_mode=True))
+                memory_snapshots.append(capture_gpu_memory_snapshot("train_before_train", kaggle_mode=True))
                 backend_summary = run_lora_training(model, tokenizer, dataset, config, manifest["output_adapter_dir"])
+                memory_snapshots.append(capture_gpu_memory_snapshot("train_after_train_and_save", kaggle_mode=True))
+                free_objects(model, tokenizer, reason="after_train_v2a")
+                memory_snapshots.append(capture_gpu_memory_snapshot("train_after_cleanup", kaggle_mode=True))
                 backend_summary["dataset_report"] = dataset_report
+                backend_summary["memory_snapshots"] = memory_snapshots
+                log_path = Path(args.out_summary).with_name(Path(args.out_summary).stem + "_log_history.json")
+                log_report = build_training_log_history(backend_summary)
+                write_json_checked(log_path, log_report, field_name="day8_train_log_history")
+                backend_summary["training_log_history_path"] = str(log_path)
+                provenance_path = Path(args.out_summary).with_name(Path(args.out_summary).stem + "_run_provenance.json")
+                provenance = build_run_provenance(args.config, collator_audit=args.collator_audit)
+                write_json_checked(provenance_path, provenance, field_name="day8_train_run_provenance")
+                backend_summary["run_provenance_path"] = str(provenance_path)
     elif not args.dry_run and not failures:
         failures.append("real_training_requires_kaggle_mode")
     write_json_checked(args.out_manifest, manifest, field_name="day8_v2a_train_manifest")

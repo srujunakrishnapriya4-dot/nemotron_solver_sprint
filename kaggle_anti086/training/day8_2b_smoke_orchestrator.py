@@ -14,8 +14,10 @@ from kaggle_anti086.data.v2_corpus_io import read_json, read_jsonl, write_json_c
 from kaggle_anti086.training.adapter_artifact_audit import audit_adapter_artifacts
 from kaggle_anti086.training.eval_ladder import select_eval_rows
 from kaggle_anti086.training.final_sft_leakage_audit import audit_final_sft_leakage
+from kaggle_anti086.training.gpu_memory_audit import capture_gpu_memory_snapshot, cuda_empty_cache, write_gpu_memory_report
 from kaggle_anti086.training.inference_eval_backend import compare_base_vs_adapter, run_model_eval
 from kaggle_anti086.training.lora_target_inspector import verify_lora_targets
+from kaggle_anti086.training.model_lifecycle import free_objects
 from kaggle_anti086.training.model_environment_report import build_model_environment_report
 from kaggle_anti086.training.model_loader import load_adapter_model, load_base_model, load_tokenizer
 from kaggle_anti086.training.output_drift_audit import audit_output_drift
@@ -52,6 +54,7 @@ PATHS = {
     "smoke_predictions": ART / "day8_2b_smoke_eval_predictions.jsonl",
     "output_drift": ART / "day8_2b_output_drift_report.json",
     "training_log_history": ART / "day8_2b_training_log_history.json",
+    "gpu_memory": ART / "day8_2c_gpu_memory_report.json",
 }
 
 BLOCK_DECISIONS = {
@@ -61,6 +64,7 @@ BLOCK_DECISIONS = {
     "label_decode": "BLOCK_FULL_TRAINING_LABEL_DECODE",
     "leakage": "BLOCK_FULL_TRAINING_LEAKAGE",
     "model_environment": "NEEDS_KAGGLE_SMOKE_TRAIN",
+    "memory_backend": "BLOCK_FULL_TRAINING_MEMORY_BACKEND_BUG",
     "lora_target": "BLOCK_FULL_TRAINING_LORA_TARGET",
     "trainable_params": "BLOCK_FULL_TRAINING_TRAINABLE_PARAMS",
     "package_submission_guard": "BLOCK_FULL_TRAINING_RUNTIME",
@@ -88,8 +92,14 @@ def build_orchestrator_report(
     warnings: list[str] = []
     adapter_dir: str | None = None
     smoke_training_completed = False
+    memory_snapshots: list[dict[str, Any]] = []
     if config.get("stage") != "v2a_base_lora":
-        return _final("FAIL", "BLOCK_FULL_TRAINING_RUNTIME", False, False, None, gates, warnings, ["non_v2a_stage_rejected"])
+        return _final("FAIL", "BLOCK_FULL_TRAINING_RUNTIME", False, False, None, gates, warnings, ["non_v2a_stage_rejected"], memory_snapshots)
+
+    def snap(stage: str) -> dict[str, Any]:
+        snapshot = capture_gpu_memory_snapshot(stage, kaggle_mode=kaggle_mode)
+        memory_snapshots.append(snapshot)
+        return snapshot
 
     def run_gate(name: str, func: Callable[[], dict[str, Any]], *, hard: bool = True) -> dict[str, Any]:
         nonlocal failures
@@ -112,7 +122,7 @@ def build_orchestrator_report(
         if kaggle_mode or collator_report.get("status") != "WARN_LOCAL_TOKENIZER_UNAVAILABLE":
             failures.append("collator_audit")
     if failures and not continue_on_failure:
-        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
     items = load_weighted_sft_rows(config)
     selected = build_weighted_sample(items, seed=int(config.get("seed", 42)))
     run_gate("weighted_sampling", lambda: build_weighted_sampling_report(items, selected, seed=int(config.get("seed", 42))))
@@ -133,26 +143,47 @@ def build_orchestrator_report(
     if provenance["status"] != "PASS":
         failures.append("run_provenance")
     if failures and not continue_on_failure:
-        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
 
     if not kaggle_mode:
         _write_local_missing_reports(gates)
-        return _final("WARN", "NEEDS_KAGGLE_SMOKE_TRAIN", False, False, None, gates, warnings, failures)
+        snap("local_no_kaggle_model_stack")
+        write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+        return _final("WARN", "NEEDS_KAGGLE_SMOKE_TRAIN", False, False, None, gates, warnings, failures, memory_snapshots)
 
     def _load_model():
         return load_base_model(str(config["base_model_path"]), load_in_4bit=bool(config.get("load_in_4bit", False)), bf16=True)
 
+    snap("before_inspection_model_load")
     model = _load_model()
+    snap("after_inspection_model_load")
     run_gate("lora_target", lambda: verify_lora_targets(model, _target_modules(config)))
     if failures and not continue_on_failure:
-        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode)
+        free_objects(model, reason="inspection_failure_cleanup")
+        snap("after_inspection_cleanup")
+        write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
     from kaggle_anti086.training.lora_backend import prepare_model_for_v2a_training
 
     lora_model = prepare_model_for_v2a_training(model, config)
+    snap("after_lora_prepare")
     run_gate("trainable_params", lambda: audit_trainable_parameters(lora_model))
     run_gate("package_submission_guard", lambda: build_package_submission_guard())
     if failures and not continue_on_failure:
-        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode)
+        free_objects(lora_model, model, reason="pre_smoke_gate_failure_cleanup")
+        snap("after_inspection_cleanup")
+        write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
+    before_cleanup = memory_snapshots[-1]
+    free_objects(lora_model, model, reason="before_smoke_train")
+    after_cleanup = snap("after_inspection_cleanup")
+    if _inspection_memory_warning(before_cleanup, after_cleanup):
+        warnings.append("inspection_model_memory_not_released")
+    before_train = snap("before_smoke_train")
+    if _low_free_memory(before_train, float(config.get("min_free_memory_gb_before_smoke_train", 1.0) or 1.0)):
+        failures.append("memory_backend")
+        write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
 
     smoke_rc = train_v2a_main(
         [
@@ -169,6 +200,7 @@ def build_orchestrator_report(
             "5",
         ]
     )
+    snap("after_smoke_train")
     smoke_report = read_json(PATHS["smoke_train"]) if PATHS["smoke_train"].exists() else {"status": "FAIL", "failures": ["smoke_summary_missing"]}
     if smoke_rc != 0 and smoke_report.get("status") == "PASS":
         smoke_report["status"] = "FAIL"
@@ -184,12 +216,16 @@ def build_orchestrator_report(
     if not adapter_dir:
         failures.append("smoke_adapter_dir_missing")
     if failures and not continue_on_failure:
-        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode)
+        write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
 
     run_gate("adapter_artifact", lambda: audit_adapter_artifacts(adapter_dir))
     if failures and not continue_on_failure:
-        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode)
+        write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
+    snap("before_smoke_eval")
     smoke_eval, predictions = _run_smoke_eval(config, adapter_dir)
+    snap("after_smoke_eval")
     write_json_checked(PATHS["smoke_eval"], smoke_eval, field_name="day8_2b_smoke_eval")
     write_jsonl_checked(PATHS["smoke_predictions"], predictions, field_name="day8_2b_smoke_eval_predictions")
     gates["smoke_eval"] = build_gate_entry(smoke_eval["status"], PATHS["smoke_eval"])
@@ -201,8 +237,10 @@ def build_orchestrator_report(
     if drift["status"] != "PASS":
         failures.append("output_drift")
     if failures:
-        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode)
-    return _final("PASS", "ALLOW_DAY8_3_FULL_V2A_TRAINING", True, True, adapter_dir, gates, warnings, failures)
+        write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+        return _blocked(failures, gates, warnings, adapter_dir, smoke_training_completed, kaggle_mode, memory_snapshots)
+    write_gpu_memory_report(PATHS["gpu_memory"], memory_snapshots)
+    return _final("PASS", "ALLOW_DAY8_3_FULL_V2A_TRAINING", True, True, adapter_dir, gates, warnings, failures, memory_snapshots)
 
 
 def _run_smoke_eval(config: dict[str, Any], adapter_dir: str) -> tuple[dict[str, Any], list[dict[str, Any]]]:
@@ -212,12 +250,10 @@ def _run_smoke_eval(config: dict[str, Any], adapter_dir: str) -> tuple[dict[str,
     tokenizer = load_tokenizer(str(config["base_model_path"]))
     base_model = load_base_model(str(config["base_model_path"]), load_in_4bit=bool(config.get("load_in_4bit", False)), bf16=True)
     base_report, base_predictions = run_model_eval(base_model, tokenizer, eval_path)
-    del base_model
-    _empty_cache()
+    free_objects(base_model, reason="after_smoke_base_eval")
     adapter_model = load_adapter_model(str(config["base_model_path"]), adapter_dir, load_in_4bit=bool(config.get("load_in_4bit", False)), bf16=True)
     adapter_report, adapter_predictions = run_model_eval(adapter_model, tokenizer, eval_path)
-    del adapter_model
-    _empty_cache()
+    free_objects(adapter_model, tokenizer, reason="after_smoke_adapter_eval")
     delta = compare_base_vs_adapter(base_report, adapter_report)
     predictions = []
     for base, v2a, row in zip(base_predictions, adapter_predictions, rows):
@@ -265,6 +301,23 @@ def _empty_cache() -> None:
         pass
 
 
+def _low_free_memory(snapshot: dict[str, Any], threshold_gb: float) -> bool:
+    if snapshot.get("status") != "PASS":
+        return False
+    devices = snapshot.get("devices") or []
+    free_values = [device.get("free_memory_gb") for device in devices if device.get("free_memory_gb") is not None]
+    return bool(free_values) and min(float(value) for value in free_values) < threshold_gb
+
+
+def _inspection_memory_warning(before: dict[str, Any], after: dict[str, Any]) -> bool:
+    if before.get("status") != "PASS" or after.get("status") != "PASS":
+        return False
+    before_reserved = sum(float(device.get("reserved_gb") or 0.0) for device in before.get("devices", []))
+    after_reserved = sum(float(device.get("reserved_gb") or 0.0) for device in after.get("devices", []))
+    after_allocated = sum(float(device.get("allocated_gb") or 0.0) for device in after.get("devices", []))
+    return after_reserved > 1.0 and after_reserved > before_reserved * 0.8 and after_allocated > 1.0
+
+
 def _write_local_missing_reports(gates: dict[str, dict[str, str]]) -> None:
     local_reports = {
         "lora_target": {"status": "FAIL", "failures": ["needs_kaggle_model_inspection"]},
@@ -283,10 +336,18 @@ def _write_local_missing_reports(gates: dict[str, dict[str, str]]) -> None:
     write_json_checked(PATHS["training_log_history"], build_training_log_history({"log_history": []}), field_name="day8_2b_training_log_history")
 
 
-def _blocked(failures: list[str], gates: dict[str, dict[str, str]], warnings: list[str], adapter_dir: str | None, smoke_done: bool, kaggle_mode: bool) -> dict[str, Any]:
+def _blocked(
+    failures: list[str],
+    gates: dict[str, dict[str, str]],
+    warnings: list[str],
+    adapter_dir: str | None,
+    smoke_done: bool,
+    kaggle_mode: bool,
+    memory_snapshots: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     first = failures[0] if failures else "runtime"
     decision = "NEEDS_KAGGLE_SMOKE_TRAIN" if (first == "model_environment" and not kaggle_mode) else BLOCK_DECISIONS.get(first, "BLOCK_FULL_TRAINING_RUNTIME")
-    return _final("WARN" if decision == "NEEDS_KAGGLE_SMOKE_TRAIN" else "FAIL", decision, False, smoke_done, adapter_dir, gates, warnings, failures)
+    return _final("WARN" if decision == "NEEDS_KAGGLE_SMOKE_TRAIN" else "FAIL", decision, False, smoke_done, adapter_dir, gates, warnings, failures, memory_snapshots or [])
 
 
 def _final(
@@ -298,6 +359,7 @@ def _final(
     gates: dict[str, dict[str, str]],
     warnings: list[str],
     failures: list[str],
+    memory_snapshots: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     return {
         "status": status,
@@ -308,6 +370,7 @@ def _final(
         "gates": gates,
         "warnings": warnings,
         "failures": failures,
+        "memory_snapshots": memory_snapshots or [],
         "packaging_allowed": False,
         "submission_allowed": False,
         "no_leaderboard_evidence": True,

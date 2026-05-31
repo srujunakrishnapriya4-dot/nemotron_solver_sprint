@@ -35,6 +35,8 @@ def _patch_common(monkeypatch, tmp_path):
     monkeypatch.setattr(orch, "build_model_environment_report", lambda *a, **k: {"status": "PASS"})
     monkeypatch.setattr(orch, "build_run_provenance", lambda *a, **k: {"status": "PASS"})
     monkeypatch.setattr(orch, "build_package_submission_guard", lambda *a, **k: {"status": "PASS"})
+    monkeypatch.setattr(orch, "capture_gpu_memory_snapshot", lambda stage, kaggle_mode=False: {"stage": stage, "status": "PASS", "devices": [{"free_memory_gb": 16.0, "reserved_gb": 0.0, "allocated_gb": 0.0}]})
+    monkeypatch.setattr(orch, "write_gpu_memory_report", lambda *a, **k: {"status": "PASS"})
     return config
 
 
@@ -87,6 +89,24 @@ def test_full_success_reads_adapter_dir(monkeypatch, tmp_path):
     assert report["decision"] == "ALLOW_DAY8_3_FULL_V2A_TRAINING"
     assert report["full_training_allowed"] is True
     assert report["adapter_dir"] == adapter_dir
+    assert any(snap["stage"] == "after_inspection_cleanup" for snap in report["memory_snapshots"])
+
+
+def test_pre_smoke_low_memory_blocks(monkeypatch, tmp_path):
+    _patch_paths(monkeypatch, tmp_path)
+    _patch_common(monkeypatch, tmp_path)
+    monkeypatch.setattr(orch, "load_base_model", lambda *a, **k: object())
+    monkeypatch.setattr(orch, "verify_lora_targets", lambda *a, **k: {"status": "PASS"})
+    monkeypatch.setattr("kaggle_anti086.training.lora_backend.prepare_model_for_v2a_training", lambda model, config: model)
+    monkeypatch.setattr(orch, "audit_trainable_parameters", lambda *a, **k: {"status": "PASS"})
+
+    def snapshot(stage, kaggle_mode=False):
+        free = 0.25 if stage == "before_smoke_train" else 16.0
+        return {"stage": stage, "status": "PASS", "devices": [{"free_memory_gb": free, "reserved_gb": 0.0, "allocated_gb": 0.0}]}
+
+    monkeypatch.setattr(orch, "capture_gpu_memory_snapshot", snapshot)
+    report = orch.build_orchestrator_report(config_path="config.yaml", kaggle_mode=True)
+    assert report["decision"] == "BLOCK_FULL_TRAINING_MEMORY_BACKEND_BUG"
 
 
 def test_missing_smoke_adapter_dir_blocks(monkeypatch, tmp_path):

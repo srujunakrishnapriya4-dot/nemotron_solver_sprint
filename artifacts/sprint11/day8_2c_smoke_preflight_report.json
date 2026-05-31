@@ -1,13 +1,7 @@
 {
-  "adapter_dir": null,
-  "decision": "NEEDS_KAGGLE_SMOKE_TRAIN",
+  "decision": "NEEDS_KAGGLE_MODEL_STACK",
   "failures": [],
-  "full_training_allowed": false,
   "gates": {
-    "adapter_artifact": {
-      "path": "artifacts\\sprint11\\day8_2_adapter_artifact_report.json",
-      "status": "FAIL"
-    },
     "collator_audit": {
       "path": "artifacts\\sprint11\\day8_2b_real_collator_audit_report.json",
       "status": "WARN_LOCAL_TOKENIZER_UNAVAILABLE"
@@ -20,37 +14,13 @@
       "path": "artifacts\\sprint11\\day8_2_final_sft_leakage_report.json",
       "status": "PASS"
     },
-    "lora_target": {
-      "path": "artifacts\\sprint11\\day8_2_lora_target_report.json",
-      "status": "FAIL"
-    },
     "model_environment": {
       "path": "artifacts\\sprint11\\day8_2b_model_environment_report.json",
       "status": "WARN"
     },
-    "output_drift": {
-      "path": "artifacts\\sprint11\\day8_2b_output_drift_report.json",
-      "status": "FAIL"
-    },
     "package_submission_guard": {
       "path": "artifacts\\sprint11\\day8_2b_package_submission_guard_report.json",
       "status": "PASS"
-    },
-    "run_provenance": {
-      "path": "artifacts\\sprint11\\day8_2b_run_provenance.json",
-      "status": "PASS"
-    },
-    "smoke_eval": {
-      "path": "artifacts\\sprint11\\day8_2b_smoke_eval_report.json",
-      "status": "NEEDS_KAGGLE_MODEL_EVAL"
-    },
-    "smoke_train": {
-      "path": "artifacts\\sprint11\\day8_2_smoke_train_summary.json",
-      "status": "NEEDS_KAGGLE_SMOKE_TRAIN"
-    },
-    "trainable_params": {
-      "path": "artifacts\\sprint11\\day8_2_trainable_parameter_report.json",
-      "status": "FAIL"
     },
     "truncation": {
       "path": "artifacts\\sprint11\\day8_2_truncation_audit_report.json",
@@ -67,9 +37,9 @@
       "device_count": 0,
       "devices": [],
       "failures": [],
-      "stage": "local_no_kaggle_model_stack",
+      "stage": "local_preflight_no_model_stack",
       "status": "WARN",
-      "timestamp_utc": "2026-05-31T21:12:51.910706+00:00",
+      "timestamp_utc": "2026-05-31T21:12:50.323683+00:00",
       "torch_available": false,
       "warnings": [
         "gpu_memory_snapshot_failed:ModuleNotFoundError"
@@ -79,8 +49,9 @@
   "no_0_95_evidence": true,
   "no_leaderboard_evidence": true,
   "packaging_allowed": false,
-  "smoke_training_completed": false,
   "status": "WARN",
   "submission_allowed": false,
-  "warnings": []
+  "warnings": [
+    "needs_kaggle_model_stack"
+  ]
 }

@@ -17,7 +17,13 @@ from kaggle_anti086.training.train_v2a_lora import main as train_v2a_main
 from kaggle_anti086.training.training_config_schema import load_training_config
 
 
-def validate_full_train_gate(config: dict[str, Any], *, smoke_report_path: str | Path | None) -> tuple[list[str], list[str]]:
+def validate_full_train_gate(
+    config: dict[str, Any],
+    *,
+    smoke_report_path: str | Path | None,
+    smoke_readiness_path: str | Path | None = None,
+    kaggle_mode: bool = False,
+) -> tuple[list[str], list[str]]:
     warnings: list[str] = []
     failures: list[str] = []
     if config.get("stage") != "v2a_base_lora":
@@ -37,6 +43,21 @@ def validate_full_train_gate(config: dict[str, Any], *, smoke_report_path: str |
             guard = smoke.get("gates", {}).get("package_submission_guard", {})
             if isinstance(guard, dict) and guard.get("status") != "PASS":
                 failures.append("package_submission_guard_not_pass")
+    default_readiness = Path("artifacts/sprint11/day8_2c_smoke_readiness_report.json")
+    readiness_path = Path(smoke_readiness_path) if smoke_readiness_path else (default_readiness if default_readiness.exists() else None)
+    if readiness_path is None:
+        if kaggle_mode:
+            failures.append("day8_2c_smoke_readiness_missing")
+        else:
+            warnings.append("day8_2c_smoke_readiness_missing")
+    elif not readiness_path.exists():
+        failures.append("day8_2c_smoke_readiness_missing")
+    else:
+        readiness = read_json(readiness_path)
+        if readiness.get("decision") != "ALLOW_DAY8_3_FULL_V2A_TRAINING":
+            failures.append("day8_2c_smoke_readiness_not_allow")
+        if readiness.get("full_training_allowed") is not True:
+            failures.append("day8_2c_full_training_not_allowed")
     package_guard = build_package_submission_guard()
     if package_guard["status"] != "PASS":
         failures.append("package_submission_guard_runtime_fail")
@@ -59,10 +80,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--smoke-report", required=True)
     parser.add_argument("--out-manifest", required=True)
     parser.add_argument("--out-summary", required=True)
+    parser.add_argument("--smoke-readiness")
     parser.add_argument("--kaggle-mode", action="store_true")
     args = parser.parse_args(argv)
     config = load_training_config(args.config)
-    warnings, failures = validate_full_train_gate(config, smoke_report_path=args.smoke_report)
+    warnings, failures = validate_full_train_gate(config, smoke_report_path=args.smoke_report, smoke_readiness_path=args.smoke_readiness, kaggle_mode=args.kaggle_mode)
     if failures:
         summary = {
             "status": "FAIL",
