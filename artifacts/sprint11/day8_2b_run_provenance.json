@@ -1,0 +1,23 @@
+{
+  "branch": "main",
+  "collator_audit_sha256": "7cb577787f53cc8ea0f5c93a2fd8c12f89576f347301014e0ef26ada44e8abcd",
+  "config_path": "kaggle_anti086\\training\\configs\\v2a_base_lora.yaml",
+  "config_sha256": "876fcf0e5d0d62d634235711e04374004ea294cb160b4974063f85788cbb29c7",
+  "created_at_utc": "2026-05-31T19:09:48.120040+00:00",
+  "dirty_worktree": true,
+  "failures": [],
+  "git_commit": "d804ed7d2177c0736b25153e040110ba1a6e20f4",
+  "label_decode_audit_sha256": "37a7bfada757f07999e598e56a71dc869c613fde5fe085dd64db0cacc6a0a4ba",
+  "leakage_audit_sha256": "53c8d5b259fe48247cc69e2f6b76056d52103cd904e2a09bb501589ce654d2c6",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+  "smoke_report_sha256": null,
+  "status": "PASS",
+  "train_direct_path": "artifacts/sprint11/train_v2_verified_direct_answer.jsonl",
+  "train_direct_sha256": "f0b56e909d5629b9067ae1f8729c065f08ad3ac31c2694e85d11bed339dcb388",
+  "train_solver_corrected_path": "artifacts/sprint11/train_v2_solver_corrected.jsonl",
+  "train_solver_corrected_sha256": "b38fb7fa38b41d4eb93b2a5aff183509ece2e67860a679efd3273e0eafb5eb1b",
+  "truncation_audit_sha256": "dad570a3b17ab116042c71c79904f81ceadd4775a852bd58388fd1d8a74a3aaf",
+  "warnings": [],
+  "weighted_sampling_report_sha256": "5249dd39252e5a19918874a5f043f1145c5f50d287b7d935cf6652fb48c5abff"
+}

@@ -1,0 +1,7 @@
+# SPRINT-11G.2b Kaggle smoke orchestrator and gated full-train plan
+# No package. No submit. No v2b/v2c/v3.
+
+python kaggle_anti086/training/day8_2b_smoke_orchestrator.py --config kaggle_anti086/training/configs/v2a_base_lora.yaml --out artifacts/sprint11/day8_2b_smoke_orchestrator_report.json --kaggle-mode
+
+# RUN ONLY IF artifacts/sprint11/day8_2b_smoke_orchestrator_report.json decision is ALLOW_DAY8_3_FULL_V2A_TRAINING.
+python kaggle_anti086/training/day8_3_full_v2a_train.py --config kaggle_anti086/training/configs/v2a_base_lora.yaml --smoke-report artifacts/sprint11/day8_2b_smoke_orchestrator_report.json --out-manifest artifacts/sprint11/day8_3_v2a_train_manifest.json --out-summary artifacts/sprint11/day8_3_v2a_train_summary.json --kaggle-mode

@@ -1,15 +1,6 @@
 {
-  "adapter_config_exists": false,
-  "adapter_dir": "artifacts\\sprint11\\missing_day8_2_smoke_adapter",
-  "adapter_model_exists": false,
-  "adapter_size_mb": 0.0,
   "failures": [
-    "adapter_config_missing",
-    "adapter_model_missing"
+    "needs_smoke_adapter"
   ],
-  "forbidden_files": [],
-  "packageable": false,
-  "rank": null,
-  "status": "FAIL",
-  "target_modules": []
+  "status": "FAIL"
 }

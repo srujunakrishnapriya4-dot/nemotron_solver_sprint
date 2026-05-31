@@ -115,6 +115,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--kaggle-mode", action="store_true")
     parser.add_argument("--smoke-steps", type=int, default=None)
     parser.add_argument("--require-day8-2-readiness", action="store_true")
+    parser.add_argument("--smoke-report", default="artifacts/sprint11/day8_2b_smoke_orchestrator_report.json")
     args = parser.parse_args(argv)
     config = load_training_config(args.config)
     if args.smoke_steps is not None:
@@ -129,8 +130,24 @@ def main(argv: list[str] | None = None) -> int:
         smoke_steps=args.smoke_steps,
         require_day8_2_readiness=args.require_day8_2_readiness,
     )
+    if not args.dry_run and args.smoke_steps is None:
+        smoke_report = Path(args.smoke_report)
+        if not smoke_report.exists():
+            failures.append("smoke_report_missing_for_full_training")
+        else:
+            smoke = read_json(smoke_report)
+            if smoke.get("decision") != "ALLOW_DAY8_3_FULL_V2A_TRAINING" or smoke.get("full_training_allowed") is not True:
+                failures.append("smoke_report_not_allowing_full_training")
+            guard = smoke.get("gates", {}).get("package_submission_guard", {})
+            if isinstance(guard, dict) and guard.get("status") not in {"PASS", None}:
+                failures.append("package_submission_guard_not_pass")
     try:
-        manifest = build_run_manifest(config, config_path=args.config, collator_audit_path=args.collator_audit)
+        manifest = build_run_manifest(
+            config,
+            config_path=args.config,
+            collator_audit_path=args.collator_audit,
+            run_kind="smoke" if args.smoke_steps is not None else "full",
+        )
     except Exception as exc:
         manifest = {"run_id": None, "stage": config.get("stage"), "output_adapter_dir": None, "packaging_allowed": False, "submission_allowed": False, "failures": [str(exc)]}
         failures.append(f"manifest_failed:{type(exc).__name__}")

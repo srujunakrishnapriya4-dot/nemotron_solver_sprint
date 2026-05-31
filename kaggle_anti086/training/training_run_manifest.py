@@ -23,20 +23,36 @@ def git_commit() -> str | None:
         return None
 
 
-def build_run_manifest(config: dict[str, Any], *, config_path: str | Path, collator_audit_path: str | Path, output_root: str | Path | None = None) -> dict[str, Any]:
+def build_run_manifest(
+    config: dict[str, Any],
+    *,
+    config_path: str | Path,
+    collator_audit_path: str | Path,
+    output_root: str | Path | None = None,
+    run_kind: str = "full",
+) -> dict[str, Any]:
     stage = str(config.get("stage"))
     if stage != "v2a_base_lora":
         raise ValueError("Day 8 training manifest only supports v2a_base_lora")
-    seed = json.dumps({"stage": stage, "config": file_record(config_path), "audit": file_record(collator_audit_path)}, sort_keys=True)
-    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "_" + sha256_text(seed)[:8]
+    if run_kind not in {"smoke", "full"}:
+        raise ValueError("run_kind must be smoke or full")
+    config_hash = file_record(config_path).get("sha256") or "missing"
+    corpus_hash = file_record(config["train_direct_path"]).get("sha256") or "missing"
+    seed = json.dumps({"stage": stage, "kind": run_kind, "config": config_hash, "audit": file_record(collator_audit_path), "corpus": corpus_hash}, sort_keys=True)
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    short_hash = sha256_text(seed)[:8]
+    run_id = f"{run_kind}_{timestamp}_{short_hash}"
     base_output = Path(output_root) if output_root is not None else Path(str(config["output_adapter_dir"])).parent
-    output_adapter_dir = base_output / f"v2a_{run_id}"
+    output_adapter_dir = base_output / f"v2a_{run_kind}_{timestamp}_{short_hash}"
     require_writable_output_dir(output_adapter_dir, field_name="output_adapter_dir")
     if output_adapter_dir.exists():
         raise FileExistsError(f"refusing to overwrite existing adapter dir: {output_adapter_dir}")
+    if (output_adapter_dir / "adapter_config.json").exists() or (output_adapter_dir / "adapter_model.safetensors").exists():
+        raise FileExistsError(f"refusing to reuse adapter-containing dir: {output_adapter_dir}")
     sampling_policy = Path("artifacts/sprint11/train_v2_sampling_policy.json")
     return {
         "run_id": run_id,
+        "run_kind": run_kind,
         "stage": stage,
         "config_path": str(config_path),
         "config_sha256": file_record(config_path).get("sha256"),

@@ -9,6 +9,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from kaggle_anti086.data.v2_corpus_io import write_json_checked
 from kaggle_anti086.training.train_v2a_lora import main as train_main
+from kaggle_anti086.training.training_config_schema import load_training_config
 
 
 def build_local_smoke_summary(steps: int) -> dict:
@@ -63,6 +64,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out-summary", required=True)
     parser.add_argument("--kaggle-mode", action="store_true")
     args = parser.parse_args(argv)
+    config = load_training_config(args.config)
+    if config.get("stage") != "v2a_base_lora":
+        report = {
+            "status": "FAIL",
+            "steps_completed": 0,
+            "requested_steps": args.steps,
+            "adapter_dir": None,
+            "adapter_valid": False,
+            "loss_start": None,
+            "loss_end": None,
+            "loss_nan_detected": False,
+            "artifact_audit_status": "MISSING",
+            "smoke_eval_status": "SKIPPED",
+            "warnings": [],
+            "failures": ["non_v2a_stage_rejected"],
+        }
+        write_json_checked(args.out_summary, report, field_name="day8_2_smoke_train_summary")
+        print(json.dumps({"status": report["status"], "out": args.out_summary}, sort_keys=True))
+        return 2
     if not args.kaggle_mode:
         report = build_local_smoke_summary(args.steps)
         write_json_checked(args.out_summary, report, field_name="day8_2_smoke_train_summary")

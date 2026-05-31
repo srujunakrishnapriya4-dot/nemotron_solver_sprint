@@ -1,0 +1,25 @@
+{
+  "base_model_path": "/kaggle/input/nemotron-model",
+  "base_model_path_exists": false,
+  "bf16_supported": false,
+  "bitsandbytes_available": false,
+  "cuda_available": false,
+  "device_map": "auto",
+  "failures": [],
+  "gpu_count": 0,
+  "gpu_name": null,
+  "gpu_total_memory_gb": 0.0,
+  "gradient_checkpointing": true,
+  "load_in_4bit": true,
+  "peft_available": false,
+  "status": "WARN",
+  "tokenizer_loadable": false,
+  "torch_available": false,
+  "transformers_available": false,
+  "warnings": [
+    "local_model_or_gpu_unavailable",
+    "torch_unavailable:ModuleNotFoundError",
+    "transformers_unavailable:ModuleNotFoundError",
+    "peft_unavailable:ModuleNotFoundError"
+  ]
+}

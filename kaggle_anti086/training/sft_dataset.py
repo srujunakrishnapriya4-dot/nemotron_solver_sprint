@@ -26,6 +26,10 @@ class SFTItem:
     sampling_weight: float
 
 
+class SFTDatasetRejectedRowError(RuntimeError):
+    pass
+
+
 def render_sft_example(row: dict[str, Any]) -> dict[str, str]:
     messages = row.get("messages", [])
     user = str(messages[0].get("content", "")) if messages else str(row.get("prompt", ""))
@@ -148,20 +152,46 @@ def build_sft_dataset_report(config: dict[str, Any], rows: list[SFTItem] | None 
 
 
 class Sprint11SFTDataset:
-    def __init__(self, rows: list[SFTItem], tokenizer: TokenizerLike, max_seq_len: int):
+    def __init__(self, rows: list[SFTItem], tokenizer: TokenizerLike, max_seq_len: int, *, prevalidate: bool = True):
         self.rows = rows
         self.tokenizer = tokenizer
         self.max_seq_len = max_seq_len
+        if prevalidate:
+            for index in range(len(self.rows)):
+                self._features_or_raise(index)
 
     def __len__(self) -> int:
         return len(self.rows)
 
     def __getitem__(self, index: int) -> dict[str, Any]:
-        item = self.rows[index]
-        features = build_assistant_only_features(item.row, self.tokenizer, self.max_seq_len)
+        item, features = self._features_or_raise(index)
         features["sampling_weight"] = item.sampling_weight
         features["source"] = item.source
         return features
+
+    def _features_or_raise(self, index: int) -> tuple[SFTItem, dict[str, Any]]:
+        item = self.rows[index]
+        row = item.row
+        features = build_assistant_only_features(row, self.tokenizer, self.max_seq_len)
+        reason = features.get("rejected_reason")
+        if row.get("family") in UNSUPPORTED_SFT:
+            reason = reason or "unsupported_family"
+        if row.get("verification_status") != "verified":
+            reason = reason or "unverified_row"
+        if features.get("answer_truncated"):
+            reason = reason or "answer_truncated"
+        if features.get("missing_answer_span"):
+            reason = reason or "missing_answer_span"
+        if int(features.get("supervised_token_count", 0) or 0) <= 0:
+            reason = reason or "zero_supervised"
+        if reason:
+            raise SFTDatasetRejectedRowError(
+                "rejected_sft_row "
+                f"id={row.get('id')} family={row.get('family')} reason={reason} "
+                f"token_length={len(features.get('input_ids', []))} "
+                f"answer_token_count={features.get('answer_token_count')}"
+            )
+        return item, features
 
 
 def _row_allowed(row: dict[str, Any]) -> bool:

@@ -1,6 +1,6 @@
 {
   "failures": [
-    "needs_kaggle_model_inspection"
+    "no_predictions"
   ],
   "status": "FAIL"
 }

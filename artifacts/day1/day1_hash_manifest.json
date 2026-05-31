@@ -1209,14 +1209,14 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/sft_dataset.py",
-      "sha256": "17e7572f425a241982b9e89192533acef7fd6024abca827051182a08a8b8091b",
-      "size_bytes": 6941
+      "sha256": "d380bb247d2843b11f157a4e7372de8d1ee5d3e2f758a4ec1b59bd8432f25645",
+      "size_bytes": 8244
     },
     {
       "exists": true,
       "path": "kaggle_anti086/training/train_v2a_lora.py",
-      "sha256": "925bd4a31d52d62d454ff98846d8cace7b78527ab5837bc64c7bec5be4d9e049",
-      "size_bytes": 9434
+      "sha256": "a7c7fd6457a11cbcc09bbeaa30857cad7755e464aa79c9ebca9cff08c09228a1",
+      "size_bytes": 10366
     },
     {
       "exists": true,
@@ -1227,8 +1227,8 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/training_run_manifest.py",
-      "sha256": "6a51d3b9cdeb7e809c7722d023ae36130785b81f989b7a31aa11fb577a72c38e",
-      "size_bytes": 3305
+      "sha256": "0a3b1cd5c077dd6770897ec6be252be356524f8a429af1bcff8d706c57c1336f",
+      "size_bytes": 3983
     },
     {
       "exists": true,
@@ -1563,8 +1563,8 @@
     {
       "exists": true,
       "path": "kaggle_anti086/training/day8_2_smoke_train.py",
-      "sha256": "17554833042deb4a731c19c4883424b586f61c99d8a8e7de279264b03acc3f1d",
-      "size_bytes": 3304
+      "sha256": "f07a0ed683a2d175fa33537826ddc76c69ff5dcb069909e10884b34d720fa6c4",
+      "size_bytes": 4165
     },
     {
       "exists": true,
@@ -1593,14 +1593,14 @@
     {
       "exists": true,
       "path": "artifacts/sprint11/day8_2_lora_target_report.json",
-      "sha256": "f802f997bfb85dc2f90746389cffbd27344c1a34311a62b8149800dba802d845",
-      "size_bytes": 320
+      "sha256": "d16d75b8d4ed225511844442bcfd2ebe2ecb1d6e8355f3f5114b20d4314cb24a",
+      "size_bytes": 86
     },
     {
       "exists": true,
       "path": "artifacts/sprint11/day8_2_trainable_parameter_report.json",
-      "sha256": "5d409bcbc97755cf09b34d2df8daff1e3ecf6cdc9d669a7456b0f09bab43d2ef",
-      "size_bytes": 292
+      "sha256": "912c989aebb2ce69da07fe655005e36eec61b8536510c65a482ba26464261e74",
+      "size_bytes": 84
     },
     {
       "exists": true,
@@ -1617,14 +1617,14 @@
     {
       "exists": true,
       "path": "artifacts/sprint11/day8_2_adapter_artifact_report.json",
-      "sha256": "204e29b057713e39ff54d8f7861fcd339f1ea489f1491d1fa43dd72c6baf0b23",
-      "size_bytes": 369
+      "sha256": "1e53fabbcdbdf76b0ce23b7a2cdb0f66fe5da3c08488e9c0f155d0583edcd14f",
+      "size_bytes": 76
     },
     {
       "exists": true,
       "path": "artifacts/sprint11/day8_2_smoke_train_summary.json",
-      "sha256": "1849356701566bed6d591bf387dd28c9577e3678cd092ea8da82a344593ff411",
-      "size_bytes": 374
+      "sha256": "9ff1f29db055d1920edca25846bd12ea16f0bbd479cad09ac54be9a1d8e2620f",
+      "size_bytes": 89
     },
     {
       "exists": true,
@@ -1733,6 +1733,156 @@
       "path": "tests/test_sprint11_day8_2_readiness.py",
       "sha256": "4c17470e69016f243622935fa1c32a8ef4aaa4d70d7c84e8c7c7258f74f4459f",
       "size_bytes": 1191
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/day8_2b_smoke_orchestrator.py",
+      "sha256": "40e10045d76f90c94c612b3818040f1c9604c9f7b72e80b41a07064ca748b353",
+      "size_bytes": 16989
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/day8_3_full_v2a_train.py",
+      "sha256": "45ef6d895cd1bdfdeb6552c50a1494e94716c2e1c780783c6871537b10cb1936",
+      "size_bytes": 4102
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/run_provenance.py",
+      "sha256": "033ef9c1140c9a2c475595def75dbf8d73e0ef88f0df84ed0962ab09202ce2d1",
+      "size_bytes": 4602
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/package_submission_guard.py",
+      "sha256": "6c8d708cc77273bfe672c4015186b25755b510a8eac71e03c7e2b3266c4e45cb",
+      "size_bytes": 2555
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/model_environment_report.py",
+      "sha256": "b6b2b9ead18b80e81c48e5661d8f153aff30d6e4510d819a0da19c78dbbc970a",
+      "size_bytes": 3396
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/training_log_history.py",
+      "sha256": "3ba65798cc0e0dbc1a249db17a85891465446593442f6d4c85d5b8647a1238f2",
+      "size_bytes": 2544
+    },
+    {
+      "exists": true,
+      "path": "kaggle_anti086/training/day8_2b_kaggle_commands.py",
+      "sha256": "b88dec3dcb109c0f3cf9a215667ac2a750a8a3105004b582e9df1e601f8cbfb3",
+      "size_bytes": 1403
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_smoke_orchestrator_report.json",
+      "sha256": "11fd3572a50f0a00c2f763f799ae8d0368d49cb92a4d5608e2ec810d7d52bfc2",
+      "size_bytes": 2263
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_model_environment_report.json",
+      "sha256": "08e63eeee7f4e3f7a30969900e681930fb76ae1292ce6e73ceeec40f99420bbd",
+      "size_bytes": 713
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_run_provenance.json",
+      "sha256": "b0b3a155148a4281a35b82ebca685e44818ec4932936a14db1a3fbe983996695",
+      "size_bytes": 1424
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_smoke_eval_report.json",
+      "sha256": "172f42be6df7bb2a9bed38dc661c086d1751245d40cb1669f394296dec2c13eb",
+      "size_bytes": 64
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_smoke_eval_predictions.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_output_drift_report.json",
+      "sha256": "81efba112263d147ed40a4bf247711eafbb532d9542e01895fb16fa74e6a6e8b",
+      "size_bytes": 71
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_training_log_history.json",
+      "sha256": "b411e257ef3349f0153408845c723fa9a2a76065880f5d19372df21ba147752d",
+      "size_bytes": 329
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_kaggle_command_plan.txt",
+      "sha256": "968515c5fa4b413b747aeaeb7ba2dec5a686a53cd7055d7ee870bc317c177d30",
+      "size_bytes": 763
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_real_collator_audit_report.json",
+      "sha256": "7cb577787f53cc8ea0f5c93a2fd8c12f89576f347301014e0ef26ada44e8abcd",
+      "size_bytes": 1478
+    },
+    {
+      "exists": true,
+      "path": "artifacts/sprint11/day8_2b_package_submission_guard_report.json",
+      "sha256": "b9877eb3887de3131c591bd1aa2ad2e6d3379479d3ef7260c5eae5f4e9a3b342",
+      "size_bytes": 166
+    },
+    {
+      "exists": true,
+      "path": "artifacts/day1/day1_guard_report.json",
+      "sha256": "9e776fdcb410b7a3b62a61b6c94caadbde04fe2eca7b50f17ee965e47418b40a",
+      "size_bytes": 9064
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_day8_2b_smoke_orchestrator.py",
+      "sha256": "6439877e523fa41051180405d28b014a0e6fece64a5c5e076cc8689ff0004907",
+      "size_bytes": 6267
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_day8_3_full_v2a_train_gate.py",
+      "sha256": "28ee165019e0be200ba41457dffadae39871ff6b4e246146509a4e037c815ecc",
+      "size_bytes": 2773
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_run_provenance.py",
+      "sha256": "783115838abb0ae55a8847dd4a4640d58c66947d7cfa2280cc243c55c92f8f78",
+      "size_bytes": 2428
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_package_submission_guard.py",
+      "sha256": "d9067c5e7cc7bdb1ca777ced83989cc47eb714daa97320a29a711071c56cff99",
+      "size_bytes": 988
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_model_environment_report.py",
+      "sha256": "38932e8ea321e4ce6a88748600eba051978cb79e0d4da468144f8c15b1405c70",
+      "size_bytes": 1859
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_training_log_history.py",
+      "sha256": "aa0825fdd710b4ea6f8c612c581ef256a577ca34f55cd68649bb4cc1e7b0da90",
+      "size_bytes": 808
+    },
+    {
+      "exists": true,
+      "path": "tests/test_sprint11_sft_dataset_rejected_rows_hard_fail.py",
+      "sha256": "5fde8dc852c845b53bde42904166931d9e98b6dddf2c80fd9687f297310c076c",
+      "size_bytes": 1701
     }
   ],
   "schema_version": 1

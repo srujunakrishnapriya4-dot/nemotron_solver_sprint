@@ -1,0 +1,16 @@
+{
+  "failures": [],
+  "grad_norms": [],
+  "learning_rates": [],
+  "log_history": [],
+  "loss_end": null,
+  "loss_inf_detected": false,
+  "loss_max": null,
+  "loss_min": null,
+  "loss_nan_detected": false,
+  "loss_start": null,
+  "losses": [],
+  "runtime_summary": {},
+  "status": "PASS",
+  "steps_completed": 0
+}
