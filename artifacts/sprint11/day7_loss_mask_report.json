@@ -1,0 +1,44 @@
+{
+  "abstain_safety_supervised_count": 0,
+  "answer_supervision_count": 824,
+  "failures": [],
+  "full_prompt_loss_detected": false,
+  "hard_negative_supervised_count": 0,
+  "label_mask_examples": [
+    {
+      "id": "train_v2_direct_000001",
+      "source": "direct",
+      "supervised_tokens": 1
+    },
+    {
+      "id": "train_v2_direct_000002",
+      "source": "direct",
+      "supervised_tokens": 1
+    },
+    {
+      "id": "train_v2_direct_000003",
+      "source": "direct",
+      "supervised_tokens": 1
+    },
+    {
+      "id": "train_v2_direct_000004",
+      "source": "direct",
+      "supervised_tokens": 1
+    },
+    {
+      "id": "train_v2_direct_000005",
+      "source": "direct",
+      "supervised_tokens": 1
+    }
+  ],
+  "prompt_supervision_count": 0,
+  "rows_checked": 595,
+  "sft_rows_checked": 512,
+  "status": "PASS",
+  "system_token_supervision_count": 0,
+  "train_on_user_detected": false,
+  "unsupported_supervised_count": 0,
+  "user_token_supervision_count": 0,
+  "warnings": [],
+  "zero_supervised_sft_rows": 0
+}

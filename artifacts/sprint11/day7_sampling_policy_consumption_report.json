@@ -1,0 +1,30 @@
+{
+  "abstain_safety_rows": 409,
+  "abstain_safety_sft_rows": 0,
+  "direct_answer_rows": 1350,
+  "effective_sft_rows": 2025.0,
+  "failures": [],
+  "family_effective_weights": {
+    "bit_manipulation": 321.0,
+    "char_cipher": 288.0,
+    "format_only": 87.0,
+    "gravity_numeric": 174.0,
+    "numeric_formula": 190.5,
+    "roman_numeral": 144.0,
+    "symbol_mapping": 336.0,
+    "unit_conversion": 247.5,
+    "word_cipher": 237.0
+  },
+  "hard_negative_rows": 33,
+  "hard_negative_sft_rows": 0,
+  "solver_corrected_effective_weight": 675.0,
+  "solver_corrected_rows": 1350,
+  "source_effective_weights": {
+    "direct": 1350.0,
+    "solver_corrected": 675.0
+  },
+  "status": "PASS",
+  "unsupported_sft_rows": 0,
+  "unverified_sft_rows": 0,
+  "warnings": []
+}

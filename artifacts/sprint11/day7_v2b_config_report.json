@@ -1,0 +1,11 @@
+{
+  "failures": [],
+  "path": "kaggle_anti086\\training\\configs\\v2b_tinker_parent_lora.yaml",
+  "runnable": false,
+  "stage": "v2b_tinker_parent_lora",
+  "status": "PASS_BLOCKED_PARENT_MISSING",
+  "warnings": [
+    "parent_adapter_missing_blocks_config",
+    "base_model_path_is_kaggle_placeholder"
+  ]
+}

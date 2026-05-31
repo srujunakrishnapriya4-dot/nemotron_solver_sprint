@@ -1,0 +1,23 @@
+{
+  "day7_status": "PASS",
+  "decision": "ALLOW_DAY8_V2_TRAINING",
+  "failures": [],
+  "no_0_95_evidence": true,
+  "no_adapter_packaged": true,
+  "no_leaderboard_evidence": true,
+  "no_training_performed": true,
+  "packaging_allowed": false,
+  "reports": {
+    "adapter_constraint": "PASS",
+    "config_validation": "PASS",
+    "day6_sampling_policy": "PASS",
+    "loss_mask": "PASS",
+    "sampling_policy_consumption": "PASS",
+    "source_leakage": "PASS",
+    "tokenization": "PASS"
+  },
+  "status": "PASS",
+  "submission_allowed": false,
+  "training_allowed_next_stage": true,
+  "training_allowed_today": false
+}

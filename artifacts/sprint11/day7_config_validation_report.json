@@ -1,0 +1,53 @@
+{
+  "blocked_count": 3,
+  "config_count": 4,
+  "configs": [
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v2a_base_lora.yaml",
+      "runnable": true,
+      "stage": "v2a_base_lora",
+      "status": "PASS_RUNNABLE",
+      "warnings": [
+        "base_model_path_is_kaggle_placeholder"
+      ]
+    },
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v2b_tinker_parent_lora.yaml",
+      "runnable": false,
+      "stage": "v2b_tinker_parent_lora",
+      "status": "PASS_BLOCKED_PARENT_MISSING",
+      "warnings": [
+        "parent_adapter_missing_blocks_config",
+        "base_model_path_is_kaggle_placeholder"
+      ]
+    },
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v2c_best_parent_lora.yaml",
+      "runnable": false,
+      "stage": "v2c_best_parent_lora",
+      "status": "PASS_BLOCKED_PARENT_MISSING",
+      "warnings": [
+        "parent_adapter_missing_blocks_config",
+        "base_model_path_is_kaggle_placeholder"
+      ]
+    },
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v3_hard_family_repair.yaml",
+      "runnable": false,
+      "stage": "v3_hard_family_repair",
+      "status": "PASS_NOT_RUNNABLE_YET",
+      "warnings": [
+        "parent_adapter_missing_blocks_config",
+        "base_model_path_is_kaggle_placeholder",
+        "v3_blocked_until_v2_eval_failure_mining_and_repair_corpus"
+      ]
+    }
+  ],
+  "failed_count": 0,
+  "runnable_count": 1,
+  "status": "PASS"
+}

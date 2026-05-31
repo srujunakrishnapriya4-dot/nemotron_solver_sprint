@@ -1,0 +1,12 @@
+{
+  "failures": [],
+  "path": "kaggle_anti086\\training\\configs\\v3_hard_family_repair.yaml",
+  "runnable": false,
+  "stage": "v3_hard_family_repair",
+  "status": "PASS_NOT_RUNNABLE_YET",
+  "warnings": [
+    "parent_adapter_missing_blocks_config",
+    "base_model_path_is_kaggle_placeholder",
+    "v3_blocked_until_v2_eval_failure_mining_and_repair_corpus"
+  ]
+}

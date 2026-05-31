@@ -1,0 +1,75 @@
+{
+  "blocked_configs": [
+    "v2b_tinker_parent_lora",
+    "v2c_best_parent_lora",
+    "v3_hard_family_repair"
+  ],
+  "configs": [
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v2a_base_lora.yaml",
+      "runnable": true,
+      "stage": "v2a_base_lora",
+      "status": "PASS_RUNNABLE",
+      "warnings": [
+        "base_model_path_is_kaggle_placeholder"
+      ]
+    },
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v2b_tinker_parent_lora.yaml",
+      "runnable": false,
+      "stage": "v2b_tinker_parent_lora",
+      "status": "PASS_BLOCKED_PARENT_MISSING",
+      "warnings": [
+        "parent_adapter_missing_blocks_config",
+        "base_model_path_is_kaggle_placeholder"
+      ]
+    },
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v2c_best_parent_lora.yaml",
+      "runnable": false,
+      "stage": "v2c_best_parent_lora",
+      "status": "PASS_BLOCKED_PARENT_MISSING",
+      "warnings": [
+        "parent_adapter_missing_blocks_config",
+        "base_model_path_is_kaggle_placeholder"
+      ]
+    },
+    {
+      "failures": [],
+      "path": "kaggle_anti086\\training\\configs\\v3_hard_family_repair.yaml",
+      "runnable": false,
+      "stage": "v3_hard_family_repair",
+      "status": "PASS_NOT_RUNNABLE_YET",
+      "warnings": [
+        "parent_adapter_missing_blocks_config",
+        "base_model_path_is_kaggle_placeholder",
+        "v3_blocked_until_v2_eval_failure_mining_and_repair_corpus"
+      ]
+    }
+  ],
+  "configs_checked": 4,
+  "failed_configs": [],
+  "failures": [],
+  "parent_paths_ok": true,
+  "paths_safe": true,
+  "rank_ok": true,
+  "runnable_configs": [
+    "v2a_base_lora"
+  ],
+  "status": "PASS",
+  "target_modules_ok": true,
+  "v3_blocked": true,
+  "warnings": [
+    "base_model_path_is_kaggle_placeholder",
+    "parent_adapter_missing_blocks_config",
+    "base_model_path_is_kaggle_placeholder",
+    "parent_adapter_missing_blocks_config",
+    "base_model_path_is_kaggle_placeholder",
+    "parent_adapter_missing_blocks_config",
+    "base_model_path_is_kaggle_placeholder",
+    "v3_blocked_until_v2_eval_failure_mining_and_repair_corpus"
+  ]
+}

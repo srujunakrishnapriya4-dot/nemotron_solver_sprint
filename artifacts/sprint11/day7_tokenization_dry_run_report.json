@@ -1,0 +1,33 @@
+{
+  "empty_answer_count": 0,
+  "empty_prompt_count": 0,
+  "excluded_abstain_safety_rows": 409,
+  "excluded_hard_negative_rows": 33,
+  "failures": [],
+  "family_counts": {
+    "bit_manipulation": 30,
+    "char_cipher": 30,
+    "format_only": 28,
+    "gravity_numeric": 28,
+    "numeric_formula": 28,
+    "roman_numeral": 28,
+    "symbol_mapping": 28,
+    "unit_conversion": 28,
+    "word_cipher": 28
+  },
+  "max_seq_len": 1024,
+  "sample_count": 256,
+  "source_counts": {
+    "direct": 128,
+    "solver_corrected": 128
+  },
+  "status": "PASS",
+  "token_length_max": 93,
+  "token_length_min": 64,
+  "token_length_p50": 76.0,
+  "token_length_p95": 91,
+  "truncation_count": 0,
+  "truncation_rate": 0.0,
+  "unsupported_sft_rows": 0,
+  "warnings": []
+}

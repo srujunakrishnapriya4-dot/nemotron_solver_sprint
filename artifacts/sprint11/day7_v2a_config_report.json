@@ -1,0 +1,10 @@
+{
+  "failures": [],
+  "path": "kaggle_anti086\\training\\configs\\v2a_base_lora.yaml",
+  "runnable": true,
+  "stage": "v2a_base_lora",
+  "status": "PASS_RUNNABLE",
+  "warnings": [
+    "base_model_path_is_kaggle_placeholder"
+  ]
+}
