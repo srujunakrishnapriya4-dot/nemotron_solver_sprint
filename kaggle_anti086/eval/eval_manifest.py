@@ -23,6 +23,16 @@ REQUIRED_FAMILIES = {
     "anti_leak": {"bit_manipulation", "symbol_mapping", "char_cipher", "word_cipher", "unit_conversion", "numeric_formula", "equation_operator"},
 }
 
+EVAL_PURPOSE = {
+    "private_like": "mixed_behavior_eval",
+    "private_like_answerable": "answer_accuracy_eval",
+    "rule_holdout": "mixed_behavior_eval",
+    "rule_holdout_answerable": "generalization_answer_eval",
+    "family_hard": "mixed_behavior_eval",
+    "family_hard_answerable": "hard_answer_accuracy_eval",
+    "anti_leak": "leakage_safety_eval",
+}
+
 
 def collect_rule_ids(paths: list[Path]) -> set[str]:
     rule_ids: set[str] = set()
@@ -62,16 +72,22 @@ def build_eval_manifest(paths: dict[str, Path]) -> dict:
     groups = {}
     failures = []
     prompt_seen: dict[str, str] = {}
+    signature_seen: dict[str, str] = {}
     duplicate_prompt_count = 0
+    duplicate_signature_count = 0
     for name, path in paths.items():
         rows = read_jsonl(path)
         groups[name] = rows
         data = path.read_bytes()
         validation = validate_rows(rows, context=name)
         family_distribution = dict(sorted(Counter(row["family"] for row in rows).items()))
+        subfamily_distribution = dict(sorted(Counter(f"{row['family']}::{row['subfamily']}" for row in rows).items()))
         behaviors = Counter(row.get("metadata", {}).get("expected_solver_behavior", "answer") for row in rows)
+        signatures = [str(row.get("metadata", {}).get("rule_signature", "")) for row in rows]
         duplicate_rules = len(rows) - len({row["rule_id"] for row in rows})
         duplicate_leakage = len(rows) - len({row["leakage_group"] for row in rows})
+        duplicate_file_prompts = len(rows) - len({row["prompt"] for row in rows})
+        duplicate_file_signatures = len(signatures) - len(set(signatures))
         missing = sorted(REQUIRED_FAMILIES.get(name, set()) - set(family_distribution))
         if validation["failure_count"]:
             failures.append({"file": name, "message": "schema_failures", "count": validation["failure_count"]})
@@ -87,16 +103,27 @@ def build_eval_manifest(paths: dict[str, Path]) -> dict:
                 duplicate_prompt_count += 1
             else:
                 prompt_seen[prompt] = name
+            signature = str(row.get("metadata", {}).get("rule_signature", ""))
+            if signature:
+                if signature in signature_seen:
+                    duplicate_signature_count += 1
+                else:
+                    signature_seen[signature] = name
         files[name] = {
             "path": str(path),
+            "eval_purpose": EVAL_PURPOSE.get(name, "unknown"),
             "row_count": len(rows),
             "sha256": hashlib.sha256(data).hexdigest(),
             "size_bytes": len(data),
             "family_distribution": family_distribution,
+            "family_counts": family_distribution,
+            "subfamily_counts": subfamily_distribution,
             "unique_rule_id_count": len({row["rule_id"] for row in rows}),
             "unique_leakage_group_count": len({row["leakage_group"] for row in rows}),
             "answerable_count": behaviors.get("answer", 0),
             "expected_abstain_count": behaviors.get("abstain", 0),
+            "duplicate_prompt_count": duplicate_file_prompts,
+            "duplicate_rule_signature_count": duplicate_file_signatures,
         }
     overlap = check_no_rule_overlap(groups)
     if overlap["rule_id_overlap_count"]:
@@ -105,11 +132,17 @@ def build_eval_manifest(paths: dict[str, Path]) -> dict:
         failures.append({"message": "cross_file_leakage_group_overlap", "count": overlap["leakage_group_overlap_count"]})
     if duplicate_prompt_count:
         failures.append({"message": "duplicate_prompt", "count": duplicate_prompt_count})
+    if duplicate_signature_count:
+        failures.append({"message": "cross_file_rule_signature_overlap", "count": duplicate_signature_count})
     return {
         "schema_version": 1,
         "created_by": "SPRINT-11D",
+        "eval_purpose": EVAL_PURPOSE,
         "files": files,
-        "cross_file_checks": overlap | {"duplicate_prompt_count": duplicate_prompt_count},
+        "cross_file_checks": overlap | {
+            "duplicate_prompt_count": duplicate_prompt_count,
+            "duplicate_rule_signature_count": duplicate_signature_count,
+        },
         "failures": failures,
         "status": "FAIL" if failures else "PASS",
     }
@@ -129,19 +162,27 @@ def write_eval_manifest(manifest: dict, path: str | Path) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build Day 5 eval manifest.")
     parser.add_argument("--private-like", required=True)
+    parser.add_argument("--private-like-answerable")
     parser.add_argument("--rule-holdout", required=True)
+    parser.add_argument("--rule-holdout-answerable")
     parser.add_argument("--family-hard", required=True)
+    parser.add_argument("--family-hard-answerable")
     parser.add_argument("--anti-leak", required=True)
     parser.add_argument("--out", required=True)
     args = parser.parse_args(argv)
-    manifest = build_eval_manifest(
-        {
-            "private_like": Path(args.private_like),
-            "rule_holdout": Path(args.rule_holdout),
-            "family_hard": Path(args.family_hard),
-            "anti_leak": Path(args.anti_leak),
-        }
-    )
+    paths = {
+        "private_like": Path(args.private_like),
+        "rule_holdout": Path(args.rule_holdout),
+        "family_hard": Path(args.family_hard),
+        "anti_leak": Path(args.anti_leak),
+    }
+    if args.private_like_answerable:
+        paths["private_like_answerable"] = Path(args.private_like_answerable)
+    if args.rule_holdout_answerable:
+        paths["rule_holdout_answerable"] = Path(args.rule_holdout_answerable)
+    if args.family_hard_answerable:
+        paths["family_hard_answerable"] = Path(args.family_hard_answerable)
+    manifest = build_eval_manifest(paths)
     write_eval_manifest(manifest, args.out)
     print(json.dumps({"status": manifest["status"], "out": args.out, "file_count": len(manifest["files"])}, sort_keys=True))
     return 0 if manifest["status"] == "PASS" else 2

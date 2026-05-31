@@ -21,8 +21,8 @@
       },
       "path": "artifacts\\sprint11\\day5_anti_leak_eval_256.jsonl",
       "row_count": 256,
-      "sha256": "ccbbbd66f45b40a834f596f9873d1c5e984f865b2102fe8e1a68f253e0ca507e",
-      "size_bytes": 223915,
+      "sha256": "1fcbe46046fcb4311c077ac8ddfe3f1e97de38f393ef3a63114bedc215678dee",
+      "size_bytes": 231595,
       "unique_leakage_group_count": 256,
       "unique_rule_id_count": 256
     },
@@ -42,8 +42,27 @@
       },
       "path": "artifacts\\sprint11\\day5_family_hard_eval_512.jsonl",
       "row_count": 512,
-      "sha256": "9796f07a050d3408c4a838820898d5b1ede521e4bcb20d9aa683ebf0478dbc03",
-      "size_bytes": 424297,
+      "sha256": "164a9abdc6aa376e038893e75beb92e127d182909984fe6de5fcee8dee3edc28",
+      "size_bytes": 442729,
+      "unique_leakage_group_count": 512,
+      "unique_rule_id_count": 512
+    },
+    "family_hard_answerable": {
+      "answerable_count": 512,
+      "expected_abstain_count": 0,
+      "family_distribution": {
+        "bit_manipulation": 79,
+        "char_cipher": 78,
+        "gravity_numeric": 56,
+        "numeric_formula": 78,
+        "symbol_mapping": 78,
+        "unit_conversion": 74,
+        "word_cipher": 69
+      },
+      "path": "artifacts\\sprint11\\day5_family_hard_answerable_512.jsonl",
+      "row_count": 512,
+      "sha256": "ccc14409bafe21e14e3539ebd1e7486c5b3e86ac78aa8b21d8713498a2656d6d",
+      "size_bytes": 634154,
       "unique_leakage_group_count": 512,
       "unique_rule_id_count": 512
     },
@@ -67,8 +86,28 @@
       },
       "path": "artifacts\\sprint11\\day5_private_like_eval_512.jsonl",
       "row_count": 512,
-      "sha256": "7685390dc0d30116938c1ca90b96519b6acc88a44905fbd2910e62fbd7fcc5bd",
-      "size_bytes": 425045,
+      "sha256": "63f5553c4ac612b8fb87db7eba52d09819c664aa37993433bd43cac8787d688b",
+      "size_bytes": 445013,
+      "unique_leakage_group_count": 512,
+      "unique_rule_id_count": 512
+    },
+    "private_like_answerable": {
+      "answerable_count": 512,
+      "expected_abstain_count": 0,
+      "family_distribution": {
+        "bit_manipulation": 64,
+        "char_cipher": 64,
+        "gravity_numeric": 64,
+        "numeric_formula": 64,
+        "roman_numeral": 64,
+        "symbol_mapping": 64,
+        "unit_conversion": 64,
+        "word_cipher": 64
+      },
+      "path": "artifacts\\sprint11\\day5_private_like_answerable_512.jsonl",
+      "row_count": 512,
+      "sha256": "380c981be519dab54cfa0f7ca21353c2d18eb00dc1498cc5afd3d7c0dec3fe6d",
+      "size_bytes": 638056,
       "unique_leakage_group_count": 512,
       "unique_rule_id_count": 512
     },
@@ -91,28 +130,47 @@
       },
       "path": "artifacts\\sprint11\\day5_rule_holdout_eval_512.jsonl",
       "row_count": 512,
-      "sha256": "f61c55edf0250ceec0cb498fa2ca376a202d1088c54f2f0e543647581e9f8f43",
-      "size_bytes": 443257,
+      "sha256": "0565d32ae1a7d7445286ce9570dd700fcb12b9db04418185d8867f86af32f606",
+      "size_bytes": 469369,
+      "unique_leakage_group_count": 512,
+      "unique_rule_id_count": 512
+    },
+    "rule_holdout_answerable": {
+      "answerable_count": 512,
+      "expected_abstain_count": 0,
+      "family_distribution": {
+        "bit_manipulation": 64,
+        "char_cipher": 64,
+        "gravity_numeric": 64,
+        "numeric_formula": 64,
+        "roman_numeral": 64,
+        "symbol_mapping": 64,
+        "unit_conversion": 64,
+        "word_cipher": 64
+      },
+      "path": "artifacts\\sprint11\\day5_rule_holdout_answerable_512.jsonl",
+      "row_count": 512,
+      "sha256": "de4c6030b255455c09af4dd9283fad35b77b232ac3aa3ffb2075a7ca1deae7f8",
+      "size_bytes": 667240,
       "unique_leakage_group_count": 512,
       "unique_rule_id_count": 512
     }
   },
   "known_weak_families": [
-    "weak_solver_family_custom_numeral",
-    "weak_solver_family_equation_operator",
-    "weak_solver_family_format_only",
-    "weak_solver_family_permutation_sorting",
-    "weak_solver_family_sequence_pattern",
-    "weak_solver_family_symbol_mapping"
+    "custom_numeral",
+    "equation_operator",
+    "permutation_sorting",
+    "sequence_pattern",
+    "symbol_mapping_reversal_substitution_partial"
   ],
   "leaderboard_evidence": false,
-  "next_required_sprint": "SPRINT-11E ? v2 solver-correct corpus builder, only if Day 5 eval quality is acceptable",
-  "purpose": "Private-like / rule-holdout / family-hard eval builder and solver benchmark",
+  "next_required_sprint": "SPRINT-11E - v2 solver-correct corpus builder only, no training",
+  "purpose": "Day 5 eval quality hardening and training-corpus readiness gate",
   "solver_reports": {
     "anti_leak": {
-      "answerable_exact_match": 0.826530612244898,
+      "answerable_exact_match": 0.9744897959183674,
       "answerable_wrong_answer_rate": 0.0,
-      "behavior_accuracy": 0.8671875,
+      "behavior_accuracy": 0.98046875,
       "correct_abstain_rate": 1.0,
       "execution_status": "PASS",
       "quality_status": "PASS",
@@ -120,9 +178,9 @@
       "unsafe_answer_rate": 0.0
     },
     "family_hard": {
-      "answerable_exact_match": 0.764367816091954,
+      "answerable_exact_match": 0.9712643678160919,
       "answerable_wrong_answer_rate": 0.0,
-      "behavior_accuracy": 0.83984375,
+      "behavior_accuracy": 0.98046875,
       "correct_abstain_rate": 1.0,
       "execution_status": "PASS",
       "quality_status": "PASS",
@@ -130,9 +188,9 @@
       "unsafe_answer_rate": 0.0
     },
     "private_like": {
-      "answerable_exact_match": 0.8256410256410256,
+      "answerable_exact_match": 0.9743589743589743,
       "answerable_wrong_answer_rate": 0.0,
-      "behavior_accuracy": 0.8671875,
+      "behavior_accuracy": 0.98046875,
       "correct_abstain_rate": 1.0,
       "execution_status": "PASS",
       "quality_status": "PASS",
@@ -140,9 +198,9 @@
       "unsafe_answer_rate": 0.0
     },
     "rule_holdout": {
-      "answerable_exact_match": 0.8143564356435643,
+      "answerable_exact_match": 0.9752475247524752,
       "answerable_wrong_answer_rate": 0.0,
-      "behavior_accuracy": 0.853515625,
+      "behavior_accuracy": 0.98046875,
       "correct_abstain_rate": 1.0,
       "execution_status": "PASS",
       "quality_status": "PASS",
@@ -150,8 +208,24 @@
       "unsafe_answer_rate": 0.0
     }
   },
-  "sprint": "SPRINT-11D",
+  "sprint": "SPRINT-11D.1",
   "submission_created": false,
   "training_performed": false,
+  "v2_eligibility": {
+    "blocked_counts": {
+      "blocked_solver_failure": 35
+    },
+    "day6_decision": "ALLOW_CORPUS_BUILD",
+    "eligible_abstain_safety_count": 454,
+    "eligible_hard_negative_count": 0,
+    "eligible_verified_answer_count": 1303,
+    "status": "PASS"
+  },
+  "weak_subfamily_action_counts": {
+    "blocked_solver_failure": 1,
+    "blocked_unsupported_family": 4,
+    "eligible_for_abstain_safety": 7,
+    "eligible_for_v2_direct_answer": 15
+  },
   "zero_point_95_evidence": false
 }

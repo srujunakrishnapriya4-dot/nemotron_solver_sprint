@@ -1,196 +1,106 @@
 {
-  "abstain_precision": 0.6666666666666666,
+  "abstain_precision": 0.9425287356321839,
   "abstain_recall": 1.0,
-  "abstained_count": 246,
+  "abstained_count": 174,
   "abstention_examples": [
     {
       "abstained": true,
-      "expected": "{[&",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0000",
+      "expected": "17",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0001",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #0] !@# -> !&@; $%^ -> {][; @#$ -> [!&; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #353] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 5",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0001",
+      "expected": "21",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0005",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #1] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #357] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 9",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0002",
+      "expected": "48",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0011",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #2] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #363] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 15",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0004",
+      "expected": "39",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0015",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #4] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #367] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 19",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0005",
+      "expected": "76",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0021",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #5] []{ -> CBA; }<> -> FED; ]{} -> DCB; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #373] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 25",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0006",
+      "expected": "60",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0025",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #6] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #377] 1 -> 4; 2 -> 6; 3 -> 8. Now solve: 29",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0008",
+      "expected": "107",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0031",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #8] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #383] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 35",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0009",
+      "expected": "81",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0035",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #9] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #387] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 39",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0010",
+      "expected": "138",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0041",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #10] !@# -> CBA; $%^ -> FED; @#$ -> DCB; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #393] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 45",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0012",
+      "expected": "99",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0045",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #12] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0013",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #13] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0014",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #14] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0016",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #16] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0017",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #17] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0018",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #18] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0020",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #20] !@# -> CBA; $%^ -> FED; @#$ -> DCB; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0021",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #21] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0022",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #22] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0024",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #24] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0025",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #25] []{ -> CBA; }<> -> FED; ]{} -> DCB; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #397] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 49",
       "reason": "all_solvers_abstained"
     }
   ],
-  "answerable_attempt_rate": 0.764367816091954,
+  "answerable_attempt_rate": 0.9712643678160919,
   "answerable_count": 348,
-  "answerable_exact_match": 0.764367816091954,
+  "answerable_exact_match": 0.9712643678160919,
   "answerable_wrong_answer_rate": 0.0,
-  "attempt_rate": 0.51953125,
-  "attempted_count": 266,
-  "behavior_accuracy": 0.83984375,
+  "attempt_rate": 0.66015625,
+  "attempted_count": 338,
+  "behavior_accuracy": 0.98046875,
   "benchmark_mode": "solver",
   "by_family": {
     "bit_manipulation": {
@@ -236,11 +146,11 @@
       "verified": 38
     },
     "symbol_mapping": {
-      "attempted": 0,
-      "correct": 0,
+      "attempted": 72,
+      "correct": 72,
       "count": 96,
-      "exact_match": 0.0,
-      "verified": 0
+      "exact_match": 0.75,
+      "verified": 72
     },
     "unit_conversion": {
       "attempted": 37,
@@ -284,190 +194,100 @@
   },
   "correct_abstain_count": 164,
   "correct_abstain_rate": 1.0,
-  "correct_count": 266,
+  "correct_count": 338,
   "eval_type": "family_hard",
-  "exact_match": 0.51953125,
+  "exact_match": 0.66015625,
   "execution_status": "PASS",
   "expected_abstain_count": 164,
   "failure_examples": [
     {
       "abstained": true,
-      "expected": "{[&",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0000",
+      "expected": "17",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0001",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #0] !@# -> !&@; $%^ -> {][; @#$ -> [!&; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #353] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 5",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0001",
+      "expected": "21",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0005",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #1] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #357] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 9",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0002",
+      "expected": "48",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0011",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #2] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #363] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 15",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0004",
+      "expected": "39",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0015",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #4] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #367] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 19",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0005",
+      "expected": "76",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0021",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #5] []{ -> CBA; }<> -> FED; ]{} -> DCB; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #373] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 25",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0006",
+      "expected": "60",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0025",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #6] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #377] 1 -> 4; 2 -> 6; 3 -> 8. Now solve: 29",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0008",
+      "expected": "107",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0031",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #8] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #383] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 35",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0009",
+      "expected": "81",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0035",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #9] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #387] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 39",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0010",
+      "expected": "138",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0041",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #10] !@# -> CBA; $%^ -> FED; @#$ -> DCB; query: @$^ output ?",
+      "prompt_excerpt": "[family_hard #393] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 45",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0012",
+      "expected": "99",
+      "family": "numeric_formula",
+      "id": "day5_family_hard_numeric_formula_0045",
       "prediction": "",
-      "prompt_excerpt": "[family_hard #12] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0013",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #13] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0014",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #14] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0016",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #16] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0017",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #17] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0018",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #18] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0020",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #20] !@# -> CBA; $%^ -> FED; @#$ -> DCB; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0021",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #21] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0022",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #22] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0024",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #24] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "FDB",
-      "family": "symbol_mapping",
-      "id": "day5_family_hard_symbol_mapping_0025",
-      "prediction": "",
-      "prompt_excerpt": "[family_hard #25] []{ -> CBA; }<> -> FED; ]{} -> DCB; query: ]}> output ?",
+      "prompt_excerpt": "[family_hard #397] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 49",
       "reason": "all_solvers_abstained"
     }
   ],
@@ -485,12 +305,11 @@
   "unsafe_answer_count": 0,
   "unsafe_answer_rate": 0.0,
   "unsafe_answer_rate_on_abstain_rows": 0.0,
-  "verified_count": 266,
+  "verified_count": 338,
   "weak_family_warnings": [
     "weak_solver_family_custom_numeral",
-    "weak_solver_family_equation_operator",
-    "weak_solver_family_symbol_mapping"
+    "weak_solver_family_equation_operator"
   ],
-  "wrong_abstain_count": 82,
+  "wrong_abstain_count": 10,
   "wrong_answer_count": 0
 }

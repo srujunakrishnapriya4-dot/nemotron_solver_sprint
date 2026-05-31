@@ -196,6 +196,7 @@ def _apply_mapping(query: str, mapping: SymbolMapping) -> tuple[str, float]:
 
 def _clean_token(value: str) -> str:
     value = value.strip()
+    value = re.sub(r"^\[[^\]]+\]\s*", "", value).strip()
     value = re.sub(r"^(?:example|input|output|query)\s*[:#]?\s*", "", value, flags=re.IGNORECASE).strip()
     return value.strip("`\"' ")
 

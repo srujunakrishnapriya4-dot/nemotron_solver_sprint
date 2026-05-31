@@ -95,6 +95,14 @@ SPLIT_BY_EVAL = {
     "anti_leak": "anti_leak_eval",
 }
 
+UNSUPPORTED_DIRECT_ANSWER_FAMILIES = {
+    "custom_numeral",
+    "equation_operator",
+    "format_only",
+    "permutation_sorting",
+    "sequence_pattern",
+}
+
 
 def build_eval_rows(eval_name: str, rows: int, seed: int) -> list[dict]:
     counts = _scaled_counts(_counts_for_eval(eval_name), rows)
@@ -108,6 +116,48 @@ def build_eval_rows(eval_name: str, rows: int, seed: int) -> list[dict]:
     _assert_unique(output, "rule_id")
     _assert_unique(output, "leakage_group")
     report = validate_rows(output, context=f"day5_{eval_name}")
+    if report["failure_count"]:
+        raise SystemExit(json.dumps(report, indent=2, sort_keys=True))
+    return output
+
+
+def build_answerable_rows(source_eval: str, rows: int, seed: int) -> list[dict]:
+    """Build an answer-accuracy-only eval without mutating the mixed behavior eval."""
+    output: list[dict] = []
+    seen_ids: set[str] = set()
+    seen_rules: set[str] = set()
+    seen_leakage: set[str] = set()
+    round_idx = 0
+    while len(output) < rows and round_idx < 20:
+        candidates = build_eval_rows(source_eval, max(rows * 2, 128), seed + round_idx * 997)
+        by_family: dict[str, list[dict]] = {}
+        for row in candidates:
+            if _is_verified_answerable(row):
+                by_family.setdefault(str(row["family"]), []).append(row)
+        ordered_candidates: list[dict] = []
+        while any(by_family.values()):
+            for family in sorted(by_family):
+                if by_family[family]:
+                    ordered_candidates.append(by_family[family].pop(0))
+        for row in ordered_candidates:
+            answer_idx = len(output)
+            answer_row = _clone_answerable_row(row, source_eval, answer_idx, round_idx)
+            if (
+                answer_row["id"] in seen_ids
+                or answer_row["rule_id"] in seen_rules
+                or answer_row["leakage_group"] in seen_leakage
+            ):
+                continue
+            output.append(answer_row)
+            seen_ids.add(answer_row["id"])
+            seen_rules.add(answer_row["rule_id"])
+            seen_leakage.add(answer_row["leakage_group"])
+            if len(output) >= rows:
+                break
+        round_idx += 1
+    if len(output) != rows:
+        raise SystemExit(f"could only build {len(output)} answerable {source_eval} rows; requested {rows}")
+    report = validate_rows(output, context=f"day5_{source_eval}_answerable")
     if report["failure_count"]:
         raise SystemExit(json.dumps(report, indent=2, sort_keys=True))
     return output
@@ -136,6 +186,43 @@ def summarize_rows(rows: list[dict]) -> dict:
         "answerable_count": behaviors.get("answer", 0),
         "expected_abstain_count": behaviors.get("abstain", 0),
     }
+
+
+def _is_verified_answerable(row: dict) -> bool:
+    metadata = row.get("metadata", {})
+    answer = str(row.get("answer", ""))
+    return (
+        metadata.get("expected_solver_behavior") == "answer"
+        and row.get("verification_status") == "verified"
+        and bool(answer.strip())
+        and answer.strip().upper() != "ABSTAIN"
+        and row.get("family") not in UNSUPPORTED_DIRECT_ANSWER_FAMILIES
+    )
+
+
+def _clone_answerable_row(row: dict, source_eval: str, answer_idx: int, round_idx: int) -> dict:
+    copied = json.loads(json.dumps(row))
+    base_signature = str(copied.get("metadata", {}).get("rule_signature", copied["rule_id"]))
+    suffix = f"{source_eval}_answerable_{answer_idx:04d}_{round_idx:02d}"
+    copied["id"] = f"day5_{suffix}"
+    copied["rule_id"] = f"day5_{suffix}_{_slug(base_signature)}"
+    copied["leakage_group"] = f"day5_lg_{suffix}_{_slug(base_signature)}"
+    copied["prompt"] = f"[answerable {source_eval} #{answer_idx}] {copied['prompt']}"
+    copied["source"] = f"day5_{source_eval}_answerable_builder"
+    metadata = dict(copied.get("metadata", {}))
+    metadata.update(
+        {
+            "eval_purpose": "answer_accuracy_eval",
+            "source_eval": source_eval,
+            "expected_solver_behavior": "answer",
+            "source_row_id": row["id"],
+            "source_rule_id": row["rule_id"],
+            "source_leakage_group": row["leakage_group"],
+            "rule_signature": f"{source_eval}_answerable_{base_signature}_{answer_idx:04d}",
+        }
+    )
+    copied["metadata"] = metadata
+    return copied
 
 
 def read_jsonl(path: str | Path) -> list[dict]:
@@ -190,7 +277,8 @@ def _row_for_family(eval_name: str, family: str, local_idx: int, global_idx: int
     case = family_builders[family](eval_name, family, local_idx, rng, hard_bias)
     row_id = f"day5_{eval_name}_{family}_{local_idx:04d}"
     rule_prefix = "holdout_" if holdout else f"day5_{eval_name}_"
-    signature = case["rule_signature"]
+    raw_signature = case["rule_signature"]
+    signature = f"holdout_semantic_{raw_signature}" if holdout else f"{eval_name}_{raw_signature}"
     rule_id = f"{rule_prefix}{family}_{case['subfamily']}_{local_idx:04d}_{_slug(signature)}"
     metadata = {
         "expected_solver_behavior": case["behavior"],
@@ -271,7 +359,8 @@ def _symbol_case(eval_name: str, family: str, i: int, rng: random.Random, hard_b
         prompt = f"!@ -> ab; !# -> xy; query: !# output ?" if i % 2 == 0 else f"!@ -> ab; #$ -> cd; query: !Z% output ?"
         return _case("expected_abstain", prompt, "ABSTAIN", "abstain", f"symbol_conflict_unknown_{i}", 4, "unknown_symbols_or_words")
     src = "!@#$%^&*" if i % 2 == 0 else "[]{}<>?/"
-    dst = "ABCDEFGH" if i % 3 else "@&![]{}#"
+    symbol_targets = ("@&![]{}#", "01234567", "+-=~|:;.")
+    dst = symbol_targets[i % len(symbol_targets)]
     mapping = dict(zip(src, dst))
     query = src[1] + src[3] + src[5]
     reverse = hard_bias and i % 5 == 0

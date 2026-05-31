@@ -49,7 +49,7 @@ def run_stack_benchmark(eval_path: str | Path, mode: str, out_report: str | Path
         safe_write_text(out_report, json.dumps(report, indent=2, sort_keys=True) + "\n", field_name="stack_benchmark_report")
         return report
     if mode == "model_plan":
-        plan = _model_plan(eval_path)
+        plan = _model_plan(eval_path, Path(out_report))
         safe_write_text(out_report, json.dumps(plan, indent=2, sort_keys=True) + "\n", field_name="stack_benchmark_plan")
         safe_write_text(out_predictions, "", field_name="model_plan_predictions_placeholder")
         print(json.dumps({"execution_status": "PASS", "mode": "model_plan", "out_report": str(out_report)}, sort_keys=True))
@@ -59,18 +59,40 @@ def run_stack_benchmark(eval_path: str | Path, mode: str, out_report: str | Path
     raise SystemExit(f"unsupported benchmark mode: {mode}")
 
 
-def _model_plan(eval_path: str | Path) -> dict:
+def _model_plan(eval_path: str | Path, out_report: Path) -> dict:
+    out_dir = out_report.parent
+    base_command_path = out_dir / "day5_kaggle_base_eval_commands.txt"
+    parent_command_path = out_dir / "day5_kaggle_parent_eval_commands.txt"
+    base_command = _kaggle_eval_command(eval_path, "base_eval")
+    parent_command = _kaggle_eval_command(eval_path, "parent_eval")
+    safe_write_text(base_command_path, base_command + "\n", field_name="base_eval_command_file")
+    safe_write_text(parent_command_path, parent_command + "\n", field_name="parent_eval_command_file")
     return {
         "execution_status": "PASS",
         "mode": "model_plan",
         "model_results_faked": False,
         "eval_path": str(eval_path),
+        "command_files": {
+            "base": str(base_command_path),
+            "parent": str(parent_command_path),
+        },
         "required_next_commands": [
-            "python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml --stage parent_eval",
+            base_command,
+            parent_command,
             "python kaggle_anti086/eval/compare_solver_base_parent.py --solver-report artifacts/sprint11/day5_private_like_solver_report.json --parent-report <parent_report.json> --out artifacts/sprint11/day5_solver_base_parent_comparison.json",
         ],
         "note": "Day 5 does not run base/parent/child model inference locally.",
     }
+
+
+def _kaggle_eval_command(eval_path: str | Path, stage: str) -> str:
+    return (
+        'PYTHONPATH="/kaggle/working:/kaggle/working/src:$PYTHONPATH" '
+        'TRITON_PTXAS_PATH="/tmp/ptxas-blackwell" '
+        'TRITON_PTXAS_BLACKWELL_PATH="/tmp/ptxas-blackwell" '
+        f"python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml "
+        f"--stage {stage} --eval-file {eval_path}"
+    )
 
 
 def _infer_eval_type(path_text: str) -> str:

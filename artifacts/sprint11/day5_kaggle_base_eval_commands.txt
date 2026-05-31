@@ -1,0 +1,1 @@
+PYTHONPATH="/kaggle/working:/kaggle/working/src:$PYTHONPATH" TRITON_PTXAS_PATH="/tmp/ptxas-blackwell" TRITON_PTXAS_BLACKWELL_PATH="/tmp/ptxas-blackwell" python kaggle_anti086/kaggle_eval_stage.py --config anti086_winmode_v1b.yaml --stage base_eval --eval-file artifacts/sprint11/day5_private_like_eval_512.jsonl

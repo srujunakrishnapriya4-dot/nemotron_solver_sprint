@@ -1,196 +1,61 @@
 {
-  "abstain_precision": 0.6382978723404256,
+  "abstain_precision": 0.9230769230769231,
   "abstain_recall": 1.0,
-  "abstained_count": 94,
+  "abstained_count": 65,
   "abstention_examples": [
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0000",
+      "expected": "17",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0001",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #32] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "prompt_excerpt": "[anti_leak #149] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 5",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0001",
+      "expected": "21",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0005",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #33] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "prompt_excerpt": "[anti_leak #153] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 9",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0002",
+      "expected": "48",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0011",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #34] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[anti_leak #159] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 15",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0003",
+      "expected": "39",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0015",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #35] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "prompt_excerpt": "[anti_leak #163] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 19",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0004",
+      "expected": "76",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0021",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #36] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0005",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #37] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0006",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #38] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0007",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #39] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0008",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #40] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0010",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #42] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0011",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #43] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0012",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #44] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0013",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #45] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0014",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #46] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0015",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #47] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0016",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #48] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0017",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #49] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0018",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #50] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0020",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #52] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0021",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #53] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "prompt_excerpt": "[anti_leak #169] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 25",
       "reason": "all_solvers_abstained"
     }
   ],
-  "answerable_attempt_rate": 0.826530612244898,
+  "answerable_attempt_rate": 0.9744897959183674,
   "answerable_count": 196,
-  "answerable_exact_match": 0.826530612244898,
+  "answerable_exact_match": 0.9744897959183674,
   "answerable_wrong_answer_rate": 0.0,
-  "attempt_rate": 0.6328125,
-  "attempted_count": 162,
-  "behavior_accuracy": 0.8671875,
+  "attempt_rate": 0.74609375,
+  "attempted_count": 191,
+  "behavior_accuracy": 0.98046875,
   "benchmark_mode": "solver",
   "by_family": {
     "bit_manipulation": {
@@ -257,11 +122,11 @@
       "verified": 0
     },
     "symbol_mapping": {
-      "attempted": 0,
-      "correct": 0,
+      "attempted": 29,
+      "correct": 29,
       "count": 32,
-      "exact_match": 0.0,
-      "verified": 0
+      "exact_match": 0.90625,
+      "verified": 29
     },
     "unit_conversion": {
       "attempted": 27,
@@ -307,190 +172,55 @@
   },
   "correct_abstain_count": 60,
   "correct_abstain_rate": 1.0,
-  "correct_count": 162,
+  "correct_count": 191,
   "eval_type": "anti_leak",
-  "exact_match": 0.6328125,
+  "exact_match": 0.74609375,
   "execution_status": "PASS",
   "expected_abstain_count": 60,
   "failure_examples": [
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0000",
+      "expected": "17",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0001",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #32] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
+      "prompt_excerpt": "[anti_leak #149] 1 -> 5; 2 -> 8; 3 -> 11. Now solve: 5",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0001",
+      "expected": "21",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0005",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #33] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
+      "prompt_excerpt": "[anti_leak #153] 1 -> 5; 2 -> 7; 3 -> 9. Now solve: 9",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0002",
+      "expected": "48",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0011",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #34] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
+      "prompt_excerpt": "[anti_leak #159] 1 -> 6; 2 -> 9; 3 -> 12. Now solve: 15",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0003",
+      "expected": "39",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0015",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #35] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "prompt_excerpt": "[anti_leak #163] 1 -> 3; 2 -> 5; 3 -> 7. Now solve: 19",
       "reason": "all_solvers_abstained"
     },
     {
       "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0004",
+      "expected": "76",
+      "family": "numeric_formula",
+      "id": "day5_anti_leak_numeric_formula_0021",
       "prediction": "",
-      "prompt_excerpt": "[anti_leak #36] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0005",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #37] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0006",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #38] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0007",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #39] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0008",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #40] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0010",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #42] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0011",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #43] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0012",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #44] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0013",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #45] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0014",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #46] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0015",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #47] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0016",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #48] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0017",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #49] []{ -> ABC; }<> -> DEF; ]{} -> BCD; query: ]}> output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0018",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #50] !@# -> @&!; $%^ -> []{; @#$ -> &![; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "BDF",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0020",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #52] !@# -> ABC; $%^ -> DEF; @#$ -> BCD; query: @$^ output ?",
-      "reason": "all_solvers_abstained"
-    },
-    {
-      "abstained": true,
-      "expected": "&[{",
-      "family": "symbol_mapping",
-      "id": "day5_anti_leak_symbol_mapping_0021",
-      "prediction": "",
-      "prompt_excerpt": "[anti_leak #53] []{ -> @&!; }<> -> []{; ]{} -> &![; query: ]}> output ?",
+      "prompt_excerpt": "[anti_leak #169] 1 -> 4; 2 -> 7; 3 -> 10. Now solve: 25",
       "reason": "all_solvers_abstained"
     }
   ],
@@ -508,11 +238,10 @@
   "unsafe_answer_count": 0,
   "unsafe_answer_rate": 0.0,
   "unsafe_answer_rate_on_abstain_rows": 0.0,
-  "verified_count": 162,
+  "verified_count": 191,
   "weak_family_warnings": [
-    "weak_solver_family_custom_numeral",
-    "weak_solver_family_symbol_mapping"
+    "weak_solver_family_custom_numeral"
   ],
-  "wrong_abstain_count": 34,
+  "wrong_abstain_count": 5,
   "wrong_answer_count": 0
 }
