@@ -12,7 +12,15 @@ PAIR_RE = re.compile(
 )
 QUERY_PATTERNS = (
     re.compile(rf"({NUMBER})\s*(?:->|=|converts?\s+to|output\s+is)\s*\?", re.IGNORECASE),
-    re.compile(rf"\b(?:convert|input|query|now\s+solve|solve|target|for)\s*[:#]?\s*({NUMBER})\b(?=[^0-9.\-+]*(?:\?|output|result|unit|$))", re.IGNORECASE),
+
+    # Robust Day 9 numeric-formula query forms:
+    #   "Now solve: 5"
+    #   "solve 5"
+    #   "query: 15"
+    # These may be followed immediately by end-of-string, punctuation, or nothing.
+    re.compile(rf"\b(?:now\s+solve|solve|query|input|target|convert)\s*[:#]?\s*({NUMBER})\b", re.IGNORECASE),
+
+    re.compile(rf"\b(?:for)\s*[:#]?\s*({NUMBER})\b(?=[^0-9.\-+]*(?:\?|output|result|unit|$))", re.IGNORECASE),
     re.compile(rf"\bwhat\s+is\s+({NUMBER})\b", re.IGNORECASE),
     re.compile(rf"\bfor\s+({NUMBER})\s*,?\s*output\s*\?", re.IGNORECASE),
 )

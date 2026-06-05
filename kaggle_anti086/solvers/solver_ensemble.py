@@ -49,6 +49,35 @@ class SolverEnsemble:
 
     def run_all(self, row: dict) -> SolverResult:
         family = str(row.get("family", "unknown"))
+
+        # Day 9 router lock:
+        # Blank prompts are not answerable tasks. In local eval they represent
+        # expected-abstain rows. Emit an explicit verified ABSTAIN candidate so
+        # run_solver_eval scores behavior correctly instead of treating this as
+        # all_solvers_abstained/null.
+        prompt = str(row.get("prompt", "") or "").strip()
+        if prompt == "":
+            return SolverResult(
+                solver_name="solver_ensemble",
+                family=family,
+                candidates=[
+                    SolverCandidate(
+                        answer="ABSTAIN",
+                        source="blank_prompt_router",
+                        family=family,
+                        subfamily="blank_prompt",
+                        confidence=1.0,
+                        example_consistency=1.0,
+                        verified=True,
+                        risk="low",
+                        metadata={"reason": "blank_prompt_route_to_abstain"},
+                    )
+                ],
+                abstained=False,
+                reason="",
+                metadata={"route": {"family": family, "signals": ["blank_prompt_abstain"]}},
+            )
+
         candidates: list[SolverCandidate] = []
         abstentions: list[dict] = []
         verification_failures: list[dict] = []

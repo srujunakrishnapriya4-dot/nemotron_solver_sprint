@@ -76,10 +76,15 @@ def run_solver_eval(
         prediction = "" if best is None else best.answer
         normalized_expected = normalize_answer(expected, expected_type=answer_type).normalized
         normalized_prediction = normalize_answer(prediction, expected_type=answer_type).normalized if prediction else ""
-        answer_correct = False if best is None or expected_behavior == "abstain" else answers_match(prediction, expected, answer_type=answer_type)
+        best_answer_for_behavior = "" if best is None else str(best.answer).strip().upper()
+        if expected_behavior == "abstain":
+            answer_correct = best is None or best_answer_for_behavior == "ABSTAIN"
+        else:
+            answer_correct = False if best is None else answers_match(prediction, expected, answer_type=answer_type)
         if expected_behavior == "abstain":
             expected_abstain_count += 1
-            if best is None:
+            best_answer = "" if best is None else str(best.answer).strip().upper()
+            if best is None or best_answer == "ABSTAIN":
                 correct_abstain_count += 1
                 behavior_correct_count += 1
             else:

@@ -99,25 +99,40 @@ class NumericFormulaSolver(BaseSolver):
         if not fits:
             reason = "gravity_formula_not_supported" if family == "gravity_numeric" else "inconsistent_examples"
             return SolverResult(self.name, family, [], True, reason, {"example_count": len(pairs)})
+        ranked = _rank_formula(fits)
+        best = ranked[0]
+        best_prediction = format_decimal(best.predict(query.value), best.precision)
         predictions = [format_decimal(candidate.predict(query.value), candidate.precision) for candidate in fits]
-        if len(set(predictions)) > 1:
+
+        # Day 9 hardening:
+        # Some integer affine prompts also admit a weak rounded quadratic fit.
+        # Do not abstain if the top-ranked candidate is an exact fit on examples.
+        # Prefer exact affine/scale candidates over rounded-valid alternatives.
+        if len(set(predictions)) > 1 and best.max_abs_error != 0:
             return SolverResult(
                 self.name,
                 family,
                 [],
                 True,
                 "ambiguous_formula_disagreement",
-                {"predictions": predictions, "candidates": [candidate.metadata() for candidate in fits]},
+                {
+                    "predictions": predictions,
+                    "best_prediction": best_prediction,
+                    "best_candidate": best.metadata(),
+                    "candidates": [candidate.metadata() for candidate in fits],
+                },
             )
-        best = _rank_formula(fits)[0]
+
         metadata = {
             "query": query.raw,
             "candidate_count": len(fits),
             "candidate_predictions": predictions,
+            "selected_prediction": best_prediction,
+            "selected_candidate": best.metadata(),
             "candidates": [candidate.metadata() for candidate in fits],
         }
         candidate = SolverCandidate(
-            answer=predictions[0],
+            answer=best_prediction,
             source=self.name,
             family=family,
             subfamily=best.subfamily,
@@ -239,7 +254,15 @@ def _rank_formula(candidates: list[FormulaCandidate]) -> list[FormulaCandidate]:
         "quadratic_scale": 3,
         "quadratic_offset": 4,
     }
-    return sorted(candidates, key=lambda candidate: (order.get(candidate.subfamily, 99), -candidate.confidence))
+    # Prefer exact fits over rounded-valid approximate fits, then simpler formulas.
+    return sorted(
+        candidates,
+        key=lambda candidate: (
+            candidate.max_abs_error,
+            order.get(candidate.subfamily, 99),
+            -candidate.confidence,
+        ),
+    )
 
 
 def _places(text: str) -> int:
