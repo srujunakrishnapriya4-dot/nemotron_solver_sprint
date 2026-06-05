@@ -26,6 +26,8 @@ def _teacher_row(index: int = 0, **overrides):
         "metadata": {
             "source_rule_signature": f"day10_rule_signature_{index}",
             "source_leakage_group": f"day10_lg_{index}",
+            "source_parameter_tuple_hash": f"day10_param_{index}",
+            "source_prompt_template_signature": f"day10_template_{index}",
         },
     }
     row.update(overrides)
@@ -40,6 +42,8 @@ def _empty_forbidden():
         "rule_signature": set(),
         "leakage_group": set(),
         "eval_row_id": set(),
+        "parameter_tuple_hash": set(),
+        "prompt_template_signature": set(),
         "files": set(),
     }
 
@@ -60,6 +64,8 @@ def test_overlap_audit_hard_fails_each_forbidden_surface():
     forbidden["normalized_prompt_hash"].add(normalized_prompt_hash(row["prompt"]))
     forbidden["rule_signature"].add(row["metadata"]["source_rule_signature"])
     forbidden["leakage_group"].add(row["metadata"]["source_leakage_group"])
+    forbidden["parameter_tuple_hash"].add(row["metadata"].get("source_parameter_tuple_hash", ""))
+    forbidden["prompt_template_signature"].add(row["metadata"].get("source_prompt_template_signature", ""))
 
     audit = build_overlap_audit([row], forbidden)
 
@@ -70,6 +76,8 @@ def test_overlap_audit_hard_fails_each_forbidden_surface():
     assert audit["normalized_prompt_hash_overlap_count"] == 1
     assert audit["rule_signature_overlap_count"] == 1
     assert audit["leakage_group_overlap_count"] == 1
+    assert audit["parameter_tuple_hash_overlap_count"] == 1
+    assert audit["prompt_template_signature_overlap_count"] == 1
 
 
 def test_learnability_audit_fails_template_dominance_and_near_duplicates():

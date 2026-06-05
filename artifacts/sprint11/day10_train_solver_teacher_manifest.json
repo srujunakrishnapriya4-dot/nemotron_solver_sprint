@@ -8,11 +8,7 @@
   "created_by": "SPRINT-11_DAY10_PASS10B",
   "dry_run_allowed": true,
   "full_training_allowed": false,
-  "full_training_blockers": [
-    "row_count_below_full_training_minimum",
-    "format_only_coverage_below_minimum",
-    "subfamily_skew_warning_count_exceeds_policy"
-  ],
+  "full_training_blockers": [],
   "no_adapter_packaged": true,
   "no_submission_created": true,
   "no_training_performed": true,
@@ -24,7 +20,7 @@
   "teacher_corpus": {
     "exists": true,
     "path": "artifacts\\sprint11\\day10_solver_teacher_direct.jsonl",
-    "sha256": "da34e52dcb30b0e27e268d9a258bc8310ea70540dea47662dcb077e39335e603",
-    "size_bytes": 1336551
+    "sha256": "9ea9f9231a9399f4abb98c5cb7d4f9a5e461193a8c1f22caeeca83420193bc79",
+    "size_bytes": 9559231
   }
 }

@@ -1,20 +1,18 @@
 {
-  "abstain_count": 274,
+  "abstain_count": 512,
   "bad_target_ids": [],
+  "direct_abstain_count": 0,
   "failures": [],
   "family_counts": {
-    "bit_manipulation": 189,
-    "char_cipher": 45,
-    "custom_numeral": 72,
-    "format_only": 1,
-    "gravity_numeric": 120,
-    "numeric_formula": 144,
-    "permutation_sorting": 48,
-    "roman_numeral": 80,
-    "sequence_pattern": 72,
-    "symbol_mapping": 34,
-    "unit_conversion": 168,
-    "word_cipher": 22
+    "bit_manipulation": 900,
+    "char_cipher": 850,
+    "format_only": 300,
+    "gravity_numeric": 550,
+    "numeric_formula": 750,
+    "roman_numeral": 544,
+    "symbol_mapping": 850,
+    "unit_conversion": 750,
+    "word_cipher": 650
   },
   "no_0_95_evidence": true,
   "no_adapter_packaged": true,
@@ -22,7 +20,7 @@
   "no_submission_created": true,
   "no_training_performed": true,
   "prompt_leak_ids": [],
-  "rejected_count": 446,
-  "row_count": 995,
+  "rejected_count": 617,
+  "row_count": 6144,
   "status": "PASS"
 }

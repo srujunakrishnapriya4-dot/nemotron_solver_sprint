@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+from functools import lru_cache
 from pathlib import Path
 
 from kaggle_anti086.training.day10_kaggle_commands import COMMAND_PLAN
 from kaggle_anti086.training.day10_build_solver_teacher_corpus import (
     REQUIRED_FAMILIES,
+    SUPPORTED_DIRECT_FAMILIES,
     build_day10_source_rows,
     build_solver_teacher_corpus,
     solve_teacher_row,
@@ -29,19 +31,32 @@ REQUIRED_SCHEMA = {
 }
 
 
+@lru_cache(maxsize=1)
+def _repaired_corpus():
+    return build_solver_teacher_corpus(
+        source_mode="day10_repair",
+        target_direct_rows=6144,
+        target_abstain_rows=512,
+        seed=1110,
+        eval_paths=[],
+    )
+
+
 def test_teacher_corpus_builds_with_required_schema_and_passes_audits():
-    result = build_solver_teacher_corpus(rows=128, seed=1110, eval_paths=[])
+    result = _repaired_corpus()
     rows = result["rows"]
 
     assert rows
     assert result["audit"]["status"] == "PASS"
     assert result["overlap"]["status"] == "PASS"
     assert result["learnability"]["status"] == "PASS"
+    assert result["mix_repair"]["status"] == "PASS"
     assert result["manifest"]["status"] == "PASS"
     assert REQUIRED_SCHEMA <= set(rows[0])
     families = {row["family"] for row in rows}
-    has_abstain = any(row["answer"] == "ABSTAIN" for row in rows)
-    assert REQUIRED_FAMILIES <= (families | ({"abstain/unsupported"} if has_abstain else set()))
+    assert SUPPORTED_DIRECT_FAMILIES <= families
+    assert "abstain/unsupported" in REQUIRED_FAMILIES
+    assert all(row["answer"] != "ABSTAIN" for row in rows)
     assert all(row["metadata"]["gold_used_for_target"] is False for row in rows)
 
 
@@ -57,29 +72,35 @@ def test_teacher_target_does_not_come_from_corrupted_gold_answer():
     assert result["row"]["metadata"]["gold_used_for_target"] is False
 
 
-def test_abstain_rows_are_policy_marked_not_default_answer_behavior():
-    result = build_solver_teacher_corpus(rows=128, seed=1110, eval_paths=[])
-    abstain_rows = [row for row in result["rows"] if row["answer"] == "ABSTAIN"]
+def test_abstain_rows_are_separated_from_default_direct_sft():
+    result = _repaired_corpus()
+    direct_abstain_rows = [row for row in result["rows"] if row["answer"] == "ABSTAIN"]
+    abstain_rows = result["abstain_rows"]
 
+    assert not direct_abstain_rows
     assert abstain_rows
     assert all(row["expected_behavior"] == "abstain" for row in abstain_rows)
     assert all(row["metadata"]["abstain_policy"] == "teacher_verified_abstain_only" for row in abstain_rows)
 
 
 def test_outputs_include_manifest_hashes_and_audit_paths(tmp_path: Path):
-    result = build_solver_teacher_corpus(rows=128, seed=1110, eval_paths=[])
+    result = _repaired_corpus()
     manifest = write_day10_outputs(
         result,
         out_direct=tmp_path / "direct.jsonl",
+        out_abstain_policy=tmp_path / "abstain.jsonl",
         out_manifest=tmp_path / "manifest.json",
         out_audit=tmp_path / "audit.json",
         out_overlap=tmp_path / "overlap.json",
         out_learnability=tmp_path / "learnability.json",
+        out_mix_repair=tmp_path / "mix.json",
     )
 
     assert manifest["status"] == "PASS"
     assert manifest["files"]["direct"]["row_count"] == len(result["rows"])
+    assert manifest["files"]["abstain_policy"]["row_count"] == len(result["abstain_rows"])
     assert manifest["files"]["direct"]["sha256"]
+    assert manifest["files"]["mix_repair"]["sha256"]
     assert manifest["files"]["overlap_audit"]["sha256"]
     assert manifest["training_allowed"] is False
     assert manifest["packaging_allowed"] is False
@@ -89,8 +110,8 @@ def test_outputs_include_manifest_hashes_and_audit_paths(tmp_path: Path):
 def test_day10_command_plan_has_staged_gates_without_package_or_submit():
     for stage in (
         "Stage A: Day 9 regression",
-        "Stage B: teacher corpus",
-        "Stage C: audits",
+        "Stage B: PASS 10C teacher corpus mix repair",
+        "Stage C: audits + mix repair checks",
         "Stage D: capacity audit + dry-run train",
         "Stage E: smoke train, Kaggle only",
         "Stage F: full train, gated",
@@ -100,5 +121,7 @@ def test_day10_command_plan_has_staged_gates_without_package_or_submit():
     ):
         assert stage in COMMAND_PLAN
     assert "submission.zip" in COMMAND_PLAN
+    assert "--source-mode day10_repair" in COMMAND_PLAN
+    assert "day10_corpus_mix_repair_report.json" in COMMAND_PLAN
     assert "kaggle competitions submit" not in COMMAND_PLAN.lower()
     assert "package_adapter.py" not in COMMAND_PLAN

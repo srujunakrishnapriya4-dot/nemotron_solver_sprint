@@ -14,7 +14,11 @@ runs/
 outputs/
 artifacts/
 checkpoints/
+checkpoint-*/
 models/
+anti086_adapters/
+bnb_linux_wheelhouse/
+bnb_wheelhouse/
 *.safetensors
 *.bin
 *.pt

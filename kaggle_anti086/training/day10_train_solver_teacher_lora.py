@@ -15,10 +15,10 @@ from kaggle_anti086.training.training_config_schema import load_training_config
 
 
 DEFAULT_POLICY = {
-    "min_full_training_rows": 2000,
-    "min_smoke_rows": 256,
-    "min_format_only_rows": 20,
-    "max_subfamily_skew_warning_count": 2,
+    "min_full_training_rows": 4096,
+    "min_smoke_rows": 2000,
+    "min_format_only_rows": 100,
+    "max_subfamily_skew_warning_count": 0,
 }
 
 
@@ -28,7 +28,9 @@ def build_training_readiness(
     teacher_audit_path: str | Path,
     overlap_audit_path: str | Path,
     learnability_audit_path: str | Path,
+    mix_repair_report_path: str | Path | None = None,
     capacity_audit_path: str | Path,
+    abstain_policy_path: str | Path | None = None,
     dry_run: bool,
     smoke_steps: int | None = None,
     kaggle_mode: bool = False,
@@ -40,11 +42,12 @@ def build_training_readiness(
     teacher_audit = read_json(teacher_audit_path)
     overlap = read_json(overlap_audit_path)
     learnability = read_json(learnability_audit_path)
+    mix_repair = read_json(mix_repair_report_path) if mix_repair_report_path else {}
     capacity = read_json(capacity_audit_path)
     corpus_path = Path(str(config.get("train_teacher_path", "artifacts/sprint11/day10_solver_teacher_direct.jsonl")))
-    row_count = int(teacher_audit.get("row_count", 0))
-    family_counts = dict(teacher_audit.get("family_counts", {}))
-    format_only_count = int(family_counts.get("format_only", 0))
+    row_count = int(mix_repair.get("direct_answer_rows", teacher_audit.get("row_count", 0)))
+    family_counts = dict(mix_repair.get("by_family", teacher_audit.get("family_counts", {})))
+    format_only_count = int(mix_repair.get("format_only_count", family_counts.get("format_only", 0)))
     subfamily_skew_count = len(learnability.get("subfamily_balance_warnings", {}) or {})
     failures: list[str] = []
     warnings: list[str] = []
@@ -62,12 +65,16 @@ def build_training_readiness(
         failures.append("overlap_audit_not_pass")
     if learnability.get("status") != "PASS":
         failures.append("learnability_audit_not_pass")
+    if mix_repair_report_path and mix_repair.get("status") != "PASS":
+        failures.append("mix_repair_report_not_pass")
     if capacity.get("status") != "PASS":
         failures.append("capacity_audit_not_pass")
     if not corpus_path.exists():
         failures.append("teacher_corpus_missing")
     if row_count < policy["min_smoke_rows"]:
         failures.append("row_count_below_smoke_minimum")
+    if abstain_policy_path and not Path(abstain_policy_path).exists():
+        failures.append("abstain_policy_missing")
     if smoke_steps is not None and (smoke_steps <= 0 or smoke_steps > 5):
         failures.append("smoke_steps_must_be_1_to_5")
     if smoke_steps is not None and not kaggle_mode:
@@ -82,8 +89,11 @@ def build_training_readiness(
         full_blockers.append("row_count_below_full_training_minimum")
     if format_only_count < policy["min_format_only_rows"]:
         full_blockers.append("format_only_coverage_below_minimum")
-    if subfamily_skew_count > policy["max_subfamily_skew_warning_count"]:
+    if not mix_repair and subfamily_skew_count > policy["max_subfamily_skew_warning_count"]:
         full_blockers.append("subfamily_skew_warning_count_exceeds_policy")
+    for blocker in (mix_repair.get("remaining_blockers", []) if mix_repair else []):
+        if blocker not in {"target_abstain_rows_not_met"} and blocker not in full_blockers:
+            full_blockers.append(str(blocker))
     if failures:
         training_gate_status = "FAIL"
     elif full_blockers:
@@ -91,8 +101,8 @@ def build_training_readiness(
     else:
         training_gate_status = "PASS"
     dry_run_allowed = not any(item in failures for item in ("teacher_audit_not_pass", "overlap_audit_not_pass", "learnability_audit_not_pass", "capacity_audit_not_pass"))
-    smoke_training_allowed = not failures and row_count >= policy["min_smoke_rows"] and format_only_count >= 1
-    full_training_allowed = not failures and not full_blockers and bool(smoke_report)
+    smoke_training_allowed = not failures and bool(mix_repair.get("smoke_training_eligible", row_count >= policy["min_smoke_rows"]))
+    full_training_allowed = not failures and not full_blockers and bool(smoke_report) and bool(mix_repair.get("full_training_eligible", False))
     report = {
         "status": "PASS" if dry_run_allowed and not failures else "FAIL",
         "training_gate_status": training_gate_status,
@@ -105,6 +115,8 @@ def build_training_readiness(
         "format_only_count": format_only_count,
         "subfamily_skew_warning_count": subfamily_skew_count,
         "family_counts": family_counts,
+        "mix_repair_status": mix_repair.get("status"),
+        "mix_repair_report": str(mix_repair_report_path) if mix_repair_report_path else "",
         "config_path": str(config_path),
         "teacher_corpus": file_record(corpus_path) if corpus_path.exists() else {"path": str(corpus_path), "exists": False},
         "policy": policy,
@@ -156,7 +168,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--teacher-audit", required=True)
     parser.add_argument("--overlap-audit", required=True)
     parser.add_argument("--learnability-audit", required=True)
+    parser.add_argument("--mix-repair-report", default=None)
     parser.add_argument("--capacity-audit", required=True)
+    parser.add_argument("--abstain-policy-path", default=None)
     parser.add_argument("--out-summary", required=True)
     parser.add_argument("--out-manifest", required=True)
     parser.add_argument("--dry-run", action="store_true")
@@ -169,7 +183,9 @@ def main(argv: list[str] | None = None) -> int:
         teacher_audit_path=args.teacher_audit,
         overlap_audit_path=args.overlap_audit,
         learnability_audit_path=args.learnability_audit,
+        mix_repair_report_path=args.mix_repair_report,
         capacity_audit_path=args.capacity_audit,
+        abstain_policy_path=args.abstain_policy_path,
         dry_run=args.dry_run,
         smoke_steps=args.smoke_steps,
         kaggle_mode=args.kaggle_mode,

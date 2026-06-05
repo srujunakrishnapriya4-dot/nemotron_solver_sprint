@@ -4,47 +4,42 @@
   "dry_run_allowed": true,
   "failures": [],
   "family_counts": {
-    "bit_manipulation": 189,
-    "char_cipher": 45,
-    "custom_numeral": 72,
-    "format_only": 1,
-    "gravity_numeric": 120,
-    "numeric_formula": 144,
-    "permutation_sorting": 48,
-    "roman_numeral": 80,
-    "sequence_pattern": 72,
-    "symbol_mapping": 34,
-    "unit_conversion": 168,
-    "word_cipher": 22
+    "bit_manipulation": 900,
+    "char_cipher": 850,
+    "format_only": 300,
+    "gravity_numeric": 550,
+    "numeric_formula": 750,
+    "roman_numeral": 544,
+    "symbol_mapping": 850,
+    "unit_conversion": 750,
+    "word_cipher": 650
   },
-  "format_only_count": 1,
+  "format_only_count": 300,
   "full_training_allowed": false,
-  "full_training_blockers": [
-    "row_count_below_full_training_minimum",
-    "format_only_coverage_below_minimum",
-    "subfamily_skew_warning_count_exceeds_policy"
-  ],
+  "full_training_blockers": [],
+  "mix_repair_report": "artifacts\\sprint11\\day10_corpus_mix_repair_report.json",
+  "mix_repair_status": "PASS",
   "no_0_95_evidence": true,
   "no_leaderboard_evidence": true,
   "no_training_performed": true,
   "packaging_allowed": false,
   "policy": {
-    "max_subfamily_skew_warning_count": 2,
-    "min_format_only_rows": 20,
-    "min_full_training_rows": 2000,
-    "min_smoke_rows": 256
+    "max_subfamily_skew_warning_count": 0,
+    "min_format_only_rows": 100,
+    "min_full_training_rows": 4096,
+    "min_smoke_rows": 2000
   },
-  "row_count": 995,
+  "row_count": 6144,
   "smoke_training_allowed": true,
   "status": "PASS",
-  "subfamily_skew_warning_count": 5,
+  "subfamily_skew_warning_count": 4,
   "submission_allowed": false,
   "teacher_corpus": {
     "exists": true,
     "path": "artifacts\\sprint11\\day10_solver_teacher_direct.jsonl",
-    "sha256": "da34e52dcb30b0e27e268d9a258bc8310ea70540dea47662dcb077e39335e603",
-    "size_bytes": 1336551
+    "sha256": "9ea9f9231a9399f4abb98c5cb7d4f9a5e461193a8c1f22caeeca83420193bc79",
+    "size_bytes": 9559231
   },
-  "training_gate_status": "BLOCK_FULL_TRAINING",
+  "training_gate_status": "PASS",
   "warnings": []
 }
