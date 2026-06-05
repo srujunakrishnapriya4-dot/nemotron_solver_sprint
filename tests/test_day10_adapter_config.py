@@ -8,6 +8,7 @@ from kaggle_anti086.training.training_config_schema import load_training_config
 def test_day10_small_and_wide_configs_are_present_and_safe():
     small = load_training_config("kaggle_anti086/training/configs/v4_solver_teacher_lora_small.yaml")
     wide = load_training_config("kaggle_anti086/training/configs/v4_solver_teacher_lora_wide.yaml")
+    smoke = load_training_config("kaggle_anti086/training/configs/v4_solver_teacher_lora_smoke_bf16_qv.yaml")
 
     assert small["stage"] == "v4_solver_teacher_lora_small"
     assert wide["stage"] == "v4_solver_teacher_lora_wide"
@@ -20,3 +21,9 @@ def test_day10_small_and_wide_configs_are_present_and_safe():
         assert config["train_on_user"] is False
         assert "lm_head" not in config["target_modules"]
         assert Path(config["train_teacher_path"]).as_posix().endswith("day10_solver_teacher_direct.jsonl")
+    assert smoke["stage"] == "v4_solver_teacher_lora_smoke_bf16_qv"
+    assert set(smoke["target_modules"]) == {"q_proj", "v_proj"}
+    assert smoke["smoke_bf16_runtime_only"] is True
+    assert smoke["load_in_4bit"] is False
+    assert smoke["full_training_allowed"] is False
+    assert smoke["not_submission_ready"] is True

@@ -60,7 +60,7 @@ def build_training_readiness(
     subfamily_skew_count = len(learnability.get("subfamily_balance_warnings", {}) or {})
     failures: list[str] = []
     warnings: list[str] = []
-    if str(config.get("stage")) not in {"v4_solver_teacher_lora_small", "v4_solver_teacher_lora_wide"}:
+    if str(config.get("stage")) not in {"v4_solver_teacher_lora_small", "v4_solver_teacher_lora_wide", "v4_solver_teacher_lora_smoke_bf16_qv"}:
         failures.append("not_day10_solver_teacher_stage")
     if config.get("full_prompt_loss") is not False:
         failures.append("full_prompt_loss_forbidden")
@@ -88,6 +88,15 @@ def build_training_readiness(
         failures.append("smoke_steps_must_be_1_to_5")
     if smoke_steps is not None and not kaggle_mode:
         failures.append("smoke_training_requires_kaggle_mode")
+    if config.get("smoke_bf16_runtime_only"):
+        if bool(config.get("load_in_4bit", True)):
+            failures.append("smoke_bf16_runtime_only_requires_load_in_4bit_false")
+        if set(_target_modules(config)) != {"q_proj", "v_proj"}:
+            failures.append("smoke_bf16_runtime_only_targets_must_be_q_proj_v_proj")
+        if not dry_run and smoke_steps is None:
+            failures.append("smoke_bf16_runtime_only_forbids_full_training")
+        if bool(config.get("full_training_allowed", True)):
+            failures.append("smoke_bf16_runtime_only_full_training_allowed_must_be_false")
     if not dry_run and smoke_steps is None:
         if not smoke_report:
             failures.append("full_training_requires_smoke_report")

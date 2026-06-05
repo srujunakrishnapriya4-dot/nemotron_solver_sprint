@@ -15,6 +15,7 @@ from kaggle_anti086.training.training_config_schema import load_training_config
 
 
 SMALL_TARGETS = {"q_proj", "v_proj", "o_proj"}
+SMOKE_BF16_QV_TARGETS = {"q_proj", "v_proj"}
 WIDE_TARGETS = SMALL_TARGETS | {"k_proj", "up_proj", "down_proj"}
 FORBIDDEN_TARGETS = {"lm_head", "embed_tokens"}
 
@@ -26,7 +27,7 @@ def audit_configs(config_paths: list[str | Path], *, available_modules: set[str]
     for path in config_paths:
         report = audit_config(path, available_modules=available_modules)
         reports.append(report)
-        if report["stage"] == "v4_solver_teacher_lora_small" and report["status"] in {"PASS", "PASS_TARGETS_UNVERIFIED"}:
+        if report["stage"] in {"v4_solver_teacher_lora_small", "v4_solver_teacher_lora_smoke_bf16_qv"} and report["status"] in {"PASS", "PASS_TARGETS_UNVERIFIED"}:
             small_viable = True
         if report["status"] == "FAIL":
             failures.append(f"{Path(path).name}:fail")
@@ -51,13 +52,26 @@ def audit_config(path: str | Path, *, available_modules: set[str] | None = None)
     stage = str(config.get("stage", ""))
     rank = int(config.get("rank", 0) or 0)
     targets = _targets(config)
-    if stage not in {"v4_solver_teacher_lora_small", "v4_solver_teacher_lora_wide"}:
+    if stage not in {"v4_solver_teacher_lora_small", "v4_solver_teacher_lora_wide", "v4_solver_teacher_lora_smoke_bf16_qv"}:
         failures.append("not_day10_v4_stage")
     if rank <= 0 or rank > 32:
         failures.append("rank_gt_32_or_invalid")
     if FORBIDDEN_TARGETS & set(targets):
         failures.append("forbidden_target_module")
-    if stage.endswith("_small") and set(targets) != SMALL_TARGETS:
+    smoke_bf16 = bool(config.get("smoke_bf16_runtime_only", False))
+    if stage == "v4_solver_teacher_lora_smoke_bf16_qv":
+        if not smoke_bf16:
+            failures.append("smoke_bf16_runtime_only_required")
+        if bool(config.get("load_in_4bit", True)):
+            failures.append("smoke_bf16_must_disable_4bit")
+        if bool(config.get("full_training_allowed", True)):
+            failures.append("smoke_bf16_full_training_must_be_false")
+        if int(config.get("num_steps", 999) or 999) > 5:
+            failures.append("smoke_bf16_num_steps_gt_5")
+        if set(targets) != SMOKE_BF16_QV_TARGETS:
+            failures.append("smoke_bf16_targets_must_be_q_v")
+        warnings.append("smoke_bf16_runtime_only_not_submission_ready")
+    elif stage.endswith("_small") and set(targets) != SMALL_TARGETS:
         failures.append("small_targets_must_be_q_v_o")
     if stage.endswith("_wide") and not set(targets).issubset(WIDE_TARGETS):
         failures.append("wide_targets_outside_allowed_set")

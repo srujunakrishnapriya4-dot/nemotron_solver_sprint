@@ -113,16 +113,21 @@ def test_day10_command_plan_has_staged_gates_without_package_or_submit():
         "Stage B: PASS 10C teacher corpus mix repair",
         "Stage C: audits + mix repair checks",
         "Stage D: capacity audit + dry-run train",
-        "Stage E: Day 10 smoke train real backend, Kaggle only",
-        "Stage F: smoke adapter package guard + adapter eval",
-        "Stage G: full-train gate decision, not implemented in PASS 10D",
-        "Stage H: adapter eval, non-smoke manual baseline path",
-        "Stage I: error mining + candidate decision",
-        "Stage J: package rehearsal, dry-run only",
+        "Stage E: Nemotron LoRA target diagnostics, Kaggle only",
+        "Stage F: Day 10 official small smoke train real backend, Kaggle only",
+        "Stage G: BF16 q/v smoke-only fallback if 4-bit PEFT shape incompatible",
+        "Stage H: smoke adapter package guard + adapter eval",
+        "Stage I: full-train gate decision, not implemented in PASS 10E",
+        "Stage J: adapter eval, non-smoke manual baseline path",
+        "Stage K: error mining + candidate decision",
+        "Stage L: package rehearsal, dry-run only",
     ):
         assert stage in COMMAND_PLAN
     assert "submission.zip" in COMMAND_PLAN
     assert "--source-mode day10_repair" in COMMAND_PLAN
     assert "day10_corpus_mix_repair_report.json" in COMMAND_PLAN
+    assert "day10_nemotron_lora_target_diagnostics.py" in COMMAND_PLAN
+    assert "v4_solver_teacher_lora_smoke_bf16_qv.yaml" in COMMAND_PLAN
+    assert "HARD_BLOCKER_GPU_MEMORY_OR_BACKEND" in COMMAND_PLAN
     assert "kaggle competitions submit" not in COMMAND_PLAN.lower()
     assert "package_adapter.py" not in COMMAND_PLAN
