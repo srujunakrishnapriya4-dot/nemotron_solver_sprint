@@ -27,22 +27,28 @@ python -m pytest tests/test_day10_solver_teacher_corpus.py tests/test_day10_teac
 python kaggle_anti086/training/day10_lora_capacity_audit.py --configs kaggle_anti086/training/configs/v4_solver_teacher_lora_small.yaml kaggle_anti086/training/configs/v4_solver_teacher_lora_wide.yaml --out artifacts/sprint11/day10_lora_capacity_audit.json
 python kaggle_anti086/training/day10_train_solver_teacher_lora.py --config kaggle_anti086/training/configs/v4_solver_teacher_lora_small.yaml --teacher-audit artifacts/sprint11/day10_solver_teacher_audit.json --overlap-audit artifacts/sprint11/day10_teacher_overlap_audit.json --learnability-audit artifacts/sprint11/day10_teacher_learnability_audit.json --mix-repair-report artifacts/sprint11/day10_corpus_mix_repair_report.json --abstain-policy-path artifacts/sprint11/day10_solver_teacher_abstain_policy.jsonl --capacity-audit artifacts/sprint11/day10_lora_capacity_audit.json --out-summary artifacts/sprint11/day10_train_solver_teacher_dry_run_summary.json --out-manifest artifacts/sprint11/day10_train_solver_teacher_manifest.json --dry-run
 
-## Stage E: smoke train, Kaggle only
+## Stage E: Day 10 smoke train real backend, Kaggle only
 # RUN ONLY AFTER Stage A-D PASS and after reviewing full_training_blockers.
 # python kaggle_anti086/training/day10_train_solver_teacher_lora.py --config kaggle_anti086/training/configs/v4_solver_teacher_lora_small.yaml --teacher-audit artifacts/sprint11/day10_solver_teacher_audit.json --overlap-audit artifacts/sprint11/day10_teacher_overlap_audit.json --learnability-audit artifacts/sprint11/day10_teacher_learnability_audit.json --mix-repair-report artifacts/sprint11/day10_corpus_mix_repair_report.json --abstain-policy-path artifacts/sprint11/day10_solver_teacher_abstain_policy.jsonl --capacity-audit artifacts/sprint11/day10_lora_capacity_audit.json --out-summary artifacts/sprint11/day10_train_solver_teacher_smoke_summary.json --out-manifest artifacts/sprint11/day10_train_solver_teacher_manifest.json --smoke-steps 5 --kaggle-mode
 
-## Stage F: full train, gated
-# RUN ONLY IF smoke report is PASS and corpus adequacy blockers are resolved.
+## Stage F: smoke adapter package guard + adapter eval
+# RUN ONLY AFTER Stage E PASS. Package guard is rehearsal only; it must not create submission.zip.
+# export DAY10_SMOKE_ADAPTER_DIR=$(python -c "import json; print(json.load(open('artifacts/sprint11/day10_train_solver_teacher_smoke_summary.json'))['adapter_dir'])")
+# python kaggle_anti086/training/day10_adapter_package_guard.py --adapter-dir "$DAY10_SMOKE_ADAPTER_DIR" --out artifacts/sprint11/day10_adapter_package_guard_report.json --dry-run-package
+# python kaggle_anti086/training/day10_adapter_eval.py --base-model-path /kaggle/input/nemotron-model --day10-adapter-dir "$DAY10_SMOKE_ADAPTER_DIR" --eval-path artifacts/sprint11/day5_rule_holdout_answerable_512.jsonl --out-report artifacts/sprint11/day10_adapter_eval_report.json --out-predictions artifacts/sprint11/day10_adapter_eval_predictions.jsonl --max-rows 128 --kaggle-mode
+
+## Stage G: full-train gate decision, not implemented in PASS 10D
+# Full training remains blocked in PASS 10D even if a smoke report exists. A separate approved pass must enable it.
 # python kaggle_anti086/training/day10_train_solver_teacher_lora.py --config kaggle_anti086/training/configs/v4_solver_teacher_lora_small.yaml --teacher-audit artifacts/sprint11/day10_solver_teacher_audit.json --overlap-audit artifacts/sprint11/day10_teacher_overlap_audit.json --learnability-audit artifacts/sprint11/day10_teacher_learnability_audit.json --mix-repair-report artifacts/sprint11/day10_corpus_mix_repair_report.json --abstain-policy-path artifacts/sprint11/day10_solver_teacher_abstain_policy.jsonl --capacity-audit artifacts/sprint11/day10_lora_capacity_audit.json --out-summary artifacts/sprint11/day10_train_solver_teacher_full_summary.json --out-manifest artifacts/sprint11/day10_train_solver_teacher_manifest.json --smoke-report artifacts/sprint11/day10_train_solver_teacher_smoke_summary.json --kaggle-mode
 
-## Stage G: adapter eval
+## Stage H: adapter eval, non-smoke manual baseline path
 python kaggle_anti086/training/day10_adapter_eval.py --base-model-path /kaggle/input/nemotron-model --day10-adapter-dir /kaggle/working/anti086_adapters/day10_solver_teacher --eval-path artifacts/sprint11/day5_rule_holdout_answerable_512.jsonl --out-report artifacts/sprint11/day10_adapter_eval_report.json --out-predictions artifacts/sprint11/day10_adapter_eval_predictions.jsonl --max-rows 128
 
-## Stage H: error mining + candidate decision
+## Stage I: error mining + candidate decision
 python kaggle_anti086/training/day10_adapter_error_mining.py --predictions artifacts/sprint11/day10_adapter_eval_predictions.jsonl --out-report artifacts/sprint11/day10_adapter_error_mining_report.json --out-rows artifacts/sprint11/day10_adapter_error_mining_rows.jsonl
 python kaggle_anti086/training/day10_candidate_decision.py --eval-report artifacts/sprint11/day10_adapter_eval_report.json --error-mining-report artifacts/sprint11/day10_adapter_error_mining_report.json --package-guard-report artifacts/sprint11/day10_adapter_package_guard_report.json --out artifacts/sprint11/day10_candidate_decision_report.json
 
-## Stage I: package rehearsal, dry-run only
+## Stage J: package rehearsal, dry-run only
 python kaggle_anti086/training/day10_adapter_package_guard.py --adapter-dir /kaggle/working/anti086_adapters/day10_solver_teacher --out artifacts/sprint11/day10_adapter_package_guard_report.json --dry-run-package
 
 # No real submission package command is present. Public-LB calibration must be explicit before any future package/submission decision.

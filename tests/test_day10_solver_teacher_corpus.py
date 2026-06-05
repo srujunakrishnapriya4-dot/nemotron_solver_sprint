@@ -113,11 +113,12 @@ def test_day10_command_plan_has_staged_gates_without_package_or_submit():
         "Stage B: PASS 10C teacher corpus mix repair",
         "Stage C: audits + mix repair checks",
         "Stage D: capacity audit + dry-run train",
-        "Stage E: smoke train, Kaggle only",
-        "Stage F: full train, gated",
-        "Stage G: adapter eval",
-        "Stage H: error mining + candidate decision",
-        "Stage I: package rehearsal, dry-run only",
+        "Stage E: Day 10 smoke train real backend, Kaggle only",
+        "Stage F: smoke adapter package guard + adapter eval",
+        "Stage G: full-train gate decision, not implemented in PASS 10D",
+        "Stage H: adapter eval, non-smoke manual baseline path",
+        "Stage I: error mining + candidate decision",
+        "Stage J: package rehearsal, dry-run only",
     ):
         assert stage in COMMAND_PLAN
     assert "submission.zip" in COMMAND_PLAN
