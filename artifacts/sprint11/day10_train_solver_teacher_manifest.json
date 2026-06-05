@@ -1,0 +1,30 @@
+{
+  "config": {
+    "exists": true,
+    "path": "kaggle_anti086\\training\\configs\\v4_solver_teacher_lora_small.yaml",
+    "sha256": "8a284bbe38a5556bc8597356af60f3127e8d7143458a436365eef876bebd2ef0",
+    "size_bytes": 1105
+  },
+  "created_by": "SPRINT-11_DAY10_PASS10B",
+  "dry_run_allowed": true,
+  "full_training_allowed": false,
+  "full_training_blockers": [
+    "row_count_below_full_training_minimum",
+    "format_only_coverage_below_minimum",
+    "subfamily_skew_warning_count_exceeds_policy"
+  ],
+  "no_adapter_packaged": true,
+  "no_submission_created": true,
+  "no_training_performed": true,
+  "packaging_allowed": false,
+  "schema_version": 1,
+  "smoke_training_allowed": true,
+  "stage": "v4_solver_teacher_lora_small",
+  "submission_allowed": false,
+  "teacher_corpus": {
+    "exists": true,
+    "path": "artifacts\\sprint11\\day10_solver_teacher_direct.jsonl",
+    "sha256": "da34e52dcb30b0e27e268d9a258bc8310ea70540dea47662dcb077e39335e603",
+    "size_bytes": 1336551
+  }
+}

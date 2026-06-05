@@ -1,0 +1,50 @@
+{
+  "config_path": "kaggle_anti086\\training\\configs\\v4_solver_teacher_lora_small.yaml",
+  "dry_run": true,
+  "dry_run_allowed": true,
+  "failures": [],
+  "family_counts": {
+    "bit_manipulation": 189,
+    "char_cipher": 45,
+    "custom_numeral": 72,
+    "format_only": 1,
+    "gravity_numeric": 120,
+    "numeric_formula": 144,
+    "permutation_sorting": 48,
+    "roman_numeral": 80,
+    "sequence_pattern": 72,
+    "symbol_mapping": 34,
+    "unit_conversion": 168,
+    "word_cipher": 22
+  },
+  "format_only_count": 1,
+  "full_training_allowed": false,
+  "full_training_blockers": [
+    "row_count_below_full_training_minimum",
+    "format_only_coverage_below_minimum",
+    "subfamily_skew_warning_count_exceeds_policy"
+  ],
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "no_training_performed": true,
+  "packaging_allowed": false,
+  "policy": {
+    "max_subfamily_skew_warning_count": 2,
+    "min_format_only_rows": 20,
+    "min_full_training_rows": 2000,
+    "min_smoke_rows": 256
+  },
+  "row_count": 995,
+  "smoke_training_allowed": true,
+  "status": "PASS",
+  "subfamily_skew_warning_count": 5,
+  "submission_allowed": false,
+  "teacher_corpus": {
+    "exists": true,
+    "path": "artifacts\\sprint11\\day10_solver_teacher_direct.jsonl",
+    "sha256": "da34e52dcb30b0e27e268d9a258bc8310ea70540dea47662dcb077e39335e603",
+    "size_bytes": 1336551
+  },
+  "training_gate_status": "BLOCK_FULL_TRAINING",
+  "warnings": []
+}

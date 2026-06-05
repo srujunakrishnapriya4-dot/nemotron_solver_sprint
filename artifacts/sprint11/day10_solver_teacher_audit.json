@@ -1,0 +1,28 @@
+{
+  "abstain_count": 274,
+  "bad_target_ids": [],
+  "failures": [],
+  "family_counts": {
+    "bit_manipulation": 189,
+    "char_cipher": 45,
+    "custom_numeral": 72,
+    "format_only": 1,
+    "gravity_numeric": 120,
+    "numeric_formula": 144,
+    "permutation_sorting": 48,
+    "roman_numeral": 80,
+    "sequence_pattern": 72,
+    "symbol_mapping": 34,
+    "unit_conversion": 168,
+    "word_cipher": 22
+  },
+  "no_0_95_evidence": true,
+  "no_adapter_packaged": true,
+  "no_leaderboard_evidence": true,
+  "no_submission_created": true,
+  "no_training_performed": true,
+  "prompt_leak_ids": [],
+  "rejected_count": 446,
+  "row_count": 995,
+  "status": "PASS"
+}

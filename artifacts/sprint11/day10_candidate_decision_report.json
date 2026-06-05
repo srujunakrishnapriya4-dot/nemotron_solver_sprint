@@ -1,0 +1,23 @@
+{
+  "adapter_eval_completed": false,
+  "adapter_exact_match": 0.0,
+  "candidate": "day10_solver_teacher_adapter",
+  "candidate_quality": "HOLD_NO_SUBMIT",
+  "error_mining_status": "PASS",
+  "failures": [
+    "adapter_eval_missing_or_incomplete",
+    "package_rehearsal_not_pass"
+  ],
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "packaging_allowed": false,
+  "public_lb_calibration_recorded": false,
+  "status": "FAIL",
+  "submission_allowed": false,
+  "submit_recommended": false,
+  "tinker_exact_match": 0.0,
+  "v2a_exact_match": 0.0,
+  "warnings": [
+    "public_lb_calibration_missing_submit_recommended_false"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "configs": [
+    {
+      "adapter_size_estimate_mb": 54.0,
+      "adapter_size_limit_mb": 1500.0,
+      "failures": [],
+      "missing_target_modules": [],
+      "path": "kaggle_anti086\\training\\configs\\v4_solver_teacher_lora_small.yaml",
+      "rank": 32,
+      "stage": "v4_solver_teacher_lora_small",
+      "status": "PASS_TARGETS_UNVERIFIED",
+      "target_modules": [
+        "q_proj",
+        "v_proj",
+        "o_proj"
+      ],
+      "target_modules_confirmed": false,
+      "trainable_parameter_estimate": 12582912,
+      "warnings": [
+        "target_modules_unverified_without_real_model"
+      ]
+    },
+    {
+      "adapter_size_estimate_mb": 108.0,
+      "adapter_size_limit_mb": 1500.0,
+      "failures": [],
+      "missing_target_modules": [],
+      "path": "kaggle_anti086\\training\\configs\\v4_solver_teacher_lora_wide.yaml",
+      "rank": 32,
+      "stage": "v4_solver_teacher_lora_wide",
+      "status": "BLOCKED_TARGETS_UNCONFIRMED",
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "target_modules_confirmed": false,
+      "trainable_parameter_estimate": 25165824,
+      "warnings": [
+        "target_modules_unverified_without_real_model"
+      ]
+    }
+  ],
+  "failures": [],
+  "no_training_performed": true,
+  "packaging_allowed": false,
+  "small_config_viable": true,
+  "status": "PASS",
+  "submission_allowed": false,
+  "warnings": [
+    "target_modules_unverified_without_real_model"
+  ],
+  "wide_config_status": "BLOCKED_TARGETS_UNCONFIRMED"
+}

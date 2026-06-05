@@ -1,0 +1,102 @@
+{
+  "abstain_count": 274,
+  "audit_status": "PASS",
+  "created_by": "SPRINT-11G_DAY10_PASS10A",
+  "family_counts": {
+    "bit_manipulation": 189,
+    "char_cipher": 45,
+    "custom_numeral": 72,
+    "format_only": 1,
+    "gravity_numeric": 120,
+    "numeric_formula": 144,
+    "permutation_sorting": 48,
+    "roman_numeral": 80,
+    "sequence_pattern": 72,
+    "symbol_mapping": 34,
+    "unit_conversion": 168,
+    "word_cipher": 22
+  },
+  "files": {
+    "audit": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\day10_solver_teacher_audit.json",
+      "sha256": "19f8117e56cf39b679c8b4590373324fcb52f446edf91b1ca279579313456081",
+      "size_bytes": 689
+    },
+    "direct": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\day10_solver_teacher_direct.jsonl",
+      "row_count": 995,
+      "sha256": "da34e52dcb30b0e27e268d9a258bc8310ea70540dea47662dcb077e39335e603",
+      "size_bytes": 1336551
+    },
+    "learnability_audit": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\day10_teacher_learnability_audit.json",
+      "sha256": "5e66f9a2e4eae0483b970054986b23ab8204f29b467636251036f690a0b485ff",
+      "size_bytes": 2095
+    },
+    "overlap_audit": {
+      "exists": true,
+      "path": "artifacts\\sprint11\\day10_teacher_overlap_audit.json",
+      "sha256": "ae78bc8e8e7e7fdaf9efba3a22877dffa334732b472d41b6d6b1b94c98de738e",
+      "size_bytes": 1031
+    }
+  },
+  "learnability_status": "PASS",
+  "no_0_95_evidence": true,
+  "no_adapter_packaged": true,
+  "no_leaderboard_evidence": true,
+  "no_submission_created": true,
+  "no_training_performed": true,
+  "overlap_status": "PASS",
+  "packaging_allowed": false,
+  "risk_counts": {
+    "low": 995
+  },
+  "row_count": 995,
+  "rows_requested": 768,
+  "schema_version": 1,
+  "seed": 1110,
+  "solver_source_counts": {
+    "bit_transform_solver": 168,
+    "char_cipher_solver": 30,
+    "format_only_solver": 1,
+    "numeric_formula_solver": 257,
+    "roman_solver": 80,
+    "solver_ensemble": 274,
+    "symbol_mapping_solver": 15,
+    "unit_conversion_solver": 160,
+    "word_cipher_solver": 10
+  },
+  "status": "PASS",
+  "subfamily_counts": {
+    "bit_manipulation/expected_abstain": 21,
+    "bit_manipulation/reverse_bits": 43,
+    "bit_manipulation/rotate_left": 43,
+    "bit_manipulation/rotate_then_xor": 43,
+    "bit_manipulation/xor_mask": 39,
+    "char_cipher/caesar_shift": 20,
+    "char_cipher/expected_abstain": 15,
+    "char_cipher/monoalphabetic_substitution": 5,
+    "char_cipher/reverse_string": 5,
+    "custom_numeral/expected_abstain": 72,
+    "format_only/boxed_answer": 1,
+    "gravity_numeric/expected_abstain": 7,
+    "gravity_numeric/gravity_distance": 113,
+    "numeric_formula/linear_offset": 72,
+    "numeric_formula/quadratic_scale": 72,
+    "permutation_sorting/expected_abstain": 48,
+    "roman_numeral/standard_roman": 80,
+    "sequence_pattern/expected_abstain": 72,
+    "symbol_mapping/char_substitution": 15,
+    "symbol_mapping/expected_abstain": 19,
+    "unit_conversion/expected_abstain": 8,
+    "unit_conversion/linear_offset_round_0": 107,
+    "unit_conversion/multiplicative_scale_round_2": 53,
+    "word_cipher/expected_abstain": 12,
+    "word_cipher/word_substitution": 10
+  },
+  "submission_allowed": false,
+  "training_allowed": false
+}

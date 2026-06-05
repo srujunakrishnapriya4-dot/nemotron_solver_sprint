@@ -1,0 +1,75 @@
+{
+  "abstain_rows_excluded_from_default_direct_sft": true,
+  "answer_unique_count": 525,
+  "duplicate_answer_violations": {},
+  "failures": [],
+  "family_cap_violations": {},
+  "family_counts": {
+    "bit_manipulation": 189,
+    "char_cipher": 45,
+    "custom_numeral": 72,
+    "format_only": 1,
+    "gravity_numeric": 120,
+    "numeric_formula": 144,
+    "permutation_sorting": 48,
+    "roman_numeral": 80,
+    "sequence_pattern": 72,
+    "symbol_mapping": 34,
+    "unit_conversion": 168,
+    "word_cipher": 22
+  },
+  "max_prompt_template_share": 0.04321608040201005,
+  "near_duplicate_prompt_count": 0,
+  "near_duplicate_prompt_rate": 0.0,
+  "number_operator_diversity": {
+    "decimal=0|binary=0|arrow=0|q=1|sym=3": 18,
+    "decimal=0|binary=0|arrow=0|q=1|sym=4": 18,
+    "decimal=0|binary=0|arrow=0|q=1|sym=5": 36,
+    "decimal=0|binary=0|arrow=0|q=1|sym=7": 3,
+    "decimal=0|binary=0|arrow=0|q=1|sym=9": 2,
+    "decimal=0|binary=0|arrow=1|q=0|sym=7": 20,
+    "decimal=0|binary=0|arrow=1|q=0|sym=8": 32,
+    "decimal=0|binary=0|arrow=1|q=0|sym=9": 372,
+    "decimal=0|binary=0|arrow=1|q=1|sym=7": 14,
+    "decimal=0|binary=0|arrow=1|q=1|sym=8": 3,
+    "decimal=0|binary=0|arrow=1|q=1|sym=9": 121,
+    "decimal=0|binary=1|arrow=1|q=0|sym=9": 189,
+    "decimal=1|binary=0|arrow=0|q=0|sym=9": 1,
+    "decimal=1|binary=0|arrow=1|q=0|sym=9": 53,
+    "decimal=1|binary=0|arrow=1|q=1|sym=9": 113
+  },
+  "prompt_template_count": 72,
+  "query_position_distribution": {
+    "early": 238,
+    "late": 243,
+    "middle": 423,
+    "missing_query_marker": 91
+  },
+  "row_count": 995,
+  "status": "PASS",
+  "subfamily_balance_warnings": {
+    "custom_numeral": [
+      "expected_abstain",
+      72
+    ],
+    "gravity_numeric": [
+      "gravity_distance",
+      113
+    ],
+    "permutation_sorting": [
+      "expected_abstain",
+      48
+    ],
+    "roman_numeral": [
+      "standard_roman",
+      80
+    ],
+    "sequence_pattern": [
+      "expected_abstain",
+      72
+    ]
+  },
+  "warnings": [
+    "subfamily_balance_skew"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "adapter_config_at_root": false,
+  "adapter_dir": "\\kaggle\\working\\anti086_adapters\\day10_solver_teacher",
+  "adapter_model_at_root": false,
+  "dry_run_package": true,
+  "expected_zip_members": [
+    "adapter_config.json",
+    "adapter_model.safetensors"
+  ],
+  "failures": [
+    "adapter_dir_missing"
+  ],
+  "forbidden_repo_artifacts": [],
+  "nested_package_rejected": true,
+  "package_created": false,
+  "packaging_allowed": false,
+  "status": "FAIL",
+  "submission_allowed": false,
+  "submit_recommended": false,
+  "warnings": []
+}
