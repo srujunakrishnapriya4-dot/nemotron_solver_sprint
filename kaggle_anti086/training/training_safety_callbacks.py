@@ -3,9 +3,16 @@ from __future__ import annotations
 import math
 from typing import Any
 
+try:
+    from transformers import TrainerCallback  # type: ignore
+except ImportError:
+    class TrainerCallback:  # type: ignore
+        pass
 
-class Sprint11TrainingSafetyCallback:
+
+class Sprint11TrainingSafetyCallback(TrainerCallback):
     def __init__(self, *, max_loss_abort: float = 20.0):
+        super().__init__()
         self.max_loss_abort = max_loss_abort
         self.loss_start = None
         self.loss_end = None
@@ -13,11 +20,26 @@ class Sprint11TrainingSafetyCallback:
         self.loss_max = None
         self.failure_reason = None
 
+    def on_init_end(self, args=None, state=None, control=None, **kwargs):
+        return control
+
+    def on_train_begin(self, args=None, state=None, control=None, **kwargs):
+        return control
+
+    def on_step_end(self, args=None, state=None, control=None, **kwargs):
+        return control
+
     def on_log(self, args=None, state=None, control=None, logs=None, **kwargs):
         logs = logs or {}
         if "loss" not in logs:
             return control
-        loss = float(logs["loss"])
+        try:
+            loss = float(logs["loss"])
+        except (TypeError, ValueError):
+            self.failure_reason = "invalid_loss"
+            if control is not None:
+                control.should_training_stop = True
+            return control
         if self.loss_start is None:
             self.loss_start = loss
         self.loss_end = loss

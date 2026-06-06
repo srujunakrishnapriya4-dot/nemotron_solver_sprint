@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import sys
+import types
+
 import pytest
 
 from kaggle_anti086.training.lora_backend import (
+    _trainer_tokenizer_kwargs,
     _validate_lora_shape,
     inspect_target_modules,
     prepare_model_for_v2a_training,
@@ -100,3 +104,14 @@ def test_inspect_target_modules_records_core_shape_fields():
     assert rows[0]["in_features"] == 4096
     assert rows[0]["out_features"] == 14336
     assert rows[0]["weight_shape"] == [14336, 4096]
+
+
+def test_trainer_tokenizer_kwargs_prefers_processing_class(monkeypatch):
+    class FakeTrainer:
+        def __init__(self, *, processing_class=None, tokenizer=None):
+            pass
+
+    monkeypatch.setitem(sys.modules, "transformers", types.SimpleNamespace(Trainer=FakeTrainer))
+    tokenizer = object()
+
+    assert _trainer_tokenizer_kwargs(tokenizer) == {"processing_class": tokenizer}

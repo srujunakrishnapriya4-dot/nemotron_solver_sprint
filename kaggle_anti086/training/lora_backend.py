@@ -10,6 +10,19 @@ from kaggle_anti086.training.training_safety_callbacks import Sprint11TrainingSa
 from kaggle_anti086.training.training_config_schema import _target_modules
 
 
+def _trainer_tokenizer_kwargs(tokenizer):
+    import inspect
+
+    from transformers import Trainer as _Trainer  # type: ignore
+
+    params = inspect.signature(_Trainer.__init__).parameters
+    if "processing_class" in params:
+        return {"processing_class": tokenizer}
+    if "tokenizer" in params:
+        return {"tokenizer": tokenizer}
+    return {}
+
+
 def build_lora_config(config: dict[str, Any]):
     targets = _target_modules(config)
     _validate_lora_shape(config, targets)
@@ -66,7 +79,14 @@ def run_lora_training(model, tokenizer, dataset: Sprint11SFTDataset, config: dic
         gradient_checkpointing=True,
         max_grad_norm=1.0,
     )
-    trainer = Trainer(model=model, args=args, train_dataset=dataset, data_collator=lambda features: collate_sft_batch(features, tokenizer), tokenizer=tokenizer, callbacks=[Sprint11TrainingSafetyCallback()])
+    trainer = Trainer(
+        model=model,
+        args=args,
+        train_dataset=dataset,
+        data_collator=lambda features: collate_sft_batch(features, tokenizer),
+        callbacks=[Sprint11TrainingSafetyCallback()],
+        **_trainer_tokenizer_kwargs(tokenizer),
+    )
     result = trainer.train()
     losses = [float(row["loss"]) for row in trainer.state.log_history if "loss" in row]
     save_lora_adapter(model, output_dir)
