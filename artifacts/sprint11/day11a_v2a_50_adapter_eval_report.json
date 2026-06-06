@@ -1,0 +1,24 @@
+{
+  "adapter_only_accuracy": null,
+  "base_fallback_accuracy": null,
+  "by_family_accuracy": {},
+  "by_subfamily_accuracy": {},
+  "candidate_name": "v2a_50_adapter_only",
+  "eval_set": "day11a_required_eval_ladder",
+  "failures": [
+    "adapter_eval_blocked_missing_trained_adapter"
+  ],
+  "format_error_rate": null,
+  "invalid_answer_rate": null,
+  "leakage_flags": [],
+  "no_family_zero": false,
+  "overall_accuracy": null,
+  "packaging_allowed": false,
+  "row_count": 0,
+  "solver_override_accuracy": null,
+  "status": "BLOCKED_MISSING_ADAPTER",
+  "submission_allowed": false,
+  "warnings": [
+    "real_gpu_training_not_run_in_codex"
+  ]
+}

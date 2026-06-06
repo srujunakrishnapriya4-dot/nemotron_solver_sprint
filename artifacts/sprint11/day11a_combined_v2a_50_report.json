@@ -1,0 +1,24 @@
+{
+  "adapter_only_accuracy": null,
+  "base_fallback_accuracy": null,
+  "by_family_accuracy": {},
+  "by_subfamily_accuracy": {},
+  "candidate_name": "combined_v2a_50",
+  "eval_set": "day11a_required_eval_ladder",
+  "failures": [
+    "combined_eval_blocked_missing_adapter_and_model_eval"
+  ],
+  "format_error_rate": null,
+  "invalid_answer_rate": null,
+  "leakage_flags": [],
+  "no_family_zero": false,
+  "overall_accuracy": null,
+  "packaging_allowed": false,
+  "row_count": 0,
+  "solver_override_accuracy": null,
+  "status": "BLOCKED_MISSING_ADAPTER",
+  "submission_allowed": false,
+  "warnings": [
+    "requires_kaggle_gpu_training_and_eval"
+  ]
+}

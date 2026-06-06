@@ -236,12 +236,22 @@ def _validate_lora_shape(config: dict[str, Any], targets: list[str]) -> None:
         if set(targets) != {"q_proj", "v_proj"}:
             raise ValueError("smoke_bf16_runtime_only_targets_must_be_q_proj_v_proj")
         return
+    if _real_bf16_qv_candidate(config):
+        if bool(config.get("load_in_4bit", True)):
+            raise ValueError("real_bf16_qv_candidate_requires_load_in_4bit_false")
+        if set(targets) != {"q_proj", "v_proj"}:
+            raise ValueError("real_bf16_qv_candidate_targets_must_be_q_proj_v_proj")
+        return
     if set(targets) != {"q_proj", "v_proj", "o_proj"}:
         raise ValueError("target_modules_must_be_q_proj_v_proj_o_proj")
 
 
 def _smoke_bf16_runtime_only(config: dict[str, Any]) -> bool:
     return bool(config.get("smoke_bf16_runtime_only", False))
+
+
+def _real_bf16_qv_candidate(config: dict[str, Any]) -> bool:
+    return bool(config.get("real_candidate_training", False)) and str(config.get("stage", "")).startswith("v2a_bf16_qv_")
 
 
 def _shape_tuple(shape: Any) -> tuple[int, ...] | None:

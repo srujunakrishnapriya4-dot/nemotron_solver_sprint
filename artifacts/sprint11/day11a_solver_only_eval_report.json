@@ -1,0 +1,24 @@
+{
+  "adapter_only_accuracy": null,
+  "base_fallback_accuracy": null,
+  "by_family_accuracy": {},
+  "by_subfamily_accuracy": {},
+  "candidate_name": "solver_only",
+  "eval_set": "day11a_required_eval_ladder",
+  "failures": [
+    "solver_only_day11a_aggregate_not_run"
+  ],
+  "format_error_rate": null,
+  "invalid_answer_rate": null,
+  "leakage_flags": [],
+  "no_family_zero": false,
+  "overall_accuracy": null,
+  "packaging_allowed": false,
+  "row_count": 0,
+  "solver_override_accuracy": null,
+  "status": "WARN_INCOMPLETE_SOLVER_EVAL",
+  "submission_allowed": false,
+  "warnings": [
+    "run_day11a_solver_only_eval_in_kaggle_plan"
+  ]
+}
