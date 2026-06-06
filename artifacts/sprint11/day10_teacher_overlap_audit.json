@@ -1,0 +1,25 @@
+{
+  "checked_eval_files": [
+    "artifacts\\sprint11\\day5_anti_leak_eval_256.jsonl",
+    "artifacts\\sprint11\\day5_family_hard_answerable_512.jsonl",
+    "artifacts\\sprint11\\day5_family_hard_answerable_solver_predictions.jsonl",
+    "artifacts\\sprint11\\day5_family_hard_eval_512.jsonl",
+    "artifacts\\sprint11\\day5_private_like_answerable_512.jsonl",
+    "artifacts\\sprint11\\day5_private_like_answerable_solver_predictions.jsonl",
+    "artifacts\\sprint11\\day5_private_like_eval_512.jsonl",
+    "artifacts\\sprint11\\day5_rule_holdout_answerable_512.jsonl",
+    "artifacts\\sprint11\\day5_rule_holdout_answerable_solver_predictions.jsonl",
+    "artifacts\\sprint11\\day5_rule_holdout_eval_512.jsonl"
+  ],
+  "checked_eval_row_count": 3328,
+  "eval_row_id_overlap_count": 0,
+  "failures": [],
+  "leakage_group_overlap_count": 0,
+  "normalized_prompt_hash_overlap_count": 0,
+  "parameter_tuple_hash_overlap_count": 0,
+  "prompt_hash_overlap_count": 0,
+  "prompt_template_signature_overlap_count": 0,
+  "rule_signature_overlap_count": 0,
+  "source_id_overlap_count": 0,
+  "status": "PASS"
+}

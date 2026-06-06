@@ -1,0 +1,37 @@
+{
+  "abstain_policy": {
+    "exists": true,
+    "path": "artifacts\\sprint11\\day10_solver_teacher_abstain_policy.jsonl",
+    "sha256": "5901d2a3f71de9bbe1e674ea1fcac5cd14c4bbb9c366a4d486c00821a05deff0",
+    "size_bytes": 826624
+  },
+  "adapter_dir": "/kaggle/working/anti086_adapters/v2a_bf16_qv_50",
+  "config": {
+    "exists": true,
+    "path": "kaggle_anti086\\training\\configs\\v2a_bf16_qv_50.yaml",
+    "sha256": "f36497d7b98fa3d34bf0945579d12cb7dbcce40c7f9712de3fcffb1e2dca1fa0",
+    "size_bytes": 1014
+  },
+  "created_by": "DAY11A_REAL_V2_CANDIDATE",
+  "direct_corpus": {
+    "exists": true,
+    "path": "artifacts\\sprint11\\day10_solver_teacher_direct.jsonl",
+    "row_count": 6144,
+    "sha256": "9ea9f9231a9399f4abb98c5cb7d4f9a5e461193a8c1f22caeeca83420193bc79",
+    "size_bytes": 9559231
+  },
+  "intended_steps": 50,
+  "leaderboard_claim": false,
+  "no_0_95_evidence": true,
+  "no_submission_created": true,
+  "packaging_allowed": false,
+  "reused_adapter": false,
+  "run_provenance_path": "",
+  "schema_version": 1,
+  "stage": "v2a_bf16_qv_50",
+  "steps_completed": 0,
+  "submission_allowed": false,
+  "submit_recommended": false,
+  "trained": false,
+  "training_log_history_path": ""
+}

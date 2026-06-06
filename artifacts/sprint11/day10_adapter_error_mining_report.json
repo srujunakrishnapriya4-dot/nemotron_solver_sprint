@@ -1,0 +1,13 @@
+{
+  "by_family_failure_counts": {},
+  "failure_class_counts": {},
+  "failure_count": 0,
+  "failures": [],
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "packaging_allowed": false,
+  "row_count": 0,
+  "status": "PASS",
+  "submission_allowed": false,
+  "use_for_pass11_repair": true
+}

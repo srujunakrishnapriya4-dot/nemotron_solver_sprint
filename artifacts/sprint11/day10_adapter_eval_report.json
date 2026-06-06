@@ -1,0 +1,18 @@
+{
+  "base_model_path": "/kaggle/input/nemotron-model",
+  "day10_adapter_dir": "/kaggle/working/anti086_adapters/day10_solver_teacher",
+  "failures": [],
+  "model_eval_completed": false,
+  "no_0_95_evidence": true,
+  "no_leaderboard_evidence": true,
+  "packaging_allowed": false,
+  "sequential_model_loading_required": true,
+  "status": "NEEDS_KAGGLE_MODEL_EVAL",
+  "submission_allowed": false,
+  "tinker_adapter_dir": null,
+  "tinker_usage": "baseline_only_if_locally_available",
+  "v2a_adapter_dir": null,
+  "warnings": [
+    "real_model_eval_requires_kaggle_mode"
+  ]
+}

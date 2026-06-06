@@ -1,0 +1,15 @@
+{
+  "failures": [
+    "incomplete_eval_reports:base,combined_v2a_50,solver_only,v2a_50_adapter_only"
+  ],
+  "fix_router_first": false,
+  "focus_solver_first": false,
+  "lora_path_alive": null,
+  "packaging_allowed": false,
+  "scale_to_150_allowed": false,
+  "scale_to_300_allowed": false,
+  "status": "BLOCKED",
+  "submission_allowed": false,
+  "submit_recommended": false,
+  "warnings": []
+}
