@@ -12,9 +12,13 @@ if str(REPO_ROOT) not in sys.path:
 
 from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked
 
+# ✅ NEW IMPORT (EVAL LAYER AUTHORITY)
+from kaggle_anti086.eval.eval_ladder import EvalLadder
+
 
 EVAL_KEYS = ("private_like_512", "family_hard_512", "rule_holdout_512", "anti_leak_256")
 ORDER = ("combined_v2a_50", "v2a_50_adapter_only", "solver_only", "base")
+
 THRESHOLDS = {
     "minimum_scale_to_150": {
         "combined_beats_solver_only": True,
@@ -46,16 +50,25 @@ def normalize_eval_report(report: dict[str, Any], candidate: str) -> dict[str, A
     failures = list(report.get("failures", []))
     warnings = list(report.get("warnings", []))
     status = str(report.get("status", "BLOCKED"))
+
     available = status in {"PASS", "WARN"} and not failures and _has_any_score(report)
+
     scores = {key: _score_for(report, key) for key in EVAL_KEYS}
     known_scores = [value for value in scores.values() if value is not None]
+
     overall_raw = _first_present(report, ("overall_score", "overall_accuracy", "exact_match"))
-    overall = float(overall_raw) if overall_raw is not None else (sum(known_scores) / len(known_scores) if known_scores else 0.0)
+    overall = float(overall_raw) if overall_raw is not None else (
+        sum(known_scores) / len(known_scores) if known_scores else 0.0
+    )
+
     invalid_raw = _first_present(report, ("invalid_answer_rate", "invalid_format_rate"))
     format_raw = _first_present(report, ("format_error_rate", "invalid_format_rate"))
+
     invalid_rate = float(invalid_raw) if invalid_raw is not None else 0.0
     format_rate = float(format_raw) if format_raw is not None else 0.0
+
     no_family_zero = bool(report.get("no_family_zero", _no_family_zero(report)))
+
     blockers = []
     if not available:
         blockers.append("eval_incomplete_or_missing")
@@ -65,6 +78,7 @@ def normalize_eval_report(report: dict[str, Any], candidate: str) -> dict[str, A
         blockers.append("family_zero_detected")
     if invalid_rate > 0.05:
         blockers.append("invalid_answer_rate_high")
+
     return {
         "candidate": candidate,
         "available": available,
@@ -87,53 +101,90 @@ def normalize_eval_report(report: dict[str, Any], candidate: str) -> dict[str, A
     }
 
 
-def build_candidate_ranking(*, base_report: dict[str, Any], solver_report: dict[str, Any], adapter_report: dict[str, Any], combined_report: dict[str, Any]) -> dict[str, Any]:
+# ============================================================
+# 🔥 MAIN PATCH: RANKING NOW DEPENDS ONLY ON EVAL LADDER
+# ============================================================
+
+def build_candidate_ranking(
+    *,
+    base_report: dict[str, Any],
+    solver_report: dict[str, Any],
+    adapter_report: dict[str, Any],
+    combined_report: dict[str, Any]
+) -> dict[str, Any]:
+
     candidates = {
         "base": normalize_eval_report(base_report, "base"),
         "solver_only": normalize_eval_report(solver_report, "solver_only"),
         "v2a_50_adapter_only": normalize_eval_report(adapter_report, "v2a_50_adapter_only"),
         "combined_v2a_50": normalize_eval_report(combined_report, "combined_v2a_50"),
     }
+
     _attach_comparisons(candidates)
-    ranking = sorted(candidates.values(), key=lambda row: (row["available"], row["overall_score"] if row["overall_score"] is not None else -1.0, -ORDER.index(row["candidate"])), reverse=True)
+
+    ranking = sorted(
+        candidates.values(),
+        key=lambda row: (
+            row["available"],
+            row["overall_score"] if row["overall_score"] is not None else -1.0,
+            -ORDER.index(row["candidate"])
+        ),
+        reverse=True
+    )
+
     combined = candidates["combined_v2a_50"]
     adapter = candidates["v2a_50_adapter_only"]
     base = candidates["base"]
     solver = candidates["solver_only"]
+
     failures: list[str] = []
     warnings: list[str] = []
+
     incomplete = [name for name, row in candidates.items() if not row["available"]]
     if incomplete:
         failures.append("incomplete_eval_reports:" + ",".join(sorted(incomplete)))
-    adapter_worse_than_base = _gt(base, adapter)
-    combined_beats_solver = _gt(combined, solver)
-    combined_beats_adapter = _gt(combined, adapter)
-    rule_holdout_ok = combined["rule_holdout_512"] is not None and combined["rule_holdout_512"] >= 0.85 and "rule_holdout_collapse" not in combined["blockers"]
-    invalid_ok = combined["invalid_answer_rate"] <= max(adapter["invalid_answer_rate"], 0.05)
-    scale_to_150 = bool(not failures and combined_beats_solver and combined_beats_adapter and rule_holdout_ok and invalid_ok and combined["no_family_zero"])
+
     adapter_improves = _gt(adapter, base)
-    lora_path_alive = None
-    if not failures:
-        if scale_to_150 or adapter_improves:
-            lora_path_alive = True
-        elif adapter_worse_than_base or adapter["invalid_answer_rate"] > base["invalid_answer_rate"] + 0.02:
-            lora_path_alive = False
+
+    # ============================================================
+    # 🔥 NEW AUTHORITY: EVAL LADDER
+    # ============================================================
+
+    ladder = EvalLadder("artifacts/sprint11/day2_eval_manifest.json")
+    ladder_result = ladder.run_gate()
+
+    scale_to_150 = bool(ladder_result["train_v2a_150"])
+
+    # ============================================================
+    # DECISION LOGIC NOW PURELY DERIVED FROM LADDER
+    # ============================================================
+
     decision = {
-        "lora_path_alive": lora_path_alive,
+        "lora_path_alive": None,
         "scale_to_150_allowed": scale_to_150,
         "scale_to_300_allowed": False,
-        "fix_router_first": bool(not failures and adapter_improves and not scale_to_150),
-        "focus_solver_first": bool(not failures and lora_path_alive is False),
+        "fix_router_first": (
+            ladder_result["decision"] == "STOP_ADAPTER_SCALING"
+            and adapter_improves
+            and not scale_to_150
+        ),
+        "focus_solver_first": not failures and not scale_to_150,
         "submit_recommended": False,
         "packaging_allowed": False,
         "submission_allowed": False,
     }
+
     status = "BLOCKED" if failures else ("PASS" if scale_to_150 else "WARN")
+
     return {
         "status": status,
         "ranking": ranking,
         "decision": decision,
         "thresholds": THRESHOLDS,
+
+        # 🔥 attach full truth system output
+        "eval_ladder": ladder_result,
+
         "failures": failures,
         "warnings": warnings,
         "leaderboard_claim": False,
@@ -146,6 +197,7 @@ def _attach_comparisons(candidates: dict[str, dict[str, Any]]) -> None:
     base = candidates["base"]
     solver = candidates["solver_only"]
     adapter = candidates["v2a_50_adapter_only"]
+
     for row in candidates.values():
         row["beats_base"] = _gt(row, base)
         row["beats_solver_only"] = _gt(row, solver)
@@ -159,7 +211,9 @@ def _gt(left: dict[str, Any], right: dict[str, Any]) -> bool | None:
 
 
 def _has_any_score(report: dict[str, Any]) -> bool:
-    return any(_score_for(report, key) is not None for key in EVAL_KEYS) or _first_present(report, ("overall_score", "overall_accuracy", "exact_match")) is not None
+    return any(_score_for(report, key) is not None for key in EVAL_KEYS) or _first_present(
+        report, ("overall_score", "overall_accuracy", "exact_match")
+    ) is not None
 
 
 def _first_present(report: dict[str, Any], keys: tuple[str, ...]) -> Any:
@@ -176,23 +230,33 @@ def _score_for(report: dict[str, Any], key: str) -> float | None:
         "rule_holdout_512": ("rule_holdout_512", "rule_holdout_answerable_512"),
         "anti_leak_256": ("anti_leak_256", "anti_leak_answerable_256"),
     }
+
     for alias in aliases[key]:
         value = report.get(alias)
         if isinstance(value, dict):
             return _dict_score(value)
         if isinstance(value, (int, float)):
             return float(value)
+
     evals = report.get("evals", {})
     if isinstance(evals, dict):
         for alias in aliases[key]:
             value = evals.get(alias)
             if isinstance(value, dict):
                 return _dict_score(value)
+
     return None
 
 
 def _dict_score(value: dict[str, Any]) -> float | None:
-    for key in ("overall_accuracy", "exact_match", "adapter_only_accuracy", "solver_override_accuracy", "v2a_exact", "base_exact"):
+    for key in (
+        "overall_accuracy",
+        "exact_match",
+        "adapter_only_accuracy",
+        "solver_override_accuracy",
+        "v2a_exact",
+        "base_exact",
+    ):
         if key in value and value[key] is not None:
             return float(value[key])
     return None
@@ -202,6 +266,7 @@ def _no_family_zero(report: dict[str, Any]) -> bool:
     by_family = report.get("by_family_accuracy", report.get("by_family", {}))
     if not isinstance(by_family, dict) or not by_family:
         return True
+
     for value in by_family.values():
         if isinstance(value, dict):
             score = value.get("overall_accuracy", value.get("exact_match", value.get("accuracy")))
@@ -209,6 +274,7 @@ def _no_family_zero(report: dict[str, Any]) -> bool:
             score = value
         if score is not None and float(score) <= 0.0:
             return False
+
     return True
 
 
@@ -221,15 +287,31 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", default="artifacts/sprint11/day11a_candidate_ranking.json")
     parser.add_argument("--decision-out", default="artifacts/sprint11/day11a_decision_report.json")
     args = parser.parse_args(argv)
+
     report = build_candidate_ranking(
         base_report=load_report_or_blocked(args.base_report, "base"),
         solver_report=load_report_or_blocked(args.solver_report, "solver_only"),
         adapter_report=load_report_or_blocked(args.adapter_report, "v2a_50_adapter_only"),
         combined_report=load_report_or_blocked(args.combined_report, "combined_v2a_50"),
     )
+
     write_json_checked(args.out, report, field_name="day11a_candidate_ranking")
-    write_json_checked(args.decision_out, report["decision"] | {"status": report["status"], "failures": report["failures"], "warnings": report["warnings"]}, field_name="day11a_decision_report")
-    print(json.dumps({"status": report["status"], "scale_to_150_allowed": report["decision"]["scale_to_150_allowed"], "submit_recommended": False}, sort_keys=True))
+
+    write_json_checked(
+        args.decision_out,
+        report["decision"] | {"status": report["status"], "failures": report["failures"], "warnings": report["warnings"]},
+        field_name="day11a_decision_report",
+    )
+
+    print(json.dumps(
+        {
+            "status": report["status"],
+            "scale_to_150_allowed": report["decision"]["scale_to_150_allowed"],
+            "submit_recommended": False
+        },
+        sort_keys=True
+    ))
+
     return 0 if report["status"] in {"PASS", "WARN", "BLOCKED"} else 2
 
 
