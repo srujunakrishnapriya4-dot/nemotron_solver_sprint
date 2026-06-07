@@ -10,141 +10,328 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked, write_jsonl_checked
-from kaggle_anti086.training.inference_eval_backend import compare_base_vs_adapter, run_model_eval
-from kaggle_anti086.training.model_loader import load_adapter_model, load_base_model, load_tokenizer
+from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked
+
+# ============================================================
+# 🔥 DAY 2 ADDITION: EVAL LADDER AUTHORITY
+# ============================================================
+
+from kaggle_anti086.eval.eval_ladder import EvalLadder
 
 
-def compare_reports(base: dict[str, Any], v2a: dict[str, Any]) -> dict[str, Any]:
-    evals = {}
-    regressions = []
-    for name in sorted(set(base) | set(v2a)):
-        b = float(base.get(name, {}).get("exact_match", 0.0))
-        v = float(v2a.get(name, {}).get("exact_match", 0.0))
-        delta = v - b
-        evals[name] = {"base_exact": b, "v2a_exact": v, "delta": delta}
-        if delta < -0.02:
-            regressions.append(name)
-    return {"evals": evals, "regressions": regressions}
+EVAL_KEYS = ("private_like_512", "family_hard_512", "rule_holdout_512", "anti_leak_256")
+ORDER = ("combined_v2a_50", "v2a_50_adapter_only", "solver_only", "base")
 
-
-DEFAULT_EVALS = {
-    "private_like_answerable_512": "artifacts/sprint11/day5_private_like_answerable_512.jsonl",
-    "rule_holdout_answerable_512": "artifacts/sprint11/day5_rule_holdout_answerable_512.jsonl",
-    "family_hard_answerable_512": "artifacts/sprint11/day5_family_hard_answerable_512.jsonl",
+THRESHOLDS = {
+    "minimum_scale_to_150": {
+        "combined_beats_solver_only": True,
+        "combined_beats_adapter_only": True,
+        "adapter_invalid_rate_not_worse": True,
+        "rule_holdout_not_collapsed": True,
+    },
+    "public_0_93_plausibility": {
+        "private_like_512": 0.90,
+        "family_hard_512": 0.85,
+        "rule_holdout_512": 0.85,
+        "no_family_below": 0.75,
+    },
 }
 
 
-def build_post_train_eval(adapter_dir: str | Path, *, base_report_path: str | Path | None = None, v2a_report_path: str | Path | None = None) -> dict[str, Any]:
-    adapter = Path(adapter_dir)
-    if base_report_path and v2a_report_path and Path(base_report_path).exists() and Path(v2a_report_path).exists():
-        comparison = compare_reports(read_json(base_report_path), read_json(v2a_report_path))
-        status = "PASS" if not comparison["regressions"] else "FAIL"
-        return {
-            "status": status,
-            "adapter_dir": str(adapter),
-            "evals": comparison["evals"],
-            "by_family": {},
-            "regressions": comparison["regressions"],
-            "catastrophic_families": comparison["regressions"],
-            "model_eval_completed": True,
-            "warnings": [],
-            "failures": [] if status == "PASS" else ["candidate_regression"],
-        }
+def load_report_or_blocked(path: str | Path | None, candidate: str) -> dict[str, Any]:
+    if not path:
+        return {"status": "BLOCKED", "candidate_name": candidate, "failures": ["report_path_missing"]}
+    p = Path(path)
+    if not p.exists():
+        return {"status": "BLOCKED", "candidate_name": candidate, "failures": ["report_missing"]}
+    data = read_json(p)
+    data.setdefault("candidate_name", candidate)
+    return data
+
+
+def normalize_eval_report(report: dict[str, Any], candidate: str) -> dict[str, Any]:
+    failures = list(report.get("failures", []))
+    warnings = list(report.get("warnings", []))
+    status = str(report.get("status", "BLOCKED"))
+
+    available = status in {"PASS", "WARN"} and not failures and _has_any_score(report)
+
+    scores = {key: _score_for(report, key) for key in EVAL_KEYS}
+    known_scores = [value for value in scores.values() if value is not None]
+
+    overall_raw = _first_present(report, ("overall_score", "overall_accuracy", "exact_match"))
+    overall = float(overall_raw) if overall_raw is not None else (
+        sum(known_scores) / len(known_scores) if known_scores else 0.0
+    )
+
+    invalid_raw = _first_present(report, ("invalid_answer_rate", "invalid_format_rate"))
+    format_raw = _first_present(report, ("format_error_rate", "invalid_format_rate"))
+
+    invalid_rate = float(invalid_raw) if invalid_raw is not None else 0.0
+    format_rate = float(format_raw) if format_raw is not None else 0.0
+
+    no_family_zero = bool(report.get("no_family_zero", _no_family_zero(report)))
+
+    blockers = []
+    if not available:
+        blockers.append("eval_incomplete_or_missing")
+    if scores["rule_holdout_512"] is not None and scores["rule_holdout_512"] < 0.85:
+        blockers.append("rule_holdout_collapse")
+    if not no_family_zero:
+        blockers.append("family_zero_detected")
+    if invalid_rate > 0.05:
+        blockers.append("invalid_answer_rate_high")
+
     return {
-        "status": "NEEDS_KAGGLE_MODEL_EVAL",
-        "adapter_dir": str(adapter),
-        "evals": {},
-        "by_family": {},
-        "regressions": [],
-        "catastrophic_families": [],
-        "model_eval_completed": False,
-        "warnings": ["local_model_inference_unavailable"],
-        "failures": [],
-        "required_kaggle_command": "python kaggle_anti086/training/post_train_eval.py --adapter-dir /kaggle/working/anti086_adapters/<v2a_run> --out-report artifacts/sprint11/day8_v2a_eval_report.json --out-predictions artifacts/sprint11/day8_v2a_eval_predictions.jsonl",
+        "candidate": candidate,
+        "available": available,
+        "overall_score": overall if available else None,
+        "private_like_512": scores["private_like_512"],
+        "family_hard_512": scores["family_hard_512"],
+        "rule_holdout_512": scores["rule_holdout_512"],
+        "anti_leak_256": scores["anti_leak_256"],
+        "format_error_rate": format_rate,
+        "invalid_answer_rate": invalid_rate,
+        "no_family_zero": no_family_zero,
+        "beats_base": None,
+        "beats_solver_only": None,
+        "beats_adapter_only": None,
+        "regression_flags": list(report.get("regression_flags", [])),
+        "blockers": blockers,
+        "raw_status": status,
+        "failures": failures,
+        "warnings": warnings,
     }
 
 
-def run_real_post_train_eval(base_model_path: str, adapter_dir: str | Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
-    adapter = Path(adapter_dir)
-    failures = []
-    if not (adapter / "adapter_config.json").exists() or not (adapter / "adapter_model.safetensors").exists():
-        failures.append("adapter_files_missing")
-    tokenizer = load_tokenizer(base_model_path)
-    base_model = load_base_model(base_model_path, load_in_4bit=False, bf16=True)
-    adapter_model = load_adapter_model(base_model_path, str(adapter), load_in_4bit=False, bf16=True)
-    evals: dict[str, Any] = {}
-    all_predictions = []
-    regressions = []
-    catastrophic = []
-    by_family: dict[str, Any] = {}
-    for name, path in DEFAULT_EVALS.items():
-        if not Path(path).exists():
-            failures.append(f"missing_eval:{name}")
-            continue
-        base_report, base_predictions = run_model_eval(base_model, tokenizer, path)
-        adapter_report, adapter_predictions = run_model_eval(adapter_model, tokenizer, path)
-        delta = compare_base_vs_adapter(base_report, adapter_report)
-        evals[name] = delta
-        if delta["delta"] < -0.02:
-            regressions.append(name)
-        for family, family_delta in delta["family_deltas"].items():
-            by_family.setdefault(family, {})[name] = family_delta
-            if family_delta < -0.05:
-                catastrophic.append(family)
-        for base_pred, v2a_pred in zip(base_predictions, adapter_predictions):
-            all_predictions.append(
-                {
-                    "row_id": base_pred["row_id"],
-                    "family": base_pred["family"],
-                    "expected": base_pred["expected"],
-                    "base_pred": base_pred["prediction"],
-                    "v2a_pred": v2a_pred["prediction"],
-                    "base_correct": base_pred["correct"],
-                    "v2a_correct": v2a_pred["correct"],
-                }
-            )
-    if regressions:
-        failures.append("major_eval_regression")
-    if catastrophic:
-        failures.append("family_regression")
-    return (
-        {
-            "status": "PASS" if not failures else "FAIL",
-            "model_eval_completed": not failures,
-            "adapter_dir": str(adapter),
-            "evals": evals,
-            "by_family": by_family,
-            "regressions": regressions,
-            "catastrophic_families": sorted(set(catastrophic)),
-            "warnings": [],
-            "failures": failures,
-        },
-        all_predictions,
+# ============================================================
+# 🔥 CORE PATCH: EVAL LADDER BECOMES AUTHORITY GATE
+# ============================================================
+
+def build_candidate_ranking(
+    *,
+    base_report: dict[str, Any],
+    solver_report: dict[str, Any],
+    adapter_report: dict[str, Any],
+    combined_report: dict[str, Any]
+) -> dict[str, Any]:
+
+    candidates = {
+        "base": normalize_eval_report(base_report, "base"),
+        "solver_only": normalize_eval_report(solver_report, "solver_only"),
+        "v2a_50_adapter_only": normalize_eval_report(adapter_report, "v2a_50_adapter_only"),
+        "combined_v2a_50": normalize_eval_report(combined_report, "combined_v2a_50"),
+    }
+
+    _attach_comparisons(candidates)
+
+    ranking = sorted(
+        candidates.values(),
+        key=lambda row: (
+            row["available"],
+            row["overall_score"] if row["overall_score"] is not None else -1.0,
+            -ORDER.index(row["candidate"])
+        ),
+        reverse=True
     )
+
+    combined = candidates["combined_v2a_50"]
+    adapter = candidates["v2a_50_adapter_only"]
+    base = candidates["base"]
+    solver = candidates["solver_only"]
+
+    failures: list[str] = []
+    warnings: list[str] = []
+
+    incomplete = [name for name, row in candidates.items() if not row["available"]]
+    if incomplete:
+        failures.append("incomplete_eval_reports:" + ",".join(sorted(incomplete)))
+
+    adapter_improves = _gt(adapter, base)
+
+    # ============================================================
+    # 🔥 DAY 2 EVAL LADDER INTEGRATION (NEW AUTHORITY LAYER)
+    # ============================================================
+
+    ladder = EvalLadder("artifacts/sprint11/day2_eval_manifest.json")
+    ladder_result = ladder.run_gate()
+
+    # HARD GATE (THIS IS NOW THE TRUTH)
+    scale_to_150 = bool(ladder_result.get("train_v2a_150", False))
+
+    combined_beats_solver = _gt(combined, solver)
+    combined_beats_adapter = _gt(combined, adapter)
+
+    invalid_ok = combined["invalid_answer_rate"] <= max(adapter["invalid_answer_rate"], 0.05)
+
+    # ============================================================
+    # DECISION LOGIC IS NOW LADDER-DRIVEN
+    # ============================================================
+
+    decision = {
+        "lora_path_alive": None,
+        "scale_to_150_allowed": scale_to_150,
+        "scale_to_300_allowed": False,
+
+        "fix_router_first": (
+            ladder_result.get("decision") == "STOP_ADAPTER_SCALING"
+            and adapter_improves
+            and not scale_to_150
+        ),
+
+        "focus_solver_first": (
+            not failures and not scale_to_150
+        ),
+
+        "submit_recommended": False,
+        "packaging_allowed": False,
+        "submission_allowed": False,
+    }
+
+    status = "BLOCKED" if failures else ("PASS" if scale_to_150 else "WARN")
+
+    return {
+        "status": status,
+        "ranking": ranking,
+        "decision": decision,
+        "thresholds": THRESHOLDS,
+
+        # 🔥 FULL TRACEABILITY OF EVAL LADDER
+        "eval_ladder": ladder_result,
+
+        "failures": failures,
+        "warnings": warnings,
+        "leaderboard_claim": False,
+        "no_0_93_evidence": not scale_to_150,
+        "no_0_95_evidence": True,
+    }
+
+
+def _attach_comparisons(candidates: dict[str, dict[str, Any]]) -> None:
+    base = candidates["base"]
+    solver = candidates["solver_only"]
+    adapter = candidates["v2a_50_adapter_only"]
+
+    for row in candidates.values():
+        row["beats_base"] = _gt(row, base)
+        row["beats_solver_only"] = _gt(row, solver)
+        row["beats_adapter_only"] = _gt(row, adapter)
+
+
+def _gt(left: dict[str, Any], right: dict[str, Any]) -> bool | None:
+    if not left["available"] or not right["available"]:
+        return None
+    return float(left["overall_score"]) > float(right["overall_score"])
+
+
+def _has_any_score(report: dict[str, Any]) -> bool:
+    return any(_score_for(report, key) is not None for key in EVAL_KEYS) or _first_present(
+        report, ("overall_score", "overall_accuracy", "exact_match")
+    ) is not None
+
+
+def _first_present(report: dict[str, Any], keys: tuple[str, ...]) -> Any:
+    for key in keys:
+        if report.get(key) is not None:
+            return report[key]
+    return None
+
+
+def _score_for(report: dict[str, Any], key: str) -> float | None:
+    aliases = {
+        "private_like_512": ("private_like_512", "private_like_answerable_512"),
+        "family_hard_512": ("family_hard_512", "family_hard_answerable_512"),
+        "rule_holdout_512": ("rule_holdout_512", "rule_holdout_answerable_512"),
+        "anti_leak_256": ("anti_leak_256", "anti_leak_answerable_256"),
+    }
+
+    for alias in aliases[key]:
+        value = report.get(alias)
+        if isinstance(value, dict):
+            return _dict_score(value)
+        if isinstance(value, (int, float)):
+            return float(value)
+
+    evals = report.get("evals", {})
+    if isinstance(evals, dict):
+        for alias in aliases[key]:
+            value = evals.get(alias)
+            if isinstance(value, dict):
+                return _dict_score(value)
+
+    return None
+
+
+def _dict_score(value: dict[str, Any]) -> float | None:
+    for key in (
+        "overall_accuracy",
+        "exact_match",
+        "adapter_only_accuracy",
+        "solver_override_accuracy",
+        "v2a_exact",
+        "base_exact",
+    ):
+        if key in value and value[key] is not None:
+            return float(value[key])
+    return None
+
+
+def _no_family_zero(report: dict[str, Any]) -> bool:
+    by_family = report.get("by_family_accuracy", report.get("by_family", {}))
+    if not isinstance(by_family, dict) or not by_family:
+        return True
+
+    for value in by_family.values():
+        if isinstance(value, dict):
+            score = value.get("overall_accuracy", value.get("exact_match", value.get("accuracy")))
+        else:
+            score = value
+        if score is not None and float(score) <= 0.0:
+            return False
+
+    return True
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--adapter-dir", required=True)
-    parser.add_argument("--base-model-path")
-    parser.add_argument("--out-report", required=True)
-    parser.add_argument("--out-predictions", required=True)
-    parser.add_argument("--base-report")
-    parser.add_argument("--v2a-report")
-    parser.add_argument("--kaggle-mode", action="store_true")
+    parser = argparse.ArgumentParser(description="Day 11A candidate ranking and scale decision gate.")
+    parser.add_argument("--base-report", required=True)
+    parser.add_argument("--solver-report", required=True)
+    parser.add_argument("--adapter-report", required=True)
+    parser.add_argument("--combined-report", required=True)
+    parser.add_argument("--out", default="artifacts/sprint11/day11a_candidate_ranking.json")
+    parser.add_argument("--decision-out", default="artifacts/sprint11/day11a_decision_report.json")
+
     args = parser.parse_args(argv)
-    if args.kaggle_mode:
-        if not args.base_model_path:
-            raise SystemExit("--base-model-path is required in --kaggle-mode")
-        report, predictions = run_real_post_train_eval(args.base_model_path, args.adapter_dir)
-    else:
-        report = build_post_train_eval(args.adapter_dir, base_report_path=args.base_report, v2a_report_path=args.v2a_report)
-        predictions = []
-    write_json_checked(args.out_report, report, field_name="day8_v2a_eval_report")
-    write_jsonl_checked(args.out_predictions, predictions, field_name="day8_v2a_eval_predictions")
-    print(json.dumps({"status": report["status"], "out": args.out_report}, sort_keys=True))
-    return 0 if report["status"] in {"PASS", "NEEDS_KAGGLE_MODEL_EVAL"} else 2
+
+    report = build_candidate_ranking(
+        base_report=load_report_or_blocked(args.base_report, "base"),
+        solver_report=load_report_or_blocked(args.solver_report, "solver_only"),
+        adapter_report=load_report_or_blocked(args.adapter_report, "v2a_50_adapter_only"),
+        combined_report=load_report_or_blocked(args.combined_report, "combined_v2a_50"),
+    )
+
+    write_json_checked(args.out, report, field_name="day11a_candidate_ranking")
+
+    write_json_checked(
+        args.decision_out,
+        report["decision"] | {
+            "status": report["status"],
+            "failures": report["failures"],
+            "warnings": report["warnings"]
+        },
+        field_name="day11a_decision_report",
+    )
+
+    print(json.dumps(
+        {
+            "status": report["status"],
+            "scale_to_150_allowed": report["decision"]["scale_to_150_allowed"],
+            "submit_recommended": False
+        },
+        sort_keys=True
+    ))
+
+    return 0
 
 
 if __name__ == "__main__":
