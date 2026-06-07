@@ -11,6 +11,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked, write_jsonl_checked
+from kaggle_anti086.eval.eval_ladder import build_eval_ladder, write_eval_ladder
 from kaggle_anti086.training.inference_eval_backend import compare_base_vs_adapter, run_model_eval
 from kaggle_anti086.training.model_loader import load_adapter_model, load_base_model, load_tokenizer
 
@@ -132,6 +133,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out-predictions", required=True)
     parser.add_argument("--base-report")
     parser.add_argument("--v2a-report")
+    parser.add_argument("--eval-ladder-manifest")
+    parser.add_argument("--out-eval-ladder")
     parser.add_argument("--kaggle-mode", action="store_true")
     args = parser.parse_args(argv)
     if args.kaggle_mode:
@@ -141,6 +144,17 @@ def main(argv: list[str] | None = None) -> int:
     else:
         report = build_post_train_eval(args.adapter_dir, base_report_path=args.base_report, v2a_report_path=args.v2a_report)
         predictions = []
+    if args.eval_ladder_manifest:
+        ladder = build_eval_ladder(args.eval_ladder_manifest)
+        if not args.out_eval_ladder:
+            raise SystemExit("--out-eval-ladder is required with --eval-ladder-manifest")
+        write_eval_ladder(ladder, args.out_eval_ladder)
+        report["day2_eval_ladder_path"] = args.out_eval_ladder
+        report["day2_eval_ladder_decision"] = ladder.get("decision", {}).get("decision")
+        report["day2_eval_ladder_train_v2a_150"] = bool(ladder.get("decision", {}).get("train_v2a_150", False))
+        report["day2_eval_ladder_reason_codes"] = list(ladder.get("decision", {}).get("reason_codes", []))
+    else:
+        report.setdefault("warnings", []).append("eval_ladder_manifest_not_provided")
     write_json_checked(args.out_report, report, field_name="day8_v2a_eval_report")
     write_jsonl_checked(args.out_predictions, predictions, field_name="day8_v2a_eval_predictions")
     print(json.dumps({"status": report["status"], "out": args.out_report}, sort_keys=True))

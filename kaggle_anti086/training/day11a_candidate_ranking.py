@@ -11,6 +11,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked
+from kaggle_anti086.eval.eval_ladder import build_eval_ladder
 
 
 EVAL_KEYS = ("private_like_512", "family_hard_512", "rule_holdout_512", "anti_leak_256")
@@ -87,7 +88,15 @@ def normalize_eval_report(report: dict[str, Any], candidate: str) -> dict[str, A
     }
 
 
-def build_candidate_ranking(*, base_report: dict[str, Any], solver_report: dict[str, Any], adapter_report: dict[str, Any], combined_report: dict[str, Any]) -> dict[str, Any]:
+def build_candidate_ranking(
+    *,
+    base_report: dict[str, Any],
+    solver_report: dict[str, Any],
+    adapter_report: dict[str, Any],
+    combined_report: dict[str, Any],
+    eval_ladder_report: dict[str, Any] | None = None,
+    eval_ladder_path: str | None = None,
+) -> dict[str, Any]:
     candidates = {
         "base": normalize_eval_report(base_report, "base"),
         "solver_only": normalize_eval_report(solver_report, "solver_only"),
@@ -96,44 +105,39 @@ def build_candidate_ranking(*, base_report: dict[str, Any], solver_report: dict[
     }
     _attach_comparisons(candidates)
     ranking = sorted(candidates.values(), key=lambda row: (row["available"], row["overall_score"] if row["overall_score"] is not None else -1.0, -ORDER.index(row["candidate"])), reverse=True)
-    combined = candidates["combined_v2a_50"]
-    adapter = candidates["v2a_50_adapter_only"]
-    base = candidates["base"]
-    solver = candidates["solver_only"]
     failures: list[str] = []
     warnings: list[str] = []
     incomplete = [name for name, row in candidates.items() if not row["available"]]
     if incomplete:
         failures.append("incomplete_eval_reports:" + ",".join(sorted(incomplete)))
-    adapter_worse_than_base = _gt(base, adapter)
-    combined_beats_solver = _gt(combined, solver)
-    combined_beats_adapter = _gt(combined, adapter)
-    rule_holdout_ok = combined["rule_holdout_512"] is not None and combined["rule_holdout_512"] >= 0.85 and "rule_holdout_collapse" not in combined["blockers"]
-    invalid_ok = combined["invalid_answer_rate"] <= max(adapter["invalid_answer_rate"], 0.05)
-    scale_to_150 = bool(not failures and combined_beats_solver and combined_beats_adapter and rule_holdout_ok and invalid_ok and combined["no_family_zero"])
-    adapter_improves = _gt(adapter, base)
-    lora_path_alive = None
-    if not failures:
-        if scale_to_150 or adapter_improves:
-            lora_path_alive = True
-        elif adapter_worse_than_base or adapter["invalid_answer_rate"] > base["invalid_answer_rate"] + 0.02:
-            lora_path_alive = False
+    if eval_ladder_report is None:
+        warnings.append("ladder_missing_legacy_mode")
+    ladder_decision = (eval_ladder_report or {}).get("decision", {})
+    reason_codes = list(ladder_decision.get("reason_codes", []))
+    scale_to_150 = bool(ladder_decision.get("train_v2a_150", False))
+    lora_path_alive = _lora_path_from_ladder(ladder_decision)
     decision = {
         "lora_path_alive": lora_path_alive,
         "scale_to_150_allowed": scale_to_150,
         "scale_to_300_allowed": False,
-        "fix_router_first": bool(not failures and adapter_improves and not scale_to_150),
-        "focus_solver_first": bool(not failures and lora_path_alive is False),
+        "fix_router_first": any(code in reason_codes for code in ("combined_not_better_than_solver", "priority_family_regression")),
+        "focus_solver_first": any(code in reason_codes for code in ("adapter_not_better_than_base", "combined_not_better_than_adapter")),
         "submit_recommended": False,
         "packaging_allowed": False,
         "submission_allowed": False,
     }
-    status = "BLOCKED" if failures else ("PASS" if scale_to_150 else "WARN")
+    if eval_ladder_report is None:
+        status = "BLOCKED" if failures else "WARN"
+    else:
+        status = "PASS" if scale_to_150 else ("FAIL" if eval_ladder_report.get("status") == "FAIL" else "WARN")
     return {
         "status": status,
         "ranking": ranking,
         "decision": decision,
         "thresholds": THRESHOLDS,
+        "eval_ladder_path": eval_ladder_path,
+        "eval_ladder": eval_ladder_report,
+        "ladder_decision_reason_codes": reason_codes,
         "failures": failures,
         "warnings": warnings,
         "leaderboard_claim": False,
@@ -156,6 +160,19 @@ def _gt(left: dict[str, Any], right: dict[str, Any]) -> bool | None:
     if not left["available"] or not right["available"]:
         return None
     return float(left["overall_score"]) > float(right["overall_score"])
+
+
+def _lora_path_from_ladder(ladder_decision: dict[str, Any]) -> bool | None:
+    if not ladder_decision:
+        return None
+    reason_codes = set(ladder_decision.get("reason_codes", []))
+    if "adapter_not_better_than_base" in reason_codes:
+        return False
+    adapter = ladder_decision.get("adapter_exact_match")
+    base = ladder_decision.get("base_exact_match")
+    if adapter is None or base is None:
+        return None
+    return float(adapter) > float(base)
 
 
 def _has_any_score(report: dict[str, Any]) -> bool:
@@ -214,18 +231,32 @@ def _no_family_zero(report: dict[str, Any]) -> bool:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Day 11A candidate ranking and scale decision gate.")
-    parser.add_argument("--base-report", required=True)
-    parser.add_argument("--solver-report", required=True)
-    parser.add_argument("--adapter-report", required=True)
-    parser.add_argument("--combined-report", required=True)
+    parser.add_argument("--base-report")
+    parser.add_argument("--solver-report")
+    parser.add_argument("--adapter-report")
+    parser.add_argument("--combined-report")
+    parser.add_argument("--eval-ladder-report")
+    parser.add_argument("--eval-ladder-manifest")
     parser.add_argument("--out", default="artifacts/sprint11/day11a_candidate_ranking.json")
     parser.add_argument("--decision-out", default="artifacts/sprint11/day11a_decision_report.json")
     args = parser.parse_args(argv)
+    ladder_report = None
+    ladder_path = None
+    if args.eval_ladder_report:
+        ladder_path = args.eval_ladder_report
+        ladder_report = read_json(args.eval_ladder_report)
+    elif args.eval_ladder_manifest:
+        ladder_path = args.eval_ladder_manifest
+        ladder_report = build_eval_ladder(args.eval_ladder_manifest)
+    elif not all([args.base_report, args.solver_report, args.adapter_report, args.combined_report]):
+        raise SystemExit("eval_ladder_report_or_manifest_required")
     report = build_candidate_ranking(
         base_report=load_report_or_blocked(args.base_report, "base"),
         solver_report=load_report_or_blocked(args.solver_report, "solver_only"),
         adapter_report=load_report_or_blocked(args.adapter_report, "v2a_50_adapter_only"),
         combined_report=load_report_or_blocked(args.combined_report, "combined_v2a_50"),
+        eval_ladder_report=ladder_report,
+        eval_ladder_path=ladder_path,
     )
     write_json_checked(args.out, report, field_name="day11a_candidate_ranking")
     write_json_checked(args.decision_out, report["decision"] | {"status": report["status"], "failures": report["failures"], "warnings": report["warnings"]}, field_name="day11a_decision_report")
