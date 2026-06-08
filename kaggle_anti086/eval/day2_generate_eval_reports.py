@@ -51,6 +51,107 @@ DECODING_CONFIG = {
 PredictionGenerator = Callable[[dict[str, Any]], str]
 
 
+
+
+
+
+def _ensure_eval_model_on_cuda(model: Any) -> Any:
+    """Force Day2 eval model onto CUDA for Nemotron/Mamba inference.
+
+    This is eval-only. Do not move this into training/model_loader.py.
+    The Kaggle Blackwell runtime has enough VRAM, and mixed CPU/CUDA tensors
+    break Nemotron/Mamba generation with index_select/device errors.
+    """
+    try:
+        import torch  # type: ignore
+    except Exception:
+        return model
+
+    if not torch.cuda.is_available():
+        return model
+
+    target = torch.device("cuda:0")
+
+    try:
+        model = model.to(target)
+    except Exception:
+        # Let smoke report capture exact failure if CUDA move is impossible.
+        return model
+
+    try:
+        if hasattr(model, "eval"):
+            model.eval()
+    except Exception:
+        pass
+
+    return model
+
+
+def _infer_torch_device_for_model(model: Any) -> Any:
+    """Return the real execution device for generation tensors.
+
+    Nemotron/Mamba kernels require CUDA tensors. HF generate does not always
+    move tokenizer outputs automatically when custom device_map / dynamic cache
+    paths are involved, so the eval harness must do it explicitly.
+    """
+    try:
+        import torch  # type: ignore
+    except Exception:
+        return None
+
+    # Prefer a non-CPU parameter device.
+    try:
+        for param in model.parameters():
+            dev = getattr(param, "device", None)
+            if dev is not None and str(dev) != "cpu":
+                return dev
+    except Exception:
+        pass
+
+    # Some device_map="auto" models expose hf_device_map.
+    try:
+        device_map = getattr(model, "hf_device_map", None)
+        if isinstance(device_map, dict):
+            for dev in device_map.values():
+                if dev is not None and str(dev) not in {"cpu", "disk"}:
+                    return torch.device(str(dev))
+    except Exception:
+        pass
+
+    if torch.cuda.is_available():
+        return torch.device("cuda:0")
+    return torch.device("cpu")
+
+
+def _move_generation_inputs_to_model_device(inputs: Any, model: Any) -> Any:
+    """Move tokenizer BatchEncoding / dict tensors to the model execution device."""
+    dev = _infer_torch_device_for_model(model)
+    if dev is None:
+        return inputs
+
+    try:
+        # BatchEncoding supports .to(device).
+        if hasattr(inputs, "to"):
+            return inputs.to(dev)
+    except Exception:
+        pass
+
+    try:
+        import torch  # type: ignore
+        if isinstance(inputs, dict):
+            out = {}
+            for k, v in inputs.items():
+                if torch.is_tensor(v):
+                    out[k] = v.to(dev)
+                else:
+                    out[k] = v
+            return out
+    except Exception:
+        return inputs
+
+    return inputs
+
+
 def build_day2_eval_reports(
     *,
     out_dir: str | Path = "artifacts/sprint11/day2_reports",
@@ -269,12 +370,14 @@ def _run_inference_smoke(*, base_model_path: str, adapter_dir: str, kaggle_mode:
         tokenizer = load_tokenizer(base_model_path)
         report["tokenizer_load"] = True
         base_model = load_base_model(base_model_path, load_in_4bit=False, bf16=True)
+        base_model = _ensure_eval_model_on_cuda(base_model)
         report["base_model_load"] = True
         _generate_answer(base_model, tokenizer, render_inference_prompt("1 -> 2; 2 -> 3. Now solve: 3"), "numeric_formula")
         report["base_generate"] = True
         del base_model
         _free_model_stack()
         adapter_model = load_adapter_model(base_model_path, adapter_dir, load_in_4bit=False, bf16=True)
+        adapter_model = _ensure_eval_model_on_cuda(adapter_model)
         report["adapter_load"] = True
         _generate_answer(adapter_model, tokenizer, render_inference_prompt("1 -> 2; 2 -> 3. Now solve: 3"), "numeric_formula")
         report["adapter_generate"] = True
@@ -395,8 +498,10 @@ def _load_model_generator(*, base_model_path: str, adapter_dir: str | None, mode
     tokenizer = load_tokenizer(base_model_path)
     if adapter_dir is None:
         model = load_base_model(base_model_path, load_in_4bit=False, bf16=True)
+        model = _ensure_eval_model_on_cuda(model)
     else:
         model = load_adapter_model(base_model_path, adapter_dir, load_in_4bit=False, bf16=True)
+        model = _ensure_eval_model_on_cuda(model)
     if hasattr(model, "eval"):
         model.eval()
 
@@ -443,8 +548,7 @@ def _generate_answer(model: Any, tokenizer: Any, prompt: str, family: str) -> st
     import torch  # type: ignore
 
     encoded = tokenizer(prompt, return_tensors="pt")
-    if hasattr(model, "device"):
-        encoded = {key: value.to(model.device) for key, value in encoded.items()}
+    encoded = _move_generation_inputs_to_model_device(encoded, model)
     max_new_tokens = 32 if family in {"numeric_formula", "gravity_numeric", "unit_conversion", "roman_numeral", "bit_manipulation", "symbol_mapping", "format_only"} else 64
     generation_kwargs = {
         "do_sample": False,

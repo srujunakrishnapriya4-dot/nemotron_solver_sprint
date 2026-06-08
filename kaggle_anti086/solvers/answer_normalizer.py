@@ -148,7 +148,11 @@ def _normalize_decimal(value: str) -> str:
 
 def _normalize_symbol(raw: str, cleaned: str, transformations: list[str]) -> NormalizedAnswer:
     value = _strip_prefixes(cleaned)
-    value = value.splitlines()[0].strip()
+    lines = value.splitlines()
+    if not lines:
+        transformations.append("empty_symbol_output")
+        return NormalizedAnswer(raw=raw, normalized="", answer_type="symbol", confidence=0.0, transformations=transformations)
+    value = lines[0].strip()
     value = value.strip("`'\" ")
     value = re.sub(r"[.;:,]+$", "", value)
     transformations.append("symbol_trim")
