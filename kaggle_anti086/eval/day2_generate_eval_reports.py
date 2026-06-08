@@ -669,7 +669,7 @@ def _run_combined_mode(
             adapter_exercised += 1
         except Exception as exc:
             adapter_failure = f"adapter_generation_failed:{type(exc).__name__}:{exc}"
-        adapter_extracted = _extract_answer(adapter_raw)
+        adapter_extracted = _extract_answer(adapter_raw, answer_type=ANSWER_TYPE_BY_FAMILY.get(str(row.get("family", "unknown"))))
         adapter_valid = bool(adapter_extracted) and not _invalid_format(adapter_raw, str(row.get("prompt", "")))
         if solver["verified"] and solver["confidence"] >= 0.85 and solver["risk"] == "low":
             selected_source = "solver"
@@ -768,7 +768,7 @@ def _prediction_record(
     family = str(row.get("family", "unknown"))
     answer_type = ANSWER_TYPE_BY_FAMILY.get(family)
     expected = "" if row.get("answer") is None else str(row.get("answer"))
-    extracted = _extract_answer(selected_answer if source in {"solver", "adapter", "model", "base"} else raw_output)
+    extracted = _extract_answer(selected_answer if source in {"solver", "adapter", "model", "base"} else raw_output, answer_type=answer_type)
     normalized = normalize_answer(extracted, expected_type=answer_type).normalized if extracted else ""
     expected_behavior = str(row.get("metadata", {}).get("expected_solver_behavior", row.get("expected_behavior", "answer")))
     valid = bool(extracted) and not _invalid_format(selected_answer or raw_output, str(row.get("prompt", "")))
@@ -1110,13 +1110,13 @@ def _combined_prediction_missing_fields(path: Path) -> list[str]:
     return sorted(missing)
 
 
-def _extract_answer(text: str) -> str:
+def _extract_answer(text: str, *, answer_type: str | None = None) -> str:
     value = str(text or "").strip()
     if "\\boxed{" in value:
         start = value.rfind("\\boxed{") + len("\\boxed{")
         end = value.find("}", start)
         if end >= 0:
-            return _clean_answer(value[start:end])
+            return _clean_answer(value[start:end], answer_type=answer_type)
     lines = [line.strip() for line in value.splitlines() if line.strip()]
     candidate = lines[-1] if lines else value
     lowered = candidate.lower()
@@ -1124,10 +1124,12 @@ def _extract_answer(text: str) -> str:
         if lowered.startswith(prefix):
             candidate = candidate[len(prefix) :].strip()
             lowered = candidate.lower()
-    return _clean_answer(candidate)
+    return _clean_answer(candidate, answer_type=answer_type)
 
 
-def _clean_answer(value: str) -> str:
+def _clean_answer(value: str, *, answer_type: str | None = None) -> str:
+    if answer_type == "symbol":
+        return str(value).strip().strip("`'\" ")
     return str(value).strip().strip("`'\".,;: ")
 
 
