@@ -1,6 +1,0 @@
-print("SPRINT-10/11 v1b diagnostic commands only. NO V2. NO PACKAGE. NO SUBMISSION.")
-print("python kaggle_build_parent_calibrated_eval.py --config anti086_winmode_v1b.yaml")
-print("python kaggle_prepare_anti086_tokens.py --config anti086_winmode_v1b.yaml")
-print("python kaggle_train_stage.py --config anti086_winmode_v1b.yaml")
-print("python kaggle_eval_stage.py --config anti086_winmode_v1b.yaml --stage eval_v1b")
-print("python kaggle_final_candidate_selector.py")

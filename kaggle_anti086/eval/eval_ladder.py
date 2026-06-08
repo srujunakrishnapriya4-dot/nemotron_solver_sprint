@@ -1,9 +1,15 @@
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 from pathlib import Path
+import sys
 from typing import Any
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from kaggle_anti086.data.v2_corpus_io import read_json, write_json_checked
 
@@ -227,3 +233,18 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Build strict Day2 eval ladder report from manifest.")
+    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--out", required=True)
+    args = parser.parse_args(argv)
+    report = build_eval_ladder(args.manifest)
+    write_eval_ladder(report, args.out)
+    print(json.dumps({"status": report["status"], "decision": report["decision"].get("decision"), "out": args.out}, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
