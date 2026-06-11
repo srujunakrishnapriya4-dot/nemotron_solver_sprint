@@ -56,3 +56,8 @@ artifacts/sprint11/tinker_adapter_converted/
 
 # Packages
 *.zip
+artifacts/sprint11/adapters/
+artifacts/sprint11/tmp_trainer/
+*.safetensors
+*.bin
+submission.zip
