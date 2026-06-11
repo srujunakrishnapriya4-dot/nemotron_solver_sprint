@@ -1,0 +1,93 @@
+{
+  "blocked_reasons": [],
+  "created_by": "DAY1X_PROMPT_TEMPLATE_LEAKAGE_REPORT",
+  "dominant_prefix_fraction": 0.01111,
+  "dominant_prompt_prefix_top20": [
+    [
+      "use only the rules written here verify every intermediate value and solve this symbol equation item",
+      1111
+    ],
+    [
+      "find the answer by doing the composed operations in order the problem is gravity unit example",
+      222
+    ],
+    [
+      "find the answer by doing the composed operations in order the problem is gravity unit a",
+      222
+    ],
+    [
+      "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+      222
+    ],
+    [
+      "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+      213
+    ],
+    [
+      "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+      195
+    ],
+    [
+      "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+      192
+    ],
+    [
+      "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+      190
+    ],
+    [
+      "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+      186
+    ],
+    [
+      "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+      179
+    ],
+    [
+      "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+      175
+    ],
+    [
+      "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+      173
+    ],
+    [
+      "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+      163
+    ],
+    [
+      "find the answer by doing the composed operations in order the problem is gravity unit mass",
+      148
+    ],
+    [
+      "find the answer by doing the composed operations in order the problem is gravity unit convert",
+      145
+    ],
+    [
+      "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+      72
+    ],
+    [
+      "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+      68
+    ],
+    [
+      "cipher mapping reverse the string on emirp then sum a=1 through z=26 for the decoded letters",
+      65
+    ],
+    [
+      "cipher mapping reverse the string on evlos then sum a=1 through z=26 for the decoded letters",
+      58
+    ],
+    [
+      "cipher mapping reverse the string on htam then sum a=1 through z=26 for the decoded letters",
+      57
+    ]
+  ],
+  "schema_version": 1,
+  "split_leakage_count": 0,
+  "split_leakage_examples": [],
+  "status": "PASS",
+  "train_duplicate_id_count": 0,
+  "train_duplicate_prompt_count": 0
+}

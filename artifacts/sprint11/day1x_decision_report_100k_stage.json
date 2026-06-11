@@ -1,0 +1,15 @@
+{
+  "blocked_reasons": [],
+  "created_by": "DAY1X_100K_STAGE_DECISION_REPORT",
+  "leaderboard_claim": false,
+  "next_phase": "DAY1X_DPO_HARD_NEGATIVE_EXPANSION_AND_VARIANTS",
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "recommended_for_next_phase": true,
+  "schema_version": 1,
+  "selected_stage_for_day2": "100k",
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true
+}

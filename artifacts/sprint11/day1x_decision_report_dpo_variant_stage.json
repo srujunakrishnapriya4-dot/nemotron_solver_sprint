@@ -1,0 +1,27 @@
+{
+  "blocked_reasons": [],
+  "created_by": "DAY1X_DPO_VARIANT_STAGE_DECISION_REPORT",
+  "dpo_eval_pairs": 2000,
+  "dpo_train_pairs": 20000,
+  "leaderboard_claim": false,
+  "next_phase": "DAY1X_STRESS_DIVERSITY_LEAKAGE_AND_FINAL_MANIFEST",
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "ready_for_next_phase": true,
+  "recommended_training_variants": [
+    "direct",
+    "short_trace",
+    "mixed_curriculum",
+    "format_heavy",
+    "composed_heavy",
+    "public_style_heavy",
+    "hard_p2_heavy"
+  ],
+  "schema_version": 1,
+  "selected_stage_for_day2": "100k",
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true,
+  "variant_count": 7
+}

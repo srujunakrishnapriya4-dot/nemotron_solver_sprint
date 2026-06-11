@@ -1,0 +1,15 @@
+{
+  "blocked_reasons": [],
+  "created_by": "DAY1X_PROMPT_STAGE_DECISION_REPORT",
+  "leaderboard_claim": false,
+  "next_phase": "DAY1X_HOLDOUTS_AND_EXPANDED_DATA_FACTORY_100K",
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "ready_for_day1x_100k_factory": true,
+  "ready_for_next_phase": true,
+  "schema_version": 1,
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true
+}

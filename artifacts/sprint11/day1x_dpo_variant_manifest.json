@@ -1,0 +1,108 @@
+{
+  "abstain_accepted": 0,
+  "ambiguity_accepted": 0,
+  "blocked_reasons": [],
+  "created_by": "DAY1X_DPO_HARD_NEGATIVE_EXPANSION_AND_VARIANTS",
+  "dpo": {
+    "eval_pairs": 2000,
+    "negative_type_counts": {
+      "correct_intermediate_wrong_final": 530,
+      "correct_substeps_wrong_final": 1548,
+      "format_abstain": 880,
+      "format_multiple_boxes": 880,
+      "format_no_box": 880,
+      "format_text_after_box": 880,
+      "near_miss_answer": 526,
+      "off_by_one": 519,
+      "right_answer_wrong_format": 880,
+      "right_reason_wrong_arithmetic": 545,
+      "sign_flip": 554,
+      "wrong_arithmetic": 547,
+      "wrong_base_or_mapping": 1209,
+      "wrong_bit_width": 1196,
+      "wrong_composition_order": 527,
+      "wrong_family_assumption": 1065,
+      "wrong_intermediate_correct_final": 530,
+      "wrong_operator": 2162,
+      "wrong_reason_right_format": 518,
+      "wrong_sequence_rule": 1239,
+      "wrong_substep_1": 1559,
+      "wrong_substep_2": 1512,
+      "wrong_unit_factor": 1314
+    },
+    "rejected_accidentally_correct_count": 0,
+    "rejected_accidentally_trainable_count": 0,
+    "status": "PASS",
+    "train_pairs": 20000
+  },
+  "duplicate_id_count": 0,
+  "duplicate_prompt_count": 0,
+  "format_error_count": 0,
+  "input_stage": "100k",
+  "leaderboard_claim": false,
+  "next_phase": "DAY1X_STRESS_DIVERSITY_LEAKAGE_AND_FINAL_MANIFEST",
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "precheck": {
+    "blocked_reasons": [],
+    "eval_rows": 10000,
+    "holdout_counts": {
+      "composed": 1000,
+      "format_traps": 1000,
+      "hard_p2": 1000,
+      "prompt_style": 1000,
+      "rule": 1000
+    },
+    "probe_rows": 10000,
+    "selected_stage_for_day2": "100k",
+    "status": "PASS",
+    "train_rows": 100000
+  },
+  "ready_for_next_phase": true,
+  "recommended_training_variants": [
+    "direct",
+    "short_trace",
+    "mixed_curriculum",
+    "format_heavy",
+    "composed_heavy",
+    "public_style_heavy",
+    "hard_p2_heavy"
+  ],
+  "schema_version": 1,
+  "split_leakage_count": 0,
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true,
+  "variants": {
+    "composed_heavy": {
+      "row_count": 50000,
+      "status": "PASS"
+    },
+    "direct": {
+      "row_count": 50000,
+      "status": "PASS"
+    },
+    "format_heavy": {
+      "row_count": 50000,
+      "status": "PASS"
+    },
+    "hard_p2_heavy": {
+      "row_count": 30000,
+      "status": "PASS"
+    },
+    "mixed_curriculum": {
+      "row_count": 100000,
+      "status": "PASS"
+    },
+    "public_style_heavy": {
+      "row_count": 50000,
+      "status": "PASS"
+    },
+    "short_trace": {
+      "row_count": 50000,
+      "status": "PASS"
+    }
+  },
+  "verification_fail_count": 0
+}

@@ -1,0 +1,72 @@
+{
+  "abstain_accepted": 0,
+  "ambiguity_accepted": 0,
+  "created_by": "DAY1X_CURRICULUM_VARIANT_BUILDER",
+  "duplicate_id_count": 0,
+  "duplicate_prompt_count": 0,
+  "errors": {},
+  "format_error_count": 0,
+  "leaderboard_claim": false,
+  "mixture_report": {
+    "short_trace": 50000
+  },
+  "package_authorized": false,
+  "recommended_for_day2_training": true,
+  "row_count": 50000,
+  "rows_by_difficulty": {
+    "easy": 15812,
+    "hard": 15743,
+    "medium": 15898,
+    "trap": 2547
+  },
+  "rows_by_family": {
+    "bit_manipulation": 2745,
+    "char_cipher": 2736,
+    "composed_bit_conversion": 1887,
+    "composed_cipher_mapping": 1960,
+    "composed_custom_numeral_arithmetic": 1944,
+    "composed_gravity_unit": 1973,
+    "composed_permutation_mapping": 1952,
+    "composed_sequence_operator": 1884,
+    "composed_symbol_equation": 1891,
+    "composed_unit_formula": 1935,
+    "composed_word_cipher": 1983,
+    "custom_numeral": 2738,
+    "equation_operator": 2686,
+    "gravity_numeric": 2704,
+    "numeric_formula_safe": 4226,
+    "permutation_sorting": 3161,
+    "sequence_pattern": 2772,
+    "symbol_mapping": 2758,
+    "unit_conversion": 3300,
+    "word_cipher": 2765
+  },
+  "rows_by_prompt_style": {
+    "direct": 8451,
+    "examples_query": 8502,
+    "minimal": 8528,
+    "public_style_examples_then_query": 564,
+    "public_style_minimal": 579,
+    "public_style_mixed_notation": 552,
+    "public_style_multiline": 564,
+    "public_style_noisy_context": 3098,
+    "public_style_plain_english": 565,
+    "public_style_symbol_heavy": 541,
+    "public_style_table": 567,
+    "public_style_verbose": 548,
+    "story": 8460,
+    "table": 8481
+  },
+  "rows_by_source": {
+    "composed_day1x": 12378,
+    "format_stress": 2547,
+    "original_day1": 30044,
+    "public_style_day1x": 5031
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "submission_authorized": false,
+  "target_size": 50000,
+  "variant": "short_trace",
+  "verification_fail_count": 0
+}

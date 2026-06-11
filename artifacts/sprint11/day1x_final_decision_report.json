@@ -1,0 +1,25 @@
+{
+  "blocked_reasons": [],
+  "created_by": "DAY1X_FINAL_DECISION_REPORT",
+  "day1x_option_c_complete": true,
+  "leaderboard_claim": false,
+  "next_phase": "DAY2_LORA_TRAINING_AND_ADAPTER_EVAL",
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "ready_for_day2_lora_training": true,
+  "recommended_training_variants": [
+    "direct",
+    "short_trace",
+    "mixed_curriculum",
+    "format_heavy",
+    "composed_heavy",
+    "public_style_heavy",
+    "hard_p2_heavy"
+  ],
+  "schema_version": 1,
+  "selected_stage_for_day2": "100k",
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true
+}

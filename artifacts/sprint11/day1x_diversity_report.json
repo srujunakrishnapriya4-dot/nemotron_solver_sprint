@@ -1,0 +1,143 @@
+{
+  "answer_spike_fraction": 0.01454,
+  "answer_top20": [
+    [
+      "24",
+      1454
+    ],
+    [
+      "0",
+      1270
+    ],
+    [
+      "1",
+      1165
+    ],
+    [
+      "2",
+      1131
+    ],
+    [
+      "61",
+      1031
+    ],
+    [
+      "27",
+      1030
+    ],
+    [
+      "46",
+      1010
+    ],
+    [
+      "4",
+      953
+    ],
+    [
+      "42",
+      889
+    ],
+    [
+      "8",
+      865
+    ],
+    [
+      "12",
+      789
+    ],
+    [
+      "6",
+      788
+    ],
+    [
+      "3",
+      770
+    ],
+    [
+      "73",
+      759
+    ],
+    [
+      "83",
+      740
+    ],
+    [
+      "9",
+      732
+    ],
+    [
+      "5",
+      710
+    ],
+    [
+      "10",
+      702
+    ],
+    [
+      "7",
+      698
+    ],
+    [
+      "11",
+      656
+    ]
+  ],
+  "blocked_reasons": [],
+  "created_by": "DAY1X_DIVERSITY_REPORT",
+  "max_difficulty_fraction": 0.31673,
+  "max_family_fraction": 0.08455,
+  "max_prompt_style_fraction": 0.17004,
+  "rows_by_difficulty": {
+    "easy": 31673,
+    "hard": 31662,
+    "medium": 31665,
+    "trap": 5000
+  },
+  "rows_by_family": {
+    "bit_manipulation": 5455,
+    "char_cipher": 5455,
+    "composed_bit_conversion": 3889,
+    "composed_cipher_mapping": 3889,
+    "composed_custom_numeral_arithmetic": 3890,
+    "composed_gravity_unit": 3888,
+    "composed_permutation_mapping": 3889,
+    "composed_sequence_operator": 3889,
+    "composed_symbol_equation": 3889,
+    "composed_unit_formula": 3889,
+    "composed_word_cipher": 3888,
+    "custom_numeral": 5454,
+    "equation_operator": 5454,
+    "gravity_numeric": 5454,
+    "numeric_formula_safe": 8455,
+    "permutation_sorting": 6454,
+    "sequence_pattern": 5454,
+    "symbol_mapping": 5455,
+    "unit_conversion": 6455,
+    "word_cipher": 5455
+  },
+  "rows_by_prompt_style": {
+    "direct": 17004,
+    "examples_query": 17002,
+    "minimal": 17004,
+    "public_style_examples_then_query": 1111,
+    "public_style_minimal": 1112,
+    "public_style_mixed_notation": 1111,
+    "public_style_multiline": 1111,
+    "public_style_noisy_context": 6111,
+    "public_style_plain_english": 1111,
+    "public_style_symbol_heavy": 1111,
+    "public_style_table": 1111,
+    "public_style_verbose": 1111,
+    "story": 16995,
+    "table": 16995
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "trace_length": {
+    "max": 19,
+    "mean": 12.41336,
+    "median": 12.0,
+    "min": 4
+  },
+  "train_rows": 100000
+}

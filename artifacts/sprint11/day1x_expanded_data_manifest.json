@@ -1,0 +1,233 @@
+{
+  "abstain_accepted": 0,
+  "ambiguity_accepted": 0,
+  "available_stages": [
+    "25k",
+    "50k",
+    "100k"
+  ],
+  "blocked_reasons": [],
+  "counts": {
+    "100k": {
+      "eval_rows": 10000,
+      "probe_rows": 10000,
+      "train_rows": 100000
+    },
+    "25k": {
+      "eval_rows": 2000,
+      "probe_rows": 2000,
+      "train_rows": 25000
+    },
+    "50k": {
+      "eval_rows": 5000,
+      "probe_rows": 5000,
+      "train_rows": 50000
+    },
+    "holdouts": {
+      "composed": 1000,
+      "format_traps": 1000,
+      "hard_p2": 1000,
+      "prompt_style": 1000,
+      "rule": 1000
+    }
+  },
+  "created_by": "DAY1X_EXPANDED_DATA_FACTORY_100K",
+  "duplicate_prompt_count": 0,
+  "fallback_to_basic_day1": false,
+  "families": {
+    "composed_families_present": [
+      "composed_bit_conversion",
+      "composed_cipher_mapping",
+      "composed_custom_numeral_arithmetic",
+      "composed_gravity_unit",
+      "composed_permutation_mapping",
+      "composed_sequence_operator",
+      "composed_symbol_equation",
+      "composed_unit_formula",
+      "composed_word_cipher"
+    ],
+    "original_families_present": [
+      "bit_manipulation",
+      "char_cipher",
+      "custom_numeral",
+      "equation_operator",
+      "gravity_numeric",
+      "numeric_formula_safe",
+      "permutation_sorting",
+      "sequence_pattern",
+      "symbol_mapping",
+      "unit_conversion",
+      "word_cipher"
+    ]
+  },
+  "format_error_count": 0,
+  "leaderboard_claim": false,
+  "mixture_report": {
+    "composed_fraction": 0.25,
+    "counts": {
+      "composed": 30000,
+      "format_stress": 6000,
+      "original": 72000,
+      "public_style": 12000
+    },
+    "format_stress_fraction": 0.05,
+    "original_fraction": 0.6,
+    "public_style_fraction": 0.1,
+    "within_tolerance": true
+  },
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "ready_for_day1x_dpo_and_variants": true,
+  "recommended_for_day2_training": true,
+  "rejected_row_count": 1,
+  "rows_by_difficulty": {
+    "easy": 38015,
+    "hard": 37984,
+    "medium": 38001,
+    "trap": 6000
+  },
+  "rows_by_family": {
+    "bit_manipulation": 6547,
+    "char_cipher": 6547,
+    "composed_bit_conversion": 4667,
+    "composed_cipher_mapping": 4667,
+    "composed_custom_numeral_arithmetic": 4670,
+    "composed_gravity_unit": 4664,
+    "composed_permutation_mapping": 4667,
+    "composed_sequence_operator": 4667,
+    "composed_symbol_equation": 4667,
+    "composed_unit_formula": 4667,
+    "composed_word_cipher": 4664,
+    "custom_numeral": 6544,
+    "equation_operator": 6544,
+    "gravity_numeric": 6544,
+    "numeric_formula_safe": 10147,
+    "permutation_sorting": 7744,
+    "sequence_pattern": 6544,
+    "symbol_mapping": 6547,
+    "unit_conversion": 7747,
+    "word_cipher": 6545
+  },
+  "rows_by_prompt_style": {
+    "direct": 20412,
+    "examples_query": 20406,
+    "minimal": 20412,
+    "public_style_examples_then_query": 1333,
+    "public_style_minimal": 1336,
+    "public_style_mixed_notation": 1333,
+    "public_style_multiline": 1333,
+    "public_style_noisy_context": 7333,
+    "public_style_plain_english": 1333,
+    "public_style_symbol_heavy": 1333,
+    "public_style_table": 1333,
+    "public_style_verbose": 1333,
+    "story": 20385,
+    "table": 20385
+  },
+  "rows_by_source": {
+    "composed_day1x": 30000,
+    "format_stress": 6000,
+    "original_day1": 72000,
+    "public_style_day1x": 12000
+  },
+  "schema_version": 1,
+  "selected_stage_for_day2": "100k",
+  "split_leakage_count": 0,
+  "stage_reports": {
+    "100k": {
+      "blocked_reasons": [],
+      "counts": {
+        "eval_rows": 10000,
+        "probe_rows": 10000,
+        "train_rows": 100000
+      },
+      "mixture_report": {
+        "composed_fraction": 0.25,
+        "counts": {
+          "composed": 30000,
+          "format_stress": 6000,
+          "original": 72000,
+          "public_style": 12000
+        },
+        "format_stress_fraction": 0.05,
+        "original_fraction": 0.6,
+        "public_style_fraction": 0.1,
+        "within_tolerance": true
+      },
+      "safety": {
+        "abstain_accepted": 0,
+        "ambiguity_accepted": 0,
+        "duplicate_prompt_count": 0,
+        "format_error_count": 0,
+        "split_leakage_count": 0,
+        "verification_fail_count": 0
+      },
+      "status": "PASS"
+    },
+    "25k": {
+      "blocked_reasons": [],
+      "counts": {
+        "eval_rows": 2000,
+        "probe_rows": 2000,
+        "train_rows": 25000
+      },
+      "mixture_report": {
+        "composed_fraction": 0.25,
+        "counts": {
+          "composed": 7250,
+          "format_stress": 1450,
+          "original": 17400,
+          "public_style": 2900
+        },
+        "format_stress_fraction": 0.05,
+        "original_fraction": 0.6,
+        "public_style_fraction": 0.1,
+        "within_tolerance": true
+      },
+      "safety": {
+        "abstain_accepted": 0,
+        "ambiguity_accepted": 0,
+        "duplicate_prompt_count": 0,
+        "format_error_count": 0,
+        "split_leakage_count": 0,
+        "verification_fail_count": 0
+      },
+      "status": "PASS"
+    },
+    "50k": {
+      "blocked_reasons": [],
+      "counts": {
+        "eval_rows": 5000,
+        "probe_rows": 5000,
+        "train_rows": 50000
+      },
+      "mixture_report": {
+        "composed_fraction": 0.25,
+        "counts": {
+          "composed": 15000,
+          "format_stress": 3000,
+          "original": 36000,
+          "public_style": 6000
+        },
+        "format_stress_fraction": 0.05,
+        "original_fraction": 0.6,
+        "public_style_fraction": 0.1,
+        "within_tolerance": true
+      },
+      "safety": {
+        "abstain_accepted": 0,
+        "ambiguity_accepted": 0,
+        "duplicate_prompt_count": 0,
+        "format_error_count": 0,
+        "split_leakage_count": 0,
+        "verification_fail_count": 0
+      },
+      "status": "PASS"
+    }
+  },
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true,
+  "verification_fail_count": 0
+}

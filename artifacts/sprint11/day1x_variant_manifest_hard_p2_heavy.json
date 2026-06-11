@@ -1,0 +1,56 @@
+{
+  "abstain_accepted": 0,
+  "ambiguity_accepted": 0,
+  "created_by": "DAY1X_CURRICULUM_VARIANT_BUILDER",
+  "duplicate_id_count": 0,
+  "duplicate_prompt_count": 0,
+  "errors": {},
+  "format_error_count": 0,
+  "leaderboard_claim": false,
+  "mixture_report": {
+    "hard_p2": 30000
+  },
+  "package_authorized": false,
+  "recommended_for_day2_training": true,
+  "row_count": 30000,
+  "rows_by_difficulty": {
+    "easy": 9215,
+    "hard": 9305,
+    "medium": 9266,
+    "trap": 2214
+  },
+  "rows_by_family": {
+    "composed_custom_numeral_arithmetic": 2869,
+    "composed_sequence_operator": 2876,
+    "composed_symbol_equation": 2972,
+    "composed_unit_formula": 2891,
+    "equation_operator": 4036,
+    "gravity_numeric": 4066,
+    "numeric_formula_safe": 6261,
+    "sequence_pattern": 4029
+  },
+  "rows_by_prompt_style": {
+    "direct": 4917,
+    "examples_query": 4862,
+    "minimal": 4899,
+    "public_style_examples_then_query": 849,
+    "public_style_minimal": 812,
+    "public_style_noisy_context": 2214,
+    "public_style_symbol_heavy": 830,
+    "public_style_verbose": 854,
+    "story": 4866,
+    "table": 4897
+  },
+  "rows_by_source": {
+    "composed_day1x": 8263,
+    "format_stress": 2214,
+    "original_day1": 16178,
+    "public_style_day1x": 3345
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "submission_authorized": false,
+  "target_size": 30000,
+  "variant": "hard_p2_heavy",
+  "verification_fail_count": 0
+}

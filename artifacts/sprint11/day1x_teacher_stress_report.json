@@ -1,0 +1,3900 @@
+{
+  "abstain_accepted": 0,
+  "ambiguity_accepted": 0,
+  "blocked_reasons": [],
+  "composed_families_seen": [
+    "composed_bit_conversion",
+    "composed_cipher_mapping",
+    "composed_custom_numeral_arithmetic",
+    "composed_gravity_unit",
+    "composed_permutation_mapping",
+    "composed_sequence_operator",
+    "composed_symbol_equation",
+    "composed_unit_formula",
+    "composed_word_cipher"
+  ],
+  "created_by": "DAY1X_TEACHER_STRESS_REPORT",
+  "file_reports": {
+    "composed_heavy": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          982
+        ],
+        [
+          "27",
+          774
+        ],
+        [
+          "46",
+          709
+        ],
+        [
+          "61",
+          703
+        ],
+        [
+          "42",
+          607
+        ],
+        [
+          "0",
+          536
+        ],
+        [
+          "83",
+          531
+        ],
+        [
+          "1",
+          529
+        ],
+        [
+          "73",
+          526
+        ],
+        [
+          "4",
+          518
+        ],
+        [
+          "2",
+          476
+        ],
+        [
+          "12",
+          476
+        ],
+        [
+          "8",
+          450
+        ],
+        [
+          "14",
+          421
+        ],
+        [
+          "9",
+          421
+        ],
+        [
+          "5",
+          385
+        ],
+        [
+          "6",
+          385
+        ],
+        [
+          "16",
+          382
+        ],
+        [
+          "10",
+          376
+        ],
+        [
+          "7",
+          376
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 15468,
+        "hard": 15695,
+        "medium": 15507,
+        "trap": 3330
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          1388
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          290
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          263
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          263
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          185
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          179
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          122
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          116
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          111
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          111
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          108
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          105
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          104
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          98
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          95
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          42
+        ],
+        [
+          "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+          34
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit m=3",
+          33
+        ],
+        [
+          "cipher mapping reverse the string on evlos then sum a=1 through z=26 for the decoded letters",
+          33
+        ],
+        [
+          "cipher mapping reverse the string on emirp then sum a=1 through z=26 for the decoded letters",
+          31
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 1808,
+        "char_cipher": 1819,
+        "composed_bit_conversion": 2999,
+        "composed_cipher_mapping": 2925,
+        "composed_custom_numeral_arithmetic": 2967,
+        "composed_gravity_unit": 2986,
+        "composed_permutation_mapping": 2990,
+        "composed_sequence_operator": 2929,
+        "composed_symbol_equation": 2980,
+        "composed_unit_formula": 2965,
+        "composed_word_cipher": 2929,
+        "custom_numeral": 1771,
+        "equation_operator": 1862,
+        "gravity_numeric": 1868,
+        "numeric_formula_safe": 3731,
+        "permutation_sorting": 2458,
+        "sequence_pattern": 1791,
+        "symbol_mapping": 1957,
+        "unit_conversion": 2504,
+        "word_cipher": 1761
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_sft_composed_heavy.jsonl",
+      "prompt_style_counts": {
+        "direct": 6913,
+        "examples_query": 6840,
+        "minimal": 6927,
+        "public_style_examples_then_query": 1383,
+        "public_style_minimal": 1347,
+        "public_style_mixed_notation": 1378,
+        "public_style_multiline": 1357,
+        "public_style_noisy_context": 4701,
+        "public_style_plain_english": 1379,
+        "public_style_symbol_heavy": 1346,
+        "public_style_table": 1352,
+        "public_style_verbose": 1388,
+        "story": 6860,
+        "table": 6829
+      },
+      "raw_problem_counts": {},
+      "row_count": 50000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "composed_heavy": 50000
+      },
+      "split": "composed_heavy",
+      "trace_length": {
+        "max": 16,
+        "mean": 7.67588,
+        "median": 10.0,
+        "min": 1
+      },
+      "verification_fail_count": 0
+    },
+    "direct": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          730
+        ],
+        [
+          "0",
+          647
+        ],
+        [
+          "2",
+          589
+        ],
+        [
+          "1",
+          568
+        ],
+        [
+          "61",
+          533
+        ],
+        [
+          "27",
+          514
+        ],
+        [
+          "46",
+          495
+        ],
+        [
+          "4",
+          449
+        ],
+        [
+          "42",
+          420
+        ],
+        [
+          "6",
+          417
+        ],
+        [
+          "8",
+          401
+        ],
+        [
+          "12",
+          392
+        ],
+        [
+          "3",
+          388
+        ],
+        [
+          "9",
+          372
+        ],
+        [
+          "73",
+          367
+        ],
+        [
+          "83",
+          361
+        ],
+        [
+          "7",
+          342
+        ],
+        [
+          "5",
+          342
+        ],
+        [
+          "10",
+          339
+        ],
+        [
+          "11",
+          326
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 15803,
+        "hard": 15880,
+        "medium": 15812,
+        "trap": 2505
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          558
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          119
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          117
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          110
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          109
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          100
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          91
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          89
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          88
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          85
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          85
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          83
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          79
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          78
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          54
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          43
+        ],
+        [
+          "cipher mapping reverse the string on emirp then sum a=1 through z=26 for the decoded letters",
+          35
+        ],
+        [
+          "cipher mapping reverse the string on evlos then sum a=1 through z=26 for the decoded letters",
+          34
+        ],
+        [
+          "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+          32
+        ],
+        [
+          "cipher mapping reverse the string on rotcev then sum a=1 through z=26 for the decoded letters",
+          29
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 2741,
+        "char_cipher": 2787,
+        "composed_bit_conversion": 1986,
+        "composed_cipher_mapping": 1919,
+        "composed_custom_numeral_arithmetic": 1900,
+        "composed_gravity_unit": 1916,
+        "composed_permutation_mapping": 1979,
+        "composed_sequence_operator": 1958,
+        "composed_symbol_equation": 1946,
+        "composed_unit_formula": 1931,
+        "composed_word_cipher": 1920,
+        "custom_numeral": 2782,
+        "equation_operator": 2744,
+        "gravity_numeric": 2787,
+        "numeric_formula_safe": 4218,
+        "permutation_sorting": 3177,
+        "sequence_pattern": 2758,
+        "symbol_mapping": 2709,
+        "unit_conversion": 3183,
+        "word_cipher": 2659
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_sft_direct.jsonl",
+      "prompt_style_counts": {
+        "direct": 8550,
+        "examples_query": 8434,
+        "minimal": 8441,
+        "public_style_examples_then_query": 565,
+        "public_style_minimal": 563,
+        "public_style_mixed_notation": 573,
+        "public_style_multiline": 558,
+        "public_style_noisy_context": 3064,
+        "public_style_plain_english": 561,
+        "public_style_symbol_heavy": 562,
+        "public_style_table": 546,
+        "public_style_verbose": 558,
+        "story": 8480,
+        "table": 8545
+      },
+      "raw_problem_counts": {},
+      "row_count": 50000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "direct": 50000
+      },
+      "split": "direct",
+      "trace_length": {
+        "max": 4,
+        "mean": 1.06294,
+        "median": 1.0,
+        "min": 1
+      },
+      "verification_fail_count": 0
+    },
+    "dpo_eval": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "2",
+          31
+        ],
+        [
+          "24",
+          28
+        ],
+        [
+          "0",
+          25
+        ],
+        [
+          "27",
+          25
+        ],
+        [
+          "8",
+          20
+        ],
+        [
+          "1",
+          20
+        ],
+        [
+          "4",
+          19
+        ],
+        [
+          "61",
+          19
+        ],
+        [
+          "42",
+          19
+        ],
+        [
+          "83",
+          17
+        ],
+        [
+          "73",
+          17
+        ],
+        [
+          "46",
+          16
+        ],
+        [
+          "7",
+          16
+        ],
+        [
+          "16",
+          15
+        ],
+        [
+          "12",
+          15
+        ],
+        [
+          "49",
+          15
+        ],
+        [
+          "15",
+          14
+        ],
+        [
+          "32",
+          13
+        ],
+        [
+          "44",
+          13
+        ],
+        [
+          "10",
+          13
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 634,
+        "hard": 631,
+        "medium": 640,
+        "trap": 95
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          33
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          7
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          5
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          5
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          4
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          4
+        ],
+        [
+          "composed sequence operator sequence operator sequence 4 8 16 32 64 find the next value then",
+          3
+        ],
+        [
+          "cipher mapping table-style task rule deterministic query caesar shift -5 on rfym then sum a=1 through",
+          3
+        ],
+        [
+          "gravity unit a contest note gives this exact rule convert 7 minutes to seconds speed is",
+          3
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          3
+        ],
+        [
+          "cipher mapping a contest note gives this exact rule atbash decode on evxgli then sum a=1",
+          2
+        ],
+        [
+          "unit formula a contest note gives this exact rule convert 19 minutes to seconds call that",
+          2
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          2
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          2
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 3 6 12 24 48 find the next",
+          2
+        ],
+        [
+          "cipher mapping atbash decode on nzgs then sum a=1 through z=26 for the decoded letters sample",
+          2
+        ],
+        [
+          "custom numeral arithmetic base 6 digits a=0 b=1 c=2 d=3 e=4 f=5 decode cc then square",
+          2
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 6 9 12 15 18 find",
+          2
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          2
+        ],
+        [
+          "gravity unit example format do each step exactly query convert 5 minutes to seconds speed is",
+          2
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 121,
+        "char_cipher": 112,
+        "composed_bit_conversion": 74,
+        "composed_cipher_mapping": 80,
+        "composed_custom_numeral_arithmetic": 79,
+        "composed_gravity_unit": 70,
+        "composed_permutation_mapping": 75,
+        "composed_sequence_operator": 86,
+        "composed_symbol_equation": 86,
+        "composed_unit_formula": 95,
+        "composed_word_cipher": 62,
+        "custom_numeral": 119,
+        "equation_operator": 113,
+        "gravity_numeric": 108,
+        "numeric_formula_safe": 146,
+        "permutation_sorting": 135,
+        "sequence_pattern": 98,
+        "symbol_mapping": 99,
+        "unit_conversion": 136,
+        "word_cipher": 106
+      },
+      "format_error_count": 0,
+      "mode": "dpo",
+      "path": "artifacts\\sprint11\\day1x_dpo_eval_pairs_2k.jsonl",
+      "prompt_style_counts": {
+        "direct": 346,
+        "examples_query": 340,
+        "minimal": 340,
+        "public_style_examples_then_query": 24,
+        "public_style_minimal": 27,
+        "public_style_mixed_notation": 18,
+        "public_style_multiline": 23,
+        "public_style_noisy_context": 118,
+        "public_style_plain_english": 18,
+        "public_style_symbol_heavy": 24,
+        "public_style_table": 22,
+        "public_style_verbose": 33,
+        "story": 333,
+        "table": 334
+      },
+      "raw_problem_counts": {},
+      "row_count": 2000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "dpo_eval": 2000
+      },
+      "split": "dpo_eval",
+      "trace_length": {
+        "max": 19,
+        "mean": 12.401,
+        "median": 12.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    },
+    "dpo_train": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          280
+        ],
+        [
+          "0",
+          257
+        ],
+        [
+          "1",
+          246
+        ],
+        [
+          "2",
+          226
+        ],
+        [
+          "61",
+          215
+        ],
+        [
+          "27",
+          213
+        ],
+        [
+          "46",
+          213
+        ],
+        [
+          "42",
+          181
+        ],
+        [
+          "4",
+          169
+        ],
+        [
+          "8",
+          168
+        ],
+        [
+          "6",
+          158
+        ],
+        [
+          "12",
+          157
+        ],
+        [
+          "10",
+          149
+        ],
+        [
+          "73",
+          147
+        ],
+        [
+          "3",
+          147
+        ],
+        [
+          "9",
+          145
+        ],
+        [
+          "83",
+          144
+        ],
+        [
+          "7",
+          142
+        ],
+        [
+          "13",
+          129
+        ],
+        [
+          "16",
+          129
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 6276,
+        "hard": 6389,
+        "medium": 6350,
+        "trap": 985
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          217
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          52
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          51
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          48
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          42
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          40
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          39
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          38
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          36
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          35
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          35
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          35
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          34
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          30
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          26
+        ],
+        [
+          "cipher mapping a contest note gives this exact rule reverse the string on cigol then sum",
+          17
+        ],
+        [
+          "cipher mapping reverse the string on emirp then sum a=1 through z=26 for the decoded letters",
+          17
+        ],
+        [
+          "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+          15
+        ],
+        [
+          "cipher mapping reverse the string on rotcev then sum a=1 through z=26 for the decoded letters",
+          13
+        ],
+        [
+          "cipher mapping reverse the string on htam then sum a=1 through z=26 for the decoded letters",
+          13
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 1071,
+        "char_cipher": 1089,
+        "composed_bit_conversion": 790,
+        "composed_cipher_mapping": 808,
+        "composed_custom_numeral_arithmetic": 784,
+        "composed_gravity_unit": 802,
+        "composed_permutation_mapping": 721,
+        "composed_sequence_operator": 777,
+        "composed_symbol_equation": 762,
+        "composed_unit_formula": 762,
+        "composed_word_cipher": 796,
+        "custom_numeral": 1066,
+        "equation_operator": 1088,
+        "gravity_numeric": 1099,
+        "numeric_formula_safe": 1696,
+        "permutation_sorting": 1339,
+        "sequence_pattern": 1122,
+        "symbol_mapping": 1054,
+        "unit_conversion": 1288,
+        "word_cipher": 1086
+      },
+      "format_error_count": 0,
+      "mode": "dpo",
+      "path": "artifacts\\sprint11\\day1x_dpo_train_pairs_20k.jsonl",
+      "prompt_style_counts": {
+        "direct": 3488,
+        "examples_query": 3406,
+        "minimal": 3395,
+        "public_style_examples_then_query": 211,
+        "public_style_minimal": 205,
+        "public_style_mixed_notation": 201,
+        "public_style_multiline": 211,
+        "public_style_noisy_context": 1217,
+        "public_style_plain_english": 241,
+        "public_style_symbol_heavy": 213,
+        "public_style_table": 246,
+        "public_style_verbose": 217,
+        "story": 3333,
+        "table": 3416
+      },
+      "raw_problem_counts": {},
+      "row_count": 20000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "dpo_train": 20000
+      },
+      "split": "dpo_train",
+      "trace_length": {
+        "max": 19,
+        "mean": 12.4194,
+        "median": 12.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    },
+    "eval_10k": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          148
+        ],
+        [
+          "0",
+          136
+        ],
+        [
+          "2",
+          128
+        ],
+        [
+          "1",
+          128
+        ],
+        [
+          "27",
+          122
+        ],
+        [
+          "42",
+          98
+        ],
+        [
+          "4",
+          91
+        ],
+        [
+          "46",
+          90
+        ],
+        [
+          "61",
+          86
+        ],
+        [
+          "73",
+          85
+        ],
+        [
+          "83",
+          84
+        ],
+        [
+          "8",
+          78
+        ],
+        [
+          "3",
+          76
+        ],
+        [
+          "11",
+          75
+        ],
+        [
+          "15",
+          73
+        ],
+        [
+          "12",
+          73
+        ],
+        [
+          "7",
+          69
+        ],
+        [
+          "9",
+          68
+        ],
+        [
+          "10",
+          63
+        ],
+        [
+          "16",
+          62
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 3171,
+        "hard": 3161,
+        "medium": 3168,
+        "trap": 500
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          111
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          27
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          23
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          22
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          22
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          22
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          21
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          20
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          17
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          17
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          16
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          16
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          15
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          13
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          12
+        ],
+        [
+          "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+          9
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          8
+        ],
+        [
+          "cipher mapping example format do each step exactly query atbash decode on xlwv then sum a=1",
+          7
+        ],
+        [
+          "cipher mapping reverse the string on htam then sum a=1 through z=26 for the decoded letters",
+          7
+        ],
+        [
+          "gravity unit a contest note gives this exact rule convert 1 minutes to seconds speed is",
+          7
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 546,
+        "char_cipher": 546,
+        "composed_bit_conversion": 389,
+        "composed_cipher_mapping": 389,
+        "composed_custom_numeral_arithmetic": 390,
+        "composed_gravity_unit": 388,
+        "composed_permutation_mapping": 389,
+        "composed_sequence_operator": 389,
+        "composed_symbol_equation": 389,
+        "composed_unit_formula": 389,
+        "composed_word_cipher": 388,
+        "custom_numeral": 545,
+        "equation_operator": 545,
+        "gravity_numeric": 545,
+        "numeric_formula_safe": 846,
+        "permutation_sorting": 645,
+        "sequence_pattern": 545,
+        "symbol_mapping": 546,
+        "unit_conversion": 646,
+        "word_cipher": 545
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_verified_sft_eval_10k.jsonl",
+      "prompt_style_counts": {
+        "direct": 1704,
+        "examples_query": 1702,
+        "minimal": 1704,
+        "public_style_examples_then_query": 111,
+        "public_style_minimal": 112,
+        "public_style_mixed_notation": 111,
+        "public_style_multiline": 111,
+        "public_style_noisy_context": 611,
+        "public_style_plain_english": 111,
+        "public_style_symbol_heavy": 111,
+        "public_style_table": 111,
+        "public_style_verbose": 111,
+        "story": 1695,
+        "table": 1695
+      },
+      "raw_problem_counts": {},
+      "row_count": 10000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "composed_day1x": 2500,
+        "format_stress": 500,
+        "original_day1": 6000,
+        "public_style_day1x": 1000
+      },
+      "split": "eval_10k",
+      "trace_length": {
+        "max": 19,
+        "mean": 12.4072,
+        "median": 12.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    },
+    "format_heavy": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          1666
+        ],
+        [
+          "0",
+          592
+        ],
+        [
+          "1",
+          536
+        ],
+        [
+          "2",
+          536
+        ],
+        [
+          "46",
+          475
+        ],
+        [
+          "61",
+          469
+        ],
+        [
+          "27",
+          462
+        ],
+        [
+          "4",
+          435
+        ],
+        [
+          "42",
+          423
+        ],
+        [
+          "8",
+          395
+        ],
+        [
+          "12",
+          380
+        ],
+        [
+          "6",
+          354
+        ],
+        [
+          "83",
+          352
+        ],
+        [
+          "3",
+          335
+        ],
+        [
+          "5",
+          327
+        ],
+        [
+          "10",
+          326
+        ],
+        [
+          "9",
+          326
+        ],
+        [
+          "20",
+          324
+        ],
+        [
+          "50",
+          323
+        ],
+        [
+          "45",
+          321
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 14215,
+        "hard": 14151,
+        "medium": 14385,
+        "trap": 7249
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          481
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          101
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          101
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          97
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          96
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          93
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          91
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          89
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          80
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          77
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          76
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          73
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          67
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          67
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          51
+        ],
+        [
+          "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+          34
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          31
+        ],
+        [
+          "cipher mapping reverse the string on rotcev then sum a=1 through z=26 for the decoded letters",
+          29
+        ],
+        [
+          "cipher mapping reverse the string on evlos then sum a=1 through z=26 for the decoded letters",
+          29
+        ],
+        [
+          "cipher mapping a contest note gives this exact rule reverse the string on rotcev then sum",
+          27
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 2462,
+        "char_cipher": 2391,
+        "composed_bit_conversion": 1768,
+        "composed_cipher_mapping": 1749,
+        "composed_custom_numeral_arithmetic": 1641,
+        "composed_gravity_unit": 1754,
+        "composed_permutation_mapping": 1734,
+        "composed_sequence_operator": 1787,
+        "composed_symbol_equation": 1752,
+        "composed_unit_formula": 1767,
+        "composed_word_cipher": 1747,
+        "custom_numeral": 2489,
+        "equation_operator": 2457,
+        "gravity_numeric": 2450,
+        "numeric_formula_safe": 6850,
+        "permutation_sorting": 3885,
+        "sequence_pattern": 2462,
+        "symbol_mapping": 2483,
+        "unit_conversion": 3920,
+        "word_cipher": 2452
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_sft_format_heavy.jsonl",
+      "prompt_style_counts": {
+        "direct": 7727,
+        "examples_query": 7533,
+        "minimal": 7588,
+        "public_style_examples_then_query": 502,
+        "public_style_minimal": 433,
+        "public_style_mixed_notation": 512,
+        "public_style_multiline": 466,
+        "public_style_noisy_context": 7714,
+        "public_style_plain_english": 486,
+        "public_style_symbol_heavy": 531,
+        "public_style_table": 508,
+        "public_style_verbose": 481,
+        "story": 7813,
+        "table": 7706
+      },
+      "raw_problem_counts": {},
+      "row_count": 50000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "format_heavy": 50000
+      },
+      "split": "format_heavy",
+      "trace_length": {
+        "max": 19,
+        "mean": 3.31474,
+        "median": 1.0,
+        "min": 1
+      },
+      "verification_fail_count": 0
+    },
+    "hard_p2_heavy": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "0",
+          397
+        ],
+        [
+          "9",
+          387
+        ],
+        [
+          "1",
+          375
+        ],
+        [
+          "4",
+          373
+        ],
+        [
+          "12",
+          354
+        ],
+        [
+          "10",
+          351
+        ],
+        [
+          "8",
+          345
+        ],
+        [
+          "2",
+          344
+        ],
+        [
+          "11",
+          342
+        ],
+        [
+          "3",
+          329
+        ],
+        [
+          "6",
+          323
+        ],
+        [
+          "7",
+          320
+        ],
+        [
+          "5",
+          314
+        ],
+        [
+          "13",
+          303
+        ],
+        [
+          "15",
+          291
+        ],
+        [
+          "14",
+          288
+        ],
+        [
+          "16",
+          276
+        ],
+        [
+          "20",
+          260
+        ],
+        [
+          "18",
+          229
+        ],
+        [
+          "25",
+          220
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 9215,
+        "hard": 9305,
+        "medium": 9266,
+        "trap": 2214
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          854
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          157
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          147
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          146
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          145
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          139
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          131
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          130
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          129
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          124
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 5 10 20 40 80 find",
+          21
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 4 8 16 32 64 find the next",
+          19
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 1 2 4 8 16 find the next",
+          19
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 1 3 9 27 81 find",
+          19
+        ],
+        [
+          "composed sequence operator sequence operator sequence 4 12 36 108 324 find the next value then",
+          18
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 4 12 36 108 324 find the next",
+          18
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 5 15 45 135 405 find the next",
+          18
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 2 4 8 16 32 find the next",
+          17
+        ],
+        [
+          "composed sequence operator sequence operator sequence 1 3 9 27 81 find the next value then",
+          17
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 1 2 4 8 16 find",
+          16
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "composed_custom_numeral_arithmetic": 2869,
+        "composed_sequence_operator": 2876,
+        "composed_symbol_equation": 2972,
+        "composed_unit_formula": 2891,
+        "equation_operator": 4036,
+        "gravity_numeric": 4066,
+        "numeric_formula_safe": 6261,
+        "sequence_pattern": 4029
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_sft_hard_p2_heavy.jsonl",
+      "prompt_style_counts": {
+        "direct": 4917,
+        "examples_query": 4862,
+        "minimal": 4899,
+        "public_style_examples_then_query": 849,
+        "public_style_minimal": 812,
+        "public_style_noisy_context": 2214,
+        "public_style_symbol_heavy": 830,
+        "public_style_verbose": 854,
+        "story": 4866,
+        "table": 4897
+      },
+      "raw_problem_counts": {},
+      "row_count": 30000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "hard_p2_heavy": 30000
+      },
+      "split": "hard_p2_heavy",
+      "trace_length": {
+        "max": 16,
+        "mean": 12.4129,
+        "median": 11.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    },
+    "holdout_composed": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "27",
+          37
+        ],
+        [
+          "42",
+          24
+        ],
+        [
+          "61",
+          22
+        ],
+        [
+          "46",
+          19
+        ],
+        [
+          "73",
+          18
+        ],
+        [
+          "50",
+          17
+        ],
+        [
+          "10",
+          16
+        ],
+        [
+          "28",
+          16
+        ],
+        [
+          "11",
+          15
+        ],
+        [
+          "49",
+          14
+        ],
+        [
+          "83",
+          13
+        ],
+        [
+          "29",
+          13
+        ],
+        [
+          "24",
+          12
+        ],
+        [
+          "14",
+          11
+        ],
+        [
+          "1",
+          11
+        ],
+        [
+          "9",
+          10
+        ],
+        [
+          "13",
+          10
+        ],
+        [
+          "26",
+          10
+        ],
+        [
+          "45",
+          10
+        ],
+        [
+          "21",
+          9
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 339,
+        "hard": 330,
+        "medium": 331
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          11
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          11
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          10
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          8
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          7
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          6
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          6
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          6
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          4
+        ],
+        [
+          "cipher mapping table-style task rule deterministic query atbash decode on nzgs then sum a=1 through z=26",
+          4
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          3
+        ],
+        [
+          "cipher mapping a contest note gives this exact rule atbash decode on kirnv then sum a=1",
+          3
+        ],
+        [
+          "cipher mapping a contest note gives this exact rule atbash decode on nzgs then sum a=1",
+          3
+        ],
+        [
+          "cipher mapping atbash decode on kirnv then sum a=1 through z=26 for the decoded letters sample",
+          3
+        ],
+        [
+          "cipher mapping reverse the string on evlos then sum a=1 through z=26 for the decoded letters",
+          3
+        ],
+        [
+          "sequence operator example format do each step exactly query sequence 4 8 16 32 64 find",
+          3
+        ],
+        [
+          "gravity unit example format do each step exactly query convert 7 minutes to seconds speed is",
+          3
+        ],
+        [
+          "gravity unit a contest note gives this exact rule convert 2 minutes to seconds speed is",
+          3
+        ],
+        [
+          "custom numeral arithmetic base 6 digits a=0 b=1 c=2 d=3 e=4 f=5 decode dde then multiply",
+          2
+        ],
+        [
+          "cipher mapping caesar shift -1 on tpmwf then sum a=1 through z=26 for the decoded letters",
+          2
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "composed_bit_conversion": 112,
+        "composed_cipher_mapping": 112,
+        "composed_custom_numeral_arithmetic": 112,
+        "composed_gravity_unit": 104,
+        "composed_permutation_mapping": 112,
+        "composed_sequence_operator": 112,
+        "composed_symbol_equation": 112,
+        "composed_unit_formula": 112,
+        "composed_word_cipher": 112
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_holdout_composed.jsonl",
+      "prompt_style_counts": {
+        "direct": 205,
+        "examples_query": 197,
+        "minimal": 205,
+        "story": 196,
+        "table": 197
+      },
+      "raw_problem_counts": {},
+      "row_count": 1000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "day1x_holdout_synthetic": 1000
+      },
+      "split": "holdout_composed",
+      "trace_length": {
+        "max": 16,
+        "mean": 12.88,
+        "median": 14.0,
+        "min": 10
+      },
+      "verification_fail_count": 0
+    },
+    "holdout_format_traps": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "13",
+          29
+        ],
+        [
+          "10",
+          28
+        ],
+        [
+          "9",
+          28
+        ],
+        [
+          "12",
+          28
+        ],
+        [
+          "11",
+          28
+        ],
+        [
+          "100",
+          24
+        ],
+        [
+          "900",
+          23
+        ],
+        [
+          "500",
+          23
+        ],
+        [
+          "600",
+          22
+        ],
+        [
+          "200",
+          22
+        ],
+        [
+          "700",
+          22
+        ],
+        [
+          "300",
+          22
+        ],
+        [
+          "800",
+          22
+        ],
+        [
+          "400",
+          22
+        ],
+        [
+          "14",
+          20
+        ],
+        [
+          "8",
+          20
+        ],
+        [
+          "84",
+          15
+        ],
+        [
+          "49",
+          14
+        ],
+        [
+          "99",
+          14
+        ],
+        [
+          "104",
+          14
+        ]
+      ],
+      "difficulty_counts": {
+        "trap": 1000
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "compute 3 - 30 final answer may be negative holdout key format-trap-123-0",
+          1
+        ],
+        [
+          "numbers may have leading zeros add 0044 and 0005 normalize the answer holdout key format-trap-123-1",
+          1
+        ],
+        [
+          "convert 9 m to cm box only the number not the unit holdout key format-trap-123-2",
+          1
+        ],
+        [
+          "table values are 5 11 15 return the range as one scalar holdout key format-trap-123-3",
+          1
+        ],
+        [
+          "answer only after checking 8*11 holdout key format-trap-123-4",
+          1
+        ],
+        [
+          "compute 3 - 35 final answer may be negative holdout key format-trap-123-5",
+          1
+        ],
+        [
+          "numbers may have leading zeros add 0049 and 0005 normalize the answer holdout key format-trap-123-6",
+          1
+        ],
+        [
+          "convert 5 m to cm box only the number not the unit holdout key format-trap-123-7",
+          1
+        ],
+        [
+          "table values are 3 11 17 return the range as one scalar holdout key format-trap-123-8",
+          1
+        ],
+        [
+          "answer only after checking 13*16 holdout key format-trap-123-9",
+          1
+        ],
+        [
+          "compute 3 - 40 final answer may be negative holdout key format-trap-123-10",
+          1
+        ],
+        [
+          "numbers may have leading zeros add 0054 and 0005 normalize the answer holdout key format-trap-123-11",
+          1
+        ],
+        [
+          "convert 1 m to cm box only the number not the unit holdout key format-trap-123-12",
+          1
+        ],
+        [
+          "table values are 8 11 16 return the range as one scalar holdout key format-trap-123-13",
+          1
+        ],
+        [
+          "answer only after checking 7*8 holdout key format-trap-123-14",
+          1
+        ],
+        [
+          "compute 3 - 45 final answer may be negative holdout key format-trap-123-15",
+          1
+        ],
+        [
+          "numbers may have leading zeros add 0059 and 0005 normalize the answer holdout key format-trap-123-16",
+          1
+        ],
+        [
+          "convert 6 m to cm box only the number not the unit holdout key format-trap-123-17",
+          1
+        ],
+        [
+          "table values are 6 11 15 return the range as one scalar holdout key format-trap-123-18",
+          1
+        ],
+        [
+          "answer only after checking 12*13 holdout key format-trap-123-19",
+          1
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "numeric_formula_safe": 800,
+        "unit_conversion": 200
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_holdout_format_traps.jsonl",
+      "prompt_style_counts": {
+        "public_style_noisy_context": 1000
+      },
+      "raw_problem_counts": {},
+      "row_count": 1000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "day1x_holdout_synthetic": 1000
+      },
+      "split": "holdout_format_traps",
+      "trace_length": {
+        "max": 10,
+        "mean": 6.4,
+        "median": 6.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    },
+    "holdout_hard_p2": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "1",
+          16
+        ],
+        [
+          "4",
+          15
+        ],
+        [
+          "0",
+          15
+        ],
+        [
+          "12",
+          14
+        ],
+        [
+          "11",
+          12
+        ],
+        [
+          "14",
+          12
+        ],
+        [
+          "22",
+          12
+        ],
+        [
+          "3",
+          12
+        ],
+        [
+          "21",
+          12
+        ],
+        [
+          "9",
+          10
+        ],
+        [
+          "8",
+          10
+        ],
+        [
+          "7",
+          10
+        ],
+        [
+          "27",
+          10
+        ],
+        [
+          "45",
+          9
+        ],
+        [
+          "43",
+          9
+        ],
+        [
+          "10",
+          8
+        ],
+        [
+          "-8",
+          8
+        ],
+        [
+          "5",
+          8
+        ],
+        [
+          "20",
+          8
+        ],
+        [
+          "128",
+          8
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 167,
+        "hard": 666,
+        "medium": 167
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "sequence operator a contest note gives this exact rule sequence 3 9 27 81 243 find",
+          8
+        ],
+        [
+          "sequence operator sequence 2 6 18 54 162 find the next value then apply sub with",
+          7
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 5 10 20 40 80 find",
+          7
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 2 4 8 16 32 find the next",
+          6
+        ],
+        [
+          "sequence operator example format do each step exactly query sequence 4 8 16 32 64 find",
+          5
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 2 6 18 54 162 find the next",
+          5
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 1 2 4 8 16 find",
+          5
+        ],
+        [
+          "sequence operator sequence 3 6 12 24 48 find the next value then apply mul with",
+          5
+        ],
+        [
+          "sequence operator example format do each step exactly query sequence 3 9 27 81 243 find",
+          5
+        ],
+        [
+          "sequence operator sequence 5 10 20 40 80 find the next value then apply absdiff with",
+          4
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 2 4 8 16 32 find",
+          4
+        ],
+        [
+          "sequence operator sequence 2 4 8 16 32 find the next value then apply sub with",
+          4
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 1 3 9 27 81 find",
+          4
+        ],
+        [
+          "sequence operator table-style task rule deterministic query sequence 5 15 45 135 405 find the next",
+          4
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 5 15 45 135 405 find",
+          4
+        ],
+        [
+          "sequence operator example format do each step exactly query sequence 1 3 9 27 81 find",
+          4
+        ],
+        [
+          "sequence operator example format do each step exactly query sequence 5 10 20 40 80 find",
+          4
+        ],
+        [
+          "sequence operator sequence 1 2 4 8 16 find the next value then apply sub with",
+          4
+        ],
+        [
+          "sequence operator sequence 4 8 16 32 64 find the next value then apply mul with",
+          4
+        ],
+        [
+          "sequence operator a contest note gives this exact rule sequence 4 12 36 108 324 find",
+          4
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "composed_sequence_operator": 500,
+        "equation_operator": 125,
+        "gravity_numeric": 125,
+        "numeric_formula_safe": 125,
+        "sequence_pattern": 125
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_holdout_hard_p2.jsonl",
+      "prompt_style_counts": {
+        "direct": 225,
+        "examples_query": 225,
+        "minimal": 100,
+        "story": 225,
+        "table": 225
+      },
+      "raw_problem_counts": {},
+      "row_count": 1000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "day1x_holdout_synthetic": 1000
+      },
+      "split": "holdout_hard_p2",
+      "trace_length": {
+        "max": 16,
+        "mean": 14.104,
+        "median": 16.0,
+        "min": 10
+      },
+      "verification_fail_count": 0
+    },
+    "holdout_prompt_style": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "27",
+          28
+        ],
+        [
+          "61",
+          24
+        ],
+        [
+          "46",
+          22
+        ],
+        [
+          "83",
+          20
+        ],
+        [
+          "73",
+          19
+        ],
+        [
+          "42",
+          19
+        ],
+        [
+          "10",
+          16
+        ],
+        [
+          "28",
+          15
+        ],
+        [
+          "9",
+          14
+        ],
+        [
+          "24",
+          13
+        ],
+        [
+          "44",
+          13
+        ],
+        [
+          "1",
+          13
+        ],
+        [
+          "16",
+          12
+        ],
+        [
+          "12",
+          12
+        ],
+        [
+          "19",
+          12
+        ],
+        [
+          "20",
+          11
+        ],
+        [
+          "29",
+          11
+        ],
+        [
+          "50",
+          11
+        ],
+        [
+          "45",
+          11
+        ],
+        [
+          "4",
+          10
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 339,
+        "hard": 330,
+        "medium": 331
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "composed custom numeral arithmetic custom numeral arithmetic example format do each step exactly query base 5",
+          4
+        ],
+        [
+          "composed custom numeral arithmetic custom numeral arithmetic base 6 digits a=0 b=1 c=2 d=3 e=4 f=5",
+          4
+        ],
+        [
+          "composed cipher mapping cipher mapping example format do each step exactly query reverse the string on",
+          4
+        ],
+        [
+          "composed cipher mapping cipher mapping atbash decode on oltrx then sum a=1 through z=26 for the",
+          4
+        ],
+        [
+          "composed cipher mapping cipher mapping a contest note gives this exact rule reverse the string on",
+          3
+        ],
+        [
+          "cipher mapping / substeps -> step 1 char_cipher input htam step 2 symbol_mapping input math now",
+          3
+        ],
+        [
+          "cipher mapping / substeps -> step 1 char_cipher input xlwv step 2 symbol_mapping input code now",
+          3
+        ],
+        [
+          "unit formula / substeps -> step 1 unit_conversion input 6 days to hours step 2 numeric_formula_safe",
+          3
+        ],
+        [
+          "sequence operator / substeps -> step 1 sequence_pattern input 2 4 8 16 32 step 2",
+          3
+        ],
+        [
+          "sequence operator / substeps -> step 1 sequence_pattern input 2 6 18 54 162 step 2",
+          3
+        ],
+        [
+          "sequence operator / substeps -> step 1 sequence_pattern input 4 8 16 32 64 step 2",
+          3
+        ],
+        [
+          "gravity unit / substeps -> step 1 unit_conversion input 1 minutes to seconds step 2 gravity_numeric",
+          3
+        ],
+        [
+          "composed custom numeral arithmetic custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0",
+          2
+        ],
+        [
+          "custom numeral arithmetic / substeps -> step 1 custom_numeral input cac step 2 arithmetic input 74",
+          2
+        ],
+        [
+          "composed custom numeral arithmetic custom numeral arithmetic a contest note gives this exact rule base 5",
+          2
+        ],
+        [
+          "composed custom numeral arithmetic custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0",
+          2
+        ],
+        [
+          "composed custom numeral arithmetic custom numeral arithmetic a contest note gives this exact rule base 4",
+          2
+        ],
+        [
+          "composed custom numeral arithmetic custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0",
+          2
+        ],
+        [
+          "custom numeral arithmetic / substeps -> step 1 custom_numeral input bdad step 2 arithmetic input 115",
+          2
+        ],
+        [
+          "cipher mapping / substeps -> step 1 char_cipher input edoc step 2 symbol_mapping input code now",
+          2
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "composed_bit_conversion": 112,
+        "composed_cipher_mapping": 112,
+        "composed_custom_numeral_arithmetic": 112,
+        "composed_gravity_unit": 104,
+        "composed_permutation_mapping": 112,
+        "composed_sequence_operator": 112,
+        "composed_symbol_equation": 112,
+        "composed_unit_formula": 112,
+        "composed_word_cipher": 112
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_holdout_prompt_style.jsonl",
+      "prompt_style_counts": {
+        "public_style_mixed_notation": 250,
+        "public_style_multiline": 250,
+        "public_style_noisy_context": 250,
+        "public_style_symbol_heavy": 250
+      },
+      "raw_problem_counts": {},
+      "row_count": 1000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "day1x_holdout_synthetic": 1000
+      },
+      "split": "holdout_prompt_style",
+      "trace_length": {
+        "max": 16,
+        "mean": 12.88,
+        "median": 14.0,
+        "min": 10
+      },
+      "verification_fail_count": 0
+    },
+    "holdout_rule": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "0",
+          31
+        ],
+        [
+          "1",
+          20
+        ],
+        [
+          "1021",
+          11
+        ],
+        [
+          "8",
+          11
+        ],
+        [
+          "5",
+          11
+        ],
+        [
+          "2",
+          11
+        ],
+        [
+          "4",
+          10
+        ],
+        [
+          "7",
+          8
+        ],
+        [
+          "42",
+          7
+        ],
+        [
+          "3",
+          6
+        ],
+        [
+          "10",
+          6
+        ],
+        [
+          "9",
+          5
+        ],
+        [
+          "19",
+          5
+        ],
+        [
+          "6",
+          5
+        ],
+        [
+          "94",
+          4
+        ],
+        [
+          "53",
+          4
+        ],
+        [
+          "-4",
+          4
+        ],
+        [
+          "18",
+          4
+        ],
+        [
+          "13",
+          4
+        ],
+        [
+          "24",
+          4
+        ]
+      ],
+      "difficulty_counts": {
+        "hard": 1000
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "symbol_mapping table mapping ->6 ->8 a->2 ->3 y->4 ->9 query a holdout key holdout_rule-123-0",
+          1
+        ],
+        [
+          "bit_manipulation use 10-bit not input not 0110110111 answer as decimal holdout key holdout_rule-123-1",
+          1
+        ],
+        [
+          "char_cipher caesar shift +1 encode puax holdout key holdout_rule-123-2",
+          1
+        ],
+        [
+          "unit_conversion convert 2148 units to dozens exact integer only holdout key holdout_rule-123-3",
+          1
+        ],
+        [
+          "numeric_formula_safe formula class quadratic examples 0->-2 1->20 2->52 3->94 query 34 holdout key holdout_rule-123-4",
+          1
+        ],
+        [
+          "word_cipher rule last_letters input green stone gold red holdout key holdout_rule-123-5",
+          1
+        ],
+        [
+          "custom_numeral base 3 digits =0 =1 =2 encode decimal 11 holdout key holdout_rule-123-6",
+          1
+        ],
+        [
+          "permutation_sorting sort numbers ascending input 3 15 9 7 24 holdout key holdout_rule-123-7",
+          1
+        ],
+        [
+          "equation_operator rule abs_diff examples -7 -1 = 6 6 5 = 1 14 -4 = 18",
+          1
+        ],
+        [
+          "sequence_pattern rule alternating_arithmetic_two_stream sequence -7 4 -4 3 -1 2 2 1 holdout key holdout_rule-123-9",
+          1
+        ],
+        [
+          "gravity_numeric use distance = speed*time if speed = 77 and time = 33 what is distance",
+          1
+        ],
+        [
+          "symbol_mapping examples ->6 ->3 ->5 y->4 x->9 ->0 query yx holdout key holdout_rule-123-11",
+          1
+        ],
+        [
+          "bit_manipulation use 10-bit right shift by 1 input 0111011001 answer as decimal holdout key holdout_rule-123-12",
+          1
+        ],
+        [
+          "char_cipher reverse string nzpnrpj holdout key holdout_rule-123-13",
+          1
+        ],
+        [
+          "unit_conversion convert 3600 seconds to hours exact integer only holdout key holdout_rule-123-14",
+          1
+        ],
+        [
+          "numeric_formula_safe formula class quadratic examples 0->16 1->11 2->20 3->43 query 24 holdout key holdout_rule-123-15",
+          1
+        ],
+        [
+          "word_cipher rule sort_letters input green mint stone gold holdout key holdout_rule-123-16",
+          1
+        ],
+        [
+          "custom_numeral base 2 digits e=0 b=1 decode bb to decimal holdout key holdout_rule-123-17",
+          1
+        ],
+        [
+          "permutation_sorting sort numbers ascending input 13 5 18 7 20 holdout key holdout_rule-123-18",
+          1
+        ],
+        [
+          "equation_operator rule mod_ba examples 5 6 = 1 9 10 = 1 4 10 = 2",
+          1
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 91,
+        "char_cipher": 91,
+        "custom_numeral": 91,
+        "equation_operator": 91,
+        "gravity_numeric": 90,
+        "numeric_formula_safe": 91,
+        "permutation_sorting": 91,
+        "sequence_pattern": 91,
+        "symbol_mapping": 91,
+        "unit_conversion": 91,
+        "word_cipher": 91
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_holdout_rule.jsonl",
+      "prompt_style_counts": {
+        "examples_query": 333,
+        "story": 333,
+        "table": 334
+      },
+      "raw_problem_counts": {},
+      "row_count": 1000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "day1x_holdout_synthetic": 1000
+      },
+      "split": "holdout_rule",
+      "trace_length": {
+        "max": 19,
+        "mean": 12.854,
+        "median": 12.0,
+        "min": 7
+      },
+      "verification_fail_count": 0
+    },
+    "mixed_curriculum": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          2923
+        ],
+        [
+          "27",
+          1332
+        ],
+        [
+          "61",
+          1301
+        ],
+        [
+          "46",
+          1301
+        ],
+        [
+          "42",
+          1119
+        ],
+        [
+          "0",
+          1090
+        ],
+        [
+          "2",
+          976
+        ],
+        [
+          "1",
+          971
+        ],
+        [
+          "73",
+          966
+        ],
+        [
+          "83",
+          956
+        ],
+        [
+          "8",
+          880
+        ],
+        [
+          "4",
+          871
+        ],
+        [
+          "12",
+          867
+        ],
+        [
+          "9",
+          755
+        ],
+        [
+          "6",
+          754
+        ],
+        [
+          "45",
+          720
+        ],
+        [
+          "14",
+          708
+        ],
+        [
+          "16",
+          703
+        ],
+        [
+          "50",
+          688
+        ],
+        [
+          "20",
+          682
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 29422,
+        "hard": 29281,
+        "medium": 29423,
+        "trap": 11874
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          1939
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          397
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          393
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          392
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          277
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          269
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          234
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          225
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          214
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          209
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          206
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          206
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          204
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          195
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          173
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          73
+        ],
+        [
+          "cipher mapping reverse the string on emirp then sum a=1 through z=26 for the decoded letters",
+          72
+        ],
+        [
+          "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+          72
+        ],
+        [
+          "cipher mapping reverse the string on rotcev then sum a=1 through z=26 for the decoded letters",
+          66
+        ],
+        [
+          "cipher mapping reverse the string on htam then sum a=1 through z=26 for the decoded letters",
+          64
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 3800,
+        "char_cipher": 3828,
+        "composed_bit_conversion": 5155,
+        "composed_cipher_mapping": 5167,
+        "composed_custom_numeral_arithmetic": 5177,
+        "composed_gravity_unit": 5098,
+        "composed_permutation_mapping": 5093,
+        "composed_sequence_operator": 5180,
+        "composed_symbol_equation": 5057,
+        "composed_unit_formula": 5180,
+        "composed_word_cipher": 5081,
+        "custom_numeral": 3796,
+        "equation_operator": 3798,
+        "gravity_numeric": 3854,
+        "numeric_formula_safe": 10871,
+        "permutation_sorting": 6172,
+        "sequence_pattern": 3897,
+        "symbol_mapping": 3858,
+        "unit_conversion": 6112,
+        "word_cipher": 3826
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_sft_mixed_curriculum.jsonl",
+      "prompt_style_counts": {
+        "direct": 14077,
+        "examples_query": 14005,
+        "minimal": 14064,
+        "public_style_examples_then_query": 1945,
+        "public_style_minimal": 2040,
+        "public_style_mixed_notation": 2011,
+        "public_style_multiline": 2009,
+        "public_style_noisy_context": 13873,
+        "public_style_plain_english": 1987,
+        "public_style_symbol_heavy": 2026,
+        "public_style_table": 1994,
+        "public_style_verbose": 1939,
+        "story": 14026,
+        "table": 14004
+      },
+      "raw_problem_counts": {},
+      "row_count": 100000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "mixed_curriculum": 100000
+      },
+      "split": "mixed_curriculum",
+      "trace_length": {
+        "max": 19,
+        "mean": 9.43061,
+        "median": 11.0,
+        "min": 1
+      },
+      "verification_fail_count": 0
+    },
+    "probe_10k": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          143
+        ],
+        [
+          "2",
+          120
+        ],
+        [
+          "0",
+          112
+        ],
+        [
+          "61",
+          107
+        ],
+        [
+          "42",
+          103
+        ],
+        [
+          "1",
+          102
+        ],
+        [
+          "27",
+          97
+        ],
+        [
+          "46",
+          94
+        ],
+        [
+          "12",
+          87
+        ],
+        [
+          "73",
+          85
+        ],
+        [
+          "4",
+          85
+        ],
+        [
+          "5",
+          82
+        ],
+        [
+          "10",
+          82
+        ],
+        [
+          "8",
+          80
+        ],
+        [
+          "7",
+          76
+        ],
+        [
+          "3",
+          75
+        ],
+        [
+          "11",
+          74
+        ],
+        [
+          "6",
+          69
+        ],
+        [
+          "83",
+          63
+        ],
+        [
+          "16",
+          63
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 3171,
+        "hard": 3161,
+        "medium": 3168,
+        "trap": 500
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          111
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          24
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          22
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          22
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          22
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          22
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          21
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          20
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          19
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          18
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          17
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          16
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          16
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          16
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          14
+        ],
+        [
+          "cipher mapping reverse the string on rotcev then sum a=1 through z=26 for the decoded letters",
+          9
+        ],
+        [
+          "cipher mapping a contest note gives this exact rule reverse the string on htam then sum",
+          8
+        ],
+        [
+          "cipher mapping atbash decode on kirnv then sum a=1 through z=26 for the decoded letters answer",
+          7
+        ],
+        [
+          "cipher mapping example format do each step exactly query atbash decode on hloev then sum a=1",
+          7
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          7
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 546,
+        "char_cipher": 546,
+        "composed_bit_conversion": 389,
+        "composed_cipher_mapping": 389,
+        "composed_custom_numeral_arithmetic": 390,
+        "composed_gravity_unit": 388,
+        "composed_permutation_mapping": 389,
+        "composed_sequence_operator": 389,
+        "composed_symbol_equation": 389,
+        "composed_unit_formula": 389,
+        "composed_word_cipher": 388,
+        "custom_numeral": 545,
+        "equation_operator": 545,
+        "gravity_numeric": 545,
+        "numeric_formula_safe": 846,
+        "permutation_sorting": 645,
+        "sequence_pattern": 545,
+        "symbol_mapping": 546,
+        "unit_conversion": 646,
+        "word_cipher": 545
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_verified_probe_10k.jsonl",
+      "prompt_style_counts": {
+        "direct": 1704,
+        "examples_query": 1702,
+        "minimal": 1704,
+        "public_style_examples_then_query": 111,
+        "public_style_minimal": 112,
+        "public_style_mixed_notation": 111,
+        "public_style_multiline": 111,
+        "public_style_noisy_context": 611,
+        "public_style_plain_english": 111,
+        "public_style_symbol_heavy": 111,
+        "public_style_table": 111,
+        "public_style_verbose": 111,
+        "story": 1695,
+        "table": 1695
+      },
+      "raw_problem_counts": {},
+      "row_count": 10000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "composed_day1x": 2500,
+        "format_stress": 500,
+        "original_day1": 6000,
+        "public_style_day1x": 1000
+      },
+      "split": "probe_10k",
+      "trace_length": {
+        "max": 19,
+        "mean": 12.4137,
+        "median": 12.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    },
+    "public_style_heavy": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          1946
+        ],
+        [
+          "27",
+          782
+        ],
+        [
+          "61",
+          731
+        ],
+        [
+          "46",
+          700
+        ],
+        [
+          "42",
+          603
+        ],
+        [
+          "83",
+          553
+        ],
+        [
+          "73",
+          534
+        ],
+        [
+          "0",
+          489
+        ],
+        [
+          "4",
+          476
+        ],
+        [
+          "12",
+          460
+        ],
+        [
+          "1",
+          444
+        ],
+        [
+          "2",
+          438
+        ],
+        [
+          "40",
+          422
+        ],
+        [
+          "8",
+          420
+        ],
+        [
+          "50",
+          406
+        ],
+        [
+          "45",
+          403
+        ],
+        [
+          "20",
+          394
+        ],
+        [
+          "16",
+          390
+        ],
+        [
+          "14",
+          387
+        ],
+        [
+          "30",
+          383
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 13810,
+        "hard": 13865,
+        "medium": 13991,
+        "trap": 8334
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          2172
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          430
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          430
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          428
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          296
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          284
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          67
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          57
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          57
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit m=3",
+          53
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          50
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit m=1",
+          49
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          49
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          47
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit m=6",
+          45
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          45
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          44
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          44
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit m=8",
+          43
+        ],
+        [
+          "composed sequence operator sequence operator sequence 4 12 36 108 324 find the next value then",
+          42
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 1391,
+        "char_cipher": 1385,
+        "composed_bit_conversion": 2961,
+        "composed_cipher_mapping": 2971,
+        "composed_custom_numeral_arithmetic": 2983,
+        "composed_gravity_unit": 2968,
+        "composed_permutation_mapping": 3030,
+        "composed_sequence_operator": 2945,
+        "composed_symbol_equation": 2971,
+        "composed_unit_formula": 2911,
+        "composed_word_cipher": 2926,
+        "custom_numeral": 1444,
+        "equation_operator": 1385,
+        "gravity_numeric": 1383,
+        "numeric_formula_safe": 6337,
+        "permutation_sorting": 3000,
+        "sequence_pattern": 1311,
+        "symbol_mapping": 1335,
+        "unit_conversion": 3028,
+        "word_cipher": 1335
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_sft_public_style_heavy.jsonl",
+      "prompt_style_counts": {
+        "direct": 4419,
+        "examples_query": 4460,
+        "minimal": 4501,
+        "public_style_examples_then_query": 2159,
+        "public_style_minimal": 2210,
+        "public_style_mixed_notation": 2175,
+        "public_style_multiline": 2153,
+        "public_style_noisy_context": 10527,
+        "public_style_plain_english": 2181,
+        "public_style_symbol_heavy": 2155,
+        "public_style_table": 2152,
+        "public_style_verbose": 2172,
+        "story": 4340,
+        "table": 4396
+      },
+      "raw_problem_counts": {},
+      "row_count": 50000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "public_style_heavy": 50000
+      },
+      "split": "public_style_heavy",
+      "trace_length": {
+        "max": 16,
+        "mean": 8.11066,
+        "median": 10.0,
+        "min": 1
+      },
+      "verification_fail_count": 0
+    },
+    "short_trace": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          740
+        ],
+        [
+          "0",
+          588
+        ],
+        [
+          "1",
+          585
+        ],
+        [
+          "2",
+          531
+        ],
+        [
+          "27",
+          529
+        ],
+        [
+          "61",
+          527
+        ],
+        [
+          "46",
+          499
+        ],
+        [
+          "4",
+          476
+        ],
+        [
+          "42",
+          469
+        ],
+        [
+          "8",
+          436
+        ],
+        [
+          "6",
+          388
+        ],
+        [
+          "73",
+          383
+        ],
+        [
+          "9",
+          381
+        ],
+        [
+          "3",
+          376
+        ],
+        [
+          "83",
+          370
+        ],
+        [
+          "12",
+          369
+        ],
+        [
+          "7",
+          353
+        ],
+        [
+          "5",
+          334
+        ],
+        [
+          "10",
+          324
+        ],
+        [
+          "14",
+          323
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 15812,
+        "hard": 15743,
+        "medium": 15898,
+        "trap": 2547
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          548
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          125
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          120
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          107
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          100
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          100
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          99
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          86
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          85
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          84
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          83
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          79
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          78
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          78
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          74
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          37
+        ],
+        [
+          "cipher mapping reverse the string on htam then sum a=1 through z=26 for the decoded letters",
+          34
+        ],
+        [
+          "cipher mapping reverse the string on emirp then sum a=1 through z=26 for the decoded letters",
+          31
+        ],
+        [
+          "cipher mapping reverse the string on rotcev then sum a=1 through z=26 for the decoded letters",
+          30
+        ],
+        [
+          "cipher mapping reverse the string on evlos then sum a=1 through z=26 for the decoded letters",
+          28
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 2745,
+        "char_cipher": 2736,
+        "composed_bit_conversion": 1887,
+        "composed_cipher_mapping": 1960,
+        "composed_custom_numeral_arithmetic": 1944,
+        "composed_gravity_unit": 1973,
+        "composed_permutation_mapping": 1952,
+        "composed_sequence_operator": 1884,
+        "composed_symbol_equation": 1891,
+        "composed_unit_formula": 1935,
+        "composed_word_cipher": 1983,
+        "custom_numeral": 2738,
+        "equation_operator": 2686,
+        "gravity_numeric": 2704,
+        "numeric_formula_safe": 4226,
+        "permutation_sorting": 3161,
+        "sequence_pattern": 2772,
+        "symbol_mapping": 2758,
+        "unit_conversion": 3300,
+        "word_cipher": 2765
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_sft_short_trace.jsonl",
+      "prompt_style_counts": {
+        "direct": 8451,
+        "examples_query": 8502,
+        "minimal": 8528,
+        "public_style_examples_then_query": 564,
+        "public_style_minimal": 579,
+        "public_style_mixed_notation": 552,
+        "public_style_multiline": 564,
+        "public_style_noisy_context": 3098,
+        "public_style_plain_english": 565,
+        "public_style_symbol_heavy": 541,
+        "public_style_table": 567,
+        "public_style_verbose": 548,
+        "story": 8460,
+        "table": 8481
+      },
+      "raw_problem_counts": {},
+      "row_count": 50000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "short_trace": 50000
+      },
+      "split": "short_trace",
+      "trace_length": {
+        "max": 19,
+        "mean": 12.40986,
+        "median": 12.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    },
+    "train_100k": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "answer_top20": [
+        [
+          "24",
+          1454
+        ],
+        [
+          "0",
+          1270
+        ],
+        [
+          "1",
+          1165
+        ],
+        [
+          "2",
+          1131
+        ],
+        [
+          "61",
+          1031
+        ],
+        [
+          "27",
+          1030
+        ],
+        [
+          "46",
+          1010
+        ],
+        [
+          "4",
+          953
+        ],
+        [
+          "42",
+          889
+        ],
+        [
+          "8",
+          865
+        ],
+        [
+          "12",
+          789
+        ],
+        [
+          "6",
+          788
+        ],
+        [
+          "3",
+          770
+        ],
+        [
+          "73",
+          759
+        ],
+        [
+          "83",
+          740
+        ],
+        [
+          "9",
+          732
+        ],
+        [
+          "5",
+          710
+        ],
+        [
+          "10",
+          702
+        ],
+        [
+          "7",
+          698
+        ],
+        [
+          "11",
+          656
+        ]
+      ],
+      "difficulty_counts": {
+        "easy": 31673,
+        "hard": 31662,
+        "medium": 31665,
+        "trap": 5000
+      },
+      "dominant_prompt_prefix_top20": [
+        [
+          "use only the rules written here verify every intermediate value and solve this symbol equation item",
+          1111
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit example",
+          222
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit a",
+          222
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit table-style",
+          222
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 6 digits a=0 b=1 c=2 d=3 e=4",
+          213
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 4 digits a=0 b=1 c=2",
+          195
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 6 digits a=0 b=1 c=2",
+          192
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 5 digits a=0 b=1 c=2",
+          190
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 6 digits a=0 b=1 c=2",
+          186
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 5 digits a=0 b=1 c=2 d=3 e=4",
+          179
+        ],
+        [
+          "custom numeral arithmetic example format do each step exactly query base 5 digits a=0 b=1 c=2",
+          175
+        ],
+        [
+          "custom numeral arithmetic a contest note gives this exact rule base 4 digits a=0 b=1 c=2",
+          173
+        ],
+        [
+          "custom numeral arithmetic table-style task rule deterministic query base 4 digits a=0 b=1 c=2 d=3 decode",
+          163
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit mass",
+          148
+        ],
+        [
+          "find the answer by doing the composed operations in order the problem is gravity unit convert",
+          145
+        ],
+        [
+          "cipher mapping reverse the string on edoc then sum a=1 through z=26 for the decoded letters",
+          72
+        ],
+        [
+          "cipher mapping reverse the string on cigol then sum a=1 through z=26 for the decoded letters",
+          68
+        ],
+        [
+          "cipher mapping reverse the string on emirp then sum a=1 through z=26 for the decoded letters",
+          65
+        ],
+        [
+          "cipher mapping reverse the string on evlos then sum a=1 through z=26 for the decoded letters",
+          58
+        ],
+        [
+          "cipher mapping reverse the string on htam then sum a=1 through z=26 for the decoded letters",
+          57
+        ]
+      ],
+      "duplicate_id_count": 0,
+      "duplicate_prompt_count": 0,
+      "examples_failed": [],
+      "family_counts": {
+        "bit_manipulation": 5455,
+        "char_cipher": 5455,
+        "composed_bit_conversion": 3889,
+        "composed_cipher_mapping": 3889,
+        "composed_custom_numeral_arithmetic": 3890,
+        "composed_gravity_unit": 3888,
+        "composed_permutation_mapping": 3889,
+        "composed_sequence_operator": 3889,
+        "composed_symbol_equation": 3889,
+        "composed_unit_formula": 3889,
+        "composed_word_cipher": 3888,
+        "custom_numeral": 5454,
+        "equation_operator": 5454,
+        "gravity_numeric": 5454,
+        "numeric_formula_safe": 8455,
+        "permutation_sorting": 6454,
+        "sequence_pattern": 5454,
+        "symbol_mapping": 5455,
+        "unit_conversion": 6455,
+        "word_cipher": 5455
+      },
+      "format_error_count": 0,
+      "mode": "sft",
+      "path": "artifacts\\sprint11\\day1x_verified_sft_train_100k.jsonl",
+      "prompt_style_counts": {
+        "direct": 17004,
+        "examples_query": 17002,
+        "minimal": 17004,
+        "public_style_examples_then_query": 1111,
+        "public_style_minimal": 1112,
+        "public_style_mixed_notation": 1111,
+        "public_style_multiline": 1111,
+        "public_style_noisy_context": 6111,
+        "public_style_plain_english": 1111,
+        "public_style_symbol_heavy": 1111,
+        "public_style_table": 1111,
+        "public_style_verbose": 1111,
+        "story": 16995,
+        "table": 16995
+      },
+      "raw_problem_counts": {},
+      "row_count": 100000,
+      "rows_with_problems": 0,
+      "source_counts": {
+        "composed_day1x": 25000,
+        "format_stress": 5000,
+        "original_day1": 60000,
+        "public_style_day1x": 10000
+      },
+      "split": "train_100k",
+      "trace_length": {
+        "max": 19,
+        "mean": 12.41336,
+        "median": 12.0,
+        "min": 4
+      },
+      "verification_fail_count": 0
+    }
+  },
+  "format_error_count": 0,
+  "leaderboard_claim": false,
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "original_families_seen": [
+    "bit_manipulation",
+    "char_cipher",
+    "custom_numeral",
+    "equation_operator",
+    "gravity_numeric",
+    "numeric_formula_safe",
+    "permutation_sorting",
+    "sequence_pattern",
+    "symbol_mapping",
+    "unit_conversion",
+    "word_cipher"
+  ],
+  "package_authorized": false,
+  "per_difficulty_counts": {
+    "easy": 159515,
+    "hard": 161250,
+    "medium": 160102,
+    "trap": 46133
+  },
+  "per_family_counts": {
+    "bit_manipulation": 22777,
+    "char_cipher": 22785,
+    "composed_bit_conversion": 22511,
+    "composed_cipher_mapping": 22470,
+    "composed_custom_numeral_arithmetic": 25238,
+    "composed_gravity_unit": 22439,
+    "composed_permutation_mapping": 22465,
+    "composed_sequence_operator": 25813,
+    "composed_symbol_equation": 25308,
+    "composed_unit_formula": 25328,
+    "composed_word_cipher": 22332,
+    "custom_numeral": 22840,
+    "equation_operator": 26929,
+    "gravity_numeric": 27078,
+    "numeric_formula_safe": 55499,
+    "permutation_sorting": 31162,
+    "sequence_pattern": 27000,
+    "symbol_mapping": 22891,
+    "unit_conversion": 31509,
+    "word_cipher": 22626
+  },
+  "per_prompt_style_counts": {
+    "direct": 79730,
+    "examples_query": 79543,
+    "minimal": 79400,
+    "public_style_examples_then_query": 9535,
+    "public_style_minimal": 9552,
+    "public_style_mixed_notation": 9003,
+    "public_style_multiline": 8924,
+    "public_style_noisy_context": 55109,
+    "public_style_plain_english": 8751,
+    "public_style_symbol_heavy": 9811,
+    "public_style_table": 8720,
+    "public_style_verbose": 9523,
+    "story": 79650,
+    "table": 79749
+  },
+  "rows_with_problems": 0,
+  "schema_version": 1,
+  "status": "PASS",
+  "submission_authorized": false,
+  "total_rows_checked": 527000,
+  "verification_fail_count": 0,
+  "verification_pass_rate": 1.0
+}

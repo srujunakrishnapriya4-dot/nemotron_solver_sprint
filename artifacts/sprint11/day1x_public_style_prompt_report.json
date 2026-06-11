@@ -1,0 +1,35 @@
+{
+  "augmented_rows": 1800,
+  "augmented_verified_fail": 0,
+  "augmented_verified_pass": 1800,
+  "created_by": "DAY1X_COMPOSED_TEACHERS_AND_PUBLIC_STYLE_PROMPTS",
+  "leaderboard_claim": false,
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "original_rows": 1800,
+  "package_authorized": false,
+  "public_styles_supported": [
+    "direct",
+    "minimal",
+    "examples_query",
+    "table",
+    "story",
+    "public_style_minimal",
+    "public_style_verbose",
+    "public_style_table",
+    "public_style_examples_then_query",
+    "public_style_noisy_context",
+    "public_style_symbol_heavy",
+    "public_style_mixed_notation",
+    "public_style_multiline",
+    "public_style_plain_english"
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "style_counts": {
+    "public_style_minimal": 1800
+  },
+  "submission_authorized": false,
+  "training_authorized": true,
+  "validation_errors": {}
+}

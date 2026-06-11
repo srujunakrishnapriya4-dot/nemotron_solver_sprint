@@ -1,0 +1,214 @@
+{
+  "abstain_accepted": 0,
+  "ambiguity_accepted": 0,
+  "composed_families_supported": [
+    "composed_bit_conversion",
+    "composed_cipher_mapping",
+    "composed_custom_numeral_arithmetic",
+    "composed_gravity_unit",
+    "composed_permutation_mapping",
+    "composed_sequence_operator",
+    "composed_symbol_equation",
+    "composed_unit_formula",
+    "composed_word_cipher"
+  ],
+  "created_by": "DAY1X_COMPOSED_TEACHERS_AND_PUBLIC_STYLE_PROMPTS",
+  "duplicate_prompt_count": 0,
+  "families_fail": [],
+  "families_pass": [
+    "composed_bit_conversion",
+    "composed_cipher_mapping",
+    "composed_custom_numeral_arithmetic",
+    "composed_gravity_unit",
+    "composed_permutation_mapping",
+    "composed_sequence_operator",
+    "composed_symbol_equation",
+    "composed_unit_formula",
+    "composed_word_cipher"
+  ],
+  "families_warn": [],
+  "format_error_count": 0,
+  "leaderboard_claim": false,
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "per_family": {
+    "composed_bit_conversion": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_cipher_mapping": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_custom_numeral_arithmetic": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_gravity_unit": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_permutation_mapping": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_sequence_operator": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_symbol_equation": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_unit_formula": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    },
+    "composed_word_cipher": {
+      "abstain_accepted": 0,
+      "ambiguity_accepted": 0,
+      "format_errors": 0,
+      "generated": 200,
+      "hard_negative_generated": 0,
+      "prompt_styles": {
+        "direct": 40,
+        "examples_query": 40,
+        "minimal": 40,
+        "story": 40,
+        "table": 40
+      },
+      "teacher_status": "PASS",
+      "verified_fail": 0,
+      "verified_pass": 200
+    }
+  },
+  "public_styles_supported": [
+    "direct",
+    "minimal",
+    "examples_query",
+    "table",
+    "story",
+    "public_style_minimal",
+    "public_style_verbose",
+    "public_style_table",
+    "public_style_examples_then_query",
+    "public_style_noisy_context",
+    "public_style_symbol_heavy",
+    "public_style_mixed_notation",
+    "public_style_multiline",
+    "public_style_plain_english"
+  ],
+  "ready_for_day1x_100k_factory": true,
+  "schema_version": 1,
+  "status": "PASS",
+  "submission_authorized": false,
+  "total_generated": 1800,
+  "total_verified_fail": 0,
+  "total_verified_pass": 1800,
+  "training_authorized": true
+}

@@ -1,0 +1,21 @@
+{
+  "base_counts": {
+    "phase4_eval_rows": 1100,
+    "phase4_probe_rows": 1100,
+    "phase4_train_rows": 11000,
+    "phase5_dpo_train_pairs": 5500
+  },
+  "blocked_reasons": [],
+  "created_by": "DAY1X_PREFLIGHT",
+  "day1_closeout_status": "PASS",
+  "day1x_prompt_stage_status": "PASS",
+  "leaderboard_claim": false,
+  "package_authorized": false,
+  "ready_for_expanded_factory": true,
+  "repo_root": "C:\\Users\\ADMIN\\nemotron_solver_sprint",
+  "safe_to_train_lora": true,
+  "schema_version": 1,
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true
+}

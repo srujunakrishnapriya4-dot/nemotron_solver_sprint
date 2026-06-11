@@ -1,0 +1,133 @@
+﻿{
+    "schema_version":  1,
+    "created_by":  "DAY1_CLOSEOUT_AND_ARTIFACT_ALIAS_REPORT",
+    "status":  "PASS",
+    "repo_root":  "C:\\Users\\ADMIN\\nemotron_solver_sprint",
+    "created_at_local":  "2026-06-11T01:16:05",
+    "purpose":  "Close out Day 1 by verifying required artifacts, mapping old expected deliverable names to actual modular artifacts, and confirming only LoRA training is authorized.",
+    "day1_complete":  true,
+    "phase_statuses":  {
+                           "phase2b_status":  "WARN",
+                           "phase3_status":  "PASS",
+                           "phase4_manifest_status":  "PASS",
+                           "phase5_manifest_status":  "PASS",
+                           "phase6_lora_manifest_status":  "PASS",
+                           "phase6_decision_status":  "PASS"
+                       },
+    "files":  {
+                  "phase5_dpo_eval_pairs":  {
+                                                "path":  "artifacts/sprint11/phase5_dpo_eval_pairs.jsonl",
+                                                "exists":  true,
+                                                "size_bytes":  445709
+                                            },
+                  "phase1_family_recovery_audit":  {
+                                                       "path":  "artifacts/sprint11/day1_family_recovery_audit.json",
+                                                       "exists":  true,
+                                                       "size_bytes":  101933
+                                                   },
+                  "phase6_teacher_quality_report":  {
+                                                        "path":  "artifacts/sprint11/day1_teacher_quality_report.json",
+                                                        "exists":  true,
+                                                        "size_bytes":  9456
+                                                    },
+                  "phase4_manifest":  {
+                                          "path":  "artifacts/sprint11/phase4_verified_data_manifest.json",
+                                          "exists":  true,
+                                          "size_bytes":  4855
+                                      },
+                  "phase6_lora_distill_manifest":  {
+                                                       "path":  "artifacts/sprint11/day1_lora_distill_manifest.json",
+                                                       "exists":  true,
+                                                       "size_bytes":  3608
+                                                   },
+                  "phase4_decision_report":  {
+                                                 "path":  "artifacts/sprint11/phase4_decision_report.json",
+                                                 "exists":  true,
+                                                 "size_bytes":  1180
+                                             },
+                  "phase4_sft_train":  {
+                                           "path":  "artifacts/sprint11/phase4_verified_sft_train.jsonl",
+                                           "exists":  true,
+                                           "size_bytes":  10161240
+                                       },
+                  "phase2b_teacher_bank_report":  {
+                                                      "path":  "artifacts/sprint11/day1_teacher_bank_report_phase2b_stress_1000.json",
+                                                      "exists":  true,
+                                                      "size_bytes":  7424
+                                                  },
+                  "phase4_sft_eval":  {
+                                          "path":  "artifacts/sprint11/phase4_verified_sft_eval.jsonl",
+                                          "exists":  true,
+                                          "size_bytes":  1018277
+                                      },
+                  "phase5_dpo_train_pairs":  {
+                                                 "path":  "artifacts/sprint11/phase5_dpo_train_pairs.jsonl",
+                                                 "exists":  true,
+                                                 "size_bytes":  4468626
+                                             },
+                  "phase4_probe":  {
+                                       "path":  "artifacts/sprint11/phase4_verified_eval_probe.jsonl",
+                                       "exists":  true,
+                                       "size_bytes":  1021980
+                                   },
+                  "phase3_verifier_report":  {
+                                                 "path":  "artifacts/sprint11/day1_teacher_verifier_report.json",
+                                                 "exists":  true,
+                                                 "size_bytes":  1442
+                                             },
+                  "phase6_decision_report":  {
+                                                 "path":  "artifacts/sprint11/day1_phase6_decision_report.json",
+                                                 "exists":  true,
+                                                 "size_bytes":  1309
+                                             },
+                  "phase5_dpo_manifest":  {
+                                              "path":  "artifacts/sprint11/phase5_dpo_pair_manifest.json",
+                                              "exists":  true,
+                                              "size_bytes":  3009
+                                          },
+                  "phase4_hard_negative_pairs":  {
+                                                     "path":  "artifacts/sprint11/phase4_hard_negative_pairs.jsonl",
+                                                     "exists":  true,
+                                                     "size_bytes":  3395693
+                                                 },
+                  "phase5_decision_report":  {
+                                                 "path":  "artifacts/sprint11/phase5_decision_report.json",
+                                                 "exists":  true,
+                                                 "size_bytes":  631
+                                             }
+              },
+    "missing_required_artifacts":  [
+
+                                   ],
+    "old_expected_to_actual_artifact_aliases":  {
+                                                    "artifacts/sprint11/day1_verified_lora_sft.jsonl":  "artifacts/sprint11/phase4_verified_sft_train.jsonl",
+                                                    "artifacts/sprint11/day1_verified_lora_eval.jsonl":  "artifacts/sprint11/phase4_verified_sft_eval.jsonl",
+                                                    "artifacts/sprint11/day1_verified_lora_probe.jsonl":  "artifacts/sprint11/phase4_verified_eval_probe.jsonl",
+                                                    "artifacts/sprint11/day1_verified_lora_dpo_pairs.jsonl":  "artifacts/sprint11/phase5_dpo_train_pairs.jsonl"
+                                                },
+    "counts":  {
+                   "sft_train_rows":  11000,
+                   "sft_eval_rows":  1100,
+                   "sft_probe_rows":  1100,
+                   "phase4_hard_negative_pairs":  5500,
+                   "dpo_train_pairs":  5500,
+                   "dpo_eval_pairs":  550
+               },
+    "safety":  {
+                   "teacher_ready_for_lora":  null,
+                   "training_authorized":  true,
+                   "safe_to_train_lora":  true,
+                   "package_authorized":  false,
+                   "submission_authorized":  false,
+                   "leaderboard_claim":  false,
+                   "no_0_93_evidence":  true,
+                   "no_0_95_evidence":  true
+               },
+    "blocked_reasons":  [
+
+                        ],
+    "next_phase":  "PHASE7_LORA_TRAINING_AND_ADAPTER_EVAL",
+    "package_authorized":  false,
+    "submission_authorized":  false,
+    "leaderboard_claim":  false
+}

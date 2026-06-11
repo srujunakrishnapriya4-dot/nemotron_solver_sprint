@@ -33,3 +33,26 @@ Thumbs.db
 *.zip
 *.tar
 *.tar.gz
+
+# Python cache
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Temporary backups
+*.bak
+
+# Large generated Day1X/Day2 datasets
+artifacts/sprint11/*.jsonl
+
+# Adapter/model artifacts
+artifacts/sprint11/adapters/
+artifacts/sprint11/tinker_adapter_converted/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# Packages
+*.zip

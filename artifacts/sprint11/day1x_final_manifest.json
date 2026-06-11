@@ -1,0 +1,72 @@
+{
+  "blocked_reasons": [],
+  "composed_families_present": [
+    "composed_bit_conversion",
+    "composed_cipher_mapping",
+    "composed_custom_numeral_arithmetic",
+    "composed_gravity_unit",
+    "composed_permutation_mapping",
+    "composed_sequence_operator",
+    "composed_symbol_equation",
+    "composed_unit_formula",
+    "composed_word_cipher"
+  ],
+  "counts": {
+    "dpo_eval_pairs": 2000,
+    "dpo_train_pairs": 20000,
+    "eval_10k": 10000,
+    "holdouts_total": 5000,
+    "probe_10k": 10000,
+    "train_100k": 100000
+  },
+  "created_by": "DAY1X_STRESS_DIVERSITY_LEAKAGE_AND_FINAL_MANIFEST",
+  "diversity_status": "PASS",
+  "dpo_variant_status": "PASS",
+  "expanded_data_status": "PASS",
+  "family_composition_status": "PASS",
+  "leaderboard_claim": false,
+  "leakage_status": "PASS",
+  "next_phase": "DAY2_LORA_TRAINING_AND_ADAPTER_EVAL",
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "original_families_present": [
+    "bit_manipulation",
+    "char_cipher",
+    "custom_numeral",
+    "equation_operator",
+    "gravity_numeric",
+    "numeric_formula_safe",
+    "permutation_sorting",
+    "sequence_pattern",
+    "symbol_mapping",
+    "unit_conversion",
+    "word_cipher"
+  ],
+  "package_authorized": false,
+  "ready_for_day2_lora_training": true,
+  "ready_for_next_phase": true,
+  "recommended_training_variants": [
+    "direct",
+    "short_trace",
+    "mixed_curriculum",
+    "format_heavy",
+    "composed_heavy",
+    "public_style_heavy",
+    "hard_p2_heavy"
+  ],
+  "safety_counters": {
+    "abstain_accepted": 0,
+    "ambiguity_accepted": 0,
+    "duplicate_id_count": 0,
+    "duplicate_prompt_count": 0,
+    "format_error_count": 0,
+    "split_leakage_count": 0,
+    "verification_fail_count": 0
+  },
+  "schema_version": 1,
+  "selected_stage_for_day2": "100k",
+  "status": "PASS",
+  "stress_status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true
+}
