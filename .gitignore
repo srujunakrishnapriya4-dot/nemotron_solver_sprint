@@ -61,3 +61,4 @@ artifacts/sprint11/tmp_trainer/
 *.safetensors
 *.bin
 submission.zip
+artifacts/sprint11/day2_phase9_datasets/
