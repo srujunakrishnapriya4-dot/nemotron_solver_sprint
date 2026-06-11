@@ -336,6 +336,50 @@ def get_smoke_configs_from_phase7(out_dir: Path) -> Dict[str, Dict[str, Any]]:
     return configs
 
 
+
+def count_existing_smoke_dataset(path: Path, adapter_name: str, train_rows_cap: int) -> Dict[str, Any]:
+    accepted_rows = 0
+    problem_count = 0
+    rejected_examples: List[Dict[str, Any]] = []
+
+    if not path.exists():
+        return {
+            "adapter_name": adapter_name,
+            "smoke_dataset_path": str(path),
+            "status": "FAIL",
+            "accepted_rows": 0,
+            "problem_count": 1,
+            "train_rows_cap": train_rows_cap,
+            "examples_rejected": [{"problems": ["existing_smoke_dataset_missing"]}],
+        }
+
+    for row in iter_jsonl(path):
+        problems = validate_sft_row(row)
+        if problems:
+            problem_count += 1
+            if len(rejected_examples) < 10:
+                rejected_examples.append({
+                    "id": row.get("id"),
+                    "family": row.get("family"),
+                    "problems": problems,
+                })
+            continue
+        accepted_rows += 1
+
+    status = "PASS" if accepted_rows > 0 and problem_count == 0 else "FAIL"
+
+    return {
+        "adapter_name": adapter_name,
+        "source_path": None,
+        "smoke_dataset_path": str(path),
+        "status": status,
+        "used_existing_smoke_dataset": True,
+        "accepted_rows": accepted_rows,
+        "problem_count": problem_count,
+        "train_rows_cap": train_rows_cap,
+        "examples_rejected": rejected_examples,
+    }
+
 def build_runtime_plan(
     out_dir: Path,
     base_model_path: Optional[str],
@@ -579,16 +623,24 @@ def run(
 
         dataset_file = DATASET_BY_VARIANT[name]
         source_path = out_dir / dataset_file
-        if not source_path.exists():
-            blocked.append(f"missing_source_dataset:{dataset_file}")
-            continue
+        existing_smoke_path = out_dir / "day2_smoke_datasets" / f"{name}.jsonl"
 
-        report = materialize_smoke_dataset(
-            out_dir=out_dir,
-            source_path=source_path,
-            adapter_name=name,
-            train_rows_cap=int(cfg["train_rows_cap"]),
-        )
+        if source_path.exists():
+            report = materialize_smoke_dataset(
+                out_dir=out_dir,
+                source_path=source_path,
+                adapter_name=name,
+                train_rows_cap=int(cfg["train_rows_cap"]),
+            )
+        elif existing_smoke_path.exists():
+            report = count_existing_smoke_dataset(
+                path=existing_smoke_path,
+                adapter_name=name,
+                train_rows_cap=int(cfg["train_rows_cap"]),
+            )
+        else:
+            blocked.append(f"missing_source_or_smoke_dataset:{dataset_file}:{existing_smoke_path}")
+            continue
         smoke_dataset_reports[name] = report
         if report["status"] == "FAIL":
             blocked.append(f"smoke_dataset_failed:{name}")
@@ -723,3 +775,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

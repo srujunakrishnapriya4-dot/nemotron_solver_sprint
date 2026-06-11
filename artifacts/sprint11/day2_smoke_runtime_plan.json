@@ -1,0 +1,134 @@
+{
+  "base_model_path": null,
+  "created_by": "DAY2_SMOKE_RUNTIME_PLAN",
+  "execute_train_requested": false,
+  "local_windows_note": "If this is run on Windows without the Nemotron model and GPU stack, the script must stop at READY_FOR_RUNTIME and must not fake adapter training.",
+  "next_if_ready": "Run this script in Kaggle/GPU runtime with --execute-train --base-model-path <Nemotron model path>.",
+  "requires_gpu": true,
+  "requires_peft": true,
+  "requires_torch": true,
+  "requires_transformers": true,
+  "schema_version": 1,
+  "smoke_configs": {
+    "smoke_direct_qv_r16": {
+      "adapter_name": "smoke_direct_qv_r16",
+      "alpha": 32,
+      "bf16": true,
+      "dataset_variant": "direct",
+      "dropout": 0.05,
+      "epochs": 1.0,
+      "eval_rows_cap": 5000,
+      "gradient_checkpointing": true,
+      "leaderboard_claim": false,
+      "learning_rate": 2e-05,
+      "max_seq_len": 1024,
+      "max_steps": 30,
+      "package_authorized": false,
+      "priority": 1,
+      "rank": 16,
+      "requires_sft_baseline_adapter": false,
+      "safe_for_smoke": true,
+      "safe_to_train": true,
+      "schema_version": 1,
+      "stage": "smoke_sft",
+      "submission_authorized": false,
+      "target_module_set": "qv",
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "train_rows_cap": 2000,
+      "training_authorized": true,
+      "uses_dpo": false,
+      "validation_problems": []
+    },
+    "smoke_mixed_qv_r16": {
+      "adapter_name": "smoke_mixed_qv_r16",
+      "alpha": 32,
+      "bf16": true,
+      "dataset_variant": "mixed_curriculum",
+      "dropout": 0.05,
+      "epochs": 1.0,
+      "eval_rows_cap": 5000,
+      "gradient_checkpointing": true,
+      "leaderboard_claim": false,
+      "learning_rate": 2e-05,
+      "max_seq_len": 1024,
+      "max_steps": 30,
+      "package_authorized": false,
+      "priority": 2,
+      "rank": 16,
+      "requires_sft_baseline_adapter": false,
+      "safe_for_smoke": true,
+      "safe_to_train": true,
+      "schema_version": 1,
+      "stage": "smoke_sft",
+      "submission_authorized": false,
+      "target_module_set": "qv",
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "train_rows_cap": 2000,
+      "training_authorized": true,
+      "uses_dpo": false,
+      "validation_problems": []
+    },
+    "smoke_short_trace_qv_r16": {
+      "adapter_name": "smoke_short_trace_qv_r16",
+      "alpha": 32,
+      "dataset_variant": "short_trace",
+      "dropout": 0.05,
+      "learning_rate": 2e-05,
+      "max_seq_len": 1024,
+      "max_steps": 30,
+      "rank": 16,
+      "safe_for_smoke": true,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "train_rows_cap": 2000
+    }
+  },
+  "smoke_datasets": {
+    "smoke_direct_qv_r16": {
+      "accepted_rows": 2000,
+      "adapter_name": "smoke_direct_qv_r16",
+      "examples_rejected": [],
+      "problem_count": 0,
+      "scanned_rows": 2000,
+      "smoke_dataset_path": "artifacts\\sprint11\\day2_smoke_datasets\\smoke_direct_qv_r16.jsonl",
+      "source_path": "artifacts\\sprint11\\day1x_sft_direct.jsonl",
+      "status": "PASS",
+      "train_rows_cap": 2000
+    },
+    "smoke_mixed_qv_r16": {
+      "accepted_rows": 2000,
+      "adapter_name": "smoke_mixed_qv_r16",
+      "examples_rejected": [],
+      "problem_count": 0,
+      "scanned_rows": 2000,
+      "smoke_dataset_path": "artifacts\\sprint11\\day2_smoke_datasets\\smoke_mixed_qv_r16.jsonl",
+      "source_path": "artifacts\\sprint11\\day1x_sft_mixed_curriculum.jsonl",
+      "status": "PASS",
+      "train_rows_cap": 2000
+    },
+    "smoke_short_trace_qv_r16": {
+      "accepted_rows": 2000,
+      "adapter_name": "smoke_short_trace_qv_r16",
+      "examples_rejected": [],
+      "problem_count": 0,
+      "scanned_rows": 2000,
+      "smoke_dataset_path": "artifacts\\sprint11\\day2_smoke_datasets\\smoke_short_trace_qv_r16.jsonl",
+      "source_path": "artifacts\\sprint11\\day1x_sft_short_trace.jsonl",
+      "status": "PASS",
+      "train_rows_cap": 2000
+    }
+  },
+  "smoke_variants": [
+    "smoke_direct_qv_r16",
+    "smoke_mixed_qv_r16",
+    "smoke_short_trace_qv_r16"
+  ]
+}

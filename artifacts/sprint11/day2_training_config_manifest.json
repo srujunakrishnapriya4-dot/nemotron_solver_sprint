@@ -1,0 +1,32 @@
+{
+  "adapter_rank_limit": 32,
+  "base_model_family": "NVIDIA-Nemotron-3-Nano-30B",
+  "blocked_reasons": [],
+  "created_by": "DAY2_TRAINING_CONFIG_MANIFEST",
+  "initial_training_policy": {
+    "all_linear_forbidden_initially": true,
+    "dpo_before_sft_baseline": false,
+    "max_initial_epochs": 1.0,
+    "max_initial_seq_len": 2048,
+    "start_with_sft_only": true,
+    "start_with_smoke": true
+  },
+  "leaderboard_claim": false,
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "recommended_first_training_order": [
+    "smoke_direct_qv_r16",
+    "smoke_mixed_qv_r16",
+    "A1_direct_qv_r32",
+    "A3_mixed_curriculum_qv_r32",
+    "A2_short_trace_qv_r32",
+    "A4_format_heavy_qv_r32",
+    "A5_composed_heavy_qv_r32"
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "submission_authorized": false,
+  "training_authorized": true,
+  "variant_matrix_status": "PASS"
+}

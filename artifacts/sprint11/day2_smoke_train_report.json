@@ -1,0 +1,152 @@
+{
+  "all_smoke_runs_complete": false,
+  "base_model_path": null,
+  "blocked_reasons": [
+    "training_not_pass:READY_FOR_RUNTIME",
+    "execute_train_not_requested"
+  ],
+  "created_by": "PHASE8_ADAPTER_SMOKE_TRAINING",
+  "execute_train_requested": false,
+  "leaderboard_claim": false,
+  "loss_finite": false,
+  "next_phase": "RUN_PHASE8_SMOKE_TRAINING_IN_GPU_RUNTIME",
+  "no_0_93_evidence": true,
+  "no_0_95_evidence": true,
+  "package_authorized": false,
+  "phase7_status": "PASS",
+  "runtime_plan_file": "artifacts\\sprint11\\day2_smoke_runtime_plan.json",
+  "safe_for_adapter_delta_eval": false,
+  "schema_version": 1,
+  "smoke_configs": {
+    "smoke_direct_qv_r16": {
+      "adapter_name": "smoke_direct_qv_r16",
+      "alpha": 32,
+      "bf16": true,
+      "dataset_variant": "direct",
+      "dropout": 0.05,
+      "epochs": 1.0,
+      "eval_rows_cap": 5000,
+      "gradient_checkpointing": true,
+      "leaderboard_claim": false,
+      "learning_rate": 2e-05,
+      "max_seq_len": 1024,
+      "max_steps": 30,
+      "package_authorized": false,
+      "priority": 1,
+      "rank": 16,
+      "requires_sft_baseline_adapter": false,
+      "safe_for_smoke": true,
+      "safe_to_train": true,
+      "schema_version": 1,
+      "stage": "smoke_sft",
+      "submission_authorized": false,
+      "target_module_set": "qv",
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "train_rows_cap": 2000,
+      "training_authorized": true,
+      "uses_dpo": false,
+      "validation_problems": []
+    },
+    "smoke_mixed_qv_r16": {
+      "adapter_name": "smoke_mixed_qv_r16",
+      "alpha": 32,
+      "bf16": true,
+      "dataset_variant": "mixed_curriculum",
+      "dropout": 0.05,
+      "epochs": 1.0,
+      "eval_rows_cap": 5000,
+      "gradient_checkpointing": true,
+      "leaderboard_claim": false,
+      "learning_rate": 2e-05,
+      "max_seq_len": 1024,
+      "max_steps": 30,
+      "package_authorized": false,
+      "priority": 2,
+      "rank": 16,
+      "requires_sft_baseline_adapter": false,
+      "safe_for_smoke": true,
+      "safe_to_train": true,
+      "schema_version": 1,
+      "stage": "smoke_sft",
+      "submission_authorized": false,
+      "target_module_set": "qv",
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "train_rows_cap": 2000,
+      "training_authorized": true,
+      "uses_dpo": false,
+      "validation_problems": []
+    },
+    "smoke_short_trace_qv_r16": {
+      "adapter_name": "smoke_short_trace_qv_r16",
+      "alpha": 32,
+      "dataset_variant": "short_trace",
+      "dropout": 0.05,
+      "learning_rate": 2e-05,
+      "max_seq_len": 1024,
+      "max_steps": 30,
+      "rank": 16,
+      "safe_for_smoke": true,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "train_rows_cap": 2000
+    }
+  },
+  "smoke_dataset_reports": {
+    "smoke_direct_qv_r16": {
+      "accepted_rows": 2000,
+      "adapter_name": "smoke_direct_qv_r16",
+      "examples_rejected": [],
+      "problem_count": 0,
+      "scanned_rows": 2000,
+      "smoke_dataset_path": "artifacts\\sprint11\\day2_smoke_datasets\\smoke_direct_qv_r16.jsonl",
+      "source_path": "artifacts\\sprint11\\day1x_sft_direct.jsonl",
+      "status": "PASS",
+      "train_rows_cap": 2000
+    },
+    "smoke_mixed_qv_r16": {
+      "accepted_rows": 2000,
+      "adapter_name": "smoke_mixed_qv_r16",
+      "examples_rejected": [],
+      "problem_count": 0,
+      "scanned_rows": 2000,
+      "smoke_dataset_path": "artifacts\\sprint11\\day2_smoke_datasets\\smoke_mixed_qv_r16.jsonl",
+      "source_path": "artifacts\\sprint11\\day1x_sft_mixed_curriculum.jsonl",
+      "status": "PASS",
+      "train_rows_cap": 2000
+    },
+    "smoke_short_trace_qv_r16": {
+      "accepted_rows": 2000,
+      "adapter_name": "smoke_short_trace_qv_r16",
+      "examples_rejected": [],
+      "problem_count": 0,
+      "scanned_rows": 2000,
+      "smoke_dataset_path": "artifacts\\sprint11\\day2_smoke_datasets\\smoke_short_trace_qv_r16.jsonl",
+      "source_path": "artifacts\\sprint11\\day1x_sft_short_trace.jsonl",
+      "status": "PASS",
+      "train_rows_cap": 2000
+    }
+  },
+  "smoke_variants_required": [
+    "smoke_direct_qv_r16",
+    "smoke_mixed_qv_r16",
+    "smoke_short_trace_qv_r16"
+  ],
+  "status": "READY_FOR_RUNTIME",
+  "submission_authorized": false,
+  "training_authorized": true,
+  "training_result": {
+    "adapter_reports": {},
+    "blocked_reasons": [
+      "execute_train_not_requested"
+    ],
+    "status": "READY_FOR_RUNTIME"
+  }
+}
